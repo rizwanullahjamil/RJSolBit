@@ -86,15 +86,15 @@ Pointing and claiming intersection (1-Fish or Locked Candidate Type 2 Claiming) 
  /  /  / | +Z +Z +Z |  /  /  /
  .  .  . | -Z -Z -Z |  .  .  .
 ---------+----------+----------
-*Almost Locked Candidates (4 exemplars, multiple exclusions)
+Almost Locked Candidates (4 exemplars, multiple exclusions) (AC 1-2 done)
   ---------------+---------------+---------------  ---------------+---------------+---------------
-    .    .    .  | XY+   /    /  |  /    /    /      .    .    .  | XY   -XY  -XY | -XY  -XY  -XY
+01) .    .    .  | XY+   /    /  |  /    /    /  02) .    .    .  | XY   -XY  -XY | -XY  -XY  -XY
    XY   -XY  -XY |  .    .    .  |  .    .    .     XY+   /    /  |  .    .    .  |  .    .    .
    -XY  -XY  -XY |  .    .    .  |  .    .    .      /    /    /  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
 
   ---------------+---------------+---------------  ---------------+---------------+---------------
-    .    .    .  | XYZ+ XYZ+  /  |  /    /    /      .    .    .  | XYZ  XYZ -XYZ |-XYZ -XYZ -XYZ
+*3) .    .    .  | XYZ+ XYZ+  /  |  /    /    /  *4) .    .    .  | XYZ  XYZ -XYZ |-XYZ -XYZ -XYZ
    XYZ -XYZ -XYZ |  .    .    .  |  .    .    .    XYZ+   /    /  |  .    .    .  |  .    .    .
    XYZ -XYZ -XYZ |  .    .    .  |  .    .    .    XYZ+   /    /  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
@@ -2971,7 +2971,7 @@ Almost Locked Set move Type 2a (5 exemplars, multiple exclusions) (AL 1-3 done)
 *http://forum.enjoysudoku.com/bent-almost-restricted-n-aked-set-barn-t33464.html#p254123
 *http://forum.enjoysudoku.com/new-technique-almost-locked-sub-sets-t33134-15.html#p251899
   ---------------+---------------+---------------  ---------------+---------------+---------------
-04) .   xyz   .  |  .    .    .  |-XZ   xz   -XZ 05) .   xyz   .  |  .    .    .  |  .   wy    .
+04) .   xyz   .  |  .    .    .  | -XZ  xz   -XZ 05) .   xyz   .  |  .    .    .  |  .   wy    .
     .    .    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
     .    .   wy  |  .    .    .  | wxz   .    .     -XZ  -XZ  xz  |  .    .    .  | wxz   .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
