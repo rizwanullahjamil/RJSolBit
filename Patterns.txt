@@ -86,17 +86,18 @@ Pointing and claiming intersection (1-Fish or Locked Candidate Type 2 Claiming) 
  /  /  / | +Z +Z +Z |  /  /  /
  .  .  . | -Z -Z -Z |  .  .  .
 ---------+----------+----------
-Almost Locked Candidates (4 exemplars, multiple exclusions) (AC 1-2 done)
+Almost Locked Candidates (4 exemplars, multiple exclusions) (AC done)
+Almost Locked Pair
   ---------------+---------------+---------------  ---------------+---------------+---------------
-01) .    .    .  | XY+   /    /  |  /    /    /  02) .    .    .  | XY   -XY  -XY | -XY  -XY  -XY
-   XY   -XY  -XY |  .    .    .  |  .    .    .     XY+   /    /  |  .    .    .  |  .    .    .
+01) .    .    .  | XY-*  /    /  |  /    /    /  02) .    .    .  | XY   -XY  -XY | -XY  -XY  -XY
+   XY   -XY  -XY |  .    .    .  |  .    .    .     XY-*  /    /  |  .    .    .  |  .    .    .
    -XY  -XY  -XY |  .    .    .  |  .    .    .      /    /    /  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-
+Almost Locked Triple
   ---------------+---------------+---------------  ---------------+---------------+---------------
-*3) .    .    .  | XYZ+ XYZ+  /  |  /    /    /  *4) .    .    .  | XYZ  XYZ -XYZ |-XYZ -XYZ -XYZ
-   XYZ -XYZ -XYZ |  .    .    .  |  .    .    .    XYZ+   /    /  |  .    .    .  |  .    .    .
-   XYZ -XYZ -XYZ |  .    .    .  |  .    .    .    XYZ+   /    /  |  .    .    .  |  .    .    .
+03) .    .    .  |XYZ-* XYZ-* /  |  /    /    /  04) .    .    .  | XYZ  XYZ -XYZ |-XYZ -XYZ -XYZ
+   XYZ -XYZ -XYZ |  .    .    .  |  .    .    .    XYZ-*  /    /  |  .    .    .  |  .    .    .
+   XYZ -XYZ -XYZ |  .    .    .  |  .    .    .    XYZ-*  /    /  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
 X-Wing (2-Fish) (2 exemplars, upto 14 exclusions) (2F done)
 ---------+----------+----------      ---------+----------+----------
