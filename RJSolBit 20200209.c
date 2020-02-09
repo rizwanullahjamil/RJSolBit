@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 
-#define RJ 5                 // 0 no debugging, 1 print solutions, 2 print puzzles, 3 print steps, 4 print steps possibilities in grid, 5 print puzzles in grid
+#define RJ 0                 // 0 no debugging, 1 print solutions, 2 print puzzles, 3 print steps, 4 print steps possibilities in grid, 5 print puzzles in grid
 
 #define ERI(A) (g[w[A][6]] | g[w[A][7]]) & (g[w[A][12]] | g[w[A][13]]) & \
                ~(g[w[A][8]] | g[w[A][9]] | g[w[A][10]] | g[w[A][11]])
@@ -808,6 +808,8 @@ int solve (int p)
       }
   for (a = 0; a < 54; ++a)   // Search Almost Locked Pair and Triple 54 mini-Lines 3 Cell positions wise
   {
+    if (!(g[j[a][0]] | g[j[a][1]] | g[j[a][2]]))
+      continue;              // Skip for no unsolved Cell in mini-Line
     for (y = 3; y < 9; ++y)  // Search Almost Locked Pair and Triple 54 mini-Lines away Line 6 Cell positions wise
     {
       if (B[Y = g[j[a][y]] & ~(g[j[a][3 + (y < 4)]] |
@@ -892,11 +894,11 @@ int solve (int p)
             {                // Search 4th Cell position away Box wise
               if (!g[j[a][X]] || (g[j[a][N]] | g[j[a][X]]) != Y ||
                              // Skip for either 4th Cell position not unsolved; or 3rd and 4th Cell values not 1st and 2nd Cell values; or
-                B[g[j[a][L]] | g[j[a][M]]] < 4 ||
+                (B[g[j[a][L]] | g[j[a][M]]] < 4 &&
                 !((g[j[a][9 + (N < 10) + (X < 11)]] |
                 g[j[a][10 + (N < 11) + (X < 12)]] |
                 g[j[a][11 + (N < 12) + (X < 13)]] |
-                g[j[a][12 + (N < 13) + (X < 14)]]) & Y))
+                g[j[a][12 + (N < 13) + (X < 14)]]) & Y)))
                 continue;    // Almost Locked Triple values not in removal Cell positions
               int k[6] = {g[j[a][L]], g[j[a][M]],
                          g[j[a][9 + (N < 10) + (X < 11)]],
@@ -1042,8 +1044,10 @@ int solve (int p)
         for (M = L + 1; M < 15; ++M)
         {                    // Search 2nd Cell position away Box wise
           if (!g[j[a][M]] || B[Y = (g[j[a][L]] | g[j[a][M]]) &
-            ~(g[j[a][9 + (L < 10) + (M < 11)]] | g[j[a][10 + (L < 11) + (M < 12)]] |
-            g[j[a][11 + (L < 12) + (M < 13)]] | g[j[a][12 + (L < 13) + (M < 14)]])] != 3)
+            ~(g[j[a][9 + (L < 10) + (M < 11)]] |
+            g[j[a][10 + (L < 11) + (M < 12)]] |
+            g[j[a][11 + (L < 12) + (M < 13)]] |
+            g[j[a][12 + (L < 13) + (M < 14)]])] != 3)
             continue;        // Skip for either 2nd Cell position not unsolved; or 1st and 2nd Cells values not 3 digits
           for (N = 3; N < 8; ++N)
           {                  // Search 3rd Cell position away Line wise
@@ -1053,11 +1057,11 @@ int solve (int p)
             {                // Search 4th Cell position away Line wise
               if (!g[j[a][X]] || (g[j[a][N]] | g[j[a][X]]) != Y ||
                              // Skip for either 4th Cell position not unsolved; or 3rd and 4th Cell values not 1st and 2nd Cell values; or
-                B[g[j[a][L]] | g[j[a][M]]] < 4 ||
+                (B[g[j[a][L]] | g[j[a][M]]] < 4 &&
                 !((g[j[a][3 + (N < 4) + (X < 5)]] |
                 g[j[a][4 + (N < 5) + (X < 6)]] |
                 g[j[a][5 + (N < 6) + (X < 7)]] |
-                g[j[a][6 + (N < 7) + (X < 8)]]) & Y))
+                g[j[a][6 + (N < 7) + (X < 8)]]) & Y)))
                 continue;    // Almost Locked Triple values not in removal Cell positions
               int k[6] = {g[j[a][L]], g[j[a][M]],
                          g[j[a][3 + (N < 4) + (X < 5)]],
