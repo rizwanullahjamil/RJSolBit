@@ -99,6 +99,12 @@ Almost Locked Triple
    XYZ -XYZ -XYZ |  .    .    .  |  .    .    .    XYZ-*  /    /  |  .    .    .  |  .    .    .
    XYZ -XYZ -XYZ |  .    .    .  |  .    .    .    XYZ-*  /    /  |  .    .    .  |  .    .    .
 225--------------+---------------+---------------225--------------+---------------+---------------
+Almost Locked Quad
+  ---------------+---------------+---------------  ---------------+---------------+---------------
+05) .    .    .  |WXYZ-* / WXYZ-*|  / WXYZ-*  /  06) .    .    .  |WXYZ -WXYZ WXYZ|-WXYZ WXYZ -WXYZ
+  WXYZ WXYZ -WXYZ|  .    .    .  |  .    .    .      /    / WXYZ-*|  .    .    .  |  .    .    .
+ -WXYZ WXYZ -WXYZ|  .    .    .  |  .    .    .    WXYZ-* / WXYZ-*|  .    .    .  |  .    .    .
+  ---------------+---------------+---------------  ---------------+---------------+---------------
 X-Wing (2-Fish) (2 exemplars, upto 14 exclusions) (2F done)
 ---------+----------+----------      ---------+----------+----------
  .  /  . |  .  .  . |  .  /  .        . -Z  . |  .  .  . |  . -Z  .
@@ -2978,7 +2984,7 @@ Almost Locked Set move Type 2a (5 exemplars, multiple exclusions) (AL 1-3 done)
 *http://forum.enjoysudoku.com/bent-almost-restricted-n-aked-set-barn-t33464.html#p254123
 *http://forum.enjoysudoku.com/new-technique-almost-locked-sub-sets-t33134-15.html#p251899
   ---------------+---------------+---------------  ---------------+---------------+---------------
-04) .   xyz   .  |  .    .    .  | -XZ  xz   -XZ 05) .   xyz   .  |  .    .    .  |  .   wy    .
+*4) .   xyz   .  |  .    .    .  | -XZ  xz   -XZ *5) .   xyz   .  |  .    .    .  |  .   wy    .
     .    .    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
     .    .   wy  |  .    .    .  | wxz   .    .     -XZ  -XZ  xz  |  .    .    .  | wxz   .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
