@@ -1147,7 +1147,7 @@ int solve (int p)
         {
           if (!g[j[a][M]] || B[Y = (g[j[a][A]] | g[j[a][L]] | g[j[a][M]]) &
             ~(g[j[a][3 + (A < 4) + (L < 5) + (M < 6)]] |
-            g[j[a][4 + (A < 5) + (L < 5) + (M < 6)]] |
+            g[j[a][4 + (A < 5) + (L < 6) + (M < 7)]] |
             g[j[a][5 + (A < 6) + (L < 7) + (M < 8)]])] != 4 ||
             !(g[j[a][A]] & Y) || !(g[j[a][L]] & Y) || !(g[j[a][M]] & Y))
             continue;        // Skip for either 3rd Cell position not unsolved; or 1st, 2nd and 3rd Cells values not four digits
@@ -1295,7 +1295,7 @@ int solve (int p)
                   BOX (j[a][Z]), S[j[a][Z]], b[Y],
                   S[j[a][3 + (N < 4) + (X < 5) + (Z < 6)]],
                   S[j[a][4 + (N < 5) + (X < 6) + (Z < 7)]],
-                  S[j[a][5 + (N < 6) + (X < 6) + (Z < 8)]]);
+                  S[j[a][5 + (N < 6) + (X < 7) + (Z < 8)]]);
                 if (k[0] ^ (k[0] & Y))
                   printf (" => -%d @ %s", b[k[0] ^ (k[0] & Y)], S[j[a][A]]);
                 if (k[1] ^ (k[1] & Y))
@@ -1318,7 +1318,7 @@ int solve (int p)
                   BOX (j[a][Z]), S[j[a][Z]], b[Y],
                   S[j[a][3 + (N < 4) + (X < 5) + (Z < 6)]],
                   S[j[a][4 + (N < 5) + (X < 6) + (Z < 7)]],
-                  S[j[a][5 + (N < 6) + (X < 6) + (Z < 8)]]);
+                  S[j[a][5 + (N < 6) + (X < 7) + (Z < 8)]]);
                 if (k[0] ^ (k[0] & Y))
                   printf (" => -%d @ %s", b[k[0] ^ (k[0] & Y)], S[j[a][A]]);
                 if (k[1] ^ (k[1] & Y))
