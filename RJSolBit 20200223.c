@@ -847,13 +847,13 @@ int solve (int p)
         g[K[3]] &= ~Y;
         g[K[4]] &= ~Y;
 #if RJ > 2
-        printf ("%d) Almost Locked Pair: %s %d Box %d wise %d @ r%dc%d %s b%d%s\n=> -%d @ %s %s %s %s %s",
-          p, a < 27 ? "Row" : "Column",
+        printf ("%d) Almost Locked Pair: Box %d %s %d wise %d @ r%dc%d %s b%d%s\n=> -%d @ %s %s %s %s %s",
+          p, BOX (j[a][y ? A : Z]), a < 27 ? "Row" : "Column",
           a < 27 ? ROW (w[j[a][y ? Z : A]][20]) : COL (w[j[a][y ? Z : A]][20]),
-          BOX (j[a][y ? A : Z]), b[Y],
-          ROW (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
-          COL (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]), S[j[a][A]],
-          BOX (j[a][Z]), S[j[a][Z]], b[Y], S[K[0]], S[K[1]], S[K[2]], S[K[3]], S[K[4]]);
+          b[Y], ROW (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
+          COL (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
+          S[j[a][y ? Z : A]], BOX (j[a][y ? A : Z]), S[j[a][y ? A : Z]],
+          b[Y], S[K[0]], S[K[1]], S[K[2]], S[K[3]], S[K[4]]);
         if (k[0] ^ Y)
           printf (" => -%d @ %s", b[k[0] ^ Y], S[j[a][A]]);
         printf ("\n");
@@ -861,13 +861,13 @@ int solve (int p)
         if (solve (p))
           return 1;
 #if RJ > 2
-        printf ("%d) Undo Almost Locked Pair: %s %d Box %d wise %d @ r%dc%d %s b%d%s\n<= +%d @ %s %s %s %s %s",
-          p, a < 27 ? "Row" : "Column",
+        printf ("%d) Undo Almost Locked Pair: Box %d %s %d wise %d @ r%dc%d %s b%d%s\n<= +%d @ %s %s %s %s %s",
+          p, BOX (j[a][y ? A : Z]), a < 27 ? "Row" : "Column",
           a < 27 ? ROW (w[j[a][y ? Z : A]][20]) : COL (w[j[a][y ? Z : A]][20]),
-          BOX (j[a][y ? A : Z]), b[Y],
-          ROW (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
-          COL (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]), S[j[a][A]],
-          BOX (j[a][Z]), S[j[a][Z]], b[Y], S[K[0]], S[K[1]], S[K[2]], S[K[3]], S[K[4]]);
+          b[Y], ROW (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
+          COL (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
+          S[j[a][y ? Z : A]], BOX (j[a][y ? A : Z]), S[j[a][y ? A : Z]],
+          b[Y], S[K[0]], S[K[1]], S[K[2]], S[K[3]], S[K[4]]);
         if (k[0] ^ Y)
           printf (" <= +%d @ %s", b[k[0] ^ Y], S[j[a][A]]);
         printf ("\n");
@@ -920,16 +920,15 @@ int solve (int p)
               g[K[2]] &= ~Y;
               g[K[3]] &= ~Y;
 #if RJ > 2
-              printf ("%d) Almost Locked Triple: %s %d Box %d wise %d @ r%dc%d r%dc%d b%d%s b%d%s\n=> -%d @ %s %s %s %s",
-                p, a < 27 ? "Row" : "Column",
+              printf ("%d) Almost Locked Triple: Box %d %s %d wise %d @ r%dc%d r%dc%d b%d%s b%d%s\n=> -%d @ %s %s %s %s",
+                p, BOX (j[a][y ? A : M]), a < 27 ? "Row" : "Column",
                 a < 27 ? ROW (w[j[a][y ? M : A]][20]) : COL (w[j[a][y ? M : A]][20]),
-                BOX (j[a][y ? A : M]), b[Y],
-                ROW (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
+                b[Y], ROW (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
                 COL (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
-                ROW (w[j[a][A]][20] | w[j[a][L]][20]),
-                COL (w[j[a][A]][20] | w[j[a][L]][20]),
-                BOX (j[a][M]), S[j[a][M]], BOX (j[a][N]), S[j[a][N]],
-                b[Y], S[K[0]], S[K[1]], S[K[2]], S[K[3]]);
+                ROW (w[j[a][y ? M : A]][20] | w[j[a][y ? N : L]][20]),
+                COL (w[j[a][y ? M : A]][20] | w[j[a][y ? N : L]][20]),
+                BOX (j[a][y ? A : M]), S[j[a][y ? A : M]], BOX (j[a][y ? L : N]),
+                S[j[a][y ? L : N]], b[Y], S[K[0]], S[K[1]], S[K[2]], S[K[3]]);
               if (k[0] ^ (k[0] & Y))
                 printf (" => -%d @ %s", b[k[0] ^ (k[0] & Y)], S[j[a][A]]);
               if (k[1] ^ (k[1] & Y))
@@ -939,16 +938,15 @@ int solve (int p)
               if (solve (p))
                 return 1;
 #if RJ > 2
-              printf ("%d) Undo Almost Locked Triple: %s %d Box %d wise %d @ r%dc%d r%dc%d b%d%s b%d%s\n<= +%d @ %s %s %s %s",
-                p, a < 27 ? "Row" : "Column",
+              printf ("%d) Undo Almost Locked Triple: Box %d %s %d wise %d @ r%dc%d r%dc%d b%d%s b%d%s\n<= +%d @ %s %s %s %s",
+                p, BOX (j[a][y ? A : M]), a < 27 ? "Row" : "Column",
                 a < 27 ? ROW (w[j[a][y ? M : A]][20]) : COL (w[j[a][y ? M : A]][20]),
-                BOX (j[a][y ? A : M]), b[Y],
-                ROW (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
+                b[Y], ROW (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
                 COL (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
-                ROW (w[j[a][A]][20] | w[j[a][L]][20]),
-                COL (w[j[a][A]][20] | w[j[a][L]][20]),
-                BOX (j[a][M]), S[j[a][M]], BOX (j[a][N]), S[j[a][N]],
-                b[Y], S[K[0]], S[K[1]], S[K[2]], S[K[3]]);
+                ROW (w[j[a][y ? M : A]][20] | w[j[a][y ? N : L]][20]),
+                COL (w[j[a][y ? M : A]][20] | w[j[a][y ? N : L]][20]),
+                BOX (j[a][y ? A : M]), S[j[a][y ? A : M]], BOX (j[a][y ? L : N]),
+                S[j[a][y ? L : N]], b[Y], S[K[0]], S[K[1]], S[K[2]], S[K[3]]);
               if (k[0] ^ (k[0] & Y))
                 printf (" <= +%d @ %s", b[k[0] ^ (k[0] & Y)], S[j[a][A]]);
               if (k[1] ^ (k[1] & Y))
@@ -1016,16 +1014,16 @@ int solve (int p)
                   g[K[1]] &= ~Y;
                   g[K[2]] &= ~Y;
 #if RJ > 2
-                  printf ("%d) Almost Locked Quad: %s %d Box %d wise %d @ r%dc%d r%dc%d b%d%s b%d%s b%d%s\n=> -%d @ %s %s %s",
-                    p, a < 27 ? "Row" : "Column",
+                  printf ("%d) Almost Locked Quad: Box %d %s %d wise %d @ r%dc%d r%dc%d b%d%s b%d%s b%d%s\n=> -%d @ %s %s %s",
+                    p, BOX (j[a][y ? A : N]), a < 27 ? "Row" : "Column",
                     a < 27 ? ROW (w[j[a][y ? N : A]][20]) : COL (w[j[a][y ? N : A]][20]),
-                    BOX (j[a][y ? A : N]), b[Y],
-                    ROW (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
+                    b[Y], ROW (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
                     COL (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
-                    ROW (w[j[a][A]][20] | w[j[a][L]][20] | w[j[a][M]][20]),
-                    COL (w[j[a][A]][20] | w[j[a][L]][20] | w[j[a][M]][20]),
-                    BOX (j[a][N]), S[j[a][N]], BOX (j[a][X]), S[j[a][X]],
-                    BOX (j[a][Z]), S[j[a][Z]], b[Y], S[K[0]], S[K[1]], S[K[2]]);
+                    ROW (w[j[a][y ? N : A]][20] | w[j[a][y ? X : L]][20] | w[j[a][y ? Z : M]][20]),
+                    COL (w[j[a][y ? N : A]][20] | w[j[a][y ? X : L]][20] | w[j[a][y ? Z : M]][20]),
+                    BOX (j[a][y ? A : N]), S[j[a][y ? A : N]], BOX (j[a][y ? L : X]),
+                    S[j[a][y ? L : X]], BOX (j[a][y ? M : Z]), S[j[a][y ? M : Z]],
+                    b[Y], S[K[0]], S[K[1]], S[K[2]]);
                   if (k[0] ^ (k[0] & Y))
                     printf (" => -%d @ %s", b[k[0] ^ (k[0] & Y)], S[j[a][A]]);
                   if (k[1] ^ (k[1] & Y))
@@ -1037,16 +1035,16 @@ int solve (int p)
                   if (solve (p))
                     return 1;
 #if RJ > 2
-                  printf ("%d) Undo Almost Locked Quad: %s %d Box %d wise %d @ r%dc%d r%dc%d b%d%s b%d%s b%d%s\n<= +%d @ %s %s %s",
-                    p, a < 27 ? "Row" : "Column",
+                  printf ("%d) Undo Almost Locked Quad: Box %d %s %d wise %d @ r%dc%d r%dc%d b%d%s b%d%s b%d%s\n<= +%d @ %s %s %s",
+                    p, BOX (j[a][y ? A : N]), a < 27 ? "Row" : "Column",
                     a < 27 ? ROW (w[j[a][y ? N : A]][20]) : COL (w[j[a][y ? N : A]][20]),
-                    BOX (j[a][y ? A : N]), b[Y],
-                    ROW (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
+                    b[Y], ROW (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
                     COL (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
-                    ROW (w[j[a][A]][20] | w[j[a][L]][20] | w[j[a][M]][20]),
-                    COL (w[j[a][A]][20] | w[j[a][L]][20] | w[j[a][M]][20]),
-                    BOX (j[a][N]), S[j[a][N]], BOX (j[a][X]), S[j[a][X]],
-                    BOX (j[a][Z]), S[j[a][Z]], b[Y], S[K[0]], S[K[1]], S[K[2]]);
+                    ROW (w[j[a][y ? N : A]][20] | w[j[a][y ? X : L]][20] | w[j[a][y ? Z : M]][20]),
+                    COL (w[j[a][y ? N : A]][20] | w[j[a][y ? X : L]][20] | w[j[a][y ? Z : M]][20]),
+                    BOX (j[a][y ? A : N]), S[j[a][y ? A : N]], BOX (j[a][y ? L : X]),
+                    S[j[a][y ? L : X]], BOX (j[a][y ? M : Z]), S[j[a][y ? M : Z]],
+                    b[Y], S[K[0]], S[K[1]], S[K[2]]);
                   if (k[0] ^ (k[0] & Y))
                     printf (" <= +%d @ %s", b[k[0] ^ (k[0] & Y)], S[j[a][A]]);
                   if (k[1] ^ (k[1] & Y))
