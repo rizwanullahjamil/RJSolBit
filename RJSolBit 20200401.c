@@ -4211,10 +4211,11 @@ XYWT1Tf:
                   g[w[K[0]][W[22][!y]]] &= ~K[5];
                 }
 #if RJ > 2
-                printf ("%d) XYZ-Wing Transport: %s %d @ %s %s %s SL %d @ %s %d => -%d @ r%dc%d",
-                  p, k[75] ? R_C : "Box", b[g[K[0]]], S[K[0]], S[K[2]], S[K[4]], b[K[5]],
-                  k[75] ? R_C : "Box", k[75] ? RCN (w[K[4]][K[7]]) : BOX (w[K[4]][K[7]]),
-                  b[K[5]], ROW (w[M][20] | w[w[M][W[3][y]]][20] | w[w[M][W[4][y]]][20]),
+                printf ("%d) XYZ-Wing Transport:%s%s %d @ %s %s %s SL %d @ %s %d => -%d @ r%dc%d",
+                  p, k[3] + 1 ? " Reduced " : " ", k[75] ? R_C : "Box",
+                  b[g[K[0]]], S[K[0]], S[K[2]], S[K[4]], b[K[5]], k[75] ? R_C : "Box",
+                  k[75] ? RCN (w[K[4]][K[7]]) : BOX (w[K[4]][K[7]]), b[K[5]],
+                  ROW (w[M][20] | w[w[M][W[3][y]]][20] | w[w[M][W[4][y]]][20]),
                   COL (w[M][20] | w[w[M][W[3][y]]][20] | w[w[M][W[4][y]]][20]));
                 if (k[3] + 1)
                   printf (" r%dc%d",
@@ -4229,10 +4230,11 @@ XYWT1Tf:
                 if (solve (p))
                   return 1;
 #if RJ > 2
-                printf ("%d) Undo XYZ-Wing Transport: %s %d @ %s %s %s SL %d @ %s %d <= +%d @ r%dc%d\n",
-                  p, k[75] ? R_C : "Box", b[g[K[0]]], S[K[0]], S[K[2]], S[K[4]], b[K[5]],
-                  k[75] ? R_C : "Box", k[75] ? RCN (w[K[4]][K[7]]) : BOX (w[K[4]][K[7]]),
-                  b[K[5]], ROW (w[M][20] | w[w[M][W[3][y]]][20] | w[w[M][W[4][y]]][20]),
+                printf ("%d) Undo XYZ-Wing Transport:%s%s %d @ %s %s %s SL %d @ %s %d <= +%d @ r%dc%d\n",
+                  p, k[3] + 1 ? " Reduced " : " ", k[75] ? R_C : "Box",
+                  b[g[K[0]]], S[K[0]], S[K[2]], S[K[4]], b[K[5]], k[75] ? R_C : "Box",
+                  k[75] ? RCN (w[K[4]][K[7]]) : BOX (w[K[4]][K[7]]), b[K[5]],
+                  ROW (w[M][20] | w[w[M][W[3][y]]][20] | w[w[M][W[4][y]]][20]),
                   COL (w[M][20] | w[w[M][W[3][y]]][20] | w[w[M][W[4][y]]][20]));
                 if (k[3] + 1)
                   printf (" r%dc%d",
@@ -4404,9 +4406,9 @@ XYWT1Tf:
                 g[w[K[2]][W[22][!y]]] &= ~K[5];
               }
 #if RJ > 2
-              printf ("%d) XY%s Transport: %s%sRing %d @ %s %s %s\nSL %d @ %s %d => -%d @ %s %s %s %s",
+              printf ("%d) XY%s Transport:%s%s Ring %d @ %s %s %s\nSL %d @ %s %d => -%d @ %s %s %s %s",
                 p, B[g[K[0]]] < 3 ? "-Wing Type 2" : "Z-Wing",
-                k[75] ? R_C : "Box", k[15] ? " Reduced " : " ", b[g[K[2]] | g[K[4]]],
+                k[15] ? " Reduced " : " ", k[75] ? R_C : "Box", b[g[K[2]] | g[K[4]]],
                 S[K[0]], S[K[2]], S[K[4]], b[K[5]], k[75] ? R_C : "Box",
                 k[75] ? RCN (M) : BOX (M), b[K[5]], S[w[K[2]][W[3][y]]],
                 S[w[K[2]][W[4][y]]], S[w[K[4]][W[3][y]]], S[w[K[4]][W[4][y]]]);
@@ -4450,9 +4452,9 @@ XYWT1Tf:
               if (solve (p))
                 return 1;
 #if RJ > 2
-              printf ("%d) Undo XY%s Transport: %s%sRing %d @ %s %s %s\nSL %d @ %s %d <= +%d @ %s %s %s %s",
+              printf ("%d) Undo XY%s Transport:%s%s Ring %d @ %s %s %s\nSL %d @ %s %d <= +%d @ %s %s %s %s",
                 p, B[g[K[0]]] < 3 ? "-Wing Type 2" : "Z-Wing",
-                k[75] ? R_C : "Box", k[15] ? " Reduced " : " ", b[g[K[2]] | g[K[4]]],
+                k[15] ? " Reduced " : " ", k[75] ? R_C : "Box", b[g[K[2]] | g[K[4]]],
                 S[K[0]], S[K[2]], S[K[4]], b[K[5]], k[75] ? R_C : "Box",
                 k[75] ? RCN (M) : BOX (M), b[K[5]], S[w[K[2]][W[3][y]]],
                 S[w[K[2]][W[4][y]]], S[w[K[4]][W[3][y]]], S[w[K[4]][W[4][y]]]);
