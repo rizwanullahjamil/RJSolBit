@@ -28,6 +28,18 @@ LLL (1 digit)  : L1-Wing (currently X-Chain) : a = a - a = a - a = a => -a (comm
 LLL (2 digits) : L2-Wing                     : a = (a-b) = b - b = b => -a (last), -b (first)
 LLL (3 digits) : L3-Wing                     : a = (a-b) = (b-c) = c => -a (last), -c (first)
 
+http://forum.enjoysudoku.com/post276422.html#p276422
+VVV : XY-Wing : 3 cells, same -> no ring
+VVL : H3-Wing : 4 cells, diff -> no ring
+VLV : W-Wing  : 4 cells, same -> * ring (degenerate: naked pair)
+VLL : M-Wing  : 4 cells, same -> * RING *
+      H2-Wing : 4 cells, diff -> no ring
+      H!-Wing : 5 cells, diff -> * ring (degenerate: Turbot Fish)
+LVL : S-Wing  : 5 cells, diff -> * RING * (but same as M-Ring)
+LLL : L1      : 6 cells, same -> * ring (better name: X-Loop)
+      L2      : 5 cells, diff -> * ring (degenerate: X-Wing)
+      L3      : 4 cells, diff -> no ring
+
 Zero solution state (done)
 Hidden single (3 exemplars) (HS done)
 3 x 1-fish: r\c, r\b, r\n            3 x 1-fish: c\r, c\b, c\n
@@ -976,6 +988,7 @@ Grouped Linked Empty Rectangle (1 exemplar, up to 16 exclusions) (DG done)
    +z   -Z   +z  | -Z   -Z   -Z  | +z   -Z   +z
     /   +z    /  |  .    .    .  |  /   +z    /
   ---------------+---------------+---------------
+http://forum.enjoysudoku.com/hybrid-wing-or-is-there-a-better-way-t6544.html
 *H2-Wing Type 1 (Row-Column wise) (2 exemplars, 1 exclusion):
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) .    .    .  |  .    .    .  |  .    /    .  02) .    /    .  |  .    .    .  |  .    .    .
@@ -3051,7 +3064,7 @@ Almost Locked Set move Type 1b (6 exemplars, multiple exclusions) (AL done)
     .   wy    .  |  .    .    .  |  .    .    .      .   wy    .  |  .    .    .  |  .    .    .
     .    .    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Almost Locked Set move Type 2a (5 exemplars, multiple exclusions) (AL 1-3 done)
+Almost Locked Set move Type 2a (5 exemplars, multiple exclusions)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01)-Z   xyz  -Z  | -Z   -Z   -Z  |-XZ   xz  -XZ  02)-Z   xyz  -Z  |  .    .    .  |  .   wy    .
     .    .    .  |  .    .    .  |  .    .    .     -Z   -Z   -Z  |  .    .    .  |  .    .    .
@@ -3071,10 +3084,10 @@ Almost Locked Set move Type 2a (5 exemplars, multiple exclusions) (AL 1-3 done)
     .   -Z    .  |  .    .    .  |  .    .    .
     .   -Z    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------
-*http://forum.enjoysudoku.com/bent-almost-restricted-n-aked-set-barn-t33464.html#p254123
-*http://forum.enjoysudoku.com/new-technique-almost-locked-sub-sets-t33134-15.html#p251899
+http://forum.enjoysudoku.com/bent-almost-restricted-n-aked-set-barn-t33464.html#p254123
+http://forum.enjoysudoku.com/new-technique-almost-locked-sub-sets-t33134-15.html#p251899
   ---------------+---------------+---------------  ---------------+---------------+---------------
-*4) .   xyz   .  |  .    .    .  | -XZ  xz   -XZ *5) .   xyz   .  |  .    .    .  |  .   wy    .
+04) .   xyz   .  |  .    .    .  | -XZ  xz   -XZ 05) .   xyz   .  |  .    .    .  |  .   wy    .
     .    .    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
     .    .   wy  |  .    .    .  | wxz   .    .     -XZ  -XZ  xz  |  .    .    .  | wxz   .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
