@@ -86,19 +86,19 @@ Naked triplet (NT done)
 Hidden triplet (HT done)
 Naked quad (NQ done)
 Hidden quad (HQ done)
-Box-line reduction intersection (1-Fish or Locked Candidate Type 1 Pointing) (1 exemplar, up to 6 exclusions) (LP done)
+Box-line reduction intersection (1-Fish or Locked Candidate Type 1 Pointing) (1 exemplar, up to 6 removals) (LP done)
 ---------+----------+----------
  .  .  . |  /  /  / |  .  .  .
 -Z -Z -Z | +Z +Z +Z | -Z -Z -Z
  .  .  . |  /  /  / |  .  .  .
 ---------+----------+----------
-Pointing and claiming intersection (1-Fish or Locked Candidate Type 2 Claiming) (1 exemplar, up to 6 exclusions) (LC done)
+Pointing and claiming intersection (1-Fish or Locked Candidate Type 2 Claiming) (1 exemplar, up to 6 removals) (LC done)
 ---------+----------+----------
  .  .  . | -Z -Z -Z |  .  .  .
  /  /  / | +Z +Z +Z |  /  /  /
  .  .  . | -Z -Z -Z |  .  .  .
 ---------+----------+----------
-Almost Locked Candidates (6 exemplars, multiple exclusions) (AP, AT & AQ done)
+Almost Locked Candidates (6 exemplars, multiple removals) (AP, AT & AQ done)
 Almost Locked Pair
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) .    .    .  | XY-*  /    /  |  /    /    /  02) .    .    .  | XY   -XY  -XY | -XY  -XY  -XY
@@ -117,7 +117,7 @@ Almost Locked Quad
   WXYZ WXYZ -WXYZ|  .    .    .  |  .    .    .      /    / WXYZ-*|  .    .    .  |  .    .    .
  -WXYZ WXYZ -WXYZ|  .    .    .  |  .    .    .    WXYZ-* / WXYZ-*|  .    .    .  |  .    .    .
 100--------------+---------------+---------------100--------------+---------------+---------------
-X-Wing (2-Fish) (2 exemplars, upto 14 exclusions) (2F done)
+X-Wing (2-Fish) (2 exemplars, upto 14 removals) (2F done)
 ---------+----------+----------      ---------+----------+----------
  .  /  . |  .  .  . |  .  /  .        . -Z  . |  .  .  . |  . -Z  .
 -Z +Z -Z | -Z -Z -Z | -Z +Z -Z        / +Z  / |  /  /  / |  / +Z  /
@@ -181,7 +181,7 @@ X-Wing (2-Fish) (2 exemplars, upto 14 exclusions) (2F done)
  *  X  * |  *  *  * |  *  X  *        /  X  / |  /  /  / |  /  X  /
  .  /  . |  .  .  . |  .  /  .        .  *  . |  .  .  . |  .  *  .
 ---------+----------+----------      ---------+----------+----------
-Sword Fish (3-Fish) (2 exemplars, up to 18 exclusions) (3F done)
+Sword Fish (3-Fish) (2 exemplars, up to 18 removals) (3F done)
 ---------+----------+----------      ---------+----------+----------
  .  /  . |  .  /  . |  .  /  .        . -Z  . |  . -Z  . |  . -Z  .
 -Z +Z -Z | -Z +Z -Z | -Z +Z -Z        / +Z  / |  / +Z  / |  / +Z  /
@@ -293,7 +293,7 @@ Sword Fish (3-Fish) (2 exemplars, up to 18 exclusions) (3F done)
  X  *  * |  .  /  . |  .  .  .        X  /  / |  .  *  . |  .  .  .
  X  * ** |  .  #  . |  .  .  .        X  /  # |  . **  . |  .  .  .
 ---------+----------+----------      ---------+----------+----------
-Jelly Fish (4-Fish) (2 exemplars, up to 15 exclusions) (4F done)
+Jelly Fish (4-Fish) (2 exemplars, up to 15 removals) (4F done)
 ---------+----------+----------      ---------+----------+----------
  .  /  . |  /  .  / |  .  /  .        . -Z  . | -Z  . -Z |  . -Z  .
 -Z +Z -Z | +Z -Z +Z | -Z +Z -Z        / +Z  / | +Z  / +Z |  / +Z  /
@@ -531,7 +531,7 @@ Jelly Fish (4-Fish) (2 exemplars, up to 15 exclusions) (4F done)
  *  X  * |  *  X  * |  X  X  *        /  X  / |  /  X  / |  X  X  /
  .  /  . |  .  /  . |  /  /  .        .  *  . |  .  *  . |  *  *  .
 ---------+----------+----------      ---------+----------+----------
-Skyscraper (1 exemplar, up to 4 exclusions) (SS done)
+Skyscraper (1 exemplar, up to 4 removals) (SS done)
 (2 Sashimi X-Wing)
   ---------------+---------------+---------------
 01) .   +Z    .  |  .    .    .  | -Z    /   -Z
@@ -546,7 +546,7 @@ Skyscraper (1 exemplar, up to 4 exclusions) (SS done)
     .   +Z    .  |  .    .    .  |  .   +Z    .
     .    /    .  |  .    .    .  |  .    /    .
   ---------------+---------------+---------------
-Grouped Skyscraper (2 exemplars, up to 2 exclusions) (GS done)
+Grouped Skyscraper (2 exemplars, up to 2 removals) (GS done)
 (Finned X-Wing)                                  (Sashimi X-Wing)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) .   +z    .  |  .    .    .  |  .    /    .  02) .   +z    .  |  .    .    .  |  .    /    .
@@ -561,7 +561,7 @@ Grouped Skyscraper (2 exemplars, up to 2 exclusions) (GS done)
     .   +Z    .  |  .    .    .  |  .   +Z    .      .   +Z    .  |  .    .    .  |  .   +Z    .
     .    /    .  |  .    .    .  |  .    /    .      .    /    .  |  .    .    .  |  .    /    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-*Extended Skyscraper (6 exemplars, up to 4 exclusions)
+*Extended Skyscraper (6 exemplars, up to 4 removals)
 http://forum.enjoysudoku.com/post275038.html#p275038
 *Line                                             Box
   ---------------+---------------+---------------  ---------------+---------------+---------------
@@ -619,7 +619,7 @@ http://forum.enjoysudoku.com/post275038.html#p275038
     .   +Z    .  | +z    .   +z  |  .   +Z    .
     .    /    .  |  /   +z    /  |  .    /    .
   ---------------+---------------+---------------
-*Extended Grouped Skyscraper (16 exemplars, up to 2 exclusions)
+*Extended Grouped Skyscraper (16 exemplars, up to 2 removals)
 http://forum.enjoysudoku.com/post275038.html#p275038
 *(Finned X-Wing)
 *Line                                             Box
@@ -764,7 +764,7 @@ http://forum.enjoysudoku.com/post275038.html#p275038
     .   +Z    .  |  .    .    .  | +z    .   +z      .   +Z    .  |  .    .    .  | +z    .   +z
     .    /    .  |  .    .    .  |  /   +z    /      .    /    .  |  .    .    .  |  /   +z    /
   ---------------+---------------+---------------  ---------------+---------------+---------------
-2-String Kite (1 exemplar, 1 exclusion)          Grouped 2-String Kite (1 exemplar, 1 exclusion) (SK GK done)
+2-String Kite (1 exemplar, 1 removal)          Grouped 2-String Kite (1 exemplar, 1 removal) (SK GK done)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) .    /    .  |  .    .    .  |  .    .    .  01) .   +Z    .  |  .    .    .  |  .    .    .
     /    /   +Z  |  /    /    /  |  /   +Z    /     +Z    /   +Z  |  /    /    /  |  /   +Z    /
@@ -862,7 +862,7 @@ http://forum.enjoysudoku.com/post275038.html#p275038
     .   +Z    .  |  .    .    .  |[-Z]   -z   .      .   +Z    .  |  .    .    .  |[-Z]  -z    .
     .    /    .  |  .    .    .  |  .    .    .      .    /    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Empty Rectangle (1 exemplar, 1 exclusion)        Dual Empty Rectangle (1 exemplar, up to 6 exclusions) (ER DR done)
+Empty Rectangle (1 exemplar, 1 removal)        Dual Empty Rectangle (1 exemplar, up to 6 removals) (ER DR done)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) /   +z    /  |  .    .    .  |  .    .    .  02) /   +z    /  |  .    .    .  |  .    /    .
    +z    .   +z  |  .    .    .  |  .   -Z    .     +z    .   +z  |  .    .    .  |  .   -Z    .
@@ -918,7 +918,7 @@ Empty Rectangle (1 exemplar, 1 exclusion)        Dual Empty Rectangle (1 exempla
     /   -Z    /  |  .    .    .  |  .   +Z    .      /   +Z    /  |  .    .    .  |  .    .    .
     /    /    /  |  .    .    .  |  .    /    .      /    /    /  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Dual Linked Empty Rectangle (1 exemplar, up to 15 exclusions) (DL done)
+Dual Linked Empty Rectangle (1 exemplar, up to 15 removals) (DL done)
   ---------------+---------------+---------------
 01) /   +z    /  |  .    .    .  |  /   +z    /
    +z   -Z   +z  | -Z   -Z   -Z  | +z   -Z   +z
@@ -932,7 +932,7 @@ Dual Linked Empty Rectangle (1 exemplar, up to 15 exclusions) (DL done)
     /   +Z    /  |  /    /    /  |  /   +Z    /
     .   -Z    .  |  .    .    .  |  .   -Z    .
   ---------------+---------------+---------------
-Grouped Empty Rectangle (1 exemplar, 1 exclusion) (GR done)
+Grouped Empty Rectangle (1 exemplar, 1 removal) (GR done)
   ---------------+---------------+---------------
 01) /   +z    /  |  .    .    .  |  .    .    .
    +z    .   +z  |  .    .    .  |  .   -Z    .
@@ -946,7 +946,7 @@ Grouped Empty Rectangle (1 exemplar, 1 exclusion) (GR done)
    +z    .   +z  |  .    .    .  | +z    .   +z
     /   +z    /  |  .    .    .  |  /   +z    /
   ---------------+---------------+---------------
-*Dual Grouped Empty Rectangle (4 exemplars, multiple exclusions) (Useless)
+*Dual Grouped Empty Rectangle (4 exemplars, multiple removals) (Useless)
   ---------------+---------------+---------------  ---------------+---------------+---------------
     /   +z    /  |  /   +z    /  |  .    .    .      /   +z    /  |  .    .    .  |  .    .    .
    +z    .   +z  | +z    .   +z  |  .   -Z    .     +z    .   +z  |  .    .    .  |  .   -Z    .
@@ -974,7 +974,7 @@ Grouped Empty Rectangle (1 exemplar, 1 exclusion) (GR done)
    +z    .   +z  |  .   -Z    .  | +z    .   +z     +z    .   +z  |  .   -Z    .  | +z    .   +z
     /   +z    /  |  .    .    .  |  /   +z    /      /   +z    /  |  .    .    .  |  /   +z    /
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Grouped Linked Empty Rectangle (1 exemplar, up to 16 exclusions) (DG done)
+Grouped Linked Empty Rectangle (1 exemplar, up to 16 removals) (DG done)
   ---------------+---------------+---------------
 01) /   +z    /  |  .    .    .  |  /   +z    /
    +z   -Z   +z  | -Z   -Z   -Z  | +z   -Z   +z
@@ -989,7 +989,7 @@ Grouped Linked Empty Rectangle (1 exemplar, up to 16 exclusions) (DG done)
     /   +z    /  |  .    .    .  |  /   +z    /
   ---------------+---------------+---------------
 http://forum.enjoysudoku.com/hybrid-wing-or-is-there-a-better-way-t6544.html
-*H2-Wing Type 1 (Row-Column wise) (2 exemplars, 1 exclusion):
+*H2-Wing Type 1 (Row-Column wise) (2 exemplars, 1 removal):
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) .    .    .  |  .    .    .  |  .    /    .  02) .    /    .  |  .    .    .  |  .    .    .
     /   +Xy   /  |  /    /    /  |  /   Z-X   /      .   +xY   .  |  .    .    .  |  .   xz    .
@@ -1003,7 +1003,7 @@ http://forum.enjoysudoku.com/hybrid-wing-or-is-there-a-better-way-t6544.html
     .   yz    .  |  .    .    .  |  .   +Z    .      /   Z-Y   /  |  /    /    /  |  /   +Z    /
     .    .    .  |  .    .    .  |  .    /    .      .    /    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-*Dual H2-Wing Type 1 (Row-Column wise) (1 exemplar, up to 2 exclusions):
+*Dual H2-Wing Type 1 (Row-Column wise) (1 exemplar, up to 2 removals):
   ---------------+---------------+---------------Bivalues xz @ r2c8 & yz @ r8c2
 01) .    /    .  |  .    .    .  |  .    /    .  Strong Link X @ r2c28
     /   +XY   /  |  /    /    /  |  /   Z-X   /  Strong Link Y @ r28c2
@@ -1017,20 +1017,20 @@ http://forum.enjoysudoku.com/hybrid-wing-or-is-there-a-better-way-t6544.html
     /   Z-Y   /  |  /    /    /  |  /   +-Z   /
     .    /    .  |  .    .    .  |  .    /    .
   ---------------+---------------+---------------
-*H2-Wing Type 2 (Box-Box wise) (2 exemplars, 1 exclusion):
+*H2-Wing Type 2 (Box-Box wise) (2 exemplars, 1 removal):
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) /   +Xy   /  |  /    /    /  |  /   Z-X   /  02) /   +xY   /  |  .    .    .  |  .   xz    .
     .    .    .  |  .    .    .  |  /    /    /      /    /    /  |  .    .    .  |  .    .    .
     .    .   yz  |  .    .    .  | +Z   +Z   +Z      /    /   Y-Z |  /    /    /  | +Z   +Z   +Z
   ---------------+---------------+---------------  ---------------+---------------+---------------
-*Dual H2-Wing Type 2 (Box-Box wise) (1 exemplar, up to 2 exclusions):
+*Dual H2-Wing Type 2 (Box-Box wise) (1 exemplar, up to 2 removals):
   ---------------+---------------+---------------
 01) /   +XY   /  |  /    /    /  |  /   Z-X   /
     /    /    /  |  .    .    .  |  /    /    /
     /    /   Y-Z |  /    /    /  | +Z   +Z   +Z
   ---------------+---------------+---------------
 http://www.dailysudoku.com/sudoku/forums/viewtopic.php?p=27147#27147
-*L3-Wing Type 1 (Rows-Columns wise) (2 exemplars, 1 exclusion):
+*L3-Wing Type 1 (Rows-Columns wise) (2 exemplars, 1 removal):
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) .    /    .  |  .    .    .  |  .    .    .  02) .    /    .  |  .    .    .  |  .    /    .
     /   +XY   /  |  /    /    /  |  /  +X-Z   /      /   +XY   /  |  /    /    /  |  /   +XZ   /
@@ -1044,7 +1044,7 @@ http://www.dailysudoku.com/sudoku/forums/viewtopic.php?p=27147#27147
     /   +YZ   /  |  /    /    /  |  /  +Z-X   /      .  +Y-Z   .  |  .    .    .  |  .  +Z-Y   .
     .    /    .  |  .    .    .  |  .    .    .      .    /    .  |  .    .    .  |  .    /    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-*Dual L3-Wing Type 1 (Rows-Columns wise) (1 exemplar, up to 2 exclusions):
+*Dual L3-Wing Type 1 (Rows-Columns wise) (1 exemplar, up to 2 removals):
   ---------------+---------------+---------------Strong Link X @ r2c28
 01) .    /    .  |  .    .    .  |  .    /    .  Strong Link Y @ r28c2
     /   +XY   /  |  /    /    /  |  /   +X-Z  /  Strong Link Z @ r28c8 & r8c28
@@ -1058,7 +1058,7 @@ http://www.dailysudoku.com/sudoku/forums/viewtopic.php?p=27147#27147
     /  +Y-Z   /  |  /    /    /  |  /  +Z-XY  /
     .    /    .  |  .    .    .  |  .    /    .
   ---------------+---------------+---------------
-*L3-Wing Type 2 (Boxes-Lines wise) (4 exemplars, 1 exclusion):
+*L3-Wing Type 2 (Boxes-Lines wise) (4 exemplars, 1 removal):
   ---------------+---------------+---------------  --------------+----------------+---------------
 01) /   +XY   /  |  /    /    /  |  /  +X-Z   /  02) /   +XY   /  |  /    /    /  |  /   +XZ   /
     /    /    /  |  .    .    .  |  .    .    .      /    /    /  |  .    .    .  |  /    /    /
@@ -1078,7 +1078,7 @@ http://www.dailysudoku.com/sudoku/forums/viewtopic.php?p=27147#27147
     .    /    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    /    .
     .    /    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    /    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-*Dual L3-Wing Type 2 (Boxes-Lines wise) (4 exemplars, up to 2 exclusions):
+*Dual L3-Wing Type 2 (Boxes-Lines wise) (4 exemplars, up to 2 removals):
   --------------+-------------+-----------Bivalues XY @ r3c3789
 01) /  +XY   /  |  /   /   /  |  / +X-Z / Strong Link X @ r1c28
     /   /    /  |  .   .   .  |  /  /   / Strong Link Y @ b1p29
@@ -1112,7 +1112,7 @@ http://www.dailysudoku.com/sudoku/forums/viewtopic.php?p=27147#27147
     .   /    .  |  .   .   .  |  .  /   .
     .   /    .  |  .   .   .  |  .  /   .
   --------------+-------------+-----------
-*M-Wing (15 exemplars, up to 0 exclusions)
+*M-Wing (15 exemplars, up to 0 removals)
 Type 1A:                             Type 1B:
  .  .  .  | .  .  .  | .  .  .        .  .  .  | .  /  .  | .  .  .
  .  ab .  | .  .  .  | . -b  .        .  ab .  | . +a  .  | . -b  .
@@ -1221,7 +1221,7 @@ Type 7A:                             Type 7B:
 7A: r2c789 -b- r2c2 -a- r3c123 =a= r3c5 =b= r3c789 -b- r2c789 --> r2c789<>b
 7B: r2c789 -b- r2c2 -a- r2c456 =a= r3c5 =b= r3c789 -b- r2c789 --> r2c789<>b
 
-*M-Ring (06 exemplars, multiple exclusions)
+*M-Ring (06 exemplars, multiple removals)
 Type A:
  .  -a   .  | .  /  .  | .  .  .
 -b  ab  -b  |-b +b -b  |-b -b -b
@@ -1300,7 +1300,7 @@ Type D:
 In addition, r3c5=ab
 r2c2 -a- r2c456 =a= r3c5 =b= r2c456 -b- r2c2 - continuous loop
 
-W-Wing Type 1 (4 exemplars, up to 2 exclusions) (WW done) (17-20) (57-58)
+W-Wing Type 1 (4 exemplars, up to 2 removals) (WW done) (17-20) (57-58)
 Line 17-20                                ERI 57-58
   --------------+-------------+-----------  --------------+-------------+-----------
 01) .   .    .  |  .   .   .  |  .  .   . 02) .   .    .  |  .   .   .  |  . +y   .
@@ -1330,7 +1330,7 @@ Line (53-54)                              ERI (55-56)
     .   .    .  |  .   .   .  |  .  .   .     .   .    .  |  .   .   .  |  .  .   .
   --------------+-------------+-----------  --------------+-------------+-----------
 *W-Wing Type 1 Transport
-*ERI (1 exclusion) 01-04                   Reduced ERI (up to 2 exclusions) 05-08
+*ERI (1 removal) 01-04                   Reduced ERI (up to 2 removals) 05-08
   --------------+-------------+-----------  --------------+-------------+-----------
 01) .   .    .  |  /  +z   /  |  .  .   . 02) .   .    .  |  /  +Z   /  |  . [-Z] .
     .  yz    .  | +z   .  +z  |  . -z   .     .  yz    .  | +z   .  +z  |  . -z   .
@@ -1344,7 +1344,7 @@ Line (53-54)                              ERI (55-56)
     .  -z    .  |  . [-Z]  .  |  . yz   .     .  -z    .  |  .  -Z   .  |  . yz   .
     .   .    .  |  .   .   .  |  .  .   .     .   .    .  |  .   .   .  |  .  .   .
   --------------+-------------+-----------  --------------+-------------+-----------
-*Box (1 exclusion) 09-12                   Line (1 exclusion) 13-16
+*Box (1 removal) 09-12                   Line (1 removal) 13-16
   --------------+-------------+-----------  --------------+-------------+-----------
 03) .   .    .  | +z  +z  +z  |  . [-Z] . 04) .   .    .  |  .   .   .  |  . [-Z] .
     .  yz    .  | +z  +z  +z  |  . -z   .     .  yz    .  |  .   .   .  |  . -z   .
@@ -1358,7 +1358,7 @@ Line (53-54)                              ERI (55-56)
     .  -z    .  |  .   .   .  |  . yz   .     .  -z    .  |  .   .   .  |  . yz   .
     .   .    .  |  .   .   .  |  .  .   .     .   .    .  |  .   .   .  |  .  .   .
   --------------+-------------+-----------  --------------+-------------+-----------
-*Reduced Line (2 exclusions) 25-28         29-32
+*Reduced Line (2 removals) 25-28         29-32
   --------------+-------------+-----------  --------------+-------------+-----------
 05) .   .    .  |  .   .   .  |  . -Z   . 06) .   .    .  |  .   .   .  |  .  .   .
     .  yz    .  |  .   .   .  |  . -z   .     .  yz    .  |  .   .   .  |  . -z   .
@@ -1414,14 +1414,14 @@ Line (53-54)                              ERI (55-56)
     .  -z    .  |  . [-Z]  .  |  . yz   .     .  -z    .  |  . [-Z]  .  |  . yz   .
     .   .    .  |  .   .   .  |  .  .   .     .   .    .  |  .   .   .  |  .  .   .
   --------------+-------------+-----------  --------------+-------------+-----------
-Grouped W-Wing Type 2 (2 exemplars, up to 6 exclusions) (WW done)
+Grouped W-Wing Type 2 (2 exemplars, up to 6 removals) (WW done)
 Line (09)                                 Box (10)
   --------------+-------------+-----------  --------------+-------------+-----------
 01) .  yz    .  |  .   .   .  | -Z -Z  -Z 02) .  yz    .  | +y  +y  +y  | -Z -Z  -Z
    +y  +y   +y  |  /   /   /  | +y +y  +y     .   .    .  |  /   /   /  |  .  .   .
    -Z  -Z   -Z  |  .   .   .  |  .  .  yz    -Z  -Z   -Z  | +y  +y  +y  |  .  .  yz
 01--------------+-------------+-----------01--------------+-------------+-----------
-W-Wing Type 2 (2 exemplars, up to 6 exclusions) (WW done)
+W-Wing Type 2 (2 exemplars, up to 6 removals) (WW done)
 Line (14)                                 ERI (15)
   --------------+-------------+-----------  --------------+-------------+-----------
 03) .  yz    .  |  .   .   .  | -Z -Z  -Z 04) .  yz    .  |  .   .   .  | -Z -Z  -Z
@@ -1436,9 +1436,9 @@ Line (14)                                 ERI (15)
     /  +Y    /  |  /   /   /  |  /  /  +Y    +y   .   +y  |  .   .   .  | +y +y   .
     .   .    .  |  .   .   .  |  .  .   .     /  +y    /  |  .   .   .  |  /  /  +y
   --------------+-------------+-----------  --------------+-------------+-----------
-*W-Wing Type 2 Transport (0 exemplars, up to 0 exclusions)
+*W-Wing Type 2 Transport (0 exemplars, up to 0 removals)
 
-*W-Wing Type 3 (4 exemplars, up to 5 exclusions) (Useless)
+*W-Wing Type 3 (4 exemplars, up to 5 removals) (Useless)
 *Skyscraper                                Grouped Skyscraper
   --------------+-------------+-----------  --------------+-------------+-----------
 01) .   .   -Z  |  .   .   .  |  .  .   . 02) .   .    .  |  .   .   .  |  .  .   .
@@ -1467,7 +1467,7 @@ Line (14)                                 ERI (15)
     .   .   +Z  |  .   .   .  |  . -Z   .     .  +Z    .  |  .   .   .  |  . -Z   .
     .   .    /  |  .   .   .  |  .  .   .     .   .    .  |  .   .   .  |  .  .   .
   --------------+-------------+-----------  --------------+-------------+-----------
-*W-Ring (multiple exemplars, up to 24 exclusions)
+*W-Ring (multiple exemplars, up to 24 removals)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) .   -Y    .  |  .    /    .  |  .   -Y    .  02) .    .    .  |  .    .    .  |  /   +YZ   /
    -Z   yz   -Z  | -Z   +Z   -Z  | -Z   -YZ  -Z     -YZ  yz   -YZ | -YZ  -YZ  -YZ | +YZ  -YZ  +YZ
@@ -1481,7 +1481,7 @@ Line (14)                                 ERI (15)
    -Z   -YZ  -Z  | -Z   +Z   -Z  | -Z   yz   -Z      .   -YZ   .  |  .    .    .  |  .   yz    .
     .   -Y    .  |  .    /    .  |  .   -Y    .      .    .    .  |  .    .    .  |  .   -YZ   .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-XY-Ring Type 1 (1 exemplar, multiple exclusions) (XR done)
+XY-Ring Type 1 (1 exemplar, multiple removals) (XR done)
   ---------------+---------------+---------------
     .   -Y    .  |  .    .    .  |  .   -Z    .
    -X   xy   -X  | -X   -X   -X  | -X   xz   -X
@@ -1495,7 +1495,7 @@ XY-Ring Type 1 (1 exemplar, multiple exclusions) (XR done)
    -W   wy   -W  | -W   -W   -W  | -W   wz   -W
     .   -Y    .  |  .    .    .  |  .   -Z    .
   ---------------+---------------+---------------
-XY-Ring Type 2 (4 exemplars, multiple exclusions) (XR done)
+XY-Ring Type 2 (4 exemplars, multiple removals) (XR done)
   --------------+-------------+-----------
    -XY xy   -XY | -X  -X  -X  | xz -XZ -XZ
    -Y  -Y   -Y  |  .   .   .  | -Z -Z  -Z
@@ -1529,9 +1529,10 @@ XY-Ring Type 2 (4 exemplars, multiple exclusions) (XR done)
     .   -Y    .  |  .    .    .  |  .   -Z    .
     .   -Y    .  |  .    .    .  |  .   -Z    .
   ---------------+---------------+---------------
+http://www.rcbroughton.co.uk/sudoku/forum/viewtopic.php?f=5&t=96
 http://forum.enjoysudoku.com/strong-wing-vs-xy-wing-t3378.html
 http://forum.enjoysudoku.com/whatever-happened-to-strong-wings-t34368.html
-Strong Wing Type 1 (1 exemplar, multiple exclusions) (SW)
+Strong Wing Type 1 (1 exemplar, multiple removals) (SW)
   ---------------+---------------+---------------
     .    /    .  |  .    .    .  |  .    /    .   Conjugate pairs:
     /   XY+   /  |  /    /    /  |  /   XZ+   /   X in r2
@@ -1545,13 +1546,13 @@ Strong Wing Type 1 (1 exemplar, multiple exclusions) (SW)
     /   YZ+   /  |  /    /    /  |  /  +Z-*   /
     .    /    .  |  .    .    .  |  .    /    .
   ---------------+---------------+---------------
-*Strong Wing Type 2 (1 exemplar, multiple exclusions) (SW)
+*Strong Wing Type 2 (1 exemplar, multiple removals) (SW)
   ---------------+---------------+---------------
     /   XY+   /  |  /    /    /  |  /   XZ+   /   X in r1
     /    /    /  |  .    .    .  |  /    /    /   Y in b1
     /    /   YZ+ |  /    /    /  |  /    /  +Z-*  Z in b3 & r3
 108--------------+---------------+---------------
-*Strong Ring Type 1 (1 exemplar, multiple exclusions) (SR)
+Strong Ring Type 1 (1 exemplar, multiple removals) (SR)
   ---------------+---------------+---------------
     .    /    .  |  .    .    .  |  .    /    .   X in r2
     /  XY-*   /  |  /    /    /  |  /  XZ-*   /   Y in c2
@@ -1565,13 +1566,13 @@ Strong Wing Type 1 (1 exemplar, multiple exclusions) (SW)
     /  WY-*   /  |  /    /    /  |  /  WZ-*   /
     .    /    .  |  .    .    .  |  .    /    .
   ---------------+---------------+---------------
-*Strong Ring Type 2 (1 exemplar, multiple exclusions) (SR)
+*Strong Ring Type 2 (1 exemplar, multiple removals) (SR)
   ---------------+---------------+---------------
     /  XY-*   /  |  /    /    /  |XZ-*   /    /   X in r1
     /    /    /  |  .    .    .  |  /    /    /   Y in b1
     /    /  WY-* |  /    /    /  |  /  WZ-*   /   Z in b3
 108--------------+---------------+--------------- W in r3
-XY-Wing Type 1 (1 exemplar, 1 exclusion) (YW done)
+XY-Wing Type 1 (1 exemplar, 1 removal) (YW done)
   ---------------+---------------+---------------
     .    .    .  |  .    .    .  |  .    .    .
     .   XY    .  |  .    .    .  |  .   XZ    .
@@ -1586,7 +1587,7 @@ XY-Wing Type 1 (1 exemplar, 1 exclusion) (YW done)
     .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------
 XY-Wing Type 1 Transport (78 examplars) (YT done)
-ERI (1 exclusion) 8 10
+ERI (1 removal) 8 10
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) .    .    .  |  /   +z    /  |  .    .    .  02) .    .    .  |  .    .    .  |  .    .    .
     .   xy    .  | +z    .   +z  |  .   xz    .      .   xy    .  |  .    .    .  |  .   xz    .
@@ -1614,7 +1615,7 @@ ERI (1 exclusion) 8 10
     .   yz    .  | +z    .   +z  |  .   -z    .      .   yz    .  |  .    .    .  |  .   -z    .
     .    .    .  |  /   +z    /  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Reduced ERI (up to 2 exclusions) 7 9
+Reduced ERI (up to 2 removals) 7 9
   ---------------+---------------+---------------  ---------------+---------------+---------------
 05) .  [-Z]   .  |  /   +Z    /  |  .    .    .  06) .    .    .  |  .    .    .  |  .    .    .
     .   xy    .  | +z    .   +z  |  .   xz    .    [-Z]  xy    .  |  .    .    .  |  .   xz    .
@@ -1642,7 +1643,7 @@ Reduced ERI (up to 2 exclusions) 7 9
     .   yz    .  | +z    .   +z  |  .   -z    .      .   yz    .  |  .    .    .  |  .   -z  [-Z]
     .    .    .  |  /   +Z    /  |  .  [-Z]   .      .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-ERI (up to 2 exclusions)
+ERI (up to 2 removals)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 09) .    .    .  |  /   +z    /  |  .    .    .  10) .    .    .  |  .    .    .  |  .    .    .
     .   xy    .  | +z    .   +z  |  .   xz    .      .   xy    .  |  .  [-Z]   .  |  .   xz    .
@@ -1670,7 +1671,7 @@ ERI (up to 2 exclusions)
     .   yz    .  | +z    .   +z  |  .   -z    .      .   yz    .  |  .  [-Z]   .  |  .   -z    .
     .    .    .  |  /   +z    /  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Reduced ERI (up to 3 exclusions)
+Reduced ERI (up to 3 removals)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 13) .  [-Z]   .  |  /   +Z    /  |  .    .    .  14) .    .    .  |  .    .    .  |  .    .    .
     .   xy    .  | +z    .   +z  |  .   xz    .    [-Z]  xy    .  |  .   -Z    .  |  .   xz    .
@@ -1726,7 +1727,7 @@ Reduced ERI (up to 3 exclusions)
     .   yz    .  | +z    .   +z  |  .   -z    .      .   yz    .  |  .  (-Z)   .  |  .   -z    .
     .    .    .  |  /   +z    /  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Reduced ERI (up to 4 exclusions)
+Reduced ERI (up to 4 removals)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 21) .  [-Z]   .  |  /   +Z    /  |  .    .    .  22) .    .    .  |  .    .    .  |  .    .    .
     .   xy    .  | +z    .   +z  |  .   xz    .      .   xy  [-Z] |  .   -Z    .  |  .   xz    .
@@ -1754,7 +1755,7 @@ Reduced ERI (up to 4 exclusions)
     .   yz    .  | +z    .   +z  |  .   -z    .      .   yz    .  |  .   -Z    .  |  .   -z  [-Z]
     .    .    .  |  /   +Z    /  |  .  [-Z]   .      .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-ERI (up to 4 exclusions)
+ERI (up to 4 removals)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 25) .    .    .  |  /   +z    /  |  .    .    .  26) .    .    .  |  .    .    .  |[-Z]   .    .
     .   xy    .  | +z    .   +z  |  .   xz    .      .   xy    .  |  .    .    .  |[-Z]  xz    .
@@ -1782,7 +1783,7 @@ ERI (up to 4 exclusions)
     .   yz    .  | +z    .   +z  |  .   -z    .      .   yz  [-Z] |  .    .    .  |  .   -z    .
     .    .    .  |  /   +z    /  |  .    .    .      .    .  [-Z] |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Reduced ERI (up to 5 exclusions)
+Reduced ERI (up to 5 removals)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 29) .  [-Z]   .  |  /   +Z    /  |  .    .    .  30) .    .    .  |  .    .    .  | -Z    .    .
     .   xy    .  | +z    .   +z  |  .   xz    .    [-Z]  xy    .  |  .    .    .  | -Z   xz    .
@@ -1866,7 +1867,7 @@ Line
     .   yz    .  |  .   +Z    .  |  .   -z    .      .   yz  (-Z) |  .    .    .  |  .   -z    .
     .    .    .  |  .    /    .  |  .    .    .      .    .  (-Z) |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Line Ring (multiple exclusions) 13
+Line Ring (multiple removals) 13
   ---------------+---------------+---------------  ---------------+---------------+---------------
 41) .   -YZ   .  |  .    .    .  |  .   -Z    .  42) .   -Y    .  |  .    /    .  |  .    .    .
 \  -X   xy   -X  | -X   -X   -X  | -X   xz   -X  \  -XZ  xy   -XZ |-XZ  +Z-X  -XZ | -XZ   xz  -XZ
@@ -1880,7 +1881,7 @@ Line Ring (multiple exclusions) 13
     .   yz    .  |  .    .    .  |  .  (-z)   .     -Z   yz   -Z  | -Z   +Z   -Z  | -Z  (-z)  -Z
     .   -YZ   .  |  .    .    .  |  .   -Z    .      .   -Y    .  |  .    /    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-ERI Ring (multiple exclusions)
+ERI Ring (multiple removals)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 43) .   -YZ   .  |  .    .    .  |  .   -Z    .  44) .   -Y    .  |  /   +z    /  |  .    .    .
 \  -X   xy   -X  | -X   -X   -X  | -X   xz   -X  \  -XZ  xy   -XZ |+z-X -XZ  +z-X | -XZ   xz  -XZ
@@ -1936,7 +1937,7 @@ ERI
     .   yz    .  |  .    .    .  |  .   -z   +z      .   yz    .  |  .    .    .  |  /   -z    /
     .    .    .  |  .    .    .  | +z    /    /      .    .    .  |  .    .    .  |  /   +z    /
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Box (1 exclusion) 5 6
+Box (1 removal) 5 6
   ---------------+---------------+---------------  ---------------+---------------+---------------
 51) .  [-Z]   .  | +z   +z   +z  |  .    .    .  52) .    .    .  |  .    .    .  |  .    .    .
     .   xy    .  | +z   +z   +z  |  .   xz    .    [-Z]  xy    .  |  .    .    .  |  .   xz    .
@@ -1964,7 +1965,7 @@ Box (1 exclusion) 5 6
     .   yz    .  | +z   +z   +z  |  .   -z    .      .   yz    .  |  .    .    .  |  .   -z  [-Z]
     .    .    .  | +z   +z   +z  |  .  [-Z]   .      .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Line (1 exclusion) 1
+Line (1 removal) 1
   ---------------+---------------+---------------  ---------------+---------------+---------------
 55) .  [-Z]   .  |  .    .    .  |  .    .    .  56) .    .   +z  |  .    .    .  |  .    .    .
     .   xy    .  |  .    .    .  |  .   xz    .    [-Z]  xy   +z  |  .    .    .  |  .   xz    .
@@ -1992,7 +1993,7 @@ Line (1 exclusion) 1
     .   yz    .  |  .    .    .  |  .  (-z)   .      .   yz    .  |  .    .    .  | +z  (-z) [-Z]
     .    .    .  |  .    .    .  |  .  [-Z]   .      .    .    .  |  .    .    .  | +z    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Reduced Line Ring (multiple exclusions) 15
+Reduced Line Ring (multiple removals) 15
   ---------------+---------------+---------------  ---------------+---------------+---------------
 59) .   -YZ   .  |  .    .    .  | -Z   -Z   -Z  60) .   -Y    /  |  .    .    .  |  .    .    .
    -X   xy   -X  | -X   -X   -X  | -XZ  xz   -XZ    -XZ  xy  +Z-X | -XZ  -XZ  -XZ | -XZ  xz   -XZ
@@ -2048,7 +2049,7 @@ Reduced Line Ring (multiple exclusions) 15
   (-Z)  yz  (-Z) |  .    .    .  |  .  (-z)   .     -Z   yz   -Z  | -Z   -Z   -Z  | +Z  (-z)  -Z
   (-Z)  -YZ (-Z) |  .    .    .  |  .   -Z    .      .   -Y    .  |  .    .    .  |  /    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Line (multiple exclusions) 2
+Line (multiple removals) 2
   ---------------+---------------+---------------  ---------------+---------------+---------------
 67) .   -Z    .  |  .    .    .  |  .    .    .  68) .    .    /  |  .    .    .  |  .    .    .
 /   .   xy    .  |  .    .    .  |  .   xz    .  /  -Z   xy    /  |  .    .    .  |  .   xz    .
@@ -2133,7 +2134,7 @@ Line (multiple exclusions) 2
     .    .    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  /    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
 XYZ-Transport (55 examplars)
-ERI (1 exclusion) 8 10
+ERI (1 removal) 8 10
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) .    .    .  |  /   +z    /  |  .    .    .  02) .    .    .  |  .    .    .  |  .    .    .
     .   xyz   .  | +z    .   +z  |  .   xz    .      .   xyz   .  |  .    .    .  |  .   xz    .
@@ -2161,7 +2162,7 @@ ERI (1 exclusion) 8 10
     .   yz    .  | +z    .   +z  |  .    .    .      .   yz    .  |  .    .    .  |  .    .    .
     .    .    .  |  /   +z    /  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Reduced ERI (up to 2 exclusions) 7 9
+Reduced ERI (up to 2 removals) 7 9
   ---------------+---------------+---------------  ---------------+---------------+---------------
 05) .  [-Z]   .  |  /   +Z    /  |  .    .    .  06) .    .    .  |  .    .    .  |  .    .    .
     .   xyz   .  | +z    .   +z  |  .   xz    .    [-Z]  xyz   .  |  .    .    .  |  .   xz    .
@@ -2231,7 +2232,7 @@ ERI
     .   yz    .  | +z    .   +z  |  .   -z    .      .   yz    .  |  .   (.)   .  |  .   -z    .
     .    .    .  |  /   +z    /  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Reduced ERI (up to 4 exclusions)
+Reduced ERI (up to 4 removals)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 21) .  [-Z]   .  |  /   +Z    /  |  .    .    .  22) .    .    .  |  .    .    .  |  .    .    .
     .   xy    .  | +z    .   +z  |  .   xz    .      .   xy  [-Z] |  .   -Z    .  |  .   xz    .
@@ -2259,7 +2260,7 @@ ERI
     .   yz    .  |  /   -Z    /  |  .    .    .      .   yz    .  |  .    .    .  |  .    .    .
     .    .    .  |  /   +z    /  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Reduced ERI (up to 5 exclusions)
+Reduced ERI (up to 5 removals)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 29) .  [-Z]   .  |  /   +Z    /  |  .    .    .  30) .    .    .  |  .    .    .  | -Z    .    .
     .   xyz   .  | +z    .   +z  |  .   xz    .      .   xyz [-Z] |  .    .    .  | -Z   xz    .
@@ -2315,7 +2316,7 @@ Line
     .   yz    .  |  .   +Z    .  |  .   -z    .      .   yz   (.) |  .    .    .  |  .   -z    .
     .    .    .  |  .    /    .  |  .    .    .      .    .   (.) |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Line Ring (multiple exclusions) 13
+Line Ring (multiple removals) 13
   ---------------+---------------+---------------  ---------------+---------------+---------------
 41) .   -YZ   .  |  .    .    .  |  .   -Z    .  42) .   -Y    .  |  .    /    .  |  .    .    .
 \  -X   xy   -X  | -X   -X   -X  | -X   xz   -X  \  -XZ  xy   -XZ |-XZ  +Z-X  -XZ | -XZ  xz   -XZ
@@ -2329,7 +2330,7 @@ Line Ring (multiple exclusions) 13
     .   yz    .  |  .    .    .  |  .  (-Z)   .     -Z   yz   -Z  | -Z   +Z   -Z  | -Z  (-Z)  -Z
     .   -YZ   .  |  .    .    .  |  .   -Z    .      .   -Y    .  |  .    /    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-ERI Ring (multiple exclusions)
+ERI Ring (multiple removals)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 43) .  -YZ    .  |  .    .    .  |  .   -Z    .  44) .   -Y    .  |  /   +z    /  |  .    .    .
 \  -X   xy   -X  | -X   -X   -X  | -X   xz   -X  \  -XZ  xy   -XZ |+z-X -XZ  +z-X | -XZ  xz   -XZ
@@ -2371,7 +2372,7 @@ ERI
     .   yz    .  |  .    .    .  |  .   +z   +z      .   yz    .  |  .    .    .  |  /   +z    /
     .    .    .  |  .    .    .  | +z    /    /      .    .    .  |  .    .    .  |  /   +z    /
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Box (1 exclusion) 5 6
+Box (1 removal) 5 6
   ---------------+---------------+---------------  ---------------+---------------+---------------
 51) .  [-Z]   .  | +z   +z   +z  |  .    .    .  52) .    .    .  |  .    .    .  |  .    .    .
     .   xyz   .  | +z   +z   +z  |  .   xz    .    [-Z]  xyz   .  |  .    .    .  |  .   xz    .
@@ -2385,7 +2386,7 @@ Box (1 exclusion) 5 6
     .   yz    .  |  .    .    .  |  .    .    .      .   yz    .  |  .    .    .  |  .    .    .
     .    .    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Line (1 exclusion) 1
+Line (1 removal) 1
   ---------------+---------------+---------------  ---------------+---------------+---------------
 55) .  [-Z]   .  |  .    .    .  |  .    .    .  56) .    .   +z  |  .    .    .  |  .    .    .
     .   xyz   .  |  .    .    .  |  .   xz    .    [-Z]  xyz  +z  |  .    .    .  |  .   xz    .
@@ -2413,7 +2414,7 @@ Line (1 exclusion) 1
     .   yz    .  |  .    .    .  |  .  (-Z)   .      .   yz    .  |  .    .    .  | +z  (-Z) [-Z]
     .    .    .  |  .    .    .  |  .  [-Z]   .      .    .    .  |  .    .    .  | +z    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Reduced Line Ring (multiple exclusions) 15
+Reduced Line Ring (multiple removals) 15
   ---------------+---------------+---------------  ---------------+---------------+---------------
 59) .   -YZ   .  |  .    .    .  | -Z   -Z   -Z  60) .   -Y    /  |  .    .    .  |  .    .    .
    -X   xyz  -X  | -X   -X   -X  |-XZ   xz   -XZ    -XZ  xyz +Z-X | -XZ  -XZ  -XZ |-XZ   xz   -XZ
@@ -2525,7 +2526,7 @@ Reduced Line Ring (multiple exclusions) 15
     .   yz    .  |  .    .    .  |  .   -z    .      .   yz    /  |  .    .    .  |  .   -z    .
     .    .    .  |  .    .    .  |  .    .    .      .    .    /  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-XYZ-Hybrid (Row-Column wise) (2 exemplars, up to 7 exclusions): (ZH done)
+XYZ-Hybrid (Row-Column wise) (2 exemplars, up to 7 removals): (ZH done)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) .    .    .  |  .    .    .  |  .    /    .  02) .   -Z    .  |  .    .    .  |  .    .    .
    -Z   xyz  -Z  | -Z   -Z   -Z  | -Z   xZ  - Z      .   xyz   .  |  .    .    .  |  .   xz    .
@@ -2539,7 +2540,7 @@ XYZ-Hybrid (Row-Column wise) (2 exemplars, up to 7 exclusions): (ZH done)
     .   yz    .  |  .    .    .  |  .   +Z    .      /   yZ    /  |  /    /    /  |  /   +Z    /
     .    .    .  |  .    .    .  |  .    /    .      .   -Z    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Dual XYZ-Hybrid: (Row-Column wise) (1 exemplar, up to 14 exclusions): (ZH done)
+Dual XYZ-Hybrid: (Row-Column wise) (1 exemplar, up to 14 removals): (ZH done)
   ---------------+---------------+---------------
 01) .   -Z    .  |  .    .    .  |  .    /    .
    -Z   xyz  -Z  | -Z   -Z   -Z  | -Z   xZ  - Z
@@ -2553,7 +2554,7 @@ Dual XYZ-Hybrid: (Row-Column wise) (1 exemplar, up to 14 exclusions): (ZH done)
     /   yZ    /  |  /    /    /  |  /   +Z    /
     .   -Z    .  |  .    .    .  |  .    /    .
   ---------------+---------------+---------------
-XY-Wing Type 2 (1 exemplar, up to 5 exclusions) (YW done)
+XY-Wing Type 2 (1 exemplar, up to 5 removals) (YW done)
   ---------------+---------------+---------------
    -Z   XY   -Z  |  .   XZ    .  |  .    .    .
     .    .    .  |  .    .    .  |  .    .    .
@@ -2744,7 +2745,7 @@ ERI
     .    .    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
     .    .    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-XYZ-Wing (1 exemplar, up to 2 exclusions) (ZW done)
+XYZ-Wing (1 exemplar, up to 2 removals) (ZW done)
   ---------------+---------------+---------------
    -Z   XYZ  -Z  |  .   XZ    .  |  .    .    .
     .    .    .  |  .    .    .  |  .    .    .
@@ -2979,7 +2980,7 @@ ERI 31 32
     .    .    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
     .    .    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-*XYZ-Wing Hybrid (Box-Line wise) (4 exemplars, up to 3 exclusions) (ZH done) removed
+*XYZ-Wing Hybrid (Box-Line wise) (4 exemplars, up to 3 removals) (ZH done) removed
                                                  XYZ-Wing Transport 04
 *Line                                             Box
   ---------------+---------------+---------------  ---------------+---------------+---------------
@@ -3008,7 +3009,7 @@ ERI 31 32
    -Z   -Z   -Z  |  .    .    .  |  .    .    .     -Z   -Z   -Z  |  .    .    .  | +z   +z   +z
    +z   +z   yz  | +z   +z   +z  |  /    /    /      .    .   yz  |  .    .    .  |  /    /    /
 01---------------+---------------+---------------  ---------------+---------------+---------------
-*Dual XYZ-Wing Hybrid (Box-Line wise) (4 exemplars, up to 6 exclusions) (ZH done) removed
+*Dual XYZ-Wing Hybrid (Box-Line wise) (4 exemplars, up to 6 removals) (ZH done) removed
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01)-z   xyz  -z  |  .   xZ    .  | -Z   -Z   -Z  02)-z   xyz  -z  |  .   xz    .  | +-Z  +-Z  +-Z
    -Z   -Z   -Z  |  .    /    .  |  .    .    .     -Z   -Z   -Z  |  .    /    .  | +z   +z   +z
@@ -3030,7 +3031,7 @@ ERI 31 32
 01---------------+---------------+---------------01---------------+---------------+---------------
 http://forum.enjoysudoku.com/how-do-you-find-almost-locked-set-eliminations-t5424.html
 http://www.sudocue.net/forum/viewtopic.php?t=726
-Almost Locked Set move Type 1a (2 exemplars, up to 7 exclusions) (AL done)
+Almost Locked Set move Type 1a (2 exemplars, up to 7 removals) (AL done)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) .    .    .  |  .    .    .  |  .    .    .  02) .   -Z    .  |  .    .    .  |  .    .    .
    -Z   xyz  -Z  | -Z   -Z   -Z  | -Z   xz   -Z      .   xyz   .  |  .    .    .  |  .   wy    .
@@ -3044,7 +3045,7 @@ Almost Locked Set move Type 1a (2 exemplars, up to 7 exclusions) (AL done)
     .   wy    .  |  .    .    .  |  .   wx    .      .   xz    .  |  .    .    .  |  .   wx    .
     .    .    .  |  .    .    .  |  .    .    .      .   -Z    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Almost Locked Set move Type 1b (6 exemplars, multiple exclusions) (AL done)
+Almost Locked Set move Type 1b (6 exemplars, multiple removals) (AL done)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) .    .    .  |  .    .    .  |  .    .    .  02) .    .    .  |  .    .    .  |  .    .    .
     .   xy    .  |  .   -Z    .  |  .   xz    .      .   xyz   .  |  .   -Z    .  |  .   xz    .
@@ -3086,7 +3087,7 @@ Almost Locked Set move Type 1b (6 exemplars, multiple exclusions) (AL done)
     .   wy    .  |  .    .    .  |  .    .    .      .   wy    .  |  .    .    .  |  .    .    .
     .    .    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Almost Locked Set move Type 2a (5 exemplars, multiple exclusions)
+Almost Locked Set move Type 2a (5 exemplars, multiple removals)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01)-Z   xyz  -Z  | -Z   -Z   -Z  |-XZ   xz  -XZ  02)-Z   xyz  -Z  |  .    .    .  |  .   wy    .
     .    .    .  |  .    .    .  |  .    .    .     -Z   -Z   -Z  |  .    .    .  |  .    .    .
@@ -3113,13 +3114,13 @@ http://forum.enjoysudoku.com/new-technique-almost-locked-sub-sets-t33134-15.html
     .    .    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
     .    .   wy  |  .    .    .  | wxz   .    .     -XZ  -XZ  xz  |  .    .    .  | wxz   .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-Almost Locked Set move Type 2b (2 exemplars, multiple exclusions) (AL done)
+Almost Locked Set move Type 2b (2 exemplars, multiple removals) (AL done)
   ---------------+---------------+---------------  ---------------+---------------+---------------
 01) .   xy    .  | -Z   -Z   -Z  |  .   xz    .  02) .   xyz   .  | -Z   -Z   -Z  |  .   xz    .
     .    .    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
     .    .   wy  |  .   wz    .  | -Z   -Z   -Z      .    .   wy  |  .   wz    .  |  .    .    .
 108--------------+---------------+---------------108--------------+---------------+---------------
-Almost Locked Set move Type 2c (3 exemplars, multiple exclusions) (AL done)
+Almost Locked Set move Type 2c (3 exemplars, multiple removals) (AL done)
 http://forum.enjoysudoku.com/do-these-wxyz-wing-patterns-have-special-name-t35833.html#p276111
   ---------------+---------------+---------------
 01) .   xyz   .  |  .    .    .  | -Z   wx   -Z
@@ -3132,7 +3133,7 @@ http://forum.enjoysudoku.com/do-these-wxyz-wing-patterns-have-special-name-t3583
     .    .    .  |  .    .    .  |  .    .    .      .    .    .  |  .    .    .  |  .    .    .
     .    .   wy  |  .    .    .  | wz    .    .     -Z   -Z   wyz |  .    .    .  | wz    .    .
   ---------------+---------------+---------------  ---------------+---------------+---------------
-WXYZ-Wing Type 1 (10 exemplars, multiple exclusions) (4W done)
+WXYZ-Wing Type 1 (10 exemplars, multiple removals) (4W done)
   --------------+-------------+-----------  --------------+-------------+-----------
 01) .  -Z    .  |  .   .   .  |  .  .   . 02) .  -Z    .  |  .   .   .  |  .  .   .
     . wxyz  yz  |  .   .   .  |  . xy   .     . wxyz  xyz |  .   .   .  |  . xy   .
@@ -3203,7 +3204,7 @@ WXYZ-Wing Type 1 (10 exemplars, multiple exclusions) (4W done)
     .   .    .  |  .   .   .  |  .  .   .     .   .    .  |  .   .   .  |  .  .   .
   --------------+-------------+-----------  --------------+-------------+-----------
 *WXYZ-Wing Type 1 Transport (48 exemplars) (except WXYZ-Wing Type 1 exemplars 2 & 4; and ...)
-*ERI (1 exclusion) (... where xy in r2c1345679 or r1345679c2; and either yz or xyz)
+*ERI (1 removal) (... where xy in r2c1345679 or r1345679c2; and either yz or xyz)
   --------------+-------------+-----------  --------------+-------------+-----------
 01) .   .    .  |  /  +Z   /  |  .  .   . 02) .   .    .  |  .   .   .  |  .  .   .
     .  wxy  xy  | +Z  +Z  +Z  |  . yz   .     .  wxy  xy  |  .   .   .  |  . yz   .
@@ -3231,7 +3232,7 @@ WXYZ-Wing Type 1 (10 exemplars, multiple exclusions) (4W done)
     .  wz    .  | +Z  +Z  +Z  |  . -z   .     .  wz    .  |  .   .   .  |  . -z   .
     .   .    .  |  /  +Z   /  |  .  .   .     .   .    .  |  .   .   .  |  .  .   .
   --------------+-------------+-----------  --------------+-------------+-----------
-*Reduced ERI (up to 2 exclusions)
+*Reduced ERI (up to 2 removals)
   --------------+-------------+-----------  --------------+-------------+-----------
 05) .  -Z    .  |  /  +Z   /  |  .  .   . 06) .   .    .  |  .   .   .  |  .  .   .
     .  wxy  xy  | +Z  +Z  +Z  |  . yz   .    -Z  wxy  xy  |  .   .   .  |  . yz   .
@@ -3259,7 +3260,7 @@ WXYZ-Wing Type 1 (10 exemplars, multiple exclusions) (4W done)
     .  wz    .  | +Z  +Z  +Z  |  . -z   .     .  wz    .  |  .   .   .  |  . -z  -Z
     .   .    .  |  /  +Z   /  |  . -Z   .     .   .    .  |  .   .   .  |  .  .   .
   --------------+-------------+-----------  --------------+-------------+-----------
-*Box (1 exclusion)
+*Box (1 removal)
   --------------+-------------+-----------  --------------+-------------+-----------
 09) .  -Z    .  | +Z  +Z  +Z  |  .  .   . 10) .   .    .  |  .   .   .  |  .  .   .
     .  wxy  xy  | +Z  +Z  +Z  |  . yz   .    -Z  wxy  xy  |  .   .   .  |  . yz   .
@@ -3287,7 +3288,7 @@ WXYZ-Wing Type 1 (10 exemplars, multiple exclusions) (4W done)
     .  wz    .  | +Z  +Z  +Z  |  . -z   .     .  wz    .  |  .   .   .  |  . -z  -Z
     .   .    .  | +Z  +Z  +Z  |  . -Z   .     .   .    .  |  .   .   .  |  .  .   .
   --------------+-------------+-----------  --------------+-------------+-----------
-*Line (1 exclusion)
+*Line (1 removal)
   --------------+-------------+-----------  --------------+-------------+-----------
 13) .  -Z    .  |  .   .   .  |  .  .   . 14) .   .   +Z  |  .   .   .  |  .  .   .
     .  wxy  xy  |  .   .   .  |  . yz   .    -Z  wxy  xy  |  .   .   .  |  . yz   .
@@ -3315,7 +3316,7 @@ WXYZ-Wing Type 1 (10 exemplars, multiple exclusions) (4W done)
     .  wz    .  |  .   .   .  |  . -z   .     .  wz    .  |  .   .   .  | +Z -z  -Z
     .   .    .  |  .   .   .  |  . -Z   .     .   .    .  |  .   .   .  | +Z  .   .
   --------------+-------------+-----------  --------------+-------------+-----------
-*Line Ring (multiple exclusions)
+*Line Ring (multiple removals)
   --------------+-------------+-----------  --------------+-------------+-----------
 17) .  -WZ   .  |  .   .   .  | -Z  .  -Z 18) /  -W    .  |  .   .   .  |  .  .   .
    -Y  wxy  xy  | -Y  -Y  -Y  |-YZ yz  -YZ   +Z-Y wxy xy  | -YZ -YZ -YZ |-YZ yz  -YZ
@@ -3371,7 +3372,7 @@ WXYZ-Wing Type 1 (10 exemplars, multiple exclusions) (4W done)
    -Z  wz   -Z  |  .   .   .  |  . -z   .    -Z  wz   -Z  | -Z  -Z  -Z  | +Z -z  -Z
    -Z  -WZ  -Z  |  .   .   .  |  . -Z   .     .  -W    .  |  .   .   .  |  /  .   .
   --------------+-------------+-----------  --------------+-------------+-----------
-*Line (multiple exclusions)
+*Line (multiple removals)
   --------------+-------------+-----------  --------------+-------------+-----------
 25) .  -Z    .  |  .   .   .  |  .  .   . 26) .   .    /  |  .   .   .  |  .  .   .
     .  wxy  xy  |  .   .   .  |  . yz   .    -Z  wxy  xy  |  .   .   .  |  . yz   .
@@ -3511,7 +3512,7 @@ WXYZ-Wing Type 1 (10 exemplars, multiple exclusions) (4W done)
     .  wz    .  | -Z  -Z  -Z  |  . -z   .     .  wz    .  |  .   .   .  | +Z -z   .
     .   .    .  |  .   .   .  |  .  .   .     .   .    .  |  .   .   .  |  /  .   .
   --------------+-------------+-----------  --------------+-------------+-----------
-*ERI Ring (multiple exclusions)
+*ERI Ring (multiple removals)
   --------------+-------------+-----------  --------------+-------------+-----------
 45) / +Z-W   /  |  .   .   .  |  .  .   . 46) .  -W    .  |  .   .   .  |  . -Z   .
   +Z-XY wxy xy |-XYZ -XYZ -XYZ|-XYZ yz -XYZ -XY  wxy  xy  | -XY -XY -XY |-XY yz  -XY
@@ -3525,7 +3526,7 @@ WXYZ-Wing Type 1 (10 exemplars, multiple exclusions) (4W done)
     .  wz    .  |  .   .   .  |  . -z   .    -Z  wz   -Z  | -Z  -Z  -Z  | +Z -z  +Z
     .  -WZ   .  |  .   .   .  |  .  .   .     .  -W    .  |  .   .   .  |  / +Z   /
   --------------+-------------+-----------  --------------+-------------+-----------
-*Line Ring (multiple exclusions)
+*Line Ring (multiple removals)
   --------------+-------------+-----------  --------------+-------------+-----------
 47) .  -WZ   .  |  .   .   .  |  . -Z   . 48) .  -W    .  |  .   /   .  |  .  .   .
    -XY wxy  xy  | -XY -XY -XY |-XY yz  -XY  -XYZ wxy  xy  |-XYZ +Z -XYZ |-XYZ yz -XYZ
@@ -3539,7 +3540,7 @@ WXYZ-Wing Type 1 (10 exemplars, multiple exclusions) (4W done)
     .  wz    .  |  .   .   .  |  . -z   .    -Z  wz   -Z  | -Z  +Z  -Z  | -Z -z  -Z
     .  -WZ   .  |  .   .   .  |  . -Z   .     .  -W    .  |  .   /   .  |  .  .   .
   --------------+-------------+-----------  --------------+-------------+-----------
-*ERI Ring (multiple exclusions)
+*ERI Ring (multiple removals)
   --------------+-------------+-----------  --------------+-------------+-----------
 49) .  -WZ   .  |  .   .   .  |  . -Z   . 50) .  -W    .  |  /  +Z   /  |  .  .   .
    -XY wxy  xy  | -XY -XY -XY |-XY yz  -XY  -XYZ wxy  xy |+Z-XY -Z +Z-XY|-XYZ yz -XYZ
@@ -3553,7 +3554,7 @@ WXYZ-Wing Type 1 (10 exemplars, multiple exclusions) (4W done)
     .  wz    .  |  .   .   .  |  . -z   .    -Z  wz   -Z  | +Z  -Z  +Z  | -Z -z  -Z
     .  -WZ   .  |  .   .   .  |  . -Z   .     .  -W    .  |  /  +Z   /  |  .  .   .
   --------------+-------------+-----------  --------------+-------------+-----------
-WXYZ-Wing Type 2a (14 exemplars, up to 5 exclusions) (4W done)
+WXYZ-Wing Type 2a (14 exemplars, up to 5 removals) (4W done)
   --------------+-------------+-----------  --------------+-------------+-----------
 01) .  wz    .  | -Z  -Z  -Z  |  .  .   . 02) .  xz   yz  | -Z  -Z  -Z  |  .  .   .
    -Z  wxy  -Z  |  .  xz  yz  |  .  .   .    -Z  wxy  -Z  |  .  wz   .  |  .  .   .
@@ -3595,7 +3596,7 @@ WXYZ-Wing Type 2a (14 exemplars, up to 5 exclusions) (4W done)
    -Z  wxy  -Z  |  .  xyz xyz |  .  .   .    -Z  wxy  -Z  |  .  wz   .  |  .  .   .
     .   .    .  |  .   .   .  |  .  .   .     .   .    .  |  .   .   .  |  .  .   .
 36--------------+-------------+-----------36--------------+-------------+-----------
-WXYZ-Wing Type 2b (6 exemplars, up to 2 exclusions) (4W done)
+WXYZ-Wing Type 2b (6 exemplars, up to 2 removals) (4W done)
   --------------+-------------+-----------  --------------+-------------+-----------
 01) .  wz    .  |  .   .   .  |  .  .   . 02) .  xz    .  |  .   .   .  |  .  .   .
    -Z  wxy  -Z  |  .  xz   .  |  . yz   .    -Z  wxy  -Z  |  .  wz   .  |  .  .   .
@@ -3613,7 +3614,7 @@ WXYZ-Wing Type 2b (6 exemplars, up to 2 exclusions) (4W done)
    -Z  wxy  -Z  |  .  xyz  .  |  . xyz  .    -Z  wxy  -Z  |  .  wz   .  |  .  .   .
     .   .    .  |  .   .   .  |  .  .   .     .  xyz   .  |  .   .   .  |  .  .   .
 54--------------+-------------+-----------54--------------+-------------+-----------
-WXYZ-Wing Type 3 (20 exemplars, up to 2 exclusions) (4W done)
+WXYZ-Wing Type 3 (20 exemplars, up to 2 removals) (4W done)
   --------------+-------------+-----------  --------------+-------------+-----------
 01) .  wz    .  |  .   .   .  |  .  .   . 02) .  xz   yz  |  .   .   .  |  .  .   .
    -Z wxyz  -Z  |  .  xz  yz  |  .  .   .    -Z wxyz  -Z  |  .  wz   .  |  .  .   .
@@ -3673,13 +3674,13 @@ WXYZ-Wing Type 3 (20 exemplars, up to 2 exclusions) (4W done)
    -Z wxyz  -Z  |  .  xyz  .  |  . xyz  .    -Z wxyz  -Z  |  .  wz   .  |  .  .   .
     .   .    .  |  .   .   .  |  .  .   .     .  xyz   .  |  .   .   .  |  .  .   .
 54--------------+-------------+-----------54--------------+-------------+-----------
-WXYZ-Wing Type 4a (2 exemplars, up to 4 exclusions) (4W done)
+WXYZ-Wing Type 4a (2 exemplars, up to 4 removals) (4W done)
   --------------+-------------+-----------  --------------+-------------+-----------
 01) .  wz    .  | -Z  -Z  -Z  |  .  .   . 02) .  xyz   .  | -Z  -Z  -Z  |  .  .   .
    -Z  wxy  wxy |  .  xyz  .  |  .  .   .    -Z  wxy  wxy |  .  wz   .  |  .  .   .
     .   .    .  |  .   .   .  |  .  .   .     .   .    .  |  .   .   .  |  .  .   .
 72--------------+-------------+-----------72--------------+-------------+-----------
-WXYZ-Wing Type 4b (4 exemplars, 1 exclusion) (4W done)
+WXYZ-Wing Type 4b (4 exemplars, 1 removal) (4W done)
   --------------+-------------+-----------  --------------+-------------+-----------
 01) .  wz    .  |  .   .   .  |  .  .   . 02) .  xyz   .  |  .   .   .  |  .  .   .
    -Z wxyz wxy  |  .  xyz  .  |  .  .   .    -Z wxyz wxy  |  .  wz   .  |  .  .   .
