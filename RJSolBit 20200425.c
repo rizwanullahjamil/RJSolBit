@@ -2480,10 +2480,10 @@ int solve (int p)
             g[K[5]] = K[8] | K[9];
 #if RJ > 2
             printf ("%d) Strong Ring Type 2: SL %d @ r%dc%d %d @ %s %s %d @ %s %s %d @ r%dc%d\n=>",
-                p, b[K[6]], ROW (w[K[0]][20] | w[K[2]][20]),
-                COL (w[K[0]][20] | w[K[2]][20]), b[K[7]], S[K[0]], S[K[4]],
-                b[K[8]], S[K[2]], S[K[5]], b[K[9]], ROW (w[K[4]][20] | w[K[5]][20]),
-                COL (w[K[4]][20] | w[K[5]][20]));
+              p, b[K[6]], ROW (w[K[0]][20] | w[K[2]][20]),
+              COL (w[K[0]][20] | w[K[2]][20]), b[K[7]], S[K[0]], S[K[4]],
+              b[K[8]], S[K[2]], S[K[5]], b[K[9]], ROW (w[K[4]][20] | w[K[5]][20]),
+              COL (w[K[4]][20] | w[K[5]][20]));
             if (k[0] - K[6] - K[7])
               printf (" -%d @ %s", b[k[0] - K[6] - K[7]], S[K[0]]);
             if (k[1] - K[6] - K[8])
@@ -2498,10 +2498,10 @@ int solve (int p)
               return 1;
 #if RJ > 2
             printf ("%d) Undo Strong Ring Type 2: SL %d @ r%dc%d %d @ %s %s %d @ %s %s %d @ r%dc%d\n<=",
-              p, b[K[6]], ROW (w[K[0]][20] | w[K[2]][20]), COL (w[K[0]][20] | w[K[2]][20]),
-              b[K[7]], ROW (w[K[0]][20] | w[K[4]][20]), COL (w[K[0]][20] | w[K[4]][20]),
-              b[K[8]], ROW (w[K[2]][20] | w[K[5]][20]), COL (w[K[2]][20] | w[K[5]][20]),
-              b[K[9]], ROW (w[K[4]][20] | w[K[5]][20]), COL (w[K[4]][20] | w[K[5]][20]));
+              p, b[K[6]], ROW (w[K[0]][20] | w[K[2]][20]),
+              COL (w[K[0]][20] | w[K[2]][20]), b[K[7]], S[K[0]], S[K[4]],
+              b[K[8]], S[K[2]], S[K[5]], b[K[9]], ROW (w[K[4]][20] | w[K[5]][20]),
+              COL (w[K[4]][20] | w[K[5]][20]));
             if (k[0] - K[6] - K[7])
               printf (" +%d @ %s", b[k[0] - K[6] - K[7]], S[K[0]]);
             if (k[1] - K[6] - K[8])
