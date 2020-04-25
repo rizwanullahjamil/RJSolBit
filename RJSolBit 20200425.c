@@ -2466,6 +2466,60 @@ int solve (int p)
 #endif
               return 0;      // Undo Strong Wing Type 1 removal Cells values
             }
+            if (K[0] > K[2] || K[0] > K[4] ||
+                             // Skip Strong Ring Type 2 for either duplicate search; or
+              ((K[6] | K[7]) & K[8]) || ((K[6] | K[7] | K[8]) & K[9]) ||
+                             // Conjugate pair digit in 1st Wing and removal Cells values same; or conjugate pair digit in 2nd Wing and removal Cells values same; or
+              (B[g[K[0]]] | B[g[K[2]]] | B[g[K[4]]] | B[g[K[5]]]) < 3)
+              continue;      // No removal Cell values
+            int k[4] = {g[K[0]], g[K[2]], g[K[4]], g[K[5]]};
+                             // Backup and drop from removal Cells values
+            g[K[0]] = K[6] | K[7];
+            g[K[2]] = K[6] | K[8];
+            g[K[4]] = K[7] | K[9];
+            g[K[5]] = K[8] | K[9];
+#if RJ > 2
+            printf ("%d) Strong Ring Type 2: SL %d @ r%dc%d %d @ %s %s %d @ %s %s %d @ r%dc%d\n=>",
+                p, b[K[6]], ROW (w[K[0]][20] | w[K[2]][20]),
+                COL (w[K[0]][20] | w[K[2]][20]), b[K[7]], S[K[0]], S[K[4]],
+                b[K[8]], S[K[2]], S[K[5]], b[K[9]], ROW (w[K[4]][20] | w[K[5]][20]),
+                COL (w[K[4]][20] | w[K[5]][20]));
+            if (k[0] - K[6] - K[7])
+              printf (" -%d @ %s", b[k[0] - K[6] - K[7]], S[K[0]]);
+            if (k[1] - K[6] - K[8])
+              printf (" -%d @ %s", b[k[1] - K[6] - K[8]], S[K[2]]);
+            if (k[2] - K[7] - K[9])
+              printf (" -%d @ %s", b[k[2] - K[7] - K[9]], S[K[4]]);
+            if (k[3] - K[8] - K[9])
+              printf (" -%d @ %s", b[k[3] - K[8] - K[9]], S[K[5]]);
+            printf ("\n");
+#endif
+            if (solve (p))
+              return 1;
+#if RJ > 2
+            printf ("%d) Undo Strong Ring Type 2: SL %d @ r%dc%d %d @ %s %s %d @ %s %s %d @ r%dc%d\n<=",
+              p, b[K[6]], ROW (w[K[0]][20] | w[K[2]][20]), COL (w[K[0]][20] | w[K[2]][20]),
+              b[K[7]], ROW (w[K[0]][20] | w[K[4]][20]), COL (w[K[0]][20] | w[K[4]][20]),
+              b[K[8]], ROW (w[K[2]][20] | w[K[5]][20]), COL (w[K[2]][20] | w[K[5]][20]),
+              b[K[9]], ROW (w[K[4]][20] | w[K[5]][20]), COL (w[K[4]][20] | w[K[5]][20]));
+            if (k[0] - K[6] - K[7])
+              printf (" +%d @ %s", b[k[0] - K[6] - K[7]], S[K[0]]);
+            if (k[1] - K[6] - K[8])
+              printf (" +%d @ %s", b[k[1] - K[6] - K[8]], S[K[2]]);
+            if (k[2] - K[7] - K[9])
+              printf (" +%d @ %s", b[k[2] - K[7] - K[9]], S[K[4]]);
+            if (k[3] - K[8] - K[9])
+              printf (" +%d @ %s", b[k[3] - K[8] - K[9]], S[K[5]]);
+            printf ("\n");
+#endif
+            g[K[0]] = k[0];
+            g[K[2]] = k[1];
+            g[K[4]] = k[2];
+            g[K[5]] = k[3];
+#if RJ > 3
+            prn ();
+#endif
+            return 0;        // Undo Strong Ring Type 2 removal Cells values
           }
         }
       }
