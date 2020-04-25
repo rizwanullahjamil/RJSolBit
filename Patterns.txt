@@ -1546,7 +1546,7 @@ XY-Ring Type 2 (4 exemplars, multiple removals) (XR done)
 http://www.rcbroughton.co.uk/sudoku/forum/viewtopic.php?f=5&t=96
 http://forum.enjoysudoku.com/strong-wing-vs-xy-wing-t3378.html
 http://forum.enjoysudoku.com/whatever-happened-to-strong-wings-t34368.html
-Strong Wing Type 1 (1 exemplar, multiple removals) (SW)
+Strong Wing Type 1 (1 exemplar, multiple removals) (SW done)
   ---------------+---------------+---------------
     .    /    .  |  .    .    .  |  .    /    .
     /   XY+   /  |  /    /    /  |  /   XZ+   /
@@ -1560,13 +1560,13 @@ Strong Wing Type 1 (1 exemplar, multiple removals) (SW)
     /   YZ+   /  |  /    /    /  |  /  +Z-*   /
     .    /    .  |  .    .    .  |  .    /    .
   ---------------+---------------+---------------
-*Strong Wing Type 2 (1 exemplar, multiple removals) (SW)
+Strong Wing Type 2 (1 exemplar, multiple removals) (SW done)
   ---------------+---------------+---------------
     /   XY+   /  |  /    /    /  |  /   XZ+   /
     /    /    /  |  .    .    .  |  /    /    /
     /    /   YZ+ |  /    /    /  |  /    /  +Z-*
 108--------------+---------------+---------------
-Strong Ring Type 1 (1 exemplar, multiple removals) (SR)
+Strong Ring Type 1 (1 exemplar, multiple removals) (SR done)
   ---------------+---------------+---------------
     .    /    .  |  .    .    .  |  .    /    .
     /  XY-*   /  |  /    /    /  |  /  XZ-*   /
@@ -1580,7 +1580,7 @@ Strong Ring Type 1 (1 exemplar, multiple removals) (SR)
     /  WY-*   /  |  /    /    /  |  /  WZ-*   /
     .    /    .  |  .    .    .  |  .    /    .
   ---------------+---------------+---------------
-*Strong Ring Type 2 (1 exemplar, multiple removals) (SR)
+Strong Ring Type 2 (1 exemplar, multiple removals) (SR done)
   ---------------+---------------+---------------
     /  XY-*   /  |  /    /    /  |XZ-*   /    /
     /    /    /  |  .    .    .  |  /    /    /
