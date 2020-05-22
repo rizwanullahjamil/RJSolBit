@@ -443,15 +443,13 @@ int solve (int p)
       return 0;              // Return for number of unsolved Cell positions <> number of unsolved Cell values
     }
     for (Y = 1; Y < 257; Y <<= 1)
-    {                        // Check Zero state digit wise
+                             // Check Zero state digit wise
       if (Z = B[a = (g[l[y][0]] & Y ? 1 : 0) | (g[l[y][1]] & Y ? 2 : 0) |
         (g[l[y][2]] & Y ? 4 : 0) | (g[l[y][3]] & Y ? 8 : 0) |
         (g[l[y][4]] & Y ? 16 : 0) | (g[l[y][5]] & Y ? 32 : 0) |
         (g[l[y][6]] & Y ? 64 : 0) | (g[l[y][7]] & Y ? 128 : 0) |
         (g[l[y][8]] & Y ? 256 : 0)])
       {                      // Check digit Unit wise
-        if (!Z)
-          continue;          // Skip for digit not found in Unit
         int A[9];
 
         for (X = 0; x = a & -a; ++X, a -= x)
@@ -470,24 +468,20 @@ int solve (int p)
           return 0;          // Return for number of unsolved Cell positions > total unsolved Cell values
         }
       }
-    }
   }
   for (a = p; a < q; ++a)    // Search Hidden single Cell value unsolved Cell positions wise
-  {
-    Y = (((g[w[r[a]][0]] | g[w[r[a]][1]] | g[w[r[a]][2]] | g[w[r[a]][3]] |
+    if (Y = (((g[w[r[a]][0]] | g[w[r[a]][1]] | g[w[r[a]][2]] | g[w[r[a]][3]] |
       g[w[r[a]][4]] | g[w[r[a]][5]] | g[w[r[a]][6]] | g[w[r[a]][7]]) ^ g[r[a]]) |
       ((g[w[r[a]][6]] | g[w[r[a]][7]] | g[w[r[a]][8]] | g[w[r[a]][9]] |
       g[w[r[a]][10]] | g[w[r[a]][11]] | g[w[r[a]][12]] | g[w[r[a]][13]]) ^ g[r[a]]) |
       ((g[w[r[a]][12]] | g[w[r[a]][13]] | g[w[r[a]][14]] | g[w[r[a]][15]] |
-      g[w[r[a]][16]] | g[w[r[a]][17]] | g[w[r[a]][18]] | g[w[r[a]][19]]) ^ g[r[a]])) & g[r[a]];
-                             // Assign Hidden single Cell value
-    if (!Y)
-      continue;              // Skip for no Hidden single Cell value found in unsolved Cell position
-    x = a;                   // Assign Hidden single Cell position
-    z = Y;                   // Assign Hidden single Cell value
-    y = B[g[r[a]]] > 1;      // 1 Represent Hidden single Cell position
-    goto NHSCF;
-  }
+      g[w[r[a]][16]] | g[w[r[a]][17]] | g[w[r[a]][18]] | g[w[r[a]][19]]) ^ g[r[a]])) & g[r[a]])
+    {                        // Check for Hidden single Cell value found in unsolved Cell position
+      x = a;                 // Assign Hidden single Cell position
+      z = Y;                 // Assign Hidden single Cell value
+      y = B[g[r[a]]] > 1;    // 1 Represent Hidden single Cell position
+      goto NHSCF;
+    }
   for (y = 0, z = 512, a = p; a < q; ++a)
                              // Search Naked single Cell value or Guess minimum Cell values unsolved Cell positions wise
     if (B[z] > B[g[r[a]]])   // Check least Cell values in current unsolved Cell position
@@ -495,10 +489,8 @@ int solve (int p)
         goto NHSCF;          // Naked single Cell value found in current unsolved Cell position
   for (; y < 27; ++y)        // Search Naked/Hidden Tuples Cell values Unit wise
   {
-    Y = !g[l[y][0]] + !g[l[y][1]] + !g[l[y][2]] + !g[l[y][3]] +
-      !g[l[y][4]] + !g[l[y][5]] + !g[l[y][6]] + !g[l[y][7]] + !g[l[y][8]];
-                             // Count Unit no unsolved Cell positions
-    if (Y > 6)
+    if ((Y  = !g[l[y][0]] + !g[l[y][1]] + !g[l[y][2]] + !g[l[y][3]] +
+      !g[l[y][4]] + !g[l[y][5]] + !g[l[y][6]] + !g[l[y][7]] + !g[l[y][8]]) > 6)
       continue;              // Skip Unit for no unsolved Cell positions > six
     for (a = 0; a < 36; ++a) // Search Naked/Hidden pair Cell values Unit 36 pair Cell positions wise
     {
@@ -1534,10 +1526,9 @@ int solve (int p)
         g[w[K[3]][12]] | g[w[K[3]][13]] | g[w[K[4]][6]] | g[w[K[4]][7]] |
         g[w[a][8]] | g[w[a][9]] | g[w[a][10]] | g[w[a][11]]) & ERI (K[5]) & Y)
       {                      // Check 2-String Kite+ERI Ring and Grouped 2-String Kite+ERI Ring
-        K[0] = g[K[5]];
-        K[1] = g[w[K[3]][12]];
-        K[2] = g[w[K[3]][13]];
-        K[6] = g[L];
+        K[0] = g[w[K[3]][12]];
+        K[1] = g[w[K[3]][13]];
+        K[2] = g[L];
         K[7] = g[w[L][12]];
         K[8] = g[w[L][13]];
         K[9] = g[w[K[4]][6]];
@@ -1549,7 +1540,6 @@ int solve (int p)
         K[15] = g[w[a][9]];
         K[16] = g[w[a][10]];
         K[17] = g[w[a][11]];
-        g[K[5]] &= ~Y;
         g[w[K[3]][12]] &= ~Y;
         g[w[K[3]][13]] &= ~Y;
         g[L] &= ~Y;
@@ -1567,68 +1557,48 @@ int solve (int p)
       }
       else if ((g[w[w[K[3]][6]][12]] | g[w[w[K[3]][6]][13]]) & ERI (w[K[5]][6]) & Y)
       {                      // Check 2-String Kite+ERI and Grouped 2-String Kite+ERI
-        K[7] = g[K[5]];
-        K[8] = g[K[2] = w[w[K[3]][K[1] = 6]][12]];
-        K[9] = g[K[6] = w[w[K[3]][6]][13]];
-        g[K[5]] &= ~Y;
+        K[8] = g[K[1] = w[w[K[3]][K[7] = 6]][12]];
+        K[9] = g[K[2] = w[w[K[3]][6]][13]];
+        g[K[1]] &= ~Y;
         g[K[2]] &= ~Y;
-        g[K[6]] &= ~Y;
       }
       else if ((g[w[w[K[3]][7]][12]] | g[w[w[K[3]][7]][13]]) & ERI (w[K[5]][7]) & Y)
       {                      // Check 2-String Kite+ERI and Grouped 2-String Kite+ERI
-        K[7] = g[K[5]];
-        K[8] = g[K[2] = w[w[K[3]][K[1] = 7]][12]];
-        K[9] = g[K[6] = w[w[K[3]][7]][13]];
-        g[K[5]] &= ~Y;
+        K[8] = g[K[1] = w[w[K[3]][K[7] = 7]][12]];
+        K[9] = g[K[2] = w[w[K[3]][7]][13]];
+        g[K[1]] &= ~Y;
         g[K[2]] &= ~Y;
-        g[K[6]] &= ~Y;
       }
       else if ((g[w[w[K[4]][12]][6]] | g[w[w[K[4]][12]][7]]) & ERI (w[K[5]][12]) & Y)
       {                      // Check 2-String Kite+ERI and Grouped 2-String Kite+ERI
-        K[7] = g[K[5]];
-        K[8] = g[K[2] = w[w[K[4]][K[1] = 12]][6]];
-        K[9] = g[K[6] = w[w[K[4]][12]][7]];
-        g[K[5]] &= ~Y;
+        K[8] = g[K[1] = w[w[K[4]][K[7] = 12]][6]];
+        K[9] = g[K[2] = w[w[K[4]][12]][7]];
+        g[K[1]] &= ~Y;
         g[K[2]] &= ~Y;
-        g[K[6]] &= ~Y;
       }
       else if ((g[w[w[K[4]][13]][6]] | g[w[w[K[4]][13]][7]]) & ERI (w[K[5]][13]) & Y)
       {                      // Check 2-String Kite+ERI and Grouped 2-String Kite+ERI
-        K[7] = g[K[5]];
-        K[8] = g[K[2] = w[w[K[4]][K[1] = 13]][6]];
-        K[9] = g[K[6] = w[w[K[4]][13]][7]];
-        g[K[5]] &= ~Y;
+        K[8] = g[K[1] = w[w[K[4]][K[7] = 13]][6]];
+        K[9] = g[K[2] = w[w[K[4]][13]][7]];
+        g[K[1]] &= ~Y;
         g[K[2]] &= ~Y;
-        g[K[6]] &= ~Y;
       }
       else if (LB3 (L, w[L][6], w[L][7], 1) & g[w[K[5]][6]] & Y)
-      {                      // Check 2-String Kite+Box and Grouped 2-String Kite+Box
-        K[6] = g[K[5]];
-        g[K[5]] &= ~Y;
+                            // Check 2-String Kite+Box and Grouped 2-String Kite+Box
         g[K[2] = w[K[5]][6]] -= Y;
-      }
       else if (LB3 (L, w[L][7], w[L][6], 1) & g[w[K[5]][7]] & Y)
-      {                       // Check 2-String Kite+Box and Grouped 2-String Kite+Box
-        K[6] = g[K[5]];
-        g[K[5]] &= ~Y;
+                             // Check 2-String Kite+Box and Grouped 2-String Kite+Box
         g[K[2] = w[K[5]][7]] -= Y;
-      }
       else if (LB3 (M, w[M][12], w[M][13], 0) & g[w[K[5]][12]] & Y)
-      {                       // Check 2-String Kite+Box and Grouped 2-String Kite+Box
-        K[6] = g[K[5]];
-        g[K[5]] &= ~Y;
+                             // Check 2-String Kite+Box and Grouped 2-String Kite+Box
         g[K[2] = w[K[5]][12]] -= Y;
-      }
       else if (LB3 (M, w[M][13], w[M][12], 0) & g[w[K[5]][13]] & Y)
-      {                       // Check 2-String Kite+Box and Grouped 2-String Kite+Box
-        K[6] = g[K[5]];
-        g[K[5]] &= ~Y;
+                             // Check 2-String Kite+Box and Grouped 2-String Kite+Box
         g[K[2] = w[K[5]][13]] -= Y;
-      }
-      else if (g[K[5]] & Y)  // Check 2-String Kite and Grouped 2-String Kite
-        g[K[5]] -= Y;        // Drop digit from removal Cell values
-      else
-        continue;
+      else if (~g[K[5]] & Y)
+        continue;            // Skip 2-String Kite and Grouped 2-String Kite for digit not in removal Cell values
+      K[6] = g[K[5]];
+      g[K[5]] &= ~Y;         // Drop digit from removal Cell values
 #if RJ > 2
       printf ("%d)%s2-String Kite%s SL Row %d between %d @ ", p,
         ((g[w[a][6]] & g[w[a][7]]) | (g[w[a][12]] & g[w[a][13]])) & Y ? " Grouped " : " ",
@@ -1660,11 +1630,11 @@ int solve (int p)
           w[M][20] | w[w[M][6]][20] | w[w[M][7]][20]));
       else if (K[1] + 1)
         printf ("ERI b%d%s => -%d @ %s r%dc%d\n",
-          BOX (w[K[5]][K[1]]), S[w[K[5]][K[1]]], b[Y], S[K[5]],
-          ROW (w[K[2]][20] | w[K[6]][20]), COL (w[K[2]][20] | w[K[6]][20]));
+          BOX (w[K[5]][K[6]]), S[w[K[5]][K[6]]], b[Y], S[K[5]],
+          ROW (w[K[1]][20] | w[K[2]][20]), COL (w[K[1]][20] | w[K[2]][20]));
       else if (K[2] + 1)
         printf ("Box %d => -%d @ r%dc%d\n", BOX (X), b[Y],
-          ROW (w[K[2]][20] | w[K[6]][20]), COL (w[K[2]][20] | w[K[6]][20]));
+          ROW (w[K[2]][20] | w[K[7]][20]), COL (w[K[2]][20] | w[K[7]][20]));
       else
         printf ("=> -%d @ %s\n", b[Y], S[K[5]]);
 #endif
@@ -1701,20 +1671,19 @@ int solve (int p)
           w[M][20] | w[w[M][6]][20] | w[w[M][7]][20]));
       else if (K[1] + 1)
         printf ("ERI b%d%s <= +%d @ %s r%dc%d\n",
-          BOX (w[K[5]][K[1]]), S[w[K[5]][K[1]]], b[Y], S[K[5]],
-          ROW (w[K[2]][20] | w[K[6]][20]), COL (w[K[2]][20] | w[K[6]][20]));
+          BOX (w[K[5]][K[6]]), S[w[K[5]][K[6]]], b[Y], S[K[5]],
+          ROW (w[K[1]][20] | w[K[2]][20]), COL (w[K[1]][20] | w[K[2]][20]));
       else if (K[2] + 1)
         printf ("Box %d => -%d @ r%dc%d\n", BOX (X), b[Y],
-          ROW (w[K[2]][20] | w[K[6]][20]), COL (w[K[2]][20] | w[K[6]][20]));
+          ROW (w[K[2]][20] | w[K[7]][20]), COL (w[K[2]][20] | w[K[7]][20]));
       else
         printf ("<= +%d @ %s\n", b[Y], S[K[5]]);
 #endif
       if (K[0] + 1)
       {                      // 2-String Kite+ERI Ring and Grouped 2-String Kite+ERI Ring
-        g[K[5]] = K[0];
-        g[w[K[3]][12]] = K[1];
-        g[w[K[3]][13]] = K[2];
-        g[L] = K[6];
+        g[w[K[3]][12]] = K[0];
+        g[w[K[3]][13]] = K[1];
+        g[L] = K[2];
         g[w[L][12]] = K[7];
         g[w[L][13]] = K[8];
         g[w[K[4]][6]] = K[9];
@@ -1729,17 +1698,12 @@ int solve (int p)
       }
       else if (K[1] + 1)
       {                      // 2-String Kite+ERI and Grouped 2-String Kite+ERI
-        g[K[5]] = K[7];
-        g[K[2]] = K[8];
-        g[K[6]] = K[9];
+        g[K[1]] = K[8];
+        g[K[2]] = K[9];
       }
       else if (K[2] + 1)     // 2-String Kite+Box and Grouped 2-String Kite+Box
-      {
         g[K[2]] += Y;
-        g[K[5]] = K[6];
-      }
-      else                   // 2-String Kite and Grouped 2-String Kite
-        g[K[5]] += Y;
+      g[K[5]] = K[6];        // 2-String Kite and Grouped 2-String Kite
 #if RJ > 3
       prn ();
 #endif
