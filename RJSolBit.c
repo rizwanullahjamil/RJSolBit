@@ -6109,47 +6109,46 @@ XYWT1Tf:
     }
   }
   for (X = -1, a = p; a < q; ++a)
-    if (B[g[r[a]]] < 3)      // Bivalue Universal Grave
-      continue;              // Skip for unsolved Cell values < three digits
+    if (B[g[r[a]]] < 3)
+      continue;              // Skip Bivalue Universal Grave for unsolved Cell values < three digits
     else if (B[g[r[a]]] == 3 && X < 0)
-      X = r[a];              // Backup first unsolved Cell position having Trivalues
+      X = r[a];              // Backup first Guardian Cell position
     else
       break;
   if (a == q)                // All unsolved Cell positions checked
   {
-    if (X + 1)               // One Trivalue Cell position found
+    if (X + 1)               // One Guardian Cell position found
     {
-      for (Y = g[X]; y = Y & -Y; Y -= y)
-                             // For each digit in Trivalue Cell position
+      for (z = 0, Y = g[X]; y = Y & -Y; Y -= y)
+                             // For each digit in Guardian Cell position
         if ((g[w[X][0]] & y ? 1 : 0) + (g[w[X][1]] & y ? 1 : 0) +
           (g[w[X][2]] & y ? 1 : 0) + (g[w[X][3]] & y ? 1 : 0) +
           (g[w[X][4]] & y ? 1 : 0) + (g[w[X][5]] & y ? 1 : 0) +
-          (g[w[X][6]] & y ? 1 : 0) + (g[w[X][7]] & y ? 1 : 0) == 2 ||
+          (g[w[X][6]] & y ? 1 : 0) + (g[w[X][7]] & y ? 1 : 0) > 1 &&
           (g[w[X][6]] & y ? 1 : 0) + (g[w[X][7]] & y ? 1 : 0) +
           (g[w[X][8]] & y ? 1 : 0) + (g[w[X][9]] & y ? 1 : 0) +
           (g[w[X][10]] & y ? 1 : 0) + (g[w[X][11]] & y ? 1 : 0) +
-          (g[w[X][12]] & y ? 1 : 0) + (g[w[X][13]] & y ? 1 : 0) == 2 ||
+          (g[w[X][12]] & y ? 1 : 0) + (g[w[X][13]] & y ? 1 : 0) > 1 &&
           (g[w[X][12]] & y ? 1 : 0) + (g[w[X][13]] & y ? 1 : 0) +
           (g[w[X][14]] & y ? 1 : 0) + (g[w[X][15]] & y ? 1 : 0) +
           (g[w[X][16]] & y ? 1 : 0) + (g[w[X][17]] & y ? 1 : 0) +
-          (g[w[X][18]] & y ? 1 : 0) + (g[w[X][19]] & y ? 1 : 0) == 2)
-        {                    // Digit found Row, Box or Column wise in two Cell positions
-          Z = g[X];          // Backup BUG+1 Trivalue removal Cell values
-          g[X] = y;          // Remove other digits from Trivalue removal Cell values
+          (g[w[X][18]] & y ? 1 : 0) + (g[w[X][19]] & y ? 1 : 0) > 1)
+          z |= y;            // Digit found Row, Box and Column wise in > one Cell positions
+        Z = g[X];            // Backup BUG+n removal Cell values
+        g[X] = z;            // Remove non-Guardian values from removal Cell values
 #if RJ > 2
-          printf ("%d) BUG+1: %d @ %s => -%d @ %s\n", p, b[y], S[X], b[Z - y], S[X]);
+        printf ("%d) BUG+%d: %d @ %s => -%d @ %s\n", p, B[z], b[z], S[X], b[Z - z], S[X]);
 #endif
-          if (solve (p))
-            return 1;
+        if (solve (p))
+          return 1;
 #if RJ > 2
-          printf ("%d) Undo BUG+1: %d @ %s <= +%d @ %s\n", p, b[y], S[X], b[Z - y], S[X]);
+        printf ("%d) Undo BUG+%d: %d @ %s <= +%d @ %s\n", p, B[z], b[z], S[X], b[Z - z], S[X]);
 #endif
-          g[X] = Z;
+        g[X] = Z;
 #if RJ > 3
-          prn ();
+        prn ();
 #endif
-          return 0;          // Undo BUG+1 removal Cell values
-        }
+        return 0;           // Undo BUG+n removal Cell values
     }
 #if RJ > 2
     else
