@@ -648,7 +648,7 @@ int solve (int p)
       if (solve (p))
         return 1;
 #if RJ > 2
-      printf ("%d) Undo Locked pair: %d @ r%dc%d => -%d @ r%dc%d r%dc%d\n",
+      printf ("%d) Undo Locked triplet: %d @ r%dc%d => -%d @ r%dc%d r%dc%d\n",
         p, b[Y], ROW (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]),
         COL (w[j[a][0]][20] | w[j[a][1]][20] | w[j[a][2]][20]), b[Y],
         ROW (w[j[a][3]][20] | w[j[a][4]][20] | w[j[a][5]][20] |
@@ -1023,9 +1023,9 @@ int solve (int p)
             ROW (w[K[0]][20] | w[K[1]][20] | w[K[2]][20] | w[K[3]][20] | w[K[4]][20]),
             COL (w[K[0]][20] | w[K[1]][20] | w[K[2]][20] | w[K[3]][20] | w[K[4]][20]));
         else
-          printf ("r%dc%d r%dc%d", ROW (w[K[0]][20] | w[K[2]][20] | w[K[4]][20]),
-            COL (w[K[0]][20] | w[K[2]][20] | w[K[4]][20]),
-            ROW (w[K[1]][20] | w[K[3]][20]), COL (w[K[1]][20] | w[K[3]][20]));
+          printf ("r%dc%d r%dc%d", ROW (w[K[0]][20] | w[K[1]][20] | w[K[2]][20]),
+            COL (w[K[0]][20] | w[K[1]][20] | w[K[2]][20]),
+            ROW (w[K[3]][20] | w[K[4]][20]), COL (w[K[3]][20] | w[K[4]][20]));
         if (k[0] ^ Y)
           printf (" => -%d @ %s", b[k[0] ^ Y], S[j[a][A]]);
         printf ("\n");
@@ -1044,9 +1044,9 @@ int solve (int p)
             ROW (w[K[0]][20] | w[K[1]][20] | w[K[2]][20] | w[K[3]][20] | w[K[4]][20]),
             COL (w[K[0]][20] | w[K[1]][20] | w[K[2]][20] | w[K[3]][20] | w[K[4]][20]));
         else
-          printf ("r%dc%d r%dc%d", ROW (w[K[0]][20] | w[K[2]][20] | w[K[4]][20]),
-            COL (w[K[0]][20] | w[K[2]][20] | w[K[4]][20]),
-            ROW (w[K[1]][20] | w[K[3]][20]), COL (w[K[1]][20] | w[K[3]][20]));
+          printf ("r%dc%d r%dc%d", ROW (w[K[0]][20] | w[K[1]][20] | w[K[2]][20]),
+            COL (w[K[0]][20] | w[K[1]][20] | w[K[2]][20]),
+            ROW (w[K[3]][20] | w[K[4]][20]), COL (w[K[3]][20] | w[K[4]][20]));
         if (k[0] ^ Y)
           printf (" <= +%d @ %s", b[k[0] ^ Y], S[j[a][A]]);
         printf ("\n");
@@ -1591,7 +1591,7 @@ int solve (int p)
               g[K[3]] &= ~Y;
             }
 #if RJ > 2
-            printf ("%d)%sSkyscraper: %ss %d %d Base %d @ r%dc%d Cover %d @ r%dc%d r%dc%d => -%d @",
+            printf ("%d)%sSkyscraper: %ss %d %d wise Base %d @ r%dc%d Cover %d @ r%dc%d r%dc%d => -%d @",
               p, A[5] ? " Grouped " : " ", RCB, a - y + 1, Z - y + 1, b[Y],
               ROW (w[K[4]][20] | w[K[5]][20]), COL (w[K[4]][20] | w[K[5]][20]),
               b[Y], ROW ((K[6] + 1 ? w[K[6]][20] : 0) | (K[7] + 1 ? w[K[7]][20] : 0) |
@@ -1611,7 +1611,7 @@ int solve (int p)
             if (solve (p))
               return 1;
 #if RJ > 2
-            printf ("%d) Undo%sSkyscraper: %ss %d %d Base %d @ r%dc%d Cover %d @ r%dc%d r%dc%d <= +%d @",
+            printf ("%d) Undo%sSkyscraper: %ss %d %d wise Base %d @ r%dc%d Cover %d @ r%dc%d r%dc%d <= +%d @",
               p, A[5] ? " Grouped " : " ", RCB, a - y + 1, Z - y + 1, b[Y],
               ROW (w[K[4]][20] | w[K[5]][20]), COL (w[K[4]][20] | w[K[5]][20]),
               b[Y], ROW ((K[6] + 1 ? w[K[6]][20] : 0) | (K[7] + 1 ? w[K[7]][20] : 0) |
@@ -2446,13 +2446,13 @@ int solve (int p)
           ~(g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] |
           g[Y = w[K[0]][Z = K[3] < 17 ? 17 : 14]] | g[w[Y][12]] | g[w[Y][13]])) ||
                              // No conjugate pair digit found in Apex and 2nd Wing Cells values; or
-          (K[6] & K[7]) || !g[K[5] = w[K[4]][K[1]]] || !(K[8] = g[K[2]] & g[K[5]] &
+          (K[6] & K[7]) || !g[K[5] = w[K[4]][K[1]]] ||
                              // Conjugate pair digit in Apex and 1st Wing Cells values same as Apex and 2nd Wing Cells values; or removal Cell not unsolved; or
-          ~(g[w[K[2]][12]] | g[w[K[2]][13]] | g[w[K[5]][12]] | g[w[K[5]][13]] |
-          g[Y = w[K[2]][Z]] | g[w[Y][12]] | g[w[Y][13]])) ||
+          !(K[8] = g[K[2]] & g[K[5]] & ~(g[w[K[2]][12]] | g[w[K[2]][13]] |
+          g[w[K[5]][12]] | g[w[K[5]][13]] | g[Y = w[K[2]][Z]] | g[w[Y][12]] | g[w[Y][13]])) ||
                              // No conjugate pair digit found in 1st Wing and removal Cells values; or
-          !(K[9] = g[K[4]] & g[K[5]] & ~(g[w[K[4]][6]] | g[w[K[4]][7]] | g[w[K[5]][6]] |
-          g[w[K[5]][7]] | g[Y = w[K[4]][X]] | g[w[Y][6]] | g[w[Y][7]])))
+          !(K[9] = g[K[4]] & g[K[5]] & ~(g[w[K[4]][6]] | g[w[K[4]][7]] |
+          g[w[K[5]][6]] | g[w[K[5]][7]] | g[Y = w[K[4]][X]] | g[w[Y][6]] | g[w[Y][7]])))
           continue;          // No conjugate pair digit found in 2nd Wing and removal Cells values
         if (Y = K[8] & K[9])
         {                    // Check Strong Wing Type 1 for conjugate pair digit in 1st Wing and removal Cells values same as 2nd Wing and removal Cells values
@@ -6182,7 +6182,7 @@ NHSCF:
     {
       printf (" from values %d", b[Y]);
       if (y < 2)
-        printf (" in %s %d", Z & 255 ? (Z >> 12 ? "Box" : "Column") : "Row",
+        printf (" %s %d wise", Z & 255 ? (Z >> 12 ? "Box" : "Column") : "Row",
           Z & 255 ? (Z >> 12 ? BOX (r[p]) : COL (w[r[p]][20])) : ROW (w[r[p]][20]));
     }
     printf ("\n");
@@ -6197,7 +6197,7 @@ NHSCF:
     {
       printf (" from values %d", b[Y]);
       if (y < 2)
-        printf (" in %s %d", Z & 255 ? (Z >> 12 ? "Box" : "Column") : "Row",
+        printf (" %s %d wise", Z & 255 ? (Z >> 12 ? "Box" : "Column") : "Row",
           Z & 255 ? (Z >> 12 ? BOX (r[p]) : COL (w[r[p]][20])) : ROW (w[r[p]][20]));
     }
     printf ("\n");
