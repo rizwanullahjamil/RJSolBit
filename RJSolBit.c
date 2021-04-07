@@ -423,10 +423,11 @@ int solve (int p)
 #endif
   for (; y < 27; ++y)        // Check Zero state Unit wise
   {
-    if (511 ^ (s[l[y][0]] | s[l[y][1]] | s[l[y][2]] | s[l[y][3]] |
-      s[l[y][4]] | s[l[y][5]] | s[l[y][6]] | s[l[y][7]] | s[l[y][8]] |
-      g[l[y][0]] | g[l[y][1]] | g[l[y][2]] | g[l[y][3]] | g[l[y][4]] |
-      g[l[y][5]] | g[l[y][6]] | g[l[y][7]] | g[l[y][8]]) ||
+    if (511 ^ (s[l[y][0]] | g[l[y][0]] | s[l[y][1]] | g[l[y][1]] |
+      s[l[y][2]] | g[l[y][2]] | s[l[y][3]] | g[l[y][3]] |
+      s[l[y][4]] | g[l[y][4]] | s[l[y][5]] | g[l[y][5]] |
+      s[l[y][6]] | g[l[y][6]] | s[l[y][7]] | g[l[y][7]] |
+      s[l[y][8]] | g[l[y][8]]) ||
       !(s[l[y][0]] | g[l[y][0]]) || !(s[l[y][1]] | g[l[y][1]]) ||
       !(s[l[y][2]] | g[l[y][2]]) || !(s[l[y][3]] | g[l[y][3]]) ||
       !(s[l[y][4]] | g[l[y][4]]) || !(s[l[y][5]] | g[l[y][5]]) ||
@@ -435,10 +436,11 @@ int solve (int p)
     {                        // Check either missing or no digit Unit wise
 #if RJ > 2
       printf ("%d) Zero state: %d @ %s %d\n",
-        p, b[511 ^ (s[l[y][0]] | s[l[y][1]] | s[l[y][2]] | s[l[y][3]] |
-        s[l[y][4]] | s[l[y][5]] | s[l[y][6]] | s[l[y][7]] | s[l[y][8]] |
-        g[l[y][0]] | g[l[y][1]] | g[l[y][2]] | g[l[y][3]] | g[l[y][4]] |
-        g[l[y][5]] | g[l[y][6]] | g[l[y][7]] | g[l[y][8]])], RCB, y % 9 + 1);
+        p, b[511 ^ (s[l[y][0]] | g[l[y][0]] | s[l[y][1]] | g[l[y][1]] |
+        s[l[y][2]] | g[l[y][2]] | s[l[y][3]] | g[l[y][3]] |
+        s[l[y][4]] | g[l[y][4]] | s[l[y][5]] | g[l[y][5]] |
+        s[l[y][6]] | g[l[y][6]] | s[l[y][7]] | g[l[y][7]] |
+        s[l[y][8]] | g[l[y][8]])], RCB, y % 9 + 1);
 #endif
       return 0;              // Return for number of unsolved Cell positions <> number of unsolved Cell values
     }
@@ -1042,9 +1044,7 @@ int solve (int p)
             ROW (w[K[0]][20] | w[K[1]][20] | w[K[2]][20] | w[K[3]][20] | w[K[4]][20]),
             COL (w[K[0]][20] | w[K[1]][20] | w[K[2]][20] | w[K[3]][20] | w[K[4]][20]));
         else
-          printf ("r%dc%d r%dc%d", ROW (w[K[0]][20] | w[K[1]][20] | w[K[2]][20]),
-            COL (w[K[0]][20] | w[K[1]][20] | w[K[2]][20]),
-            ROW (w[K[3]][20] | w[K[4]][20]), COL (w[K[3]][20] | w[K[4]][20]));
+          printf ("%s %s %s %s %s", S[K[0]], S[K[1]], S[K[2]], S[K[3]], S[K[4]]);
         if (k[0] ^ Y)
           printf (" <= +%d @ %s", b[k[0] ^ Y], S[j[a][A]]);
         printf ("\n");
@@ -1757,8 +1757,8 @@ int solve (int p)
         printf ("%s", S[w[a][g[w[a][12]] & Y ? 12 : 13]]);
       printf (" and %d @ %s\n", b[Y], S[K[4]]);
       if (K[0] + 1)
-        printf ("ERI b%d%s => -%d @ r%dc%d r%dc%d r%dc%d\n",
-          BOX (a), S[a], b[Y], ROW (w[w[K[3]][12]][20] | w[w[K[3]][13]][20] |
+        printf ("ERI %d @ b%d%s => -%d @ r%dc%d r%dc%d r%dc%d\n",
+          b[Y], BOX (a), S[a], b[Y], ROW (w[w[K[3]][12]][20] | w[w[K[3]][13]][20] |
           w[w[a][8]][20] | w[w[a][9]][20] | w[w[a][10]][20] | w[w[a][11]][20]),
           COL (w[w[K[3]][12]][20] | w[w[K[3]][13]][20] | w[w[a][8]][20] |
           w[w[a][9]][20] | w[w[a][10]][20] | w[w[a][11]][20]),
@@ -1769,11 +1769,11 @@ int solve (int p)
           COL (w[K[5]][20] | w[w[K[4]][6]][20] | w[w[K[4]][7]][20] |
           w[M][20] | w[w[M][6]][20] | w[w[M][7]][20]));
       else if (K[1] + 1)
-        printf ("ERI b%d%s => -%d @ %s r%dc%d\n",
-          BOX (w[K[5]][K[7]]), S[w[K[5]][K[7]]], b[Y], S[K[5]],
+        printf ("ERI %d @ b%d%s => -%d @ %s r%dc%d\n",
+          b[Y], BOX (w[K[5]][K[7]]), S[w[K[5]][K[7]]], b[Y], S[K[5]],
           ROW (w[K[1]][20] | w[K[2]][20]), COL (w[K[1]][20] | w[K[2]][20]));
       else if (K[2] + 1)
-        printf ("Box %d => -%d @ r%dc%d\n", BOX (X), b[Y],
+        printf ("%d @ Box %d => -%d @ r%dc%d\n", b[Y], BOX (X), b[Y],
           ROW (w[K[2]][20] | w[K[7]][20]), COL (w[K[2]][20] | w[K[7]][20]));
       else
         printf ("=> -%d @ %s\n", b[Y], S[K[5]]);
@@ -1798,8 +1798,8 @@ int solve (int p)
         printf ("%s", S[w[a][g[w[a][12]] & Y ? 12 : 13]]);
       printf (" and %d @ %s\n", b[Y], S[K[4]]);
       if (K[0] + 1)
-        printf ("ERI b%d%s <= +%d @ r%dc%d r%dc%d r%dc%d\n",
-          BOX (a), S[a], b[Y], ROW (w[w[K[3]][12]][20] | w[w[K[3]][13]][20] |
+        printf ("ERI %d @ b%d%s <= +%d @ r%dc%d r%dc%d r%dc%d\n",
+          b[Y], BOX (a), S[a], b[Y], ROW (w[w[K[3]][12]][20] | w[w[K[3]][13]][20] |
           w[w[a][8]][20] | w[w[a][9]][20] | w[w[a][10]][20] | w[w[a][11]][20]),
           COL (w[w[K[3]][12]][20] | w[w[K[3]][13]][20] | w[w[a][8]][20] |
           w[w[a][9]][20] | w[w[a][10]][20] | w[w[a][11]][20]),
@@ -1810,11 +1810,11 @@ int solve (int p)
           COL (w[K[5]][20] | w[w[K[4]][6]][20] | w[w[K[4]][7]][20] |
           w[M][20] | w[w[M][6]][20] | w[w[M][7]][20]));
       else if (K[1] + 1)
-        printf ("ERI b%d%s <= +%d @ %s r%dc%d\n",
-          BOX (w[K[5]][K[7]]), S[w[K[5]][K[7]]], b[Y], S[K[5]],
+        printf ("ERI %d @ b%d%s <= +%d @ %s r%dc%d\n",
+          b[Y], BOX (w[K[5]][K[7]]), S[w[K[5]][K[7]]], b[Y], S[K[5]],
           ROW (w[K[1]][20] | w[K[2]][20]), COL (w[K[1]][20] | w[K[2]][20]));
       else if (K[2] + 1)
-        printf ("Box %d => -%d @ r%dc%d\n", BOX (X), b[Y],
+        printf ("%d @ Box %d => -%d @ r%dc%d\n", b[Y], BOX (X), b[Y],
           ROW (w[K[2]][20] | w[K[7]][20]), COL (w[K[2]][20] | w[K[7]][20]));
       else
         printf ("<= +%d @ %s\n", b[Y], S[K[5]]);
