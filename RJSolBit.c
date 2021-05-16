@@ -1758,7 +1758,7 @@ int solve (int p)
       printf (" and %d @ %s\n", b[Y], S[K[4]]);
       if (K[0] + 1)
         printf ("ERI %d @ b%d%s => -%d @ r%dc%d r%dc%d r%dc%d\n",
-          b[Y], BOX (a), S[a], b[Y], ROW (w[w[K[3]][12]][20] | w[w[K[3]][13]][20] |
+          b[Y], BOX (K[5]), S[K[5]], b[Y], ROW (w[w[K[3]][12]][20] | w[w[K[3]][13]][20] |
           w[w[a][8]][20] | w[w[a][9]][20] | w[w[a][10]][20] | w[w[a][11]][20]),
           COL (w[w[K[3]][12]][20] | w[w[K[3]][13]][20] | w[w[a][8]][20] |
           w[w[a][9]][20] | w[w[a][10]][20] | w[w[a][11]][20]),
@@ -2427,7 +2427,7 @@ int solve (int p)
     if (!(g[w[r[a]][0]] | g[w[r[a]][1]] | g[w[r[a]][2]] | g[w[r[a]][3]] |
       g[w[r[a]][4]] | g[w[r[a]][5]]) || !(g[w[r[a]][14]] | g[w[r[a]][15]] |
       g[w[r[a]][16]] | g[w[r[a]][17]] | g[w[r[a]][18]] | g[w[r[a]][19]]))
-      continue;              // Skip for no unsolved Cell position found in Apex either Row or Column
+      continue;              // Skip for no unsolved Cell position found in either Apex Row or Column
     int K[10] = {r[a], 0};   // Assign Apex Cell position
 
     for (; K[1] < 6; ++K[1]) // Search 1st Wing Cell position Row wise
@@ -2491,7 +2491,7 @@ int solve (int p)
           (B[g[K[0]]] | B[g[K[2]]] | B[g[K[4]]] | B[g[K[5]]]) < 3)
           continue;          // No removal Cell values
         int k[4] = {g[K[0]], g[K[2]], g[K[4]], g[K[5]]};
-                             // Backup and drop from removal Cells values
+                             // Backup Strong Ring Type 1 removal Cells values and drop other digits from removal Cells values
         g[K[0]] = K[6] | K[7];
         g[K[2]] = K[6] | K[8];
         g[K[4]] = K[7] | K[9];
@@ -2617,7 +2617,7 @@ int solve (int p)
               (B[g[K[0]]] | B[g[K[2]]] | B[g[K[4]]] | B[g[K[5]]]) < 3)
               continue;      // No removal Cell values
             int k[4] = {g[K[0]], g[K[2]], g[K[4]], g[K[5]]};
-                             // Backup and drop from removal Cells values
+                             // Backup Strong Ring Type 2 removal Cells values and drop other digits from removal Cells values
             g[K[0]] = K[6] | K[7];
             g[K[2]] = K[6] | K[8];
             g[K[4]] = K[7] | K[9];
@@ -2712,7 +2712,7 @@ int solve (int p)
                        g[w[K[0]][K[7]]], g[w[K[0]][K[7] + 1]], g[w[K[0]][K[7] + 2]],
                        g[w[K[2]][12]], g[w[K[2]][13]], g[w[K[6]][12]], g[w[K[6]][13]],
                        g[w[K[2]][K[7]]], g[w[K[2]][K[7] + 1]], g[w[K[2]][K[7] + 2]]};
-                             // Backup XY-Ring Type 1 removal Cell values and drop Wing Cells common removal values
+                             // Backup XY-Ring Type 1 removal Cell values and drop Wing Cells common value from removal Cells values
           g[w[K[0]][6]] &= (X = ~(g[K[0]] & g[K[2]]));
           g[w[K[0]][7]] &= X;
           g[w[K[2]][6]] &= X;
@@ -4449,14 +4449,14 @@ XYWT1Tf:
           int k[6] = {g[w[K[0]][W[3][y]]], g[w[K[0]][W[4][y]]]};
                              // Backup XY-Wing Type 2 and XYZ-Wing removal Cells values
           if (B[g[K[0]]] < 3)
-          {                  // Check no Wing Cells common value in Apex Cell values for backup more XY-Wing Type 2 removal Cells values
+          {                  // Check Apex Cell values < three digits for backup more XY-Wing Type 2 removal Cells values
             k[2] = g[w[K[4]][K[6]]];
             k[3] = g[w[K[4]][K[6] + 1]];
             k[4] = g[w[K[4]][K[6] + 2]];
           }
           if ((k[0] | k[1] | k[2] | k[3] | k[4]) & K[5])
           {                  // Check Wing Cells common value in XY-Wing Type 2 and XYZ-Wing removal Cells values
-                             // Drop Wing Cells common value from XY-Wing Type 2 and XYZ-Wing removal Cell positions
+                             // Drop Wing Cells common value from XY-Wing Type 2 and XYZ-Wing removal Cell values
             g[w[K[0]][W[3][y]]] &= ~K[5];
             g[w[K[0]][W[4][y]]] &= ~K[5];
             if (B[g[K[0]]] < 3)
@@ -5236,129 +5236,129 @@ XYWT1Tf:
           {                  // Check XYZ-Wing Hybrid for Apex Cell values > two digits; and Wing Cells common value found in XYZ-Wing Hybrid Cells values
             int k[12] = {-1,-1,-1};
 
-          if (~(g[w[K[4]][K[7]]] | g[w[K[4]][K[7] + 1]] | g[w[K[4]][K[7] + 2]]) &
-            (g[X = w[K[0]][K[8]]] | g[w[X][W[3][y]]] | g[w[X][W[4][y]]] |
-            (Y = (w[K[0]][20] & w[K[4]][20] & W[15][y]) &&
-            (~(g[w[K[4]][W[3][y]]] | g[w[K[4]][W[4][y]]]) & K[5]) ?
-            g[w[K[0]][W[1][!y]]] | g[w[K[0]][W[18][!y]]] |
-            g[w[K[0]][W[19][!y]]] | g[w[K[0]][W[20][!y]]] |
-            g[w[K[0]][W[21][!y]]] | g[w[K[0]][W[22][!y]]] : 0)) & K[5])
-          {                  // Check XYZ-Wing Hybrid for either 2nd Wing Line wise or other Box wise and Wing Cells common value found in removal Cells values
-            k[0] = g[X];     // Backup XYZ-Wing Hybrid either 2nd Wing Line wise or other Box wise and remove Wing Cells common value from removal Cells values
-            k[3] = g[w[X][W[3][y]]];
-            k[4] = g[w[X][W[4][y]]];
-            g[X] &= ~K[5];
-            g[w[X][W[3][y]]] &= ~K[5];
-            g[w[X][W[4][y]]] &= ~K[5];
-            if (Y)
-            {                // Check Apex and 2nd Wing in Line; and Wing Cells common digit not in 2nd Wing mini-Line Cells values
-              k[2] = g[w[K[0]][W[1][!y]]];
-              k[5] = g[w[K[0]][W[18][!y]]];
-              k[6] = g[w[K[0]][W[19][!y]]];
-              k[7] = g[w[K[0]][W[20][!y]]];
-              k[8] = g[w[K[0]][W[21][!y]]];
-              k[9] = g[w[K[0]][W[22][!y]]];
-              g[w[K[0]][W[1][!y]]] &= ~K[5];
-              g[w[K[0]][W[18][!y]]] &= ~K[5];
-              g[w[K[0]][W[19][!y]]] &= ~K[5];
-              g[w[K[0]][W[20][!y]]] &= ~K[5];
-              g[w[K[0]][W[21][!y]]] &= ~K[5];
-              g[w[K[0]][W[22][!y]]] &= ~K[5];
+            if (~(g[w[K[4]][K[7]]] | g[w[K[4]][K[7] + 1]] | g[w[K[4]][K[7] + 2]]) &
+              (g[X = w[K[0]][K[8]]] | g[w[X][W[3][y]]] | g[w[X][W[4][y]]] |
+              (Y = (w[K[0]][20] & w[K[4]][20] & W[15][y]) &&
+              (~(g[w[K[4]][W[3][y]]] | g[w[K[4]][W[4][y]]]) & K[5]) ?
+              g[w[K[0]][W[1][!y]]] | g[w[K[0]][W[18][!y]]] |
+              g[w[K[0]][W[19][!y]]] | g[w[K[0]][W[20][!y]]] |
+              g[w[K[0]][W[21][!y]]] | g[w[K[0]][W[22][!y]]] : 0)) & K[5])
+            {                // Check XYZ-Wing Hybrid for either 2nd Wing Line wise or other Box wise and Wing Cells common value found in removal Cells values
+              k[0] = g[X];   // Backup XYZ-Wing Hybrid either 2nd Wing Line wise or other Box wise and remove Wing Cells common value from removal Cells values
+              k[3] = g[w[X][W[3][y]]];
+              k[4] = g[w[X][W[4][y]]];
+              g[X] &= ~K[5];
+              g[w[X][W[3][y]]] &= ~K[5];
+              g[w[X][W[4][y]]] &= ~K[5];
+              if (Y)
+              {              // Check Apex and 2nd Wing in Line; and Wing Cells common digit not in 2nd Wing mini-Line Cells values
+                k[2] = g[w[K[0]][W[1][!y]]];
+                k[5] = g[w[K[0]][W[18][!y]]];
+                k[6] = g[w[K[0]][W[19][!y]]];
+                k[7] = g[w[K[0]][W[20][!y]]];
+                k[8] = g[w[K[0]][W[21][!y]]];
+                k[9] = g[w[K[0]][W[22][!y]]];
+                g[w[K[0]][W[1][!y]]] &= ~K[5];
+                g[w[K[0]][W[18][!y]]] &= ~K[5];
+                g[w[K[0]][W[19][!y]]] &= ~K[5];
+                g[w[K[0]][W[20][!y]]] &= ~K[5];
+                g[w[K[0]][W[21][!y]]] &= ~K[5];
+                g[w[K[0]][W[22][!y]]] &= ~K[5];
+              }
             }
-          }
-          if (((g[w[K[0]][K[7]]] | g[w[K[0]][K[7] + 1]] | g[w[K[0]][K[7] + 2]]) & K[5]) &&
-            ((~(g[Z = w[K[2]][K[8]]] | g[w[Z][W[3][y]]] | g[w[Z][W[4][y]]]) & K[5]) ||
-            (~(g[Z] | g[w[K[2]][W[1][!y]]] | g[w[K[2]][W[18][!y]]] |
-            g[w[K[2]][W[19][!y]]] | g[w[K[2]][W[20][!y]]] | g[w[K[2]][W[21][!y]]] |
-            g[w[K[2]][W[22][!y]]]) & g[w[K[4]][K[1]]] & K[5])))
-          {                  // Check XYZ-Wing Hybrid for 1st Wing either Line or Box wise and remove Wing Cells common value from removal Cells values
+            if (((g[w[K[0]][K[7]]] | g[w[K[0]][K[7] + 1]] | g[w[K[0]][K[7] + 2]]) & K[5]) &&
+              ((~(g[Z = w[K[2]][K[8]]] | g[w[Z][W[3][y]]] | g[w[Z][W[4][y]]]) & K[5]) ||
+              (~(g[Z] | g[w[K[2]][W[1][!y]]] | g[w[K[2]][W[18][!y]]] |
+              g[w[K[2]][W[19][!y]]] | g[w[K[2]][W[20][!y]]] | g[w[K[2]][W[21][!y]]] |
+              g[w[K[2]][W[22][!y]]]) & g[w[K[4]][K[1]]] & K[5])))
+            {                // Check XYZ-Wing Hybrid for 1st Wing either Line or Box wise and remove Wing Cells common value from removal Cells values
                              // Backup XYZ-Wing Hybrid 1st Wing either Line or Box wise and remove Wing Cells common value from removal Cells values
-            k[1] = g[w[K[0]][K[7]]];
-            k[10] = g[w[K[0]][K[7] + 1]];
-            k[11] = g[w[K[0]][K[7] + 2]];
-            g[w[K[0]][K[7]]] &= ~K[5];
-            g[w[K[0]][K[7] + 1]] &= ~K[5];
-            g[w[K[0]][K[7] + 2]] &= ~K[5];
-          }
-          if ((k[0] & k[1]) < 0)
-            continue;        // Skip for no XYZ-Wing Hybrid found
+              k[1] = g[w[K[0]][K[7]]];
+              k[10] = g[w[K[0]][K[7] + 1]];
+              k[11] = g[w[K[0]][K[7] + 2]];
+              g[w[K[0]][K[7]]] &= ~K[5];
+              g[w[K[0]][K[7] + 1]] &= ~K[5];
+              g[w[K[0]][K[7] + 2]] &= ~K[5];
+            }
+            if ((k[0] & k[1]) < 0)
+              continue;      // Skip for no XYZ-Wing Hybrid found
 #if RJ > 2
-          printf ("%d)%sXYZ-Wing Hybrid: %d @ r%dc%d %s%s%s Hybrid %d @ r%dc%d => -%d @",
-            p, (k[0] | k[1]) + 1 ? " Dual " : " ", b[g[K[2]] | g[K[4]]],
-            ROW (w[K[0]][20] | w[K[2]][20]), COL (w[K[0]][20] | w[K[2]][20]), S[K[4]],
-            k[2] + 1 ? " Reduced " : " ", (k[0] | k[1]) + 1 ? "Dual" :
-            (k[0] + 1 ? (y ? "Column wise" : "Row wise") : "Box wise"), b[K[5]],
-            ROW (w[w[K[4]][K[6]]][20] | w[w[K[4]][K[6] + 1]][20] |
-            w[w[K[4]][K[6] + 2]][20]), COL (w[w[K[4]][K[6]]][20] |
-            w[w[K[4]][K[6] + 1]][20] | w[w[K[4]][K[6] + 2]][20]), b[K[5]]);
-          if (k[0] + 1)
-            printf (" r%dc%d", ROW (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]),
-              COL (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]));
-          if (k[1] + 1)
-            printf (" r%dc%d", ROW (w[w[K[0]][K[7]]][20] | w[w[K[0]][K[7] + 1]][20] |
-              w[w[K[0]][K[7] + 2]][20]), COL (w[w[K[0]][K[7]]][20] |
-              w[w[K[0]][K[7] + 1]][20] | w[w[K[0]][K[7] + 2]][20]));
-          if (k[2] + 1)
-            printf (" r%dc%d", ROW (w[w[K[0]][W[1][!y]]][20] | w[w[K[0]][W[18][!y]]][20] |
-              w[w[K[0]][W[19][!y]]][20] | w[w[K[0]][W[20][!y]]][20] |
-              w[w[K[0]][W[21][!y]]][20] | w[w[K[0]][W[22][!y]]][20]),
-              COL (w[w[K[0]][W[1][!y]]][20] | w[w[K[0]][W[18][!y]]][20] |
-              w[w[K[0]][W[19][!y]]][20] | w[w[K[0]][W[20][!y]]][20] |
-              w[w[K[0]][W[21][!y]]][20] | w[w[K[0]][W[22][!y]]][20]));
-          printf ("\n");
+            printf ("%d)%sXYZ-Wing Hybrid: %d @ r%dc%d %s%s%s Hybrid %d @ r%dc%d => -%d @",
+              p, (k[0] | k[1]) + 1 ? " Dual " : " ", b[g[K[2]] | g[K[4]]],
+              ROW (w[K[0]][20] | w[K[2]][20]), COL (w[K[0]][20] | w[K[2]][20]), S[K[4]],
+              k[2] + 1 ? " Reduced " : " ", (k[0] | k[1]) + 1 ? "Dual" :
+              (k[0] + 1 ? (y ? "Column wise" : "Row wise") : "Box wise"), b[K[5]],
+              ROW (w[w[K[4]][K[6]]][20] | w[w[K[4]][K[6] + 1]][20] |
+              w[w[K[4]][K[6] + 2]][20]), COL (w[w[K[4]][K[6]]][20] |
+              w[w[K[4]][K[6] + 1]][20] | w[w[K[4]][K[6] + 2]][20]), b[K[5]]);
+            if (k[0] + 1)
+              printf (" r%dc%d", ROW (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]),
+                COL (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]));
+            if (k[1] + 1)
+              printf (" r%dc%d", ROW (w[w[K[0]][K[7]]][20] | w[w[K[0]][K[7] + 1]][20] |
+                w[w[K[0]][K[7] + 2]][20]), COL (w[w[K[0]][K[7]]][20] |
+                w[w[K[0]][K[7] + 1]][20] | w[w[K[0]][K[7] + 2]][20]));
+            if (k[2] + 1)
+              printf (" r%dc%d", ROW (w[w[K[0]][W[1][!y]]][20] | w[w[K[0]][W[18][!y]]][20] |
+                w[w[K[0]][W[19][!y]]][20] | w[w[K[0]][W[20][!y]]][20] |
+                w[w[K[0]][W[21][!y]]][20] | w[w[K[0]][W[22][!y]]][20]),
+                COL (w[w[K[0]][W[1][!y]]][20] | w[w[K[0]][W[18][!y]]][20] |
+                w[w[K[0]][W[19][!y]]][20] | w[w[K[0]][W[20][!y]]][20] |
+                w[w[K[0]][W[21][!y]]][20] | w[w[K[0]][W[22][!y]]][20]));
+            printf ("\n");
 #endif
-          if (solve (p))
-            return 1;
+            if (solve (p))
+              return 1;
 #if RJ > 2
-          printf ("%d) Undo%sXYZ-Wing Hybrid: %d @ r%dc%d %s%s%s Hybrid %d @ r%dc%d <= +%d @",
-            p, (k[0] | k[1]) + 1 ? " Dual " : " ", b[g[K[2]] | g[K[4]]],
-            ROW (w[K[0]][20] | w[K[2]][20]), COL (w[K[0]][20] | w[K[2]][20]), S[K[4]],
-            k[2] + 1 ? " Reduced " : " ", (k[0] | k[1]) + 1 ? "Dual" :
-            (k[0] + 1 ? (y ? "Column wise" : "Row wise") : "Box wise"), b[K[5]],
-            ROW (w[w[K[4]][K[6]]][20] | w[w[K[4]][K[6] + 1]][20] |
-            w[w[K[4]][K[6] + 2]][20]), COL (w[w[K[4]][K[6]]][20] |
-            w[w[K[4]][K[6] + 1]][20] | w[w[K[4]][K[6] + 2]][20]), b[K[5]]);
-          if (k[0] + 1)
-            printf (" r%dc%d", ROW (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]),
-              COL (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]));
-          if (k[1] + 1)
-            printf (" r%dc%d", ROW (w[w[K[0]][K[7]]][20] | w[w[K[0]][K[7] + 1]][20] |
-              w[w[K[0]][K[7] + 2]][20]), COL (w[w[K[0]][K[7]]][20] |
-              w[w[K[0]][K[7] + 1]][20] | w[w[K[0]][K[7] + 2]][20]));
-          if (k[2] + 1)
-            printf (" r%dc%d", ROW (w[w[K[0]][W[1][!y]]][20] | w[w[K[0]][W[18][!y]]][20] |
-              w[w[K[0]][W[19][!y]]][20] | w[w[K[0]][W[20][!y]]][20] |
-              w[w[K[0]][W[21][!y]]][20] | w[w[K[0]][W[22][!y]]][20]),
-              COL (w[w[K[0]][W[1][!y]]][20] | w[w[K[0]][W[18][!y]]][20] |
-              w[w[K[0]][W[19][!y]]][20] | w[w[K[0]][W[20][!y]]][20] |
-              w[w[K[0]][W[21][!y]]][20] | w[w[K[0]][W[22][!y]]][20]));
-          printf ("\n");
+            printf ("%d) Undo%sXYZ-Wing Hybrid: %d @ r%dc%d %s%s%s Hybrid %d @ r%dc%d <= +%d @",
+              p, (k[0] | k[1]) + 1 ? " Dual " : " ", b[g[K[2]] | g[K[4]]],
+              ROW (w[K[0]][20] | w[K[2]][20]), COL (w[K[0]][20] | w[K[2]][20]), S[K[4]],
+              k[2] + 1 ? " Reduced " : " ", (k[0] | k[1]) + 1 ? "Dual" :
+              (k[0] + 1 ? (y ? "Column wise" : "Row wise") : "Box wise"), b[K[5]],
+              ROW (w[w[K[4]][K[6]]][20] | w[w[K[4]][K[6] + 1]][20] |
+              w[w[K[4]][K[6] + 2]][20]), COL (w[w[K[4]][K[6]]][20] |
+              w[w[K[4]][K[6] + 1]][20] | w[w[K[4]][K[6] + 2]][20]), b[K[5]]);
+            if (k[0] + 1)
+              printf (" r%dc%d", ROW (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]),
+                COL (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]));
+            if (k[1] + 1)
+              printf (" r%dc%d", ROW (w[w[K[0]][K[7]]][20] | w[w[K[0]][K[7] + 1]][20] |
+                w[w[K[0]][K[7] + 2]][20]), COL (w[w[K[0]][K[7]]][20] |
+                w[w[K[0]][K[7] + 1]][20] | w[w[K[0]][K[7] + 2]][20]));
+            if (k[2] + 1)
+              printf (" r%dc%d", ROW (w[w[K[0]][W[1][!y]]][20] | w[w[K[0]][W[18][!y]]][20] |
+                w[w[K[0]][W[19][!y]]][20] | w[w[K[0]][W[20][!y]]][20] |
+                w[w[K[0]][W[21][!y]]][20] | w[w[K[0]][W[22][!y]]][20]),
+                COL (w[w[K[0]][W[1][!y]]][20] | w[w[K[0]][W[18][!y]]][20] |
+                w[w[K[0]][W[19][!y]]][20] | w[w[K[0]][W[20][!y]]][20] |
+                w[w[K[0]][W[21][!y]]][20] | w[w[K[0]][W[22][!y]]][20]));
+            printf ("\n");
 #endif
-          if (k[0] + 1)
-          {                  // Check XYZ-Wing Hybrid Line wise
-            g[X] = k[0];
-            g[w[X][W[3][y]]] = k[3];
-            g[w[X][W[4][y]]] = k[4];
-          }
-          if (k[1] + 1)
-          {                  // Check XYZ-Wing Hybrid either Line or Box wise
-            g[w[K[0]][K[7]]] = k[1];
-            g[w[K[0]][K[7] + 1]] = k[10];
-            g[w[K[0]][K[7] + 2]] = k[11];
-          }
-          if (k[2] + 1)
-          {
-            g[w[K[0]][W[1][!y]]] = k[2];
-            g[w[K[0]][W[18][!y]]] = k[5];
-            g[w[K[0]][W[19][!y]]] = k[6];
-            g[w[K[0]][W[20][!y]]] = k[7];
-            g[w[K[0]][W[21][!y]]] = k[8];
-            g[w[K[0]][W[22][!y]]] = k[9];
-          }
+            if (k[0] + 1)
+            {                // Check XYZ-Wing Hybrid Line wise
+              g[X] = k[0];
+              g[w[X][W[3][y]]] = k[3];
+              g[w[X][W[4][y]]] = k[4];
+            }
+            if (k[1] + 1)
+            {                // Check XYZ-Wing Hybrid either Line or Box wise
+              g[w[K[0]][K[7]]] = k[1];
+              g[w[K[0]][K[7] + 1]] = k[10];
+              g[w[K[0]][K[7] + 2]] = k[11];
+            }
+            if (k[2] + 1)
+            {
+              g[w[K[0]][W[1][!y]]] = k[2];
+              g[w[K[0]][W[18][!y]]] = k[5];
+              g[w[K[0]][W[19][!y]]] = k[6];
+              g[w[K[0]][W[20][!y]]] = k[7];
+              g[w[K[0]][W[21][!y]]] = k[8];
+              g[w[K[0]][W[22][!y]]] = k[9];
+            }
 #if RJ > 3
-          prn ();
+            prn ();
 #endif
-          return 0;          // Undo XYZ-Wing Hybrid removal Cells values
+            return 0;        // Undo XYZ-Wing Hybrid removal Cells values
           }
         }
       }
@@ -5379,7 +5379,7 @@ XYWT1Tf:
       if (!g[K[2] = w[K[0]][K[1]]] || B[g[K[0]] | g[K[2]]] > 4)
         continue;            // Skip for either 1st Wing Cell position not unsolved; or Apex and 1st Wing Cells values > four digits
       for (K[3] = K[1] > 5 ? 14 : 12; K[3] < 20; ++K[3])
-      {                      // Search 2nd Wing Cell position Column wise but not both Wings in Apex Box
+      {                      // Search 2nd Wing Cell position Column wise but not both Wing Cells positions in Apex Box
         if (!g[K[4] = w[K[0]][K[3]]] || B[g[K[0]] | g[K[2]] | g[K[4]]] > 4)
           continue;          // Skip for either 2nd Wing Cell position not unsolved; or Apex and Wings Cells values > four digits
         for (Y = 0; Y < 2; ++Y)
@@ -5398,34 +5398,34 @@ XYWT1Tf:
                              // either 2nd or 3rd Wing Cell position within Apex Box; or
               (g[K[2 << Y]] & g[K[6]] & K[7]))
               continue;      // Wing Cells common value in Both 1st (or 2nd) and 3rd Wing Cells values
-            int k[6] = {g[K[8] = K[g[K[2]] & K[7] ? 2 : 6] - K[0] +
-                       K[g[K[4]] & K[7] ? 4 : 6]], 0, 0, 0, 0,-1};
+            int k[6] = {-1, g[K[8] = K[g[K[2]] & K[7] ? 2 : 6] - K[0] +
+                       K[g[K[4]] & K[7] ? 4 : 6]]};
 
             if (((g[K[2]] & K[7]) && K[1] > 5) || ((g[K[4]] & K[7]) && K[3] < 14))
-            {                // Wings Cells common value in Wing Cell position within Apex Box
-              k[5] = (g[K[2]] & K[7]) && K[1] > 5;
+            {                // Check Wings Cells common value in Wing Cell position within Apex Box
+              k[0] = (g[K[2]] & K[7]) && K[1] > 5;
               if (g[K[0]] & K[7])
-                k[0] = 0;
+                k[1] = 0;
               else
               {
-                k[1] = g[w[K[8]][W[3][k[5]]]];
-                k[2] = g[w[K[8]][W[4][k[5]]]];
+                k[2] = g[w[K[8]][W[3][k[0]]]];
+                k[3] = g[w[K[8]][W[4][k[0]]]];
               }
-              k[3] = g[w[K[0]][W[3][k[5]]]];
-              k[4] = g[w[K[0]][W[4][k[5]]]];
+              k[4] = g[w[K[0]][W[3][k[0]]]];
+              k[5] = g[w[K[0]][W[4][k[0]]]];
             }
-            if ((k[0] | k[1] | k[2] | k[3] | k[4]) & K[7])
+            if ((k[1] | k[2] | k[3] | k[4] | k[5]) & K[7])
             {                // Check no Wing Cells common value in WXYZ-Wing Type 1 removal Cell values
-              if (k[5] + 1)
+              if (k[0] + 1)
               {              // Drop Wing Cells common value from WXYZ-Wing Type 1 removal Cell positions
-                g[w[K[0]][W[3][k[5]]]] &= ~K[7];
-                g[w[K[0]][W[4][k[5]]]] &= ~K[7];
                 if (~g[K[0]] & K[7])
                 {
                   g[K[8]] &= ~K[7];
-                  g[w[K[8]][W[3][k[5]]]] &= ~K[7];
-                  g[w[K[8]][W[4][k[5]]]] &= ~K[7];
+                  g[w[K[8]][W[3][k[0]]]] &= ~K[7];
+                  g[w[K[8]][W[4][k[0]]]] &= ~K[7];
                 }
+                g[w[K[0]][W[3][k[0]]]] &= ~K[7];
+                g[w[K[0]][W[4][k[0]]]] &= ~K[7];
               }
               else
                 g[K[8]] &= ~K[7];
@@ -5434,15 +5434,15 @@ XYWT1Tf:
                 p, b[g[K[2]] | g[K[4]] | g[K[6]]],
                 ROW (w[K[0]][20] | w[K[2 << Y]][20] | w[K[6]][20]),
                 COL (w[K[0]][20] | w[K[2 << Y]][20] | w[K[6]][20]), S[K[4 >> Y]], b[K[7]]);
-              if (k[5] + 1)
+              if (k[0] + 1)
               {
                 printf ("r%dc%d",
-                  ROW (w[w[K[0]][W[3][k[5]]]][20] | w[w[K[0]][W[4][k[5]]]][20]),
-                  COL (w[w[K[0]][W[3][k[5]]]][20] | w[w[K[0]][W[4][k[5]]]][20]));
+                  ROW (w[w[K[0]][W[3][k[0]]]][20] | w[w[K[0]][W[4][k[0]]]][20]),
+                  COL (w[w[K[0]][W[3][k[0]]]][20] | w[w[K[0]][W[4][k[0]]]][20]));
                 if (~g[K[0]] & K[7])
                   printf (" r%dc%d",
-                    ROW (w[K[8]][20] | w[w[K[8]][W[3][k[5]]]][20] | S[w[K[8]][W[4][k[5]]]][20]),
-                    COL (w[K[8]][20] | w[w[K[8]][W[3][k[5]]]][20] | S[w[K[8]][W[4][k[5]]]][20]));
+                    ROW (w[K[8]][20] | w[w[K[8]][W[3][k[0]]]][20] | S[w[K[8]][W[4][k[0]]]][20]),
+                    COL (w[K[8]][20] | w[w[K[8]][W[3][k[0]]]][20] | S[w[K[8]][W[4][k[0]]]][20]));
                 printf ("\n");
               }
               else
@@ -5455,33 +5455,33 @@ XYWT1Tf:
                 p, b[g[K[2]] | g[K[4]] | g[K[6]]],
                 ROW (w[K[0]][20] | w[K[2 << Y]][20] | w[K[6]][20]),
                 COL (w[K[0]][20] | w[K[2 << Y]][20] | w[K[6]][20]), S[K[4 >> Y]], b[K[7]]);
-              if (k[5] + 1)
+              if (k[0] + 1)
               {
                 printf ("r%dc%d",
-                  ROW (w[w[K[0]][W[3][k[5]]]][20] | w[w[K[0]][W[4][k[5]]]][20]),
-                  COL (w[w[K[0]][W[3][k[5]]]][20] | w[w[K[0]][W[4][k[5]]]][20]));
+                  ROW (w[w[K[0]][W[3][k[0]]]][20] | w[w[K[0]][W[4][k[0]]]][20]),
+                  COL (w[w[K[0]][W[3][k[0]]]][20] | w[w[K[0]][W[4][k[0]]]][20]));
                 if (~g[K[0]] & K[7])
                   printf (" r%dc%d",
-                    ROW (w[K[8]][20] | w[w[K[8]][W[3][k[5]]]][20] | S[w[K[8]][W[4][k[5]]]][20]),
-                    COL (w[K[8]][20] | w[w[K[8]][W[3][k[5]]]][20] | S[w[K[8]][W[4][k[5]]]][20]));
+                    ROW (w[K[8]][20] | w[w[K[8]][W[3][k[0]]]][20] | S[w[K[8]][W[4][k[0]]]][20]),
+                    COL (w[K[8]][20] | w[w[K[8]][W[3][k[0]]]][20] | S[w[K[8]][W[4][k[0]]]][20]));
                 printf ("\n");
               }
               else
                 printf ("%s\n", S[K[8]]);
 #endif
-              if (k[5] + 1)  // Undo Wing Cells common value to WXYZ-Wing Type 1 removal Cell positions
+              if (k[0] + 1)  // Undo Wing Cells common value to WXYZ-Wing Type 1 removal Cell positions
               {
-                g[w[K[0]][W[3][k[5]]]] = k[3];
-                g[w[K[0]][W[4][k[5]]]] = k[4];
                 if (~g[K[0]] & K[7])
                 {
-                  g[K[8]] = k[0];
-                  g[w[K[8]][W[3][k[5]]]] = k[1];
-                  g[w[K[8]][W[4][k[5]]]] = k[2];
+                  g[K[8]] = k[1];
+                  g[w[K[8]][W[3][k[0]]]] = k[2];
+                  g[w[K[8]][W[4][k[0]]]] = k[3];
                 }
+                g[w[K[0]][W[3][k[0]]]] = k[4];
+                g[w[K[0]][W[4][k[0]]]] = k[5];
               }
               else
-                g[K[8]] = k[0];
+                g[K[8]] = k[1];
 #if RJ > 3
               prn ();
 #endif
@@ -5550,6 +5550,7 @@ XYWT1Tf:
 #endif
           return 0;          // Undo Almost Locked Set move Type 1a removal Cell values
         }
+/*
         for (Y = 0; Y < 2; ++Y)
         {                    // Search Almost Locked Set move Type 1b 3rd Wing Cell position Line wise
           if (B[g[K[0]] | g[K[2 << Y]]] != 3 || B[g[K[0]] & g[K[4 >> Y]]] != 1)
@@ -5563,44 +5564,43 @@ XYWT1Tf:
               B[g[K[2]] & g[K[6]]] != 1 || B[g[K[4]] & g[K[6]]] != 1)
               continue;      // No one common digit in 1st and 3rd Wing Cells values; or no one common digit in 2nd and 3rd Wing Cells values
             int k[12] = {K[2 << Y] - COL (w[K[2 << Y]][20]) + COL (w[K[6]][20]),
-                        K[6] - COL (w[K[6]][20]) + COL (w[K[2 << Y]][20]),-1};
-
-            k[6] = g[k[Y]];
+                        K[6] - COL (w[K[6]][20]) + COL (w[K[2 << Y]][20]), g[k[Y]],-1};
+                             // Backup Almost Locked Set move Type 1b removal Cell values
             if (B[g[K[0]]] < 3)
             {
               k[7] = g[k[!Y]];
               if ((w[K[2 << Y]][20] & W[25][Y]) == (w[K[6]][20] & W[25][Y]))
               {
-                k[8] = g[k[2] = w[k[Y]][W[3][!Y]]];
-                k[9] = g[k[3] = w[k[Y]][W[4][!Y]]];
-                k[10] = g[k[4] = w[k[!Y]][W[3][!Y]]];
-                k[11] = g[k[5] = w[k[!Y]][W[4][!Y]]];
+                k[8] = g[k[3] = w[k[Y]][W[3][!Y]]];
+                k[9] = g[k[4] = w[k[Y]][W[4][!Y]]];
+                k[10] = g[k[5] = w[k[!Y]][W[3][!Y]]];
+                k[11] = g[k[6] = w[k[!Y]][W[4][!Y]]];
               }
             }
             K[7] = g[K[2 << Y]] & g[K[6]];
-            if ((k[6] | k[7] | k[8] | k[9] | k[10] | k[11]) & K[7])
-            {
+            if ((k[2] | k[7] | k[8] | k[9] | k[10] | k[11]) & K[7])
+            {                // Drop Wing Cells common values from Almost Locked Set move Type 1b removal Cell values
               g[k[Y]] &= ~K[7];
               if (B[g[K[0]]] < 3)
               {
                 g[k[!Y]] &= ~K[7];
-                if (k[2] + 1)
+                if (k[3] + 1)
                 {
-                  g[k[2]] &= ~K[7];
                   g[k[3]] &= ~K[7];
                   g[k[4]] &= ~K[7];
                   g[k[5]] &= ~K[7];
+                  g[k[6]] &= ~K[7];
                 }
               }
 #if RJ > 2
               printf ("%d) Almost Locked Set move Type 1b: %d @ r%dc%d %s %s => -%d @ r%dc%d",
                 p, b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[2 << Y]][20]),
                 COL (w[K[0]][20] | w[K[2 << Y]][20]), S[K[4 >> Y]], S[K[6]], b[K[7]],
-                ROW (w[k[Y]][20] | (k[2] + 1 ? w[k[2]][20] | w[k[3]][20] : 0)),
-                COL (w[k[Y]][20] | (k[2] + 1 ? w[k[2]][20] | w[k[3]][20] : 0)));
+                ROW (w[k[Y]][20] | (k[3] + 1 ? w[k[3]][20] | w[k[4]][20] : 0)),
+                COL (w[k[Y]][20] | (k[3] + 1 ? w[k[3]][20] | w[k[4]][20] : 0)));
               if (B[g[K[0]]] < 3)
-                printf (" r%dc%d", ROW (w[k[!Y]][20] | (k[2] + 1 ? w[k[4]][20] | w[k[5]][20] : 0)),
-                COL (w[k[!Y]][20] | (k[2] + 1 ? w[k[4]][20] | w[k[5]][20] : 0)));
+                printf (" r%dc%d", ROW (w[k[!Y]][20] | (k[3] + 1 ? w[k[5]][20] | w[k[6]][20] : 0)),
+                COL (w[k[!Y]][20] | (k[3] + 1 ? w[k[5]][20] | w[k[6]][20] : 0)));
               printf ("\n");
 #endif
               if (solve (p))
@@ -5609,23 +5609,23 @@ XYWT1Tf:
               printf ("%d) Undo Almost Locked Set move Type 1b: %d @ r%dc%d %s %s <= +%d @ r%dc%d",
                 p, b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[2 << Y]][20]),
                 COL (w[K[0]][20] | w[K[2 << Y]][20]), S[K[4 >> Y]], S[K[6]], b[K[7]],
-                ROW (w[k[Y]][20] | (k[2] + 1 ? w[k[2]][20] | w[k[3]][20] : 0)),
-                COL (w[k[Y]][20] | (k[2] + 1 ? w[k[2]][20] | w[k[3]][20] : 0)));
+                ROW (w[k[Y]][20] | (k[3] + 1 ? w[k[3]][20] | w[k[4]][20] : 0)),
+                COL (w[k[Y]][20] | (k[3] + 1 ? w[k[3]][20] | w[k[4]][20] : 0)));
               if (B[g[K[0]]] < 3)
-                printf (" r%dc%d", ROW (w[k[!Y]][20] | (k[2] + 1 ? w[k[4]][20] | w[k[5]][20] : 0)),
-                COL (w[k[!Y]][20] | (k[2] + 1 ? w[k[4]][20] | w[k[5]][20] : 0)));
+                printf (" r%dc%d", ROW (w[k[!Y]][20] | (k[3] + 1 ? w[k[5]][20] | w[k[6]][20] : 0)),
+                COL (w[k[!Y]][20] | (k[3] + 1 ? w[k[5]][20] | w[k[6]][20] : 0)));
               printf ("\n");
 #endif
-              g[k[Y]] = k[6];
+              g[k[Y]] = k[2];
               if (B[g[K[0]]] < 3)
               {
                 g[k[!Y]] = k[7];
-                if (k[2] + 1)
+                if (k[3] + 1)
                 {
-                  g[k[2]] = k[8];
-                  g[k[3]] = k[9];
-                  g[k[4]] = k[10];
-                  g[k[5]] = k[11];
+                  g[k[3]] = k[8];
+                  g[k[4]] = k[9];
+                  g[k[5]] = k[10];
+                  g[k[6]] = k[11];
                 }
               }
 #if RJ > 3
@@ -5635,10 +5635,11 @@ XYWT1Tf:
             }
           }
         }
+*/
       }
     }
   }
-  for (a = p; a < q; ++a)    // Search WXYZ-Wing Type 2a, Type 2b, Type 3, Type 4a, Type 4b, Almost Locked Set move Type 2a, Type 2b and Type 2c Apex unsolved Cell positions wise
+  for (a = p; a < q; ++a)    // Search WXYZ-Wing Type 2a, Type 2b, Type 3, Type 4a, Type 4b, Type 5, Almost Locked Set move Type 2a, Type 2b and Type 2c Apex unsolved Cell positions wise
   {
     if (B[g[r[a]]] > 4)
       continue;              // Skip for unsolved Cell values > four digits
@@ -5742,69 +5743,148 @@ XYWT1Tf:
 // WXYZ-Wing Type 2a, Type 2b and Type 3 Transport
             }
           for (K[5] = 3; K[5] < 5; ++K[5])
-          {                  // Search WXYZ-Wing Type 4a and Type 4b for 2nd Apex Cell position mini-Line wise
+          {                  // Search WXYZ-Wing Type 4a, Type 4b and Type 5 for 2nd Apex Cell position mini-Line wise
             if (K[0] > (K[6] = w[K[0]][W[K[5]][y]]) ||
                              // Skip for either 1st Apex Cell position > 2nd Apex Cell position; or
               !g[K[6]] || B[g[K[0]] | g[K[2]] | g[K[4]] | g[K[6]]] != 4 ||
                              // 2nd Apex Cell position not unsolved; or Apex Cells values and Wing Cells values not four digits; or
-              !((g[K[0]] | g[K[6]]) & g[K[2]]) ||
-                             // No common value in Apex Cells and 1st Wing Cell values; or
-              !((g[K[0]] | g[K[6]]) & g[K[4]]) ||
-                             // No common value in Apex Cells and 2nd Wing Cell values; or
-              B[K[7] = g[K[2]] & g[K[4]]] != 1)
-              continue;      // Wing Cells common value not one digit
-            int k[4] = {g[w[K[0]][W[7 - K[5]][y]]]};
+              !((g[K[0]] | g[K[6]]) & g[K[2]]) || !((g[K[0]] | g[K[6]]) & g[K[4]]))
+              continue;      //  No common digit in Apex Cells and 1st Wing Cell values; or no common digit in Apex Cells and 2nd Wing Cell values; or
+            if (B[K[7] = g[K[2]] & g[K[4]]] == 1)
+            {                // Check WXYZ-Wing Type 4a and Type 4b for Wing Cells common value one digit
+              int k[4] = {g[w[K[0]][W[7 - K[5]][y]]]};
                              // Backup WXYZ-Wing Type 4b removal Cell value
-            Z = -1;
-            if (~(g[K[0]] | g[K[6]]) & K[7])
-            {                // Check no Wing Cells common value in Apex Cells values
-              k[1] = g[w[K[2]][Z = W[K[3] < W[5][y] ? 1 : 5][y]]];
-              k[2] = g[w[K[2]][Z + 1]];
-              k[3] = g[w[K[2]][Z + 2]];
-            }                // Backup WXYZ-Wing Type 4a more removal Cell values
-            if ((k[0] | k[1] | k[2] | k[3]) & K[7])
-            {                // Check WXYZ-Wing Type 4a and Type 4b removal Cells values
+              Z = -1;
+              if (~(g[K[0]] | g[K[6]]) & K[7])
+              {              // Check no Wing Cells common value in Apex Cells values
+                k[1] = g[w[K[2]][Z = W[K[3] < W[5][y] ? 1 : 5][y]]];
+                k[2] = g[w[K[2]][Z + 1]];
+                k[3] = g[w[K[2]][Z + 2]];
+              }              // Backup WXYZ-Wing Type 4a more removal Cell values
+              if ((k[0] | k[1] | k[2] | k[3]) & K[7])
+              {              // Check WXYZ-Wing Type 4a and Type 4b removal Cells values
                              // Drop Wing Cells common value from WXYZ-Wing Type 4b removal Cell position
-              g[w[K[0]][W[7 - K[5]][y]]] &= ~K[7];
-              if (Z + 1)
-              {              // Drop Wing Cells common value from WXYZ-Wing Type 4a more removal Cell positions
-                g[w[K[2]][Z]] &= ~K[7];
-                g[w[K[2]][Z + 1]] &= ~K[7];
-                g[w[K[2]][Z + 2]] &= ~K[7];
-              }
+                g[w[K[0]][W[7 - K[5]][y]]] &= ~K[7];
+                if (Z + 1)
+                {            // Drop Wing Cells common value from WXYZ-Wing Type 4a more removal Cell positions
+                  g[w[K[2]][Z]] &= ~K[7];
+                  g[w[K[2]][Z + 1]] &= ~K[7];
+                  g[w[K[2]][Z + 2]] &= ~K[7];
+                }
 #if RJ > 2
-              printf ("%d) WXYZ-Wing Type 4%c: %d @ %s %s %s %s => -%d @ %s",
-                p, Z + 1 ? 'a' : 'b', b[g[K[0]] | g[K[2]] | g[K[4]] | g[K[6]]],
-                S[K[0]], S[K[6]], S[K[2]], S[K[4]], b[K[7]], S[w[K[0]][W[7 - K[5]][y]]]);
-              if (Z + 1)
-                printf (" r%dc%d", ROW (w[w[K[2]][Z]][20] | w[w[K[2]][Z + 1]][20] |
-                  w[w[K[2]][Z + 2]][20]), COL (w[w[K[2]][Z]][20] |
-                  w[w[K[2]][Z + 1]][20] | w[w[K[2]][Z + 2]][20]));
-              printf ("\n");
+                printf ("%d) WXYZ-Wing Type 4%c: %d @ r%dc%d %s => -%d @ %s",
+                  p, Z + 1 ? 'a' : 'b', b[g[K[0]] | g[K[2]] | g[K[4]] | g[K[6]]],
+                  ROW (w[K[0]][20] | w[K[6]][20] | w[K[4]][20]),
+                  COL (w[K[0]][20] | w[K[6]][20] | w[K[4]][20]),
+                  S[K[2]], b[K[7]], S[w[K[0]][W[7 - K[5]][y]]]);
+                if (Z + 1)
+                  printf (" r%dc%d", ROW (w[w[K[2]][Z]][20] | w[w[K[2]][Z + 1]][20] |
+                    w[w[K[2]][Z + 2]][20]), COL (w[w[K[2]][Z]][20] |
+                    w[w[K[2]][Z + 1]][20] | w[w[K[2]][Z + 2]][20]));
+                printf ("\n");
 #endif
-              if (solve (p))
-                return 1;
+                if (solve (p))
+                  return 1;
 #if RJ > 2
-              printf ("%d) Undo WXYZ-Wing Type 4%c: %d @ %s %s %s %s <= +%d @ %s",
-                p, Z + 1 ? 'a' : 'b', b[g[K[0]] | g[K[2]] | g[K[4]] | g[K[6]]],
-                S[K[0]], S[K[6]], S[K[2]], S[K[4]], b[K[7]], S[w[K[0]][W[7 - K[5]][y]]]);
-              if (Z + 1)
-                printf (" r%dc%d", ROW (w[w[K[2]][Z]][20] | w[w[K[2]][Z + 1]][20] |
-                  w[w[K[2]][Z + 2]][20]), COL (w[w[K[2]][Z]][20] |
-                  w[w[K[2]][Z + 1]][20] | w[w[K[2]][Z + 2]][20]));
-              printf ("\n");
+                printf ("%d) Undo WXYZ-Wing Type 4%c: %d @ r%dc%d %s => -%d @ %s",
+                  p, Z + 1 ? 'a' : 'b', b[g[K[0]] | g[K[2]] | g[K[4]] | g[K[6]]],
+                  ROW (w[K[0]][20] | w[K[6]][20] | w[K[4]][20]),
+                  COL (w[K[0]][20] | w[K[6]][20] | w[K[4]][20]),
+                  S[K[2]], b[K[7]], S[w[K[0]][W[7 - K[5]][y]]]);
+                if (Z + 1)
+                  printf (" r%dc%d", ROW (w[w[K[2]][Z]][20] | w[w[K[2]][Z + 1]][20] |
+                    w[w[K[2]][Z + 2]][20]), COL (w[w[K[2]][Z]][20] |
+                    w[w[K[2]][Z + 1]][20] | w[w[K[2]][Z + 2]][20]));
+                printf ("\n");
 #endif
-              g[w[K[0]][W[7 - K[5]][y]]] = k[0];
-              if (Z + 1)
-              {
-                g[w[K[2]][Z]] = k[1];
-                g[w[K[2]][Z + 1]] = k[2];
-                g[w[K[2]][Z + 2]] = k[3];
-              }
+                g[w[K[0]][W[7 - K[5]][y]]] = k[0];
+                if (Z + 1)
+                {
+                  g[w[K[2]][Z]] = k[1];
+                  g[w[K[2]][Z + 1]] = k[2];
+                  g[w[K[2]][Z + 2]] = k[3];
+                }
 #if RJ > 3
-              prn ();
+                prn ();
 #endif
-              return 0;      // Undo WXYZ-Wing Type 4a and Type 4b removal Cells values
+                return 0;    // Undo WXYZ-Wing Type 4a and Type 4b removal Cells values
+              }
+            }
+            else
+            {
+              X = W[K[3] < W[5][y] ? 5 : 1][y];
+              if (!(g[K[2]] & g[K[4]]) &&
+                             // Check WXYZ-Wing Type 5 for no common digit in Wing Cells values; and
+                ((g[K[7] = w[K[0]][W[7 - K[5]][y]]] | g[w[K[2]][W[3][y]]] | g[w[K[2]][W[4][y]]] |
+                g[w[K[0]][W[Z = K[1] == W[6][y] || K[1] == W[7][y] || K[1] == W[8][y] ? 9 : 6][y]]] |
+                g[w[K[0]][W[Z + 1][y]]] | g[w[K[0]][W[Z + 2][y]]]) & g[K[2]] ||
+                (g[K[7]] | g[w[K[4]][W[3][y]]] | g[w[K[4]][W[4][y]]] |
+                g[w[K[0]][X]] | g[w[K[0]][X + 1]] | g[w[K[0]][X + 2]]) & g[K[4]]))
+              {              // WXYZ-Wing Type 5 removal Cells values
+                int k[11] = {g[K[7]], g[w[K[2]][W[3][y]]], g[w[K[2]][W[4][y]]],
+                            g[w[K[0]][W[Z][y]]], g[w[K[0]][W[Z + 1][y]]],
+                            g[w[K[0]][W[Z + 2][y]]], g[w[K[4]][W[3][y]]], g[w[K[4]][W[4][y]]],
+                            g[w[K[0]][X]], g[w[K[0]][X + 1]], g[w[K[0]][X + 2]]};
+                             // Backup WXYZ-Wing Type 5 removal Cells values and drop from removal Cells values
+                g[K[7]] &= ~(g[K[2]] | g[K[4]]);
+                g[w[K[2]][W[3][y]]] &= ~g[K[2]];
+                g[w[K[2]][W[4][y]]] &= ~g[K[2]];
+                g[w[K[0]][W[Z][y]]] &= ~g[K[2]];
+                g[w[K[0]][W[Z + 1][y]]] &= ~g[K[2]];
+                g[w[K[0]][W[Z + 2][y]]] &= ~g[K[2]];
+                g[w[K[4]][W[3][y]]] &= ~g[K[4]];
+                g[w[K[4]][W[4][y]]] &= ~g[K[4]];
+                g[w[K[0]][X]] &= ~g[K[4]];
+                g[w[K[0]][X + 1]] &= ~g[K[4]];
+                g[w[K[0]][X + 2]] &= ~g[K[4]];
+#if RJ > 2
+                printf ("%d) WXYZ-Wing Type 5 (SDC): %d @ r%dc%d %s => -%d @ %s => -%d @ r%dc%d r%dc%d => -%d @ r%dc%d\n",
+                  p, b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[6]][20] | w[K[4]][20]),
+                  COL (w[K[0]][20] | w[K[6]][20] | w[K[4]][20]), S[K[2]],
+                  b[g[K[2]] | g[K[4]]], S[K[7]], b[g[K[2]]],
+                  ROW (w[w[K[2]][W[3][y]]][20] | w[w[K[2]][W[4][y]]][20]),
+                  COL (w[w[K[2]][W[3][y]]][20] | w[w[K[2]][W[4][y]]][20]),
+                  ROW (w[w[K[0]][W[Z][y]]][20] | w[w[K[0]][W[Z + 1][y]]][20] |
+                  w[w[K[0]][W[Z + 2][y]]][20]), COL (w[w[K[0]][W[Z][y]]][20] |
+                  w[w[K[0]][W[Z + 1][y]]][20] | w[w[K[0]][W[Z + 2][y]]][20]),
+                  b[g[K[4]]], ROW (w[w[K[4]][W[3][y]]][20] | w[w[K[4]][W[4][y]]][20] |
+                  w[w[K[0]][X]][20] | w[w[K[0]][X + 1]][20] | w[w[K[0]][X + 2]][20]),
+                  COL (w[w[K[4]][W[3][y]]][20] | w[w[K[4]][W[4][y]]][20] |
+                  w[w[K[0]][X]][20] | w[w[K[0]][X + 1]][20] | w[w[K[0]][X + 2]][20]));
+#endif
+                if (solve (p))
+                  return 1;
+#if RJ > 2
+                printf ("%d) Undo WXYZ-Wing Type 5 (SDC): %d @ r%dc%d %s <= +%d @ %s <= +%d @ r%dc%d r%dc%d <= +%d @ r%dc%d\n",
+                  p, b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[6]][20] | w[K[4]][20]),
+                  COL (w[K[0]][20] | w[K[6]][20] | w[K[4]][20]), S[K[2]],
+                  b[g[K[2]] | g[K[4]]], S[K[7]], b[g[K[2]]],
+                  ROW (w[w[K[2]][W[3][y]]][20] | w[w[K[2]][W[4][y]]][20]),
+                  COL (w[w[K[2]][W[3][y]]][20] | w[w[K[2]][W[4][y]]][20]),
+                  ROW (w[w[K[0]][W[Z][y]]][20] | w[w[K[0]][W[Z + 1][y]]][20] |
+                  w[w[K[0]][W[Z + 2][y]]][20]), COL (w[w[K[0]][W[Z][y]]][20] |
+                  w[w[K[0]][W[Z + 1][y]]][20] | w[w[K[0]][W[Z + 2][y]]][20]),
+                  b[g[K[4]]], ROW (w[w[K[4]][W[3][y]]][20] | w[w[K[4]][W[4][y]]][20] |
+                  w[w[K[0]][X]][20] | w[w[K[0]][X + 1]][20] | w[w[K[0]][X + 2]][20]),
+                  COL (w[w[K[4]][W[3][y]]][20] | w[w[K[4]][W[4][y]]][20] |
+                  w[w[K[0]][X]][20] | w[w[K[0]][X + 1]][20] | w[w[K[0]][X + 2]][20]));
+#endif
+                g[K[7]] = k[0];
+                g[w[K[2]][W[3][y]]] = k[1];
+                g[w[K[2]][W[4][y]]] = k[2];
+                g[w[K[0]][W[Z][y]]] = k[3];
+                g[w[K[0]][W[Z + 1][y]]] = k[4];
+                g[w[K[0]][W[Z + 2][y]]] = k[5];
+                g[w[K[4]][W[3][y]]] = k[6];
+                g[w[K[4]][W[4][y]]] = k[7];
+                g[w[K[0]][X]] = k[8];
+                g[w[K[0]][X + 1]] = k[9];
+                g[w[K[0]][X + 2]] = k[10];
+#if RJ > 3
+                prn ();
+#endif
+                return 0;      // Undo WXYZ-Wing Type 5 removal Cells values
+              }
             }
           }
           if (B[g[K[0]]] == 3 && B[g[K[0]] | g[K[2]]] == 4 &&
