@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 
-#define RJ 5                 // 0 no debugging, 1 print solutions, 2 print puzzles, 3 print steps, 4 print steps possibilities in grid, 5 print puzzles in grid
+#define RJ 0                 // 0 no debugging, 1 print solutions, 2 print puzzles, 3 print steps, 4 print steps possibilities in grid, 5 print puzzles in grid
 
 #define ERI(A)          (g[w[A][6]] | g[w[A][7]]) & (g[w[A][12]] | g[w[A][13]]) & \
                         ~(g[w[A][8]] | g[w[A][9]] | g[w[A][10]] | g[w[A][11]])
@@ -2551,7 +2551,7 @@ int solve (int p)
         g[w[K[0]][W[20][y]]] | g[w[K[0]][W[21][y]]] | g[w[K[0]][W[22][y]]]) ||
         !(g[w[K[0]][W[6][y]]] | g[w[K[0]][W[7][y]]] | g[w[K[0]][W[8][y]]] |
         g[w[K[0]][W[9][y]]] | g[w[K[0]][W[10][y]]] | g[w[K[0]][W[11][y]]]))
-        continue;            // Skip for no unsolved Cell position found in Apex either Line or Box
+        continue;            // Skip for no unsolved Cell position found in either Apex Line or Box
       for (K[1] = W[1][y]; K[1] < W[2][y]; ++K[1])
       {                      // Search 1st Wing Cell position Line wise
         if (!g[K[2] = w[K[0]][K[1]]] || !(K[6] = (g[K[0]] & g[K[2]] &
@@ -2676,7 +2676,7 @@ int solve (int p)
       g[w[r[a]][3]] | g[w[r[a]][4]] | g[w[r[a]][5]]) ||
       !(g[w[r[a]][14]] | g[w[r[a]][15]] | g[w[r[a]][16]] |
       g[w[r[a]][17]] | g[w[r[a]][18]] | g[w[r[a]][19]]))
-      continue;              // No unsolved Cell position found in Apex either Row or Column
+      continue;              // No unsolved Cell position found in either Apex Row or Column
     int K[9] = {r[a], 0};    // Assign Apex Cell position
 
     for (; K[1] < 6; ++K[1]) // Search 1st Wing Cell position Row wise
@@ -4198,7 +4198,7 @@ XYWT1Tf:
         g[w[K[0]][W[20][y]]] | g[w[K[0]][W[21][y]]] | g[w[K[0]][W[22][y]]]) ||
         !(g[w[K[0]][W[6][y]]] | g[w[K[0]][W[7][y]]] | g[w[K[0]][W[8][y]]] |
         g[w[K[0]][W[9][y]]] | g[w[K[0]][W[10][y]]] | g[w[K[0]][W[11][y]]]))
-        continue;            // Skip for no unsolved Cell position found in Apex either Line or Box
+        continue;            // Skip for no unsolved Cell position found in either Apex Line or Box
       for (K[1] = W[1][y]; K[1] < W[2][y]; ++K[1])
       {                      // Search 1st Wing Cell position Line wise
         if (B[g[K[2] = w[K[0]][K[1]]]] != 2 || B[g[K[0]] | g[K[2]]] != 3)
@@ -5550,7 +5550,6 @@ XYWT1Tf:
 #endif
           return 0;          // Undo Almost Locked Set move Type 1a removal Cell values
         }
-/*
         for (Y = 0; Y < 2; ++Y)
         {                    // Search Almost Locked Set move Type 1b 3rd Wing Cell position Line wise
           if (B[g[K[0]] | g[K[2 << Y]]] != 3 || B[g[K[0]] & g[K[4 >> Y]]] != 1)
@@ -5564,43 +5563,44 @@ XYWT1Tf:
               B[g[K[2]] & g[K[6]]] != 1 || B[g[K[4]] & g[K[6]]] != 1)
               continue;      // No one common digit in 1st and 3rd Wing Cells values; or no one common digit in 2nd and 3rd Wing Cells values
             int k[12] = {K[2 << Y] - COL (w[K[2 << Y]][20]) + COL (w[K[6]][20]),
-                        K[6] - COL (w[K[6]][20]) + COL (w[K[2 << Y]][20]), g[k[Y]],-1};
+                        K[6] - COL (w[K[6]][20]) + COL (w[K[2 << Y]][20]),-1};
                              // Backup Almost Locked Set move Type 1b removal Cell values
+            k[6] = g[k[Y]];
             if (B[g[K[0]]] < 3)
             {
               k[7] = g[k[!Y]];
               if ((w[K[2 << Y]][20] & W[25][Y]) == (w[K[6]][20] & W[25][Y]))
               {
-                k[8] = g[k[3] = w[k[Y]][W[3][!Y]]];
-                k[9] = g[k[4] = w[k[Y]][W[4][!Y]]];
-                k[10] = g[k[5] = w[k[!Y]][W[3][!Y]]];
-                k[11] = g[k[6] = w[k[!Y]][W[4][!Y]]];
+                k[8] = g[k[2] = w[k[Y]][W[3][!Y]]];
+                k[9] = g[k[3] = w[k[Y]][W[4][!Y]]];
+                k[10] = g[k[4] = w[k[!Y]][W[3][!Y]]];
+                k[11] = g[k[5] = w[k[!Y]][W[4][!Y]]];
               }
             }
             K[7] = g[K[2 << Y]] & g[K[6]];
-            if ((k[2] | k[7] | k[8] | k[9] | k[10] | k[11]) & K[7])
+            if ((k[6] | k[7] | k[8] | k[9] | k[10] | k[11]) & K[7])
             {                // Drop Wing Cells common values from Almost Locked Set move Type 1b removal Cell values
               g[k[Y]] &= ~K[7];
               if (B[g[K[0]]] < 3)
               {
                 g[k[!Y]] &= ~K[7];
-                if (k[3] + 1)
+                if (k[2] + 1)
                 {
+                  g[k[2]] &= ~K[7];
                   g[k[3]] &= ~K[7];
                   g[k[4]] &= ~K[7];
                   g[k[5]] &= ~K[7];
-                  g[k[6]] &= ~K[7];
                 }
               }
 #if RJ > 2
               printf ("%d) Almost Locked Set move Type 1b: %d @ r%dc%d %s %s => -%d @ r%dc%d",
                 p, b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[2 << Y]][20]),
                 COL (w[K[0]][20] | w[K[2 << Y]][20]), S[K[4 >> Y]], S[K[6]], b[K[7]],
-                ROW (w[k[Y]][20] | (k[3] + 1 ? w[k[3]][20] | w[k[4]][20] : 0)),
-                COL (w[k[Y]][20] | (k[3] + 1 ? w[k[3]][20] | w[k[4]][20] : 0)));
+                ROW (w[k[Y]][20] | (k[2] + 1 ? w[k[2]][20] | w[k[3]][20] : 0)),
+                COL (w[k[Y]][20] | (k[2] + 1 ? w[k[2]][20] | w[k[3]][20] : 0)));
               if (B[g[K[0]]] < 3)
-                printf (" r%dc%d", ROW (w[k[!Y]][20] | (k[3] + 1 ? w[k[5]][20] | w[k[6]][20] : 0)),
-                COL (w[k[!Y]][20] | (k[3] + 1 ? w[k[5]][20] | w[k[6]][20] : 0)));
+                printf (" r%dc%d", ROW (w[k[!Y]][20] | (k[2] + 1 ? w[k[4]][20] | w[k[5]][20] : 0)),
+                COL (w[k[!Y]][20] | (k[2] + 1 ? w[k[4]][20] | w[k[5]][20] : 0)));
               printf ("\n");
 #endif
               if (solve (p))
@@ -5609,23 +5609,23 @@ XYWT1Tf:
               printf ("%d) Undo Almost Locked Set move Type 1b: %d @ r%dc%d %s %s <= +%d @ r%dc%d",
                 p, b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[2 << Y]][20]),
                 COL (w[K[0]][20] | w[K[2 << Y]][20]), S[K[4 >> Y]], S[K[6]], b[K[7]],
-                ROW (w[k[Y]][20] | (k[3] + 1 ? w[k[3]][20] | w[k[4]][20] : 0)),
-                COL (w[k[Y]][20] | (k[3] + 1 ? w[k[3]][20] | w[k[4]][20] : 0)));
+                ROW (w[k[Y]][20] | (k[2] + 1 ? w[k[2]][20] | w[k[3]][20] : 0)),
+                COL (w[k[Y]][20] | (k[2] + 1 ? w[k[2]][20] | w[k[3]][20] : 0)));
               if (B[g[K[0]]] < 3)
-                printf (" r%dc%d", ROW (w[k[!Y]][20] | (k[3] + 1 ? w[k[5]][20] | w[k[6]][20] : 0)),
-                COL (w[k[!Y]][20] | (k[3] + 1 ? w[k[5]][20] | w[k[6]][20] : 0)));
+                printf (" r%dc%d", ROW (w[k[!Y]][20] | (k[2] + 1 ? w[k[4]][20] | w[k[5]][20] : 0)),
+                COL (w[k[!Y]][20] | (k[2] + 1 ? w[k[4]][20] | w[k[5]][20] : 0)));
               printf ("\n");
 #endif
-              g[k[Y]] = k[2];
+              g[k[Y]] = k[6];
               if (B[g[K[0]]] < 3)
               {
                 g[k[!Y]] = k[7];
-                if (k[3] + 1)
+                if (k[2] + 1)
                 {
-                  g[k[3]] = k[8];
-                  g[k[4]] = k[9];
-                  g[k[5]] = k[10];
-                  g[k[6]] = k[11];
+                  g[k[2]] = k[8];
+                  g[k[3]] = k[9];
+                  g[k[4]] = k[10];
+                  g[k[5]] = k[11];
                 }
               }
 #if RJ > 3
@@ -5635,7 +5635,6 @@ XYWT1Tf:
             }
           }
         }
-*/
       }
     }
   }
@@ -6189,7 +6188,7 @@ XYWT1Tf:
   for (X = -1, a = p; a < q; ++a)
     if (B[g[r[a]]] < 3)
       continue;              // Skip Bivalue Universal Grave for unsolved Cell values < three digits
-    else if (B[g[r[a]]] == 3 && X < 0)
+    else if (B[g[r[a]]] > 2 && X < 0)
       X = r[a];              // Backup first Guardian Cell position
     else
       break;
