@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 
-#define RJ 0                 // 0 no debugging, 1 print solutions, 2 print puzzles, 3 print steps, 4 print steps possibilities in grid, 5 print puzzles in grid
+#define RJ 5                 // 0 no debugging, 1 print solutions, 2 print puzzles, 3 print steps, 4 print steps possibilities in grid, 5 print puzzles in grid
 
 #define ERI(A)          (g[w[A][6]] | g[w[A][7]]) & (g[w[A][12]] | g[w[A][13]]) & \
                         ~(g[w[A][8]] | g[w[A][9]] | g[w[A][10]] | g[w[A][11]])
@@ -424,10 +424,9 @@ int solve (int p)
   for (; y < 27; ++y)        // Check Zero state Unit wise
   {
     if (511 ^ (s[l[y][0]] | g[l[y][0]] | s[l[y][1]] | g[l[y][1]] |
-      s[l[y][2]] | g[l[y][2]] | s[l[y][3]] | g[l[y][3]] |
-      s[l[y][4]] | g[l[y][4]] | s[l[y][5]] | g[l[y][5]] |
-      s[l[y][6]] | g[l[y][6]] | s[l[y][7]] | g[l[y][7]] |
-      s[l[y][8]] | g[l[y][8]]) ||
+      s[l[y][2]] | g[l[y][2]] | s[l[y][3]] | g[l[y][3]] | s[l[y][4]] |
+      g[l[y][4]] | s[l[y][5]] | g[l[y][5]] | s[l[y][6]] | g[l[y][6]] |
+      s[l[y][7]] | g[l[y][7]] | s[l[y][8]] | g[l[y][8]]) ||
       !(s[l[y][0]] | g[l[y][0]]) || !(s[l[y][1]] | g[l[y][1]]) ||
       !(s[l[y][2]] | g[l[y][2]]) || !(s[l[y][3]] | g[l[y][3]]) ||
       !(s[l[y][4]] | g[l[y][4]]) || !(s[l[y][5]] | g[l[y][5]]) ||
@@ -437,20 +436,18 @@ int solve (int p)
 #if RJ > 2
       printf ("%d) Zero state: %d @ %s %d\n",
         p, b[511 ^ (s[l[y][0]] | g[l[y][0]] | s[l[y][1]] | g[l[y][1]] |
-        s[l[y][2]] | g[l[y][2]] | s[l[y][3]] | g[l[y][3]] |
-        s[l[y][4]] | g[l[y][4]] | s[l[y][5]] | g[l[y][5]] |
-        s[l[y][6]] | g[l[y][6]] | s[l[y][7]] | g[l[y][7]] |
-        s[l[y][8]] | g[l[y][8]])], RCB, y % 9 + 1);
+        s[l[y][2]] | g[l[y][2]] | s[l[y][3]] | g[l[y][3]] | s[l[y][4]] |
+        g[l[y][4]] | s[l[y][5]] | g[l[y][5]] | s[l[y][6]] | g[l[y][6]] |
+        s[l[y][7]] | g[l[y][7]] | s[l[y][8]] | g[l[y][8]])], RCB, y % 9 + 1);
 #endif
       return 0;              // Return for number of unsolved Cell positions <> number of unsolved Cell values
     }
     for (Y = 1; Y < 257; Y <<= 1)
                              // Check Zero state digit wise
       if (Z = B[a = (g[l[y][0]] & Y ? 1 : 0) | (g[l[y][1]] & Y ? 2 : 0) |
-        (g[l[y][2]] & Y ? 4 : 0) | (g[l[y][3]] & Y ? 8 : 0) |
-        (g[l[y][4]] & Y ? 16 : 0) | (g[l[y][5]] & Y ? 32 : 0) |
-        (g[l[y][6]] & Y ? 64 : 0) | (g[l[y][7]] & Y ? 128 : 0) |
-        (g[l[y][8]] & Y ? 256 : 0)])
+        (g[l[y][2]] & Y ? 4 : 0) | (g[l[y][3]] & Y ? 8 : 0) | (g[l[y][4]] & Y ? 16 : 0) |
+        (g[l[y][5]] & Y ? 32 : 0) | (g[l[y][6]] & Y ? 64 : 0) |
+        (g[l[y][7]] & Y ? 128 : 0) | (g[l[y][8]] & Y ? 256 : 0)])
       {                      // Check digit Unit wise
         int A[9];
 
@@ -460,14 +457,14 @@ int solve (int p)
           z |= g[A[X]];
         }
         if (Z > B[z])
-        {                    // Check for number of Cell positions > number of Cell values
+        {                    // Check for total unsolved Cell positions > total unsolved Cell values
 #if RJ > 2
           printf ("%d) Zero state: %d @", p, b[z]);
           while (X)
             printf (" %s", S[A[--X]]);
           printf (" in %s %d\n", RCB, y % 9 + 1);
 #endif
-          return 0;          // Return for number of unsolved Cell positions > total unsolved Cell values
+          return 0;          // Return for total unsolved Cell positions > total unsolved Cell values
         }
       }
   }
@@ -476,8 +473,8 @@ int solve (int p)
       g[w[r[a]][4]] | g[w[r[a]][5]] | g[w[r[a]][6]] | g[w[r[a]][7]]) ^ g[r[a]]) |
       ((g[w[r[a]][6]] | g[w[r[a]][7]] | g[w[r[a]][8]] | g[w[r[a]][9]] |
       g[w[r[a]][10]] | g[w[r[a]][11]] | g[w[r[a]][12]] | g[w[r[a]][13]]) ^ g[r[a]]) |
-      ((g[w[r[a]][12]] | g[w[r[a]][13]] | g[w[r[a]][14]] | g[w[r[a]][15]] |
-      g[w[r[a]][16]] | g[w[r[a]][17]] | g[w[r[a]][18]] | g[w[r[a]][19]]) ^ g[r[a]])) & g[r[a]])
+      ((g[w[r[a]][12]] | g[w[r[a]][13]] | g[w[r[a]][14]] | g[w[r[a]][15]] | g[w[r[a]][16]] |
+      g[w[r[a]][17]] | g[w[r[a]][18]] | g[w[r[a]][19]]) ^ g[r[a]])) & g[r[a]])
     {                        // Check for Hidden single Cell value found in unsolved Cell position
       x = a;                 // Assign Hidden single Cell position
       z = Y;                 // Assign Hidden single Cell value
@@ -543,10 +540,9 @@ int solve (int p)
     if (((g[j[a][1]] && g[j[a][2]] && B[Y = g[j[a][1]] | g[j[a][2]]] == 2 && !(X = 0)) ||
       (g[j[a][0]] && g[j[a][2]] && B[Y = g[j[a][0]] | g[j[a][2]]] == 2 && (X = 1)) ||
       (g[j[a][0]] && g[j[a][1]] && B[Y = g[j[a][0]] | g[j[a][1]]] == 2 && (X = 2))) &&
-      ((g[j[a][X]] | g[j[a][3]] | g[j[a][4]] | g[j[a][5]] |
-      g[j[a][6]] | g[j[a][7]] | g[j[a][8]]) &
-      (g[j[a][9]] | g[j[a][10]] | g[j[a][11]] |
-      g[j[a][12]] | g[j[a][13]] | g[j[a][14]]) & Y))
+      (g[j[a][X]] | g[j[a][3]] | g[j[a][4]] | g[j[a][5]] | g[j[a][6]] |
+      g[j[a][7]] | g[j[a][8]]) & (g[j[a][9]] | g[j[a][10]] | g[j[a][11]] |
+      g[j[a][12]] | g[j[a][13]] | g[j[a][14]]) & Y)
     {                        // Locked pair found
       int k[13] = {g[j[a][X]], g[j[a][3]], g[j[a][4]], g[j[a][5]], g[j[a][6]],
                   g[j[a][7]], g[j[a][8]], g[j[a][9]], g[j[a][10]],
@@ -613,10 +609,8 @@ int solve (int p)
     }
     if (g[j[a][0]] && g[j[a][1]] && g[j[a][2]] &&
       B[Y = g[j[a][0]] | g[j[a][1]] | g[j[a][2]]] == 3 &&
-      ((g[j[a][3]] | g[j[a][4]] | g[j[a][5]] |
-      g[j[a][6]] | g[j[a][7]] | g[j[a][8]]) &
-      (g[j[a][9]] | g[j[a][10]] | g[j[a][11]] |
-      g[j[a][12]] | g[j[a][13]] | g[j[a][14]]) & Y))
+      (g[j[a][9]] | g[j[a][10]] | g[j[a][11]] | g[j[a][12]] | g[j[a][13]] | g[j[a][14]]) &
+      (g[j[a][3]] | g[j[a][4]] | g[j[a][5]] | g[j[a][6]] | g[j[a][7]] | g[j[a][8]]) & Y)
     {                        // Locked triplet found
       int k[12] = {g[j[a][3]], g[j[a][4]], g[j[a][5]], g[j[a][6]],
                   g[j[a][7]], g[j[a][8]], g[j[a][9]], g[j[a][10]],
@@ -682,7 +676,7 @@ int solve (int p)
   }
   for (; y < 27; ++y)        // Search Naked/Hidden Tuples Cell values Unit wise
   {
-    if ((Y  = !g[l[y][0]] + !g[l[y][1]] + !g[l[y][2]] + !g[l[y][3]] +
+    if ((Y = !g[l[y][0]] + !g[l[y][1]] + !g[l[y][2]] + !g[l[y][3]] +
       !g[l[y][4]] + !g[l[y][5]] + !g[l[y][6]] + !g[l[y][7]] + !g[l[y][8]]) > 6)
       continue;              // Skip Unit for no unsolved Cell positions > six
     for (a = 0; a < 36; ++a) // Search Naked/Hidden pair Cell values Unit 36 pair Cell positions wise
@@ -989,10 +983,9 @@ int solve (int p)
     {
       for (A = W[26][y]; A < W[32][y]; ++A)
       {                      // Search Almost Locked Pair 1st Cell position 54 mini-Lines away Line/Box 6 Cell positions wise
-        if (!g[j[a][A]] || B[Y = g[j[a][A]] & ~(g[j[a][W[26][y] +
-          (A < W[27][y])]] | g[j[a][W[27][y] + (A < W[28][y])]] |
-          g[j[a][W[28][y] + (A < W[29][y])]] | g[j[a][W[29][y] +
-          (A < W[30][y])]] | g[j[a][W[30][y] + (A < W[31][y])]])] != 2 ||
+        if (!g[j[a][A]] || B[Y = g[j[a][A]] & ~(g[j[a][W[26][y] + (A < W[27][y])]] |
+          g[j[a][W[27][y] + (A < W[28][y])]] | g[j[a][W[28][y] + (A < W[29][y])]] |
+          g[j[a][W[29][y] + (A < W[30][y])]] | g[j[a][W[30][y] + (A < W[31][y])]])] != 2 ||
                              // Skip for either 1st Cell position not unsolved; or 1st Cell values not two digits; or
           (g[j[a][Z = W[26][!y]]] != Y && g[j[a][Z = W[27][!y]]] != Y &&
           g[j[a][Z = W[28][!y]]] != Y && g[j[a][Z = W[29][!y]]] != Y &&
@@ -1002,8 +995,7 @@ int solve (int p)
           g[K[1] = j[a][W[27][!y] + (Z < W[28][!y])]] |
           g[K[2] = j[a][W[28][!y] + (Z < W[29][!y])]] |
           g[K[3] = j[a][W[29][!y] + (Z < W[30][!y])]] |
-          g[K[4] = j[a][W[30][!y] + (Z < W[31][!y])]]) & Y) &&
-          B[g[j[a][A]]] < 3))
+          g[K[4] = j[a][W[30][!y] + (Z < W[31][!y])]]) & Y) && B[g[j[a][A]]] < 3))
           continue;          // No Almost Locked Pair values found in removal Cell positions
         int k[6] = {g[j[a][A]], g[K[0]], g[K[1]], g[K[2]], g[K[3]], g[K[4]]};
                              // Backup and drop Almost Locked Pair values from removal Cell positions
@@ -1061,7 +1053,7 @@ int solve (int p)
         return 0;            // Undo Almost Locked Pair values to removal Cell positions
       }
       if (!g[j[a][0]] + !g[j[a][1]] + !g[j[a][2]] > 1)
-        continue;            // Skip Almost Locked Triple for no unsolved Cell position > 1 in mini-Line
+        continue;            // Skip Almost Locked Triple for no unsolved Cell position > 1 Cell in mini-Line
       for (A = W[26][y]; A < W[31][y]; ++A)
       {                      // Search 1st Cell position 54 mini-Lines away Line/Box wise
         if (!g[j[a][A]])
@@ -1154,10 +1146,9 @@ int solve (int p)
           }
         }
       }
-      if (!g[j[a][3]] + !g[j[a][4]] + !g[j[a][5]] +
-        !g[j[a][6]] + !g[j[a][7]] + !g[j[a][8]] > 3 ||
-        !g[j[a][9]] + !g[j[a][10]] + !g[j[a][11]] +
-        !g[j[a][12]] + !g[j[a][13]] + !g[j[a][14]] > 3)
+      if (!g[j[a][3]] + !g[j[a][4]] + !g[j[a][5]] + !g[j[a][6]] +
+        !g[j[a][7]] + !g[j[a][8]] > 3 || !g[j[a][9]] + !g[j[a][10]] +
+        !g[j[a][11]] + !g[j[a][12]] + !g[j[a][13]] + !g[j[a][14]] > 3)
         continue;            // Skip Almost Locked Quad for mini-Line away Line not unsolved Cell positions > three; or mini-Line away Box not unsolved Cell positions > three
       for (A = W[26][y]; A < W[30][y]; ++A)
       {                      // Search 1st Cell position 54 mini-Lines away Line/Box wise
@@ -1175,7 +1166,7 @@ int solve (int p)
               g[j[a][W[28][y] + (A < W[29][y]) + (L < W[30][y]) + (M < W[31][y])]])] != 4 ||
                              // Skip for either 3rd Cell position not unsolved; or 1st, 2nd and 3rd Cells values not four digits; or
               !(g[j[a][A]] & Y) || !(g[j[a][L]] & Y) || !(g[j[a][M]] & Y))
-              continue;      // No Almost Locked Quad values in either 1st or 2nd or 3rd Cells positions
+              continue;      // No Almost Locked Quad digits in either 1st, 2nd or 3rd Cells positions
             for (N = W[26][!y]; N < W[30][!y]; ++N)
             {                // Search 4th Cell position 54 mini-Lines away Box/Line wise
               if (!g[j[a][N]] || B[g[j[a][N]]] > 4)
@@ -1187,10 +1178,13 @@ int solve (int p)
                 for (Z = X + 1; Z < W[32][!y]; ++Z)
                 {            // Search 6th Cell position 54 mini-Lines away Box/Line wise
                   if (!g[j[a][Z]] || (g[j[a][N]] | g[j[a][X]] | g[j[a][Z]]) != Y ||
-                             // Skip for either 6th Cell position not unsolved; or 4th, 5th and 6th Cells values is 1st, 2nd and 3rd Cells values; or
-                    (!((g[K[0] = j[a][W[26][!y] + (N < W[27][!y]) + (X < W[28][!y]) + (Z < W[29][!y])]] |
-                    g[K[1] = j[a][W[27][!y] + (N < W[28][!y]) + (X < W[29][!y]) + (Z < W[30][!y])]] |
-                    g[K[2] = j[a][W[28][!y] + (N < W[29][!y]) + (X < W[30][!y]) + (Z < W[31][!y])]]) & Y) &&
+                             // Skip for either 6th Cell position not unsolved; or 4th, 5th and 6th Cells values not 1st, 2nd and 3rd Cells values; or
+                    (!((g[K[0] = j[a][W[26][!y] + (N < W[27][!y]) +
+                    (X < W[28][!y]) + (Z < W[29][!y])]] |
+                    g[K[1] = j[a][W[27][!y] + (N < W[28][!y]) +
+                    (X < W[29][!y]) + (Z < W[30][!y])]] |
+                    g[K[2] = j[a][W[28][!y] + (N < W[29][!y]) +
+                    (X < W[30][!y]) + (Z < W[31][!y])]]) & Y) &&
                     B[g[j[a][A]] | g[j[a][L]] | g[j[a][M]]] < 5))
                     continue;// No Almost Locked Quad values found in removal Cell positions
                   int k[6] = {g[j[a][A]], g[j[a][L]], g[j[a][M]], g[K[0]], g[K[1]], g[K[2]]};
@@ -1268,19 +1262,18 @@ int solve (int p)
   for (y = 0; y < 10; y += 9)// Search Basic Fishes Line wise
     for (Y = 1; Y < 257; Y <<= 1)
     {                        // Search Basic Fishes digit wise
-      int k[9],              // Backup Basic Fish value Line Cell positions wise
+      int k[9],              // Backup Basic Fish digit Line Cell positions wise
           K[4];
 
       for (a = y; a < y + 9; ++a)
         k[a - y] = (g[l[a][0]] & Y ? 1 : 0) | (g[l[a][1]] & Y ? 2 : 0) |
-          (g[l[a][2]] & Y ? 4 : 0) | (g[l[a][3]] & Y ? 8 : 0) |
-          (g[l[a][4]] & Y ? 16 : 0) | (g[l[a][5]] & Y ? 32 : 0) |
-          (g[l[a][6]] & Y ? 64 : 0) | (g[l[a][7]] & Y ? 128 : 0) |
-          (g[l[a][8]] & Y ? 256 : 0);
+          (g[l[a][2]] & Y ? 4 : 0) | (g[l[a][3]] & Y ? 8 : 0) | (g[l[a][4]] & Y ? 16 : 0) |
+          (g[l[a][5]] & Y ? 32 : 0) | (g[l[a][6]] & Y ? 64 : 0) |
+          (g[l[a][7]] & Y ? 128 : 0) | (g[l[a][8]] & Y ? 256 : 0);
       for (a = 0; a < 36; ++a)
-      {                      // Search X-Wing value for Line 36 pair Cell positions
+      {                      // Search X-Wing digit for Line 36 pair Cell positions
         if (B[X = k[h[a][0]]] != 2 || X != k[h[a][1]])
-        {                    // Skip for no X-Wing value found in Lines pair Cell positions
+        {                    // Skip for no X-Wing digit found in Lines pair Cell positions
           if (B[X] != 2)
             a += 7 - h[a][0];
           continue;
@@ -1288,10 +1281,10 @@ int solve (int p)
         int A[2] = {-1,-1};
 
         for (Z = -1; K[++Z] = X & -X; X -= K[Z])
-        {                    // Search opposite Line other Cell positions for X-Wing value
+        {                    // Search X-Wing digit in opposite Line other Cell positions
           if (~(k[h[a][2]] | k[h[a][3]] | k[h[a][4]] | k[h[a][5]] | k[h[a][6]] |
             k[h[a][7]] | k[h[a][8]]) & K[Z])
-            continue;        // Skip for no X-Wing value found in opposite Line other Cell positions
+            continue;        // Skip for no X-Wing digit found in opposite Line other Cell positions
           A[Z] = b[K[Z]] - y + 8;
           g[l[A[Z]][h[a][2]]] &= ~Y;
           g[l[A[Z]][h[a][3]]] &= ~Y;
@@ -1300,9 +1293,9 @@ int solve (int p)
           g[l[A[Z]][h[a][6]]] &= ~Y;
           g[l[A[Z]][h[a][7]]] &= ~Y;
           g[l[A[Z]][h[a][8]]] &= ~Y;
-        }                    // Drop X-Wing value from opposite Line other Cell positions
+        }                    // Drop X-Wing digit from opposite Line other Cell positions
         if ((A[0] & A[1]) < 0)
-          continue;          // Skip for no X-Wing value found in opposite Lines other Cell positions
+          continue;          // Skip for no X-Wing digit found in opposite Lines other Cell positions
 #if RJ > 2
         printf ("%d) X-Wing: %s wise %d @ r%d%dc%d%d\n",
           p, RCB, b[Y], y ? b[K[0]] : h[a][0] + 1, y ? b[K[1]] : h[a][1] + 1,
@@ -1318,7 +1311,7 @@ int solve (int p)
         for (Z = 0; Z < 2; ++Z)
         {
           if (A[Z] < 0)
-            continue;        // Skip for no X-Wing value found in opposite Line other Cell positions
+            continue;        // Skip for no X-Wing digit found in opposite Line other Cell positions
           g[l[A[Z]][h[a][2]]] |= k[h[a][2]] & K[Z] ? Y : 0;
           g[l[A[Z]][h[a][3]]] |= k[h[a][3]] & K[Z] ? Y : 0;
           g[l[A[Z]][h[a][4]]] |= k[h[a][4]] & K[Z] ? Y : 0;
@@ -1330,13 +1323,13 @@ int solve (int p)
 #if RJ > 3
         prn ();
 #endif
-        return 0;            // Undo X-Wing value to opposite Lines other Cell positions
+        return 0;            // Undo X-Wing digit to opposite Lines other Cell positions
       }
-      for (; a < 120; ++a)   // Search Sword Fish value in Line 84 triplet Cell positions
+      for (; a < 120; ++a)   // Search Sword Fish digit in Line 84 triplet Cell positions
       {
         if (!k[h[a][0]] || !k[h[a][1]] || !k[h[a][2]] ||
           B[X = k[h[a][0]] | k[h[a][1]] | k[h[a][2]]] != 3)
-        {                    // Skip for either no unsolved Cell positions; or no Sord Fish value found in Lines triplet Cell positions
+        {                    // Skip for either no unsolved Cell positions; or no Sord Fish digit found in Lines triplet Cell positions
           if (!k[h[a][0]] || B[k[h[a][0]]] > 3)
           {
             int A[7] = {27,20,14, 9, 5, 2, 0};
@@ -1350,10 +1343,10 @@ int solve (int p)
         int A[3] = {-1,-1,-1};
 
         for (Z = -1; K[++Z] = X & -X; X -= K[Z])
-        {                    // Search opposite Line other Cell positions for Sword Fish value
+        {                    // Search Sword Fish digit in opposite Line other Cell positions
           if (~(k[h[a][3]] | k[h[a][4]] | k[h[a][5]] | k[h[a][6]] | k[h[a][7]] |
             k[h[a][8]]) & K[Z])
-            continue;        // Skip for no Sword Fish value found in opposite Line other Cell positions
+            continue;        // Skip for no Sword Fish digit found in opposite Line other Cell positions
           A[Z] = b[K[Z]] - y + 8;
           g[l[A[Z]][h[a][3]]] &= ~Y;
           g[l[A[Z]][h[a][4]]] &= ~Y;
@@ -1361,9 +1354,9 @@ int solve (int p)
           g[l[A[Z]][h[a][6]]] &= ~Y;
           g[l[A[Z]][h[a][7]]] &= ~Y;
           g[l[A[Z]][h[a][8]]] &= ~Y;
-        }                    // Drop Sword Fish value from opposite Line other Cell positions
+        }                    // Drop Sword Fish digit from opposite Line other Cell positions
         if ((A[0] & A[1] & A[2]) < 0)
-          continue;          // Skip for no Sword Fish value found in opposite Lines other Cell positions
+          continue;          // Skip for no Sword Fish digit found in opposite Lines other Cell positions
 #if RJ > 2
         printf ("%d) Sword Fish: %s wise %d @ r%d%d%dc%d%d%d\n",
           p, RCB, b[Y], y ? b[K[0]] : h[a][0] + 1, y ? b[K[1]] : h[a][1] + 1,
@@ -1381,7 +1374,7 @@ int solve (int p)
         for (Z = 0; Z < 3; ++Z)
         {
           if (A[Z] < 0)
-            continue;        // Skip for no Sword Fish value found in opposite Line other Cell positions
+            continue;        // Skip for no Sword Fish digit found in opposite Line other Cell positions
           g[l[A[Z]][h[a][3]]] |= k[h[a][3]] & K[Z] ? Y : 0;
           g[l[A[Z]][h[a][4]]] |= k[h[a][4]] & K[Z] ? Y : 0;
           g[l[A[Z]][h[a][5]]] |= k[h[a][5]] & K[Z] ? Y : 0;
@@ -1392,13 +1385,13 @@ int solve (int p)
 #if RJ > 3
         prn ();
 #endif
-        return 0;            // Undo Sword Fish value to opposite Lines other Cell positions
+        return 0;            // Undo Sword Fish digit to opposite Lines other Cell positions
       }
-      for (; a < 246; ++a)   // Search Jelly Fish value in Line 126 quad Cell positions
+      for (; a < 246; ++a)   // Search Jelly Fish digit in Line 126 quad Cell positions
       {
         if (!k[h[a][0]] || !k[h[a][1]] || !k[h[a][2]] || !k[h[a][3]] ||
           B[X = k[h[a][0]] | k[h[a][1]] | k[h[a][2]] | k[h[a][3]]] != 4)
-        {                    // Skip for either no unsolved Cell positions; or no Jelly Fish value found in Line quad Cell positions
+        {                    // Skip for either no unsolved Cell positions; or no Jelly Fish digit found in Line quad Cell positions
           if (!k[h[a][0]] || B[k[h[a][0]]] > 4)
           {
             int A[6] = {55,34,19, 9, 3, 0};
@@ -1418,18 +1411,18 @@ int solve (int p)
         int A[4] = {-1,-1,-1,-1};
 
         for (Z = -1; K[++Z] = X & -X; X -= K[Z])
-        {                    // Search opposite Line other Cell positions for Jelly Fish value
+        {                    // Search Jelly Fish digit in opposite Line other Cell positions
           if (~(k[h[a][4]] | k[h[a][5]] | k[h[a][6]] | k[h[a][7]] | k[h[a][8]]) & K[Z])
-            continue;        // Skip for no Jelly Fish value found in opposite Line other Cell positions
+            continue;        // Skip for no Jelly Fish digit found in opposite Line other Cell positions
           A[Z] = b[K[Z]] - y + 8;
           g[l[A[Z]][h[a][4]]] &= ~Y;
           g[l[A[Z]][h[a][5]]] &= ~Y;
           g[l[A[Z]][h[a][6]]] &= ~Y;
           g[l[A[Z]][h[a][7]]] &= ~Y;
           g[l[A[Z]][h[a][8]]] &= ~Y;
-        }                    // Drop Jelly Fish value from opposite Line other Cell positions
+        }                    // Drop Jelly Fish digit from opposite Line other Cell positions
         if ((A[0] & A[1] & A[2] & A[3]) < 0)
-          continue;          // Skip for no Jelly Fish value found in opposite Lines other Cell positions
+          continue;          // Skip for no Jelly Fish digit found in opposite Lines other Cell positions
 #if RJ > 2
         printf ("%d) Jelly Fish: %s wise %d @ r%d%d%d%dc%d%d%d%d\n",
           p, RCB, b[Y], y ? b[K[0]] : h[a][0] + 1, y ? b[K[1]] : h[a][1] + 1,
@@ -1447,7 +1440,7 @@ int solve (int p)
         for (Z = 0; Z < 4; ++Z)
         {
           if (A[Z] < 0)
-            continue;        // Skip for no Jelly Fish value found in opposite Line other Cell positions
+            continue;        // Skip for no Jelly Fish digit found in opposite Line other Cell positions
           g[l[A[Z]][h[a][4]]] |= k[h[a][4]] & K[Z] ? Y : 0;
           g[l[A[Z]][h[a][5]]] |= k[h[a][5]] & K[Z] ? Y : 0;
           g[l[A[Z]][h[a][6]]] |= k[h[a][6]] & K[Z] ? Y : 0;
@@ -1457,9 +1450,283 @@ int solve (int p)
 #if RJ > 3
         prn ();
 #endif
-        return 0;            // Undo Jelly Fish value to opposite Lines other Cell positions
+        return 0;            // Undo Jelly Fish digit to opposite Lines other Cell positions
       }
     }
+  for (y = p; y < q; ++y)    // Search M-Wings and M-Rings 1st Wing Cell position unsolved Cell positions wise
+  {
+    if (B[g[r[y]]] > 2)
+      continue;              // Skip M-Wings and M-Rings for 1st Wing Cell values > two digits
+    for (Y = p; Y < q; ++Y)  // Search M-Wings and M-Rings 2nd Wing Cell position unsolved Cell positions wise
+    {
+      if (w[r[y]][20] & w[r[Y]][20] & 134217727 || B[g[r[y]] & g[r[Y]]] != 2)
+        continue;            // Skip M-Wings and M-Rings for either 1st and 2nd Wing Cell positions in Unit; or 1st and 2nd Wing Cells values not two common digits
+      int L = 0,
+          M,
+          N,
+          P;
+
+      if ((w[r[y]][20] & W[25][0]) != (w[r[Y]][20] & W[25][0]) &&
+        (w[r[y]][20] & W[25][1]) != (w[r[Y]][20] & W[25][1]))
+      {                      // Check for 1st and 2nd Wing Cell positions not Band and Stack wise
+        int A[2][2] = {{r[Y] - COL (w[r[Y]][20]) + COL (w[r[y]][20]),
+                      r[y] - COL (w[r[y]][20]) + COL (w[r[Y]][20])},
+                      {r[Y] + (COL (w[r[Y]][20]) < 4 ? (COL (w[r[y]][20]) < 7 ? 6 : 3) :
+                      (COL (w[r[Y]][20]) < 7 ? (COL (w[r[y]][20]) < 4 ? 3 : -3) :
+                      (COL (w[r[y]][20]) < 4 ? -3 : -6))),
+                      r[Y] + (r[Y] < 27 ? (r[y] < 54 ? 54 : 27) :
+                      (r[Y] < 54 ? (r[y] < 27 ? 27 : -27) : (r[y] < 27 ? -27 : -54)))}};
+
+        if (!(a = LN1 (r[Y], A[0][0], A[1][0], 0) & g[r[y]]) &&
+          (L = 1) && !(a = LN1 (X, A[0][1], A[1][1], 1) & g[r[y]]))
+          continue;          // Skip for no 1st digit SL found
+        for (M = g[r[y]] - a, N = 0; N < 2; ++N)
+        {                    // Search 1st Wing Cell values 2nd digit SL Line wise
+          int K[6] = {-1,-1,-1,-1},
+              k[15] = {0};
+          if (!(g[w[X][W[3][N]]] & M) + !(g[w[X][W[4][N]]] & M) +
+            !(g[A[0][N]] & M) + !(g[w[A[0][N]][W[3][N]]] & M) +
+            !(g[w[A[0][N]][W[4][N]]] & M) + !(g[A[1][N]] & M) +
+            !(g[w[A[1][N]][W[3][N]]] & M) + !(g[w[A[1][N]][W[4][N]]] & M) == 7)
+          {                  // M-Wing Type 1A, 1B, 4A, 4B, and M-Ring Type A
+            if (g[w[X][W[3][N]]] & M)
+              Z = w[X][W[3][N]];
+            else if (g[w[X][W[4][N]]] & M)
+              Z = w[X][W[4][N]];
+            else if (g[A[0][N]] & M)
+              Z = A[0][N];
+            else if (g[w[A[0][N]][W[3][N]]] & M)
+              Z = w[A[0][N]][W[3][N]];
+            else if (g[w[A[0][N]][W[4][N]]] & M)
+              Z = w[A[0][N]][W[4][N]];
+            else if (g[A[1][N]] & M)
+              Z = A[1][N];
+            else if (g[w[A[1][N]][W[3][N]]] & M)
+              Z = w[A[1][N]][W[3][N]];
+            else
+              Z = w[A[1][N]][W[4][N]];
+            if (w[r[y]][20] & w[Z][20] & W[15][N])
+            {                // M-Ring Type A
+              k[0] = g[X];
+              k[1] = g[w[r[y]][W[3][!N]]];
+              k[2] = g[w[r[y]][W[4][!N]]];
+              k[3] = g[w[Z][W[3][!N]]];
+              k[4] = g[w[Z][W[4][!N]]];
+              K[0] = N ? r[y] - COL (w[r[y]][20]) + COL (w[A[1][0]][20]) :
+                     A[1][1] - COL (w[A[1][1]][20]) + COL (w[r[y]][20]);
+              k[5] = g[K[0]];
+              k[6] = g[w[K[0]][W[3][!N]]];
+              k[7] = g[w[K[0]][W[4][!N]]];
+              k[8] = g[w[r[y]][W[3][!L]]];
+              k[9] = g[w[r[y]][W[4][!L]]];
+              k[10] = g[w[A[0][L]][W[3][!L]]];
+              k[11] = g[w[A[0][L]][W[4][!L]]];
+              K[1] = L ? r[y] - COL (w[r[y]][20]) + COL (w[A[1][0]][20]) :
+                     A[1][1] - COL (w[A[1][1]][20]) + COL (w[r[y]][20]);
+              k[12] = g[K[1]];
+              k[13] = g[w[K[1]][W[3][!L]]];
+              k[14] = g[w[K[1]][W[4][!L]]];
+            }
+            else if ((w[r[y]][20] & W[25][N]) == (w[Z][20] & W[25][N]))
+            {                // (Check for 1st Wing Cell 2nd digit SL within 2nd Wing Cell Chute) M-Wing Type 4A and 4B
+              k[1] = g[K[1] = N ? Z - COL (w[Z][20]) + COL (w[r[y]][20]) :
+                     r[y] - COL (w[r[y]][20]) + COL (w[Z][20])];
+              k[2] = g[K[2] = w[K[1]][W[3][!N]]];
+              k[3] = g[K[3] = w[K[1]][W[4][!N]]];
+              k[4] = g[K[4] = w[A[0][N]][W[3][!N]]];
+              k[5] = g[K[5] = w[A[0][N]][W[4][!N]]];
+            }
+          }
+          else if (~(g[w[X][W[3][N]]] | g[w[X][W[4][N]]]) & M &&
+            (P = (g[Z = w[X][W[3][!N]]] | g[w[Z][W[3][N]]] | g[w[Z][W[4][N]]]) & M) !=
+            ((g[Z = w[X][W[4][!N]]] | g[w[Z][W[3][N]]] | g[w[Z][W[4][N]]]) & M))
+          {                  // M-Wing Type 2A, Type 2B, Type 2C and Type 2D
+            if (P)
+              Z = w[X][W[3][!N]];
+            k[1] = g[K[1] = N ? r[y] - COL (w[r[y]][20]) + COL (w[Z][20]) :
+              Z - COL (w[Z][20]) + COL (w[r[y]][20])];
+            if (~(g[w[Z][W[3][N]]] | g[w[Z][W[4][N]]]) & M ||
+              (~(g[Z] | g[w[Z][W[3][N]]]) & M && (Z = w[Z][W[4][N]])) ||
+              (~(g[Z] | g[w[Z][W[4][N]]]) & M && (Z = w[Z][W[3][N]])))
+              k[2] = g[K[2] = N ? Z - COL (w[Z][20]) + COL (w[r[y]][20]) :
+                r[y] - COL (w[r[y]][20]) + COL (w[Z][20])];
+          }
+          else if (LN3 (X, A[0][N], A[1][N], N) & M)
+          {                  // M-Wing Type 3A and Type 3B
+            k[1] = g[K[1] = w[A[0][N]][W[3][!N]]];
+            k[2] = g[K[2] = w[A[0][N]][W[4][!N]]];
+          }
+          else
+            continue;
+          if ((~K[0] && B[k[0]] < 3) ||
+            (!((k[1] | k[2] | k[3] | k[4] | k[5] | k[6] | k[7]) & M) &&
+            !((k[8] | k[9] | k[10] | k[11] | k[12] | k[13] | k[14]) & a)))
+            continue;
+          if (~K[0])
+          {
+            g[X] = g[r[y]];
+            g[w[r[y]][W[3][!N]]] &= ~M;
+            g[w[r[y]][W[4][!N]]] &= ~M;
+            g[w[Z][W[3][!N]]] &= ~M;
+            g[w[Z][W[4][!N]]] &= ~M;
+            g[K[0]] &= ~M;
+            g[w[K[0]][W[3][!N]]] &= ~M;
+            g[w[K[0]][W[4][!N]]] &= ~M;
+            g[w[r[y]][W[3][!L]]] &= ~a;
+            g[w[r[y]][W[4][!L]]] &= ~a;
+            g[w[A[0][L]][W[3][!L]]] &= ~a;
+            g[w[A[0][L]][W[4][!L]]] &= ~a;
+            g[K[1]] &= ~a;
+            g[w[K[1]][W[3][!L]]] &= ~a;
+            g[w[K[1]][W[4][!L]]] &= ~a;
+          }
+          else
+          {
+            if (~K[1])
+            {
+              g[K[1]] &= ~M;
+              if (~K[2])
+                g[K[2]] &= ~M;
+            }
+            if (~K[3])
+            {
+              g[K[3]] &= ~M;
+              g[K[4]] &= ~M;
+              g[K[5]] &= ~M;
+            }
+          }
+          P = r[y];
+#if RJ > 2
+          printf ("%d) M-%cing Type 1: %d @ %s %d @ %s SL %d @ r%dc%d SL %d @ %s r%dc%d => -",
+            p, ~K[0] ? 'R' : 'W', b[g[P]], S[P], b[g[X] | k[0]], S[X], b[a],
+            ROW (w[X][20] | w[A[0][L]][20]), COL (w[X][20] | w[A[0][L]][20]),
+            b[M], S[X], ROW (((g[Z] & M) ? w[Z][20] : 0) |
+            ((g[w[Z][W[3][N]]] & M) ? w[w[Z][W[3][N]]][20] : 0) |
+            ((g[w[Z][W[4][N]]] & M) ? w[w[Z][W[4][N]]][20] : 0)),
+            COL (((g[Z] & M) ? w[Z][20] : 0) |
+            ((g[w[Z][W[3][N]]] & M) ? w[w[Z][W[3][N]]][20] : 0) |
+            ((g[w[Z][W[4][N]]] & M) ? w[w[Z][W[4][N]]][20] : 0)));
+          if (~K[0])
+          {
+            if (k[0] - g[P])
+              printf ("%d @ %s => -", b[k[0] - g[P]], S[X]);
+            printf ("%d @ r%dc%d => -%d @ r%dc%d",
+              b[M], ROW (w[w[P][W[3][!N]]][20] | w[w[P][W[4][!N]]][20] |
+              w[w[Z][W[3][!N]]][20] | w[w[Z][W[4][!N]]][20] | w[K[0]][20] |
+              w[w[K[0]][W[3][!N]]][20] | w[w[K[0]][W[4][!N]]][20]),
+              COL (w[w[P][W[3][!N]]][20] | w[w[P][W[4][!N]]][20] |
+              w[w[Z][W[3][!N]]][20] | w[w[Z][W[4][!N]]][20] | w[K[0]][20] |
+              w[w[K[0]][W[3][!N]]][20] | w[w[K[0]][W[4][!N]]][20]), b[a],
+              ROW (w[w[P][W[3][!L]]][20] | w[w[P][W[4][!L]]][20] |
+              w[w[A[0][L]][W[3][!L]]][20] | w[w[A[0][L]][W[4][!L]]][20] |
+              w[K[1]][20] | w[w[K[1]][W[3][!L]]][20] | w[w[K[1]][W[4][!L]]][20]),
+              COL (w[w[P][W[3][!L]]][20] | w[w[P][W[4][!L]]][20] |
+              w[w[A[0][L]][W[3][!L]]][20] | w[w[A[0][L]][W[4][!L]]][20] |
+              w[K[1]][20] | w[w[K[1]][W[3][!L]]][20] | w[w[K[1]][W[4][!L]]][20]));
+          }
+          else
+          {
+            printf ("%d @", b[M]);
+            if (~K[3])
+              printf (" r%dc%d r%dc%d", ROW (w[K[1]][20] | w[K[2]][20] | w[K[3]][20]),
+                COL (w[K[1]][20] | w[K[2]][20] | w[K[3]][20]),
+                ROW (w[K[4]][20] | w[K[5]][20]), COL (w[K[4]][20] | w[K[5]][20]));
+            else if (~K[1])
+            {
+              printf (" %s", S[K[1]]);
+              if (~K[2])
+                printf (" %s", S[K[2]]);
+            }
+          }
+          printf ("\n");
+#endif
+          if (solve (p))
+            return 1;
+#if RJ > 2
+          printf ("%d) Undo M-%cing Type 1: %d @ %s %d @ %s SL %d @ r%dc%d SL %d @ %s r%dc%d <= +",
+            p, ~K[0] ? 'R' : 'W', b[g[P]], S[P], b[g[X] | k[0]], S[X], b[a],
+            ROW (w[X][20] | w[A[0][L]][20]), COL (w[X][20] | w[A[0][L]][20]),
+            b[M], S[X], ROW (((g[Z] & M) ? w[Z][20] : 0) |
+            ((g[w[Z][W[3][N]]] & M) ? w[w[Z][W[3][N]]][20] : 0) |
+            ((g[w[Z][W[4][N]]] & M) ? w[w[Z][W[4][N]]][20] : 0)),
+            COL (((g[Z] & M) ? w[Z][20] : 0) |
+            ((g[w[Z][W[3][N]]] & M) ? w[w[Z][W[3][N]]][20] : 0) |
+            ((g[w[Z][W[4][N]]] & M) ? w[w[Z][W[4][N]]][20] : 0)));
+          if (~K[0])
+          {
+            if (k[0] - g[P])
+              printf ("%d @ %s <= +", b[k[0] - g[P]], S[X]);
+            printf ("%d @ r%dc%d <= +%d @ r%dc%d",
+              b[M], ROW (w[w[P][W[3][!N]]][20] | w[w[P][W[4][!N]]][20] |
+              w[w[Z][W[3][!N]]][20] | w[w[Z][W[4][!N]]][20] | w[K[0]][20] |
+              w[w[K[0]][W[3][!N]]][20] | w[w[K[0]][W[4][!N]]][20]),
+              COL (w[w[P][W[3][!N]]][20] | w[w[P][W[4][!N]]][20] |
+              w[w[Z][W[3][!N]]][20] | w[w[Z][W[4][!N]]][20] | w[K[0]][20] |
+              w[w[K[0]][W[3][!N]]][20] | w[w[K[0]][W[4][!N]]][20]), b[a],
+              ROW (w[w[P][W[3][!L]]][20] | w[w[P][W[4][!L]]][20] |
+              w[w[A[0][L]][W[3][!L]]][20] | w[w[A[0][L]][W[4][!L]]][20] |
+              w[K[1]][20] | w[w[K[1]][W[3][!L]]][20] | w[w[K[1]][W[4][!L]]][20]),
+              COL (w[w[P][W[3][!L]]][20] | w[w[P][W[4][!L]]][20] |
+              w[w[A[0][L]][W[3][!L]]][20] | w[w[A[0][L]][W[4][!L]]][20] |
+              w[K[1]][20] | w[w[K[1]][W[3][!L]]][20] | w[w[K[1]][W[4][!L]]][20]));
+          }
+          else
+          {
+            printf ("%d @", b[M]);
+            if (~K[3])
+              printf (" r%dc%d r%dc%d", ROW (w[K[1]][20] | w[K[2]][20] | w[K[3]][20]),
+                COL (w[K[1]][20] | w[K[2]][20] | w[K[3]][20]),
+                ROW (w[K[4]][20] | w[K[5]][20]), COL (w[K[4]][20] | w[K[5]][20]));
+            else if (~K[1])
+            {
+              printf (" %s", S[K[1]]);
+              if (~K[2])
+                printf (" %s", S[K[2]]);
+            }
+          }
+          printf ("\n");
+#endif
+          if (~K[0])
+          {
+            g[X] = k[0];
+            g[w[P][W[3][!N]]] = k[1];
+            g[w[P][W[4][!N]]] = k[2];
+            g[w[Z][W[3][!N]]] = k[3];
+            g[w[Z][W[4][!N]]] = k[4];
+            g[K[0]] = k[5];
+            g[w[K[0]][W[3][!N]]] = k[6];
+            g[w[K[0]][W[4][!N]]] = k[7];
+            g[w[P][W[3][!L]]] = k[8];
+            g[w[P][W[4][!L]]] = k[9];
+            g[w[A[0][L]][W[3][!L]]] = k[10];
+            g[w[A[0][L]][W[4][!L]]] = k[11];
+            g[K[1]] = k[12];
+            g[w[K[1]][W[3][!L]]] = k[13];
+            g[w[K[1]][W[4][!L]]] = k[14];
+          }
+          else
+          {
+            if (~K[1])
+            {
+              g[K[1]] = k[1];
+              if (~K[2])
+                g[K[2]] = k[2];
+            }
+            if (~K[3])
+            {
+              g[K[3]] = k[3];
+              g[K[4]] = k[4];
+              g[K[5]] = k[5];
+            }
+          }
+#if RJ > 3
+          prn ();
+#endif
+          return 0;        // Undo M-Wing Type 1 and M-Ring Type 1 removal Cells values
+        }
+      }
+    }
+  }
   for (y = 0; y < 10; y += 9)// Search Skyscraper and Grouped Skyscraper Line wise
     for (Y = 1; Y < 257; Y <<= 1)
                              // Search Skyscraper and Grouped Skyscraper digit wise
@@ -1540,24 +1807,28 @@ int solve (int p)
           if (!A[4])
             continue;        // Skip for no 2nd SL Base and Cover Cell positions found
           A[6] = 0;          // Base Cell positions
-          if ((A[0] & 1) && (!(g[l[a][0]] & Y) | (!(g[l[a][1]] & Y) << 1) | (!(g[l[a][2]] & Y) << 2)) ==
+          if (A[0] & 1 &&
+            (!(g[l[a][0]] & Y) | (!(g[l[a][1]] & Y) << 1) | (!(g[l[a][2]] & Y) << 2)) ==
             (!(g[l[Z][0]] & Y) | (!(g[l[Z][1]] & Y) << 1) | (!(g[l[Z][2]] & Y) << 2)))
             A[6] = 1;
-          if (((A[0] | A[1]) & 2) && (!(g[l[a][3]] & Y) | (!(g[l[a][4]] & Y) << 1) | (!(g[l[a][5]] & Y) << 2)) ==
+          if ((A[0] | A[1]) & 2 &&
+            (!(g[l[a][3]] & Y) | (!(g[l[a][4]] & Y) << 1) | (!(g[l[a][5]] & Y) << 2)) ==
             (!(g[l[Z][3]] & Y) | (!(g[l[Z][4]] & Y) << 1) | (!(g[l[Z][5]] & Y) << 2)))
             A[6] |= 2;
-          if ((A[1] & 4) && (!(g[l[a][6]] & Y) | (!(g[l[a][7]] & Y) << 1) | (!(g[l[a][8]] & Y) << 2)) ==
+          if (A[1] & 4 &&
+            (!(g[l[a][6]] & Y) | (!(g[l[a][7]] & Y) << 1) | (!(g[l[a][8]] & Y) << 2)) ==
             (!(g[l[Z][6]] & Y) | (!(g[l[Z][7]] & Y) << 1) | (!(g[l[Z][8]] & Y) << 2)))
             A[6] |= 4;
           if (B[A[6]] != 1)
-            continue;        // Skip for neither Skyscraper nor Grouped Skyscraper found
+            continue;        // Skip for not Skyscraper and Grouped Skyscraper found
           int K[12] = {-1,-1,-1,-1,
-                      l[a][b[A[6]] * 3 - (g[l[a][b[A[6]] * 3 - 3]] & Y ? 3 : g[l[a][b[A[6]] * 3 - 2]] & Y ? 2 : 1)],
-                      l[Z][b[A[6]] * 3 - (g[l[Z][b[A[6]] * 3 - 3]] & Y ? 3 : g[l[Z][b[A[6]] * 3 - 2]] & Y ? 2 : 1)]},
+                      l[a][b[A[6]] * 3 - (g[l[a][b[A[6]] * 3 - 3]] & Y ? 3 :
+                      g[l[a][b[A[6]] * 3 - 2]] & Y ? 2 : 1)],
+                      l[Z][b[A[6]] * 3 - (g[l[Z][b[A[6]] * 3 - 3]] & Y ? 3 :
+                      g[l[Z][b[A[6]] * 3 - 2]] & Y ? 2 : 1)]},
               k[4] = {0};    // Backup Skyscraper and Grouped Skyscraper removal Cell positions
-
-          A[6] = b[A[A[0] == A[6]]] * 3;
                              // Cover Cell positions
+          A[6] = b[A[A[0] == A[6]]] * 3;
           K[6] = g[l[a][A[6] - 3]] & Y ? l[a][A[6] - 3] : -1;
           K[7] = g[l[a][A[6] - 2]] & Y ? l[a][A[6] - 2] : -1;
           K[8] = g[l[a][A[6] - 1]] & Y ? l[a][A[6] - 1] : -1;
@@ -1566,13 +1837,13 @@ int solve (int p)
           K[11] = g[l[Z][A[6] - 1]] & Y ? l[Z][A[6] - 1] : -1;
           if (!A[2])
           {                  // Found 1st SL one Cover Cell position
-            A[6] = K[K[6] + 1 ? 6 : K[7] + 1 ? 7 : 8] - K[4] + K[5];
+            A[6] = K[~K[6] ? 6 : ~K[7] ? 7 : 8] - K[4] + K[5];
             k[0] = g[K[0] = w[A[6]][W[3][!y]]];
             k[1] = g[K[1] = w[A[6]][W[4][!y]]];
           }
           if (A[2] || !A[5])
           {                  // Found 2nd SL one Cover Cell position
-            A[6] = K[K[9] + 1 ? 9 : K[10] + 1 ? 10 : 11] - K[5] + K[4];
+            A[6] = K[~K[9] ? 9 : ~K[10] ? 10 : 11] - K[5] + K[4];
             k[2] = g[K[2] = w[A[6]][W[3][!y]]];
             k[3] = g[K[3] = w[A[6]][W[4][!y]]];
           }
@@ -1592,12 +1863,12 @@ int solve (int p)
             printf ("%d)%sSkyscraper: %ss %d %d wise Base %d @ r%dc%d Cover %d @ r%dc%d r%dc%d => -%d @",
               p, A[5] ? " Grouped " : " ", RCB, a - y + 1, Z - y + 1, b[Y],
               ROW (w[K[4]][20] | w[K[5]][20]), COL (w[K[4]][20] | w[K[5]][20]),
-              b[Y], ROW ((K[6] + 1 ? w[K[6]][20] : 0) | (K[7] + 1 ? w[K[7]][20] : 0) |
-              (K[8] + 1 ? w[K[8]][20] : 0)), COL ((K[6] + 1 ? w[K[6]][20] : 0) |
-              (K[7] + 1 ? w[K[7]][20] : 0) | (K[8] + 1 ? w[K[8]][20] : 0)),
-              ROW ((K[9] + 1 ? w[K[9]][20] : 0) | (K[10] + 1 ? w[K[10]][20] : 0) |
-              (K[11] + 1 ? w[K[11]][20] : 0)), COL ((K[9] + 1 ? w[K[9]][20] : 0) |
-              (K[10] + 1 ? w[K[10]][20] : 0) | (K[11] + 1 ? w[K[11]][20] : 0)), b[Y]);
+              b[Y], ROW ((~K[6] ? w[K[6]][20] : 0) | (~K[7] ? w[K[7]][20] : 0) |
+              (~K[8] ? w[K[8]][20] : 0)), COL ((~K[6] ? w[K[6]][20] : 0) |
+              (~K[7] ? w[K[7]][20] : 0) | (~K[8] ? w[K[8]][20] : 0)),
+              ROW ((~K[9] ? w[K[9]][20] : 0) | (~K[10] ? w[K[10]][20] : 0) |
+              (~K[11] ? w[K[11]][20] : 0)), COL ((~K[9] ? w[K[9]][20] : 0) |
+              (~K[10] ? w[K[10]][20] : 0) | (~K[11] ? w[K[11]][20] : 0)), b[Y]);
             if (!A[2])
               printf (" r%dc%d", ROW (w[K[0]][20] | w[K[1]][20]),
                 COL (w[K[0]][20] | w[K[1]][20]));
@@ -1612,12 +1883,12 @@ int solve (int p)
             printf ("%d) Undo%sSkyscraper: %ss %d %d wise Base %d @ r%dc%d Cover %d @ r%dc%d r%dc%d <= +%d @",
               p, A[5] ? " Grouped " : " ", RCB, a - y + 1, Z - y + 1, b[Y],
               ROW (w[K[4]][20] | w[K[5]][20]), COL (w[K[4]][20] | w[K[5]][20]),
-              b[Y], ROW ((K[6] + 1 ? w[K[6]][20] : 0) | (K[7] + 1 ? w[K[7]][20] : 0) |
-              (K[8] + 1 ? w[K[8]][20] : 0)), COL ((K[6] + 1 ? w[K[6]][20] : 0) |
-              (K[7] + 1 ? w[K[7]][20] : 0) | (K[8] + 1 ? w[K[8]][20] : 0)),
-              ROW ((K[9] + 1 ? w[K[9]][20] : 0) | (K[10] + 1 ? w[K[10]][20] : 0) |
-              (K[11] + 1 ? w[K[11]][20] : 0)), COL ((K[9] + 1 ? w[K[9]][20] : 0) |
-              (K[10] + 1 ? w[K[10]][20] : 0) | (K[11] + 1 ? w[K[11]][20] : 0)), b[Y]);
+              b[Y], ROW ((~K[6] ? w[K[6]][20] : 0) | (~K[7] ? w[K[7]][20] : 0) |
+              (~K[8] ? w[K[8]][20] : 0)), COL ((~K[6] ? w[K[6]][20] : 0) |
+              (~K[7] ? w[K[7]][20] : 0) | (~K[8] ? w[K[8]][20] : 0)),
+              ROW ((~K[9] ? w[K[9]][20] : 0) | (~K[10] ? w[K[10]][20] : 0) |
+              (~K[11] ? w[K[11]][20] : 0)), COL ((~K[9] ? w[K[9]][20] : 0) |
+              (~K[10] ? w[K[10]][20] : 0) | (~K[11] ? w[K[11]][20] : 0)), b[Y]);
             if (!A[2])
               printf (" r%dc%d", ROW (w[K[0]][20] | w[K[1]][20]),
                 COL (w[K[0]][20] | w[K[1]][20]));
@@ -1737,12 +2008,12 @@ int solve (int p)
         g[K[2] = w[K[5]][13]] -= Y;
       else if (~g[K[5]] & Y)
         continue;            // Skip 2-String Kite and Grouped 2-String Kite for digit not in removal Cell values
-      K[6] = g[K[5]];
+      K[6] = g[K[5]];        // Backup removal Cell values
       g[K[5]] &= ~Y;         // Drop digit from removal Cell values
 #if RJ > 2
       printf ("%d)%s2-String Kite%s SL Row %d between %d @ ", p,
         ((g[w[a][6]] & g[w[a][7]]) | (g[w[a][12]] & g[w[a][13]])) & Y ? " Grouped " : " ",
-        K[0] + 1 ? "+ERI Ring:" : (K[1] + 1 ? "+ERI:" : (K[2] + 1 ? "+Box:" : ":")),
+        ~K[0] ? "+ERI Ring:" : (~K[1] ? "+ERI:" : (~K[2] ? "+Box:" : ":")),
         ROW (w[a][20]), b[Y]);
       if (g[w[a][6]] & g[w[a][7]] & Y)
         printf ("r%dc%d", ROW (w[w[a][6]][20] | w[w[a][7]][20]),
@@ -1756,7 +2027,7 @@ int solve (int p)
       else
         printf ("%s", S[w[a][g[w[a][12]] & Y ? 12 : 13]]);
       printf (" and %d @ %s\n", b[Y], S[K[4]]);
-      if (K[0] + 1)
+      if (~K[0])
         printf ("ERI %d @ b%d%s => -%d @ r%dc%d r%dc%d r%dc%d\n",
           b[Y], BOX (K[5]), S[K[5]], b[Y], ROW (w[w[K[3]][12]][20] | w[w[K[3]][13]][20] |
           w[w[a][8]][20] | w[w[a][9]][20] | w[w[a][10]][20] | w[w[a][11]][20]),
@@ -1768,13 +2039,13 @@ int solve (int p)
           w[M][20] | w[w[M][6]][20] | w[w[M][7]][20]),
           COL (w[K[5]][20] | w[w[K[4]][6]][20] | w[w[K[4]][7]][20] |
           w[M][20] | w[w[M][6]][20] | w[w[M][7]][20]));
-      else if (K[1] + 1)
+      else if (~K[1])
         printf ("ERI %d @ b%d%s => -%d @ %s r%dc%d\n",
           b[Y], BOX (w[K[5]][K[7]]), S[w[K[5]][K[7]]], b[Y], S[K[5]],
           ROW (w[K[1]][20] | w[K[2]][20]), COL (w[K[1]][20] | w[K[2]][20]));
-      else if (K[2] + 1)
+      else if (~K[2])
         printf ("%d @ Box %d => -%d @ r%dc%d\n", b[Y], BOX (X), b[Y],
-          ROW (w[K[2]][20] | w[K[7]][20]), COL (w[K[2]][20] | w[K[7]][20]));
+          ROW (w[K[2]][20] | w[K[5]][20]), COL (w[K[2]][20] | w[K[5]][20]));
       else
         printf ("=> -%d @ %s\n", b[Y], S[K[5]]);
 #endif
@@ -1783,7 +2054,7 @@ int solve (int p)
 #if RJ > 2
       printf ("%d) Undo%s2-String Kite%s SL Row %d between %d @ ", p,
         ((g[w[a][6]] & g[w[a][7]]) | (g[w[a][12]] & g[w[a][13]])) & Y ? " Grouped " : " ",
-        K[0] + 1 ? "+ERI Ring:" : (K[1] + 1 ? "+ERI:" : (K[2] + 1 ? "+Box:" : ":")),
+        ~K[0] ? "+ERI Ring:" : (~K[1] ? "+ERI:" : (~K[2] ? "+Box:" : ":")),
         ROW (w[a][20]), b[Y]);
       if (g[w[a][6]] & g[w[a][7]] & Y)
         printf ("r%dc%d", ROW (w[w[a][6]][20] | w[w[a][7]][20]),
@@ -1797,7 +2068,7 @@ int solve (int p)
       else
         printf ("%s", S[w[a][g[w[a][12]] & Y ? 12 : 13]]);
       printf (" and %d @ %s\n", b[Y], S[K[4]]);
-      if (K[0] + 1)
+      if (~K[0])
         printf ("ERI %d @ b%d%s <= +%d @ r%dc%d r%dc%d r%dc%d\n",
           b[Y], BOX (a), S[a], b[Y], ROW (w[w[K[3]][12]][20] | w[w[K[3]][13]][20] |
           w[w[a][8]][20] | w[w[a][9]][20] | w[w[a][10]][20] | w[w[a][11]][20]),
@@ -1809,17 +2080,17 @@ int solve (int p)
           w[M][20] | w[w[M][6]][20] | w[w[M][7]][20]),
           COL (w[K[5]][20] | w[w[K[4]][6]][20] | w[w[K[4]][7]][20] |
           w[M][20] | w[w[M][6]][20] | w[w[M][7]][20]));
-      else if (K[1] + 1)
+      else if (~K[1])
         printf ("ERI %d @ b%d%s <= +%d @ %s r%dc%d\n",
           b[Y], BOX (w[K[5]][K[7]]), S[w[K[5]][K[7]]], b[Y], S[K[5]],
           ROW (w[K[1]][20] | w[K[2]][20]), COL (w[K[1]][20] | w[K[2]][20]));
-      else if (K[2] + 1)
+      else if (~K[2])
         printf ("%d @ Box %d => -%d @ r%dc%d\n", b[Y], BOX (X), b[Y],
-          ROW (w[K[2]][20] | w[K[7]][20]), COL (w[K[2]][20] | w[K[7]][20]));
+          ROW (w[K[2]][20] | w[K[5]][20]), COL (w[K[2]][20] | w[K[5]][20]));
       else
         printf ("<= +%d @ %s\n", b[Y], S[K[5]]);
 #endif
-      if (K[0] + 1)
+      if (~K[0])
       {                      // 2-String Kite+ERI Ring and Grouped 2-String Kite+ERI Ring
         g[w[K[3]][12]] = K[0];
         g[w[K[3]][13]] = K[1];
@@ -1836,12 +2107,12 @@ int solve (int p)
         g[w[a][10]] = K[16];
         g[w[a][11]] = K[17];
       }
-      else if (K[1] + 1)
+      else if (~K[1])
       {                      // 2-String Kite+ERI and Grouped 2-String Kite+ERI
         g[K[1]] = K[8];
         g[K[2]] = K[9];
       }
-      else if (K[2] + 1)     // 2-String Kite+Box and Grouped 2-String Kite+Box
+      else if (~K[2])        // 2-String Kite+Box and Grouped 2-String Kite+Box
         g[K[2]] += Y;
       g[K[5]] = K[6];        // 2-String Kite and Grouped 2-String Kite
 #if RJ > 3
@@ -1863,7 +2134,8 @@ int solve (int p)
                              // Check ERI digit either in SL 1st Cell values; and not in mini-Line Cells values; and
             B[K[3] = !(g[w[K[2]][W[1][y]]] & K[1]) | (!(g[w[K[2]][W[18][y]]] & K[1]) << 1) |
             (!(g[w[K[2]][W[19][y]]] & K[1]) << 2) | (!(g[w[K[2]][W[20][y]]] & K[1]) << 3) |
-            (!(g[w[K[2]][W[21][y]]] & K[1]) << 4) | (!(g[w[K[2]][W[22][y]]] & K[1]) << 5)] == 5)
+            (!(g[w[K[2]][W[21][y]]] & K[1]) << 4) |
+            (!(g[w[K[2]][W[22][y]]] & K[1]) << 5)] == 5)
           {                  // No ERI digit found in six Line Cell positions
             K[4] = W[b[~K[3] & 63] < 4 ? 5 : 1][y];
             K[5] = W[Y < W[5][!y] ? 5 : 1][!y];
@@ -1871,15 +2143,14 @@ int solve (int p)
             K[7] = w[a][W[1][y] + b[~K[3] & 63] - 1];
             if (ERI (K[7]) & // Check Dual Linked Empty Rectangle Intersection Cell values; and
               (g[K[7]] | g[w[K[7]][K[5]]] | g[w[K[7]][K[5] + 1]] | g[w[K[7]][K[5] + 2]] |
-              g[a] | g[w[a][K[4]]] | g[w[a][K[4] + 1]] | g[w[a][K[4] + 2]] |
-              g[w[a][K[5]]] | g[w[a][K[5] + 1]] | g[w[a][K[5] + 2]] |
-              g[w[K[2]][W[3][!y]]] | g[w[K[2]][W[4][!y]]] |
-              g[w[K[6]][W[3][!y]]] | g[w[K[6]][W[4][!y]]]) & K[1])
+              g[a] | g[w[a][K[4]]] | g[w[a][K[4] + 1]] | g[w[a][K[4] + 2]] | g[w[a][K[5]]] |
+              g[w[a][K[5] + 1]] | g[w[a][K[5] + 2]] | g[w[K[2]][W[3][!y]]] |
+              g[w[K[2]][W[4][!y]]] | g[w[K[6]][W[3][!y]]] | g[w[K[6]][W[4][!y]]]) & K[1])
             {                // Dual Linked Empty Rectangle removals
-              int k[15] = {g[K[7]], g[w[K[7]][K[5]]], g[w[K[7]][K[5] + 1]], g[w[K[7]][K[5] + 2]],
-                          g[a], g[w[a][K[4]]], g[w[a][K[4] + 1]], g[w[a][K[4] + 2]],
-                          g[w[a][K[5]]], g[w[a][K[5] + 1]], g[w[a][K[5] + 2]],
-                          g[w[K[2]][W[3][!y]]], g[w[K[2]][W[4][!y]]],
+              int k[15] = {g[K[7]], g[w[K[7]][K[5]]], g[w[K[7]][K[5] + 1]],
+                          g[w[K[7]][K[5] + 2]], g[a], g[w[a][K[4]]], g[w[a][K[4] + 1]],
+                          g[w[a][K[4] + 2]], g[w[a][K[5]]], g[w[a][K[5] + 1]],
+                          g[w[a][K[5] + 2]], g[w[K[2]][W[3][!y]]], g[w[K[2]][W[4][!y]]],
                           g[w[K[6]][W[3][!y]]], g[w[K[6]][W[4][!y]]]};
                              // Backup Dual Linked Empty Rectangle removal Cells values and drop ERI digit from removal Cells positions
               g[K[7]] &= ~K[1];
@@ -2014,9 +2285,10 @@ int solve (int p)
             g[K[7]] | g[w[a][K[6]]] | g[w[a][K[6] + 1]] | g[w[a][K[6] + 2]]) & K[1])
           {                  // Grouped Linked Empty Rectangle Intersection removal Cell positions
             int k[16] = {g[a], g[w[a][K[5]]], g[w[a][K[5] + 1]], g[w[a][K[5] + 2]],
-                        g[K[2]], g[w[K[2]][K[6]]], g[w[K[2]][K[6] + 1]], g[w[K[2]][K[6] + 2]],
-                        g[K[4]], g[w[K[7]][K[5]]], g[w[K[7]][K[5] + 1]], g[w[K[7]][K[5] + 2]],
-                        g[K[7]], g[w[a][K[6]]], g[w[a][K[6] + 1]], g[w[a][K[6] + 2]]};
+                        g[K[2]], g[w[K[2]][K[6]]], g[w[K[2]][K[6] + 1]],
+                        g[w[K[2]][K[6] + 2]], g[K[4]], g[w[K[7]][K[5]]],
+                        g[w[K[7]][K[5] + 1]], g[w[K[7]][K[5] + 2]], g[K[7]],
+                        g[w[a][K[6]]], g[w[a][K[6] + 1]], g[w[a][K[6] + 2]]};
                              // Backup Grouped Linked Empty Rectangle removal Cells values and drop ERI digit from removal Cells positions
             g[a] &= ~K[1];
             g[w[a][K[5]]] &= ~K[1];
@@ -2115,7 +2387,7 @@ int solve (int p)
       continue;              // Skip for 1st Wing Cell values > two digits
     for (Y = y + 1; Y < q; ++Y)
     {                        // Search W-Wing Type 1, Type 2 and W-Ring 2nd Wing Cell position unsolved Cell positions wise
-      if (g[r[y]] != g[r[Y]] || (w[r[y]][20] & w[r[Y]][20] & 134217727))
+      if (g[r[y]] != g[r[Y]] || w[r[y]][20] & w[r[Y]][20] & 134217727)
         continue;            // Skip for either 1st and 2nd Wing Cells values not same; or 1st and 2nd Wing Cells positions in Unit
       int K[10] = {r[y], r[Y], g[r[y]], r[y] - COL (w[r[y]][20]) + COL (w[r[Y]][20]),
                   r[Y] - COL (w[r[Y]][20]) + COL (w[r[y]][20]),-1},
@@ -2128,87 +2400,9 @@ int solve (int p)
 
       A[1][0] += A[0][0];
       A[1][1] += A[0][1];
-      if ((w[K[0]][20] & W[25][0]) == (w[K[1]][20] & W[25][0]) ||
-        (w[K[0]][20] & W[25][1]) == (w[K[1]][20] & W[25][1]))
-      {                      // Check W-Wing Type 2 1st and 2nd Wing Cells positions either Band or Stack wise
-        if ((w[K[0]][20] & W[25][1]) == (w[K[1]][20] & W[25][1]))
-        {                    // Check 1st and 2nd Wing Cells positions Band wise
-          A[1][0] = 20;
-          A[2][1] = 0;
-          L = w[w[K[0]][K[4] == w[K[0]][12] ? 13 : 12]][A[0][1]];
-          K[5] = w[K[3]][6];
-          K[6] = w[K[3]][7];
-          K[7] = w[K[4]][6];
-          K[8] = w[K[4]][7];
-        }
-        else
-        {                    // 1st and 2nd Wing Cells positions Stack wise
-          A[1][1] = 6;
-          A[2][0] = 1;
-          L = w[w[K[0]][K[3] == w[K[0]][6] ? 7 : 6]][A[0][0]];
-          K[5] = w[K[3]][12];
-          K[6] = w[K[3]][13];
-          K[7] = w[K[4]][12];
-          K[8] = w[K[4]][13];
-        }
-        k[2] = g[K[5]];
-        k[3] = g[K[6]];
-        k[4] = g[K[7]];
-        k[5] = g[K[8]];
-        if (((N = K[9] = LB3 (w[L][W[1][A[2][0]]], w[L][W[5][A[2][0]]], L, A[2][0]) & K[2]) ||
-          (K[9] = LB3 (w[L][W[3][A[2][0]]], w[L][W[4][A[2][0]]], L, A[2][0]) & K[2])) &&
-          ((k[0] | k[1] | k[2] | k[3] | k[4] | k[5]) & (K[2] - K[9])))
-        {                    // (Type 2 01, 02) Check SL either Line or Box wise
-          K[2] -= K[9];
-          g[K[3]] &= ~K[2];
-          g[K[4]] &= ~K[2];
-          g[K[5]] &= ~K[2];
-          g[K[6]] &= ~K[2];
-          g[K[7]] &= ~K[2];
-          g[K[8]] &= ~K[2];
-#if RJ > 2
-          printf ("%d) Grouped W-Wing Type 2 %s: %d @ %s %s SL %s %d between %d @ r%dc%d and %d @ r%dc%d\n=> -%d @ r%dc%d r%dc%d\n",
-            p, A[2][0] ? "Stack" : "Band", b[g[K[0]]], S[K[0]], S[K[1]],
-            K[9] ? (A[2][0] ? "Column" : "Row") : "Box",
-            N ? (A[2][0] ? COL (w[L][20]) : ROW (w[L][20])) : BOX (L), b[K[9]],
-            ROW (w[X][20] | w[w[X][W[3][A[2][0]]]][20] | w[w[X][W[4][A[2][0]]]][20]),
-            COL (w[X][20] | w[w[X][W[3][A[2][0]]]][20] | w[w[X][W[4][A[2][0]]]][20]), b[K[9]],
-            ROW (w[Z][20] | w[w[Z][W[3][A[2][0]]]][20] | w[w[Z][W[4][A[2][0]]]][20]),
-            COL (w[Z][20] | w[w[Z][W[3][A[2][0]]]][20] | w[w[Z][W[4][A[2][0]]]][20]),
-            b[K[2]], ROW (w[K[3]][20] | w[K[5]][20] | w[K[6]][20]),
-            COL (w[K[3]][20] | w[K[5]][20] | w[K[6]][20]),
-            ROW (w[K[4]][20] | w[K[7]][20] | w[K[8]][20]),
-            COL (w[K[4]][20] | w[K[7]][20] | w[K[8]][20]));
-#endif
-          if (solve (p))
-            return 1;
-#if RJ > 2
-          printf ("%d) Undo Grouped W-Wing Type 2 %s: %d @ %s %s SL %s %d between %d @ r%dc%d and %d @ r%dc%d\n<= +%d @ r%dc%d r%dc%d\n",
-            p, A[2][0] ? "Stack" : "Band", b[g[K[0]]], S[K[0]], S[K[1]],
-            K[9] ? (A[2][0] ? "Column" : "Row") : "Box",
-            N ? (A[2][0] ? COL (w[L][20]) : ROW (w[L][20])) : BOX (L), b[K[9]],
-            ROW (w[X][20] | w[w[X][W[3][A[2][0]]]][20] | w[w[X][W[4][A[2][0]]]][20]),
-            COL (w[X][20] | w[w[X][W[3][A[2][0]]]][20] | w[w[X][W[4][A[2][0]]]][20]), b[K[9]],
-            ROW (w[Z][20] | w[w[Z][W[3][A[2][0]]]][20] | w[w[Z][W[4][A[2][0]]]][20]),
-            COL (w[Z][20] | w[w[Z][W[3][A[2][0]]]][20] | w[w[Z][W[4][A[2][0]]]][20]),
-            b[K[2]], ROW (w[K[3]][20] | w[K[5]][20] | w[K[6]][20]),
-            COL (w[K[3]][20] | w[K[5]][20] | w[K[6]][20]),
-            ROW (w[K[4]][20] | w[K[7]][20] | w[K[8]][20]),
-            COL (w[K[4]][20] | w[K[7]][20] | w[K[8]][20]));
-#endif
-          g[K[3]] = k[0];
-          g[K[4]] = k[1];
-          g[K[5]] = k[2];
-          g[K[6]] = k[3];
-          g[K[7]] = k[4];
-          g[K[8]] = k[5];
-#if RJ > 3
-          prn ();
-#endif
-          return 0;          // Undo W-Wing Type 2 removal Cells values
-        }
-      }
-      else                   // 1st and 2nd Wing Cells positions Grid wise
+      if ((w[K[0]][20] & W[25][0]) != (w[K[1]][20] & W[25][0]) &&
+        (w[K[0]][20] & W[25][1]) != (w[K[1]][20] & W[25][1]))
+                             // Check 1st and 2nd Wing Cell positions not Band and Stack wise
         for (a = 0; a < 2; ++a)
         {                    // Search W-Wing Type 1 SL Line wise
           for (K[6] = 0; K[6] < 2; ++K[6])
@@ -2219,7 +2413,7 @@ int solve (int p)
                 !(g[w[K[8]][W[1][K[6]]]] & N) + !(g[w[K[8]][W[18][K[6]]]] & N) +
                 !(g[w[K[8]][W[19][K[6]]]] & N) + !(g[w[K[8]][W[20][K[6]]]] & N) +
                 !(g[w[K[8]][W[21][K[6]]]] & N) + !(g[w[K[8]][W[22][K[6]]]] & N) > 4 &&
-                ((k[0] | k[1]) & (K[2] - N)))
+                (k[0] | k[1]) & (K[2] - N))
               {              // (Type 1 01) Check SL Line wise
                 K[2] -= N;
                 g[K[3]] &= ~K[2];
@@ -2227,20 +2421,20 @@ int solve (int p)
 #if RJ > 2
                 printf ("%d) Grouped W-Wing Type 1 Grid: %d @ %s %s SL %s %d between %d @ r%dc%d and %d @ %s\n=> -%d @ %s %s\n",
                   p, b[g[K[0]]], S[K[0]], S[K[1]], K[6] ? "Column" : "Row",
-                  K[6] ? COL (w[K[8]][20]) : ROW (w[K[8]][20]), b[N],
-                  ROW (w[K[8]][20] | w[w[K[8]][W[3][K[6]]]][20] | w[w[K[8]][W[4][K[6]]]][20]),
-                  COL (w[K[8]][20] | w[w[K[8]][W[3][K[6]]]][20] | w[w[K[8]][W[4][K[6]]]][20]),
-                  b[N], S[K[9]], b[K[2]], S[K[3]], S[K[4]]);
+                  K[6] ? COL (w[K[8]][20]) : ROW (w[K[8]][20]), b[N], ROW (w[K[8]][20] |
+                  w[w[K[8]][W[3][K[6]]]][20] | w[w[K[8]][W[4][K[6]]]][20]),
+                  COL (w[K[8]][20] | w[w[K[8]][W[3][K[6]]]][20] |
+                  w[w[K[8]][W[4][K[6]]]][20]), b[N], S[K[9]], b[K[2]], S[K[3]], S[K[4]]);
 #endif
                 if (solve (p))
                   return 1;
 #if RJ > 2
                 printf ("%d) Undo Grouped W-Wing Type 1 Grid: %d @ %s %s SL %s %d between %d @ r%dc%d and %d @ %s\n<= +%d @ %s %s\n",
                   p, b[g[K[0]]], S[K[0]], S[K[1]], K[6] ? "Column" : "Row",
-                  K[6] ? COL (w[K[8]][20]) : ROW (w[K[8]][20]), b[N],
-                  ROW (w[K[8]][20] | w[w[K[8]][W[3][K[6]]]][20] | w[w[K[8]][W[4][K[6]]]][20]),
-                  COL (w[K[8]][20] | w[w[K[8]][W[3][K[6]]]][20] | w[w[K[8]][W[4][K[6]]]][20]),
-                  b[N], S[K[9]], b[K[2]], S[K[3]], S[K[4]]);
+                  K[6] ? COL (w[K[8]][20]) : ROW (w[K[8]][20]), b[N], ROW (w[K[8]][20] |
+                  w[w[K[8]][W[3][K[6]]]][20] | w[w[K[8]][W[4][K[6]]]][20]),
+                  COL (w[K[8]][20] | w[w[K[8]][W[3][K[6]]]][20] |
+                  w[w[K[8]][W[4][K[6]]]][20]), b[N], S[K[9]], b[K[2]], S[K[3]], S[K[4]]);
 #endif
                 g[K[3]] = k[0];
                 g[K[4]] = k[1];
@@ -2264,11 +2458,10 @@ int solve (int p)
             A[4] = w[K[1]][W[21][!a]];
             A[5] = w[K[1]][W[22][!a]];
           }
-          if ((N = ERI (K[3 + a]) & K[2]) && (B[N] < 2 ?
-            ((k[0] | k[1]) & (K[2] - N)) : ((k[0] | k[1] |
-            g[w[K[0]][W[3][a]]] | g[w[K[0]][W[4][a]]] | g[A[0]] | g[A[1]] |
-            g[A[2]] | g[w[K[1]][W[3][!a]]] | g[w[K[1]][W[4][!a]]] |
-            g[A[3]] | g[A[4]] | g[A[5]]) & N)))
+          if ((N = ERI (K[3 + a]) & K[2]) && B[N] < 2 ? (k[0] | k[1]) & (K[2] - N) :
+            (k[0] | k[1] | g[w[K[0]][W[3][a]]] | g[w[K[0]][W[4][a]]] |
+            g[A[0]] | g[A[1]] | g[A[2]] | g[A[3]] | g[A[4]] | g[A[5]] |
+            g[w[K[1]][W[3][!a]]] | g[w[K[1]][W[4][!a]]]) & N)
           {                  // (W-Wing Type 1 02, W-Ring 02) Check SL ERI wise
             if (B[N] < 2)
               K[2] -= N;
@@ -2352,17 +2545,94 @@ int solve (int p)
             return 0;        // Undo W-Wing Type 1 and W-Ring removal Cells values
           }
         }
+      else                   // 1st and 2nd Wing Cells positions Chute wise
+      {                      // Check W-Wing Type 2 1st and 2nd Wing Cells positions either Band or Stack wise
+        if ((w[K[0]][20] & W[25][1]) == (w[K[1]][20] & W[25][1]))
+        {                    // Check 1st and 2nd Wing Cells positions Band wise
+          A[1][0] = 20;
+          A[2][1] = 0;
+          L = w[w[K[0]][K[4] == w[K[0]][12] ? 13 : 12]][A[0][1]];
+          K[5] = w[K[3]][6];
+          K[6] = w[K[3]][7];
+          K[7] = w[K[4]][6];
+          K[8] = w[K[4]][7];
+        }
+        else
+        {                    // 1st and 2nd Wing Cells positions Stack wise
+          A[1][1] = 6;
+          A[2][0] = 1;
+          L = w[w[K[0]][K[3] == w[K[0]][6] ? 7 : 6]][A[0][0]];
+          K[5] = w[K[3]][12];
+          K[6] = w[K[3]][13];
+          K[7] = w[K[4]][12];
+          K[8] = w[K[4]][13];
+        }
+        k[2] = g[K[5]];
+        k[3] = g[K[6]];
+        k[4] = g[K[7]];
+        k[5] = g[K[8]];
+        if (((N = K[9] = LB3 (w[L][W[1][A[2][0]]], w[L][W[5][A[2][0]]], L, A[2][0]) & K[2]) ||
+          (K[9] = LB3 (w[L][W[3][A[2][0]]], w[L][W[4][A[2][0]]], L, A[2][0]) & K[2])) &&
+          (k[0] | k[1] | k[2] | k[3] | k[4] | k[5]) & (K[2] - K[9]))
+        {                    // (Type 2 01, 02) Check SL either Line or Box wise
+          K[2] -= K[9];
+          g[K[3]] &= ~K[2];
+          g[K[4]] &= ~K[2];
+          g[K[5]] &= ~K[2];
+          g[K[6]] &= ~K[2];
+          g[K[7]] &= ~K[2];
+          g[K[8]] &= ~K[2];
+#if RJ > 2
+          printf ("%d) Grouped W-Wing Type 2 %s: %d @ %s %s SL %s %d between %d @ r%dc%d and %d @ r%dc%d\n=> -%d @ r%dc%d r%dc%d\n",
+            p, A[2][0] ? "Stack" : "Band", b[g[K[0]]], S[K[0]], S[K[1]],
+            K[9] ? (A[2][0] ? "Column" : "Row") : "Box",
+            N ? (A[2][0] ? COL (w[L][20]) : ROW (w[L][20])) : BOX (L), b[K[9]],
+            ROW (w[X][20] | w[w[X][W[3][A[2][0]]]][20] | w[w[X][W[4][A[2][0]]]][20]),
+            COL (w[X][20] | w[w[X][W[3][A[2][0]]]][20] | w[w[X][W[4][A[2][0]]]][20]),
+            b[K[9]], ROW (w[Z][20] | w[w[Z][W[3][A[2][0]]]][20] |
+            w[w[Z][W[4][A[2][0]]]][20]), COL (w[Z][20] | w[w[Z][W[3][A[2][0]]]][20] |
+            w[w[Z][W[4][A[2][0]]]][20]), b[K[2]], ROW (w[K[3]][20] | w[K[5]][20] |
+            w[K[6]][20]), COL (w[K[3]][20] | w[K[5]][20] | w[K[6]][20]), ROW (w[K[4]][20] |
+            w[K[7]][20] | w[K[8]][20]), COL (w[K[4]][20] | w[K[7]][20] | w[K[8]][20]));
+#endif
+          if (solve (p))
+            return 1;
+#if RJ > 2
+          printf ("%d) Undo Grouped W-Wing Type 2 %s: %d @ %s %s SL %s %d between %d @ r%dc%d and %d @ r%dc%d\n<= +%d @ r%dc%d r%dc%d\n",
+            p, A[2][0] ? "Stack" : "Band", b[g[K[0]]], S[K[0]], S[K[1]],
+            K[9] ? (A[2][0] ? "Column" : "Row") : "Box",
+            N ? (A[2][0] ? COL (w[L][20]) : ROW (w[L][20])) : BOX (L), b[K[9]],
+            ROW (w[X][20] | w[w[X][W[3][A[2][0]]]][20] | w[w[X][W[4][A[2][0]]]][20]),
+            COL (w[X][20] | w[w[X][W[3][A[2][0]]]][20] | w[w[X][W[4][A[2][0]]]][20]),
+            b[K[9]], ROW (w[Z][20] | w[w[Z][W[3][A[2][0]]]][20] |
+            w[w[Z][W[4][A[2][0]]]][20]), COL (w[Z][20] | w[w[Z][W[3][A[2][0]]]][20] |
+            w[w[Z][W[4][A[2][0]]]][20]), b[K[2]], ROW (w[K[3]][20] | w[K[5]][20] |
+            w[K[6]][20]), COL (w[K[3]][20] | w[K[5]][20] | w[K[6]][20]), ROW (w[K[4]][20] |
+            w[K[7]][20] | w[K[8]][20]), COL (w[K[4]][20] | w[K[7]][20] | w[K[8]][20]));
+#endif
+          g[K[3]] = k[0];
+          g[K[4]] = k[1];
+          g[K[5]] = k[2];
+          g[K[6]] = k[3];
+          g[K[7]] = k[4];
+          g[K[8]] = k[5];
+#if RJ > 3
+          prn ();
+#endif
+          return 0;          // Undo W-Wing Type 2 removal Cells values
+        }
+      }
       for (a = A[2][0]; a <= A[2][1]; ++a)
         for (L = A[0][a]; L < A[1][a]; ++L)
         {                    // Search W-Wing Type 1 and Type 2 SL Line and ERI wise
           if (((N = K[9] = LN1 (w[K[0]][L], w[K[3 + a]][L], w[X][A[0][!a]], a) & K[2]) ||
             (K[9] = ERI (X) & ERI (Z) & K[2])) &&
-            ((k[0] | k[1] | k[2] | k[3] | k[4] | k[5]) & (K[2] - K[9])))
+            (k[0] | k[1] | k[2] | k[3] | k[4] | k[5]) & (K[2] - K[9]))
           {                  // (Type 1 03, 04, Type 2 03, 04) Check SL either Line or ERI wise
             K[2] -= K[9];
             g[K[3]] &= ~K[2];
             g[K[4]] &= ~K[2];
-            if (K[5] + 1)
+            if (~K[5])
             {
               g[K[5]] &= ~K[2];
               g[K[6]] &= ~K[2];
@@ -2381,10 +2651,10 @@ int solve (int p)
             if (!N)
               printf ("b%d", BOX (Z));
             printf ("%s\n=> -%d @ r%dc%d r%dc%d\n", S[Z], b[K[2]],
-              ROW (w[K[3]][20] | (K[5] + 1 ? w[K[5]][20] | w[K[6]][20] : 0)),
-              COL (w[K[3]][20] | (K[5] + 1 ? w[K[5]][20] | w[K[6]][20] : 0)),
-              ROW (w[K[4]][20] | (K[5] + 1 ? w[K[7]][20] | w[K[8]][20] : 0)),
-              COL (w[K[4]][20] | (K[5] + 1 ? w[K[7]][20] | w[K[8]][20] : 0)));
+              ROW (w[K[3]][20] | (~K[5] ? w[K[5]][20] | w[K[6]][20] : 0)),
+              COL (w[K[3]][20] | (~K[5] ? w[K[5]][20] | w[K[6]][20] : 0)),
+              ROW (w[K[4]][20] | (~K[5] ? w[K[7]][20] | w[K[8]][20] : 0)),
+              COL (w[K[4]][20] | (~K[5] ? w[K[7]][20] | w[K[8]][20] : 0)));
 #endif
               if (solve (p))
                 return 1;
@@ -2400,14 +2670,14 @@ int solve (int p)
             if (!N)
               printf ("b%d", BOX (Z));
             printf ("%s\n<= +%d @ r%dc%d r%dc%d\n", S[Z], b[K[2]],
-              ROW (w[K[3]][20] | (K[5] + 1 ? w[K[5]][20] | w[K[6]][20] : 0)),
-              COL (w[K[3]][20] | (K[5] + 1 ? w[K[5]][20] | w[K[6]][20] : 0)),
-              ROW (w[K[4]][20] | (K[5] + 1 ? w[K[7]][20] | w[K[8]][20] : 0)),
-              COL (w[K[4]][20] | (K[5] + 1 ? w[K[7]][20] | w[K[8]][20] : 0)));
+              ROW (w[K[3]][20] | (~K[5] ? w[K[5]][20] | w[K[6]][20] : 0)),
+              COL (w[K[3]][20] | (~K[5] ? w[K[5]][20] | w[K[6]][20] : 0)),
+              ROW (w[K[4]][20] | (~K[5] ? w[K[7]][20] | w[K[8]][20] : 0)),
+              COL (w[K[4]][20] | (~K[5] ? w[K[7]][20] | w[K[8]][20] : 0)));
 #endif
             g[K[3]] = k[0];
             g[K[4]] = k[1];
-            if (K[5] + 1)
+            if (~K[5])
             {
               g[K[5]] = k[2];
               g[K[6]] = k[3];
@@ -2432,22 +2702,20 @@ int solve (int p)
 
     for (; K[1] < 6; ++K[1]) // Search 1st Wing Cell position Row wise
     {
-      if (!g[K[2] = w[K[0]][K[1]]] || !(K[6] = g[K[0]] & g[K[2]] &
-                             // Skip for either 1st Wing Cell position not unsolved; or
+      if (!(K[6] = g[K[0]] & g[K[2] = w[K[0]][K[1]]] &
         ~(g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
         g[Y = w[K[0]][X = K[1] < 3 ? 3 : 0]] | g[w[Y][6]] | g[w[Y][7]])))
-        continue;            // No conjugate pair digit found in Apex and 1st Wing Cells values
+        continue;            // Skip for no conjugate pair digit found in Apex and 1st Wing Cells values
       for (K[3] = 14; K[3] < 20; ++K[3])
       {                      // Search 2nd Wing Cell position Column wise
-        if (!g[K[4] = w[K[0]][K[3]]] || !(K[7] = g[K[0]] & g[K[4]] &
-                             // Skip for either 2nd Wing Cell position not unsolved; or
+        if (!(K[7] = g[K[0]] & g[K[4] = w[K[0]][K[3]]] &
           ~(g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] |
           g[Y = w[K[0]][Z = K[3] < 17 ? 17 : 14]] | g[w[Y][12]] | g[w[Y][13]])) ||
-                             // No conjugate pair digit found in Apex and 2nd Wing Cells values; or
-          (K[6] & K[7]) || !g[K[5] = w[K[4]][K[1]]] ||
-                             // Conjugate pair digit in Apex and 1st Wing Cells values same as Apex and 2nd Wing Cells values; or removal Cell not unsolved; or
-          !(K[8] = g[K[2]] & g[K[5]] & ~(g[w[K[2]][12]] | g[w[K[2]][13]] |
-          g[w[K[5]][12]] | g[w[K[5]][13]] | g[Y = w[K[2]][Z]] | g[w[Y][12]] | g[w[Y][13]])) ||
+                             // Skip for either no conjugate pair digit found in Apex and 2nd Wing Cells values; or
+          (K[6] & K[7]) ||   // Conjugate pair digit in Apex and 1st Wing Cells values same as Apex and 2nd Wing Cells values; or
+          !(K[8] = g[K[2]] & g[K[5] = w[K[4]][K[1]]] &
+          ~(g[w[K[2]][12]] | g[w[K[2]][13]] | g[w[K[5]][12]] | g[w[K[5]][13]] |
+          g[Y = w[K[2]][Z]] | g[w[Y][12]] | g[w[Y][13]])) ||
                              // No conjugate pair digit found in 1st Wing and removal Cells values; or
           !(K[9] = g[K[4]] & g[K[5]] & ~(g[w[K[4]][6]] | g[w[K[4]][7]] |
           g[w[K[5]][6]] | g[w[K[5]][7]] | g[Y = w[K[4]][X]] | g[w[Y][6]] | g[w[Y][7]])))
@@ -2486,7 +2754,7 @@ int solve (int p)
         }
         if (K[0] > K[2] || K[0] > K[4] ||
                              // Skip Strong Ring Type 1 for either Apex Cell position > 1st Wing Cell position; or Apex Cell position > 2nd Wing Cell position; or
-          ((K[6] | K[7]) & K[8]) || ((K[6] | K[7] | K[8]) & K[9]) ||
+          (K[6] | K[7]) & K[8] || (K[6] | K[7] | K[8]) & K[9] ||
                              //  Conjugate pair digit in 1st Wing and removal Cells values same; or conjugate pair digit in 2nd Wing and removal Cells values same; or
           (B[g[K[0]]] | B[g[K[2]]] | B[g[K[4]]] | B[g[K[5]]]) < 3)
           continue;          // No removal Cell values
@@ -2554,29 +2822,26 @@ int solve (int p)
         continue;            // Skip for no unsolved Cell position found in either Apex Line or Box
       for (K[1] = W[1][y]; K[1] < W[2][y]; ++K[1])
       {                      // Search 1st Wing Cell position Line wise
-        if (!g[K[2] = w[K[0]][K[1]]] || !(K[6] = (g[K[0]] & g[K[2]] &
-                             // Skip for either 1st Wing Cell position not unsolved; or
+        if (!(K[6] = g[K[0]] & g[K[2] = w[K[0]][K[1]]] &
           ~(g[w[K[0]][W[3][y]]] | g[w[K[0]][W[4][y]]] | g[w[K[2]][W[3][y]]] |
           g[w[K[2]][W[4][y]]] | g[Y = w[K[0]][K[11] = W[K[1] < W[5][y] ? 5 : 1][y]]] |
-          g[w[Y][W[3][y]]] | g[w[Y][W[4][y]]]))))
-          continue;          // No conjugate pair digit found in Apex and 1st Wing Cells values
+          g[w[Y][W[3][y]]] | g[w[Y][W[4][y]]])))
+          continue;          // Skip for no conjugate pair digit found in Apex and 1st Wing Cells values
         for (K[3] = W[6][y]; K[3] < W[0][y]; ++K[3])
         {                    // Search 2nd Wing Cell position Box wise but not in 1st Wing Line
-          if (!g[K[4] = w[K[0]][K[3]]] || !(K[7] = (g[K[0]] & g[K[4]] &
-                             // Skip for either 2nd Wing Cell position not unsolved; or
+          if (!(K[7] = g[K[0]] & g[K[4] = w[K[0]][K[3]]] &
             ~(g[w[K[0]][W[3][y]]] | g[w[K[0]][W[4][y]]] | g[w[K[4]][W[3][y]]] |
             g[w[K[4]][W[4][y]]] | g[Y = w[K[0]][Z = W[K[3] == W[6][y] || K[3] == W[7][y] ||
-            K[3] == W[8][y] ? 4 : 3][!y]]] | g[w[Y][W[3][y]]] | g[w[Y][W[4][y]]]))) ||
-            (K[6] & K[7]))   // No Conjugate pair digit found in Apex and 2nd Wing Cells values; or
+            K[3] == W[8][y] ? 4 : 3][!y]]] | g[w[Y][W[3][y]]] | g[w[Y][W[4][y]]])) ||
+            K[6] & K[7])     // Skip for either no Conjugate pair digit found in Apex and 2nd Wing Cells values; or
             continue;        // Conjugate pair digit in Apex and 1st Wing Cells values same as Apex and 2nd Wing Cells values
           for (X = K[10] = W[K[1] < W[5][y] ? 1 : 5][y]; X < K[10] + 3; ++X)
           {                  // Search removal Cell position 1st Wing Line and 2nd Wing Box intersection wise
-            if (!g[K[5] = w[K[4]][K[1]]] || !(K[8] = g[K[2]] & g[K[5]] &
-                             // Skip for removal Cell not unsolved; or
-              ~(g[w[K[2]][W[3][y]]] | g[w[K[2]][W[4][y]]] | g[w[K[5]][W[3][y]]] |
-              g[w[K[5]][W[4][y]]] | g[Y = w[K[2]][Z]] | g[w[Y][W[3][y]]] |
-              g[w[Y][W[4][y]]])) || !(K[9] = g[K[4]] & g[K[5]] & ~(g[w[K[4]][W[3][y]]] |
-                             // No conjugate pair digit found in 1st Wing and removal Cells values; or
+            if (!(K[8] = g[K[2]] & g[K[5] = w[K[4]][K[1]]] & ~(g[w[K[2]][W[3][y]]] |
+              g[w[K[2]][W[4][y]]] | g[w[K[5]][W[3][y]]] | g[w[K[5]][W[4][y]]] |
+              g[Y = w[K[2]][Z]] | g[w[Y][W[3][y]]] | g[w[Y][W[4][y]]])) ||
+                             // Skip for either mo conjugate pair digit found in 1st Wing and removal Cells values; or
+              !(K[9] = g[K[4]] & g[K[5]] & ~(g[w[K[4]][W[3][y]]] |
               g[w[K[4]][W[4][y]]] | g[w[K[5]][W[3][y]]] | g[w[K[5]][W[4][y]]] |
               g[Y = w[K[4]][K[11]]] | g[w[Y][W[3][y]]] | g[w[Y][W[4][y]]])))
               continue;      // No conjugate pair digit found in 2nd Wing and removal Cells values
@@ -2612,7 +2877,7 @@ int solve (int p)
             }
             if (K[0] > K[2] || K[0] > K[4] ||
                              // Skip Strong Ring Type 2 for either Apex Cell position > 1st Wing Cell position; or Apex Cell position > 2nd Wing Cell position; or
-              ((K[6] | K[7]) & K[8]) || ((K[6] | K[7] | K[8]) & K[9]) ||
+              (K[6] | K[7]) & K[8] || (K[6] | K[7] | K[8]) & K[9] ||
                              // Conjugate pair digit in 1st Wing and removal Cells values same; or conjugate pair digit in 2nd Wing and removal Cells values same; or
               (B[g[K[0]]] | B[g[K[2]]] | B[g[K[4]]] | B[g[K[5]]]) < 3)
               continue;      // No removal Cell values
@@ -2695,23 +2960,23 @@ int solve (int p)
                              // Apex Cell values two digits; and 1st and 2nd Wing Cells values four digits; and 1st and 3rd Wing Cells values three digits; and
           B[g[K[4]] | g[K[6]]] == 3 && !(g[K[0]] & g[K[6]]) &&
                              // 2nd and 3rd Wing Cells values three digits; and Apex and 3rd Wing Cells values four digits; and
-          (((g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] | g[w[K[0]][K[5]]] |
-          g[w[K[0]][K[5] + 1]] | g[w[K[0]][K[5] + 2]]) & g[K[0]] & g[K[2]]) ||
-          ((g[w[K[4]][6]] | g[w[K[4]][7]] | g[w[K[6]][6]] | g[w[K[6]][7]] | g[w[K[4]][K[5]]] |
-          g[w[K[4]][K[5] + 1]] | g[w[K[4]][K[5] + 2]]) & g[K[4]] & g[K[6]]) ||
-          ((g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] | g[w[K[0]][K[7]]] |
-          g[w[K[0]][K[7] + 1]] | g[w[K[0]][K[7] + 2]]) & g[K[0]] & g[K[4]]) ||
-          ((g[w[K[2]][12]] | g[w[K[2]][13]] | g[w[K[6]][12]] | g[w[K[6]][13]] | g[w[K[2]][K[7]]] |
-          g[w[K[2]][K[7] + 1]] | g[w[K[2]][K[7] + 2]]) & g[K[2]] & g[K[6]])))
+          ((g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] | g[w[K[0]][K[5]]] |
+          g[w[K[0]][K[5] + 1]] | g[w[K[0]][K[5] + 2]]) & g[K[0]] & g[K[2]] ||
+          (g[w[K[4]][6]] | g[w[K[4]][7]] | g[w[K[6]][6]] | g[w[K[6]][7]] | g[w[K[4]][K[5]]] |
+          g[w[K[4]][K[5] + 1]] | g[w[K[4]][K[5] + 2]]) & g[K[4]] & g[K[6]] ||
+          (g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] | g[w[K[0]][K[7]]] |
+          g[w[K[0]][K[7] + 1]] | g[w[K[0]][K[7] + 2]]) & g[K[0]] & g[K[4]] ||
+          (g[w[K[2]][12]] | g[w[K[2]][13]] | g[w[K[6]][12]] | g[w[K[6]][13]] | g[w[K[2]][K[7]]] |
+          g[w[K[2]][K[7] + 1]] | g[w[K[2]][K[7] + 2]]) & g[K[2]] & g[K[6]]))
         {                    // XY-Ring Type 1 removal Cell values
           int k[28] = {g[w[K[0]][6]], g[w[K[0]][7]], g[w[K[2]][6]], g[w[K[2]][7]],
-                       g[w[K[0]][K[5]]], g[w[K[0]][K[5] + 1]], g[w[K[0]][K[5] + 2]],
-                       g[w[K[4]][6]], g[w[K[4]][7]], g[w[K[6]][6]], g[w[K[6]][7]],
-                       g[w[K[4]][K[5]]], g[w[K[4]][K[5] + 1]], g[w[K[4]][K[5] + 2]],
-                       g[w[K[0]][12]], g[w[K[0]][13]], g[w[K[4]][12]], g[w[K[4]][13]],
-                       g[w[K[0]][K[7]]], g[w[K[0]][K[7] + 1]], g[w[K[0]][K[7] + 2]],
-                       g[w[K[2]][12]], g[w[K[2]][13]], g[w[K[6]][12]], g[w[K[6]][13]],
-                       g[w[K[2]][K[7]]], g[w[K[2]][K[7] + 1]], g[w[K[2]][K[7] + 2]]};
+                      g[w[K[0]][K[5]]], g[w[K[0]][K[5] + 1]], g[w[K[0]][K[5] + 2]],
+                      g[w[K[4]][6]], g[w[K[4]][7]], g[w[K[6]][6]], g[w[K[6]][7]],
+                      g[w[K[4]][K[5]]], g[w[K[4]][K[5] + 1]], g[w[K[4]][K[5] + 2]],
+                      g[w[K[0]][12]], g[w[K[0]][13]], g[w[K[4]][12]], g[w[K[4]][13]],
+                      g[w[K[0]][K[7]]], g[w[K[0]][K[7] + 1]], g[w[K[0]][K[7] + 2]],
+                      g[w[K[2]][12]], g[w[K[2]][13]], g[w[K[6]][12]], g[w[K[6]][13]],
+                      g[w[K[2]][K[7]]], g[w[K[2]][K[7] + 1]], g[w[K[2]][K[7] + 2]]};
                              // Backup XY-Ring Type 1 removal Cell values and drop Wing Cells common value from removal Cells values
           g[w[K[0]][6]] &= (X = ~(g[K[0]] & g[K[2]]));
           g[w[K[0]][7]] &= X;
@@ -2826,10 +3091,8 @@ int solve (int p)
 #endif
           return 0;          // Undo Wing Cells common value to XY-Ring Type 1 removal Cell values
         }
-        if (B[g[K[0]] | g[K[2]] | g[K[4]]] != 3 ||
-                             // Skip for either Apex and Wings Cells values not three digits; or
-          B[K[5] = g[K[2]] & g[K[4]]] != 1)
-          continue;          // Wing Cells common value not one digit
+        if (B[g[K[0]] | g[K[2]] | g[K[4]]] != 3 || B[K[5] = g[K[2]] & g[K[4]]] != 1)
+          continue;          // Skip for either Apex and Wings Cells values not three digits; or Wing Cells common value not one digit
         if (~g[K[0]] & g[K[6]] & K[5])
         {                    // Check XY-Wing Type 1 removal Cell values
           g[K[6]] -= K[5];   // Drop Wing Cells common value from XY-Wing Type 1 removal Cell position
@@ -2873,13 +3136,13 @@ int solve (int p)
             else if (~g[w[X][13]] & g[w[K[0]][12]] & K[5])
               k[1] = w[K[0]][12];
 #if RJ > 2
-            k[50] = k[1] + 1 ? 6 : 2;
+            k[50] = ~k[1] ? 6 : 2;
             A[0][0] = X;
 #endif
             L = 0;
             Z = w[X][K[8]];
-            if ((ERI (Z) & K[5]) || ((L = 9) && (ERI (Z + L) & K[5])) ||
-              ((L = 18) && (ERI (Z + L) & K[5])))
+            if (ERI (Z) & K[5] || ((L = 9) && ERI (Z + L) & K[5]) ||
+              ((L = 18) && ERI (Z + L) & K[5]))
             {                // ERI 09, Reduced ERI 13, 17, 21
               if (g[w[K[0]][K[8]] + L] & K[5])
                 k[2] = w[K[0]][K[8]] + L;
@@ -2888,14 +3151,14 @@ int solve (int p)
               else if (~g[w[Z + L][7]] & g[w[Y][6]] & K[5])
                 k[3] = w[Y][6];
 #if RJ > 2
-              if (k[3] + 1)
+              if (~k[3])
                 k[50] = 6;
               A[1][0] = Z + L;
 #endif
             }
-            else if ((((L = 12) && (ERI (w[Y][L]) & K[5])) ||
-              ((L = 13) && (ERI (w[Y][L]) & K[5]))) &&
-              ((g[M = w[K[4]][L]] | g[w[M][6]] | g[w[M][7]]) & K[5]))
+            else if ((((L = 12) && ERI (w[Y][L]) & K[5]) ||
+              ((L = 13) && ERI (w[Y][L]) & K[5])) &&
+              (g[M = w[K[4]][L]] | g[w[M][6]] | g[w[M][7]]) & K[5])
             {                // ERI 25, Reduced ERI 29
               k[2] = M;
               k[3] = w[M][6];
@@ -2904,7 +3167,7 @@ int solve (int p)
               A[1][0] = w[Y][L];
 #endif
             }
-            if ((k[0] & k[1] & k[2] & k[3]) + 1)
+            if (~(k[0] & k[1] & k[2] & k[3]))
               goto XYWT1Tf;
           }
           X = w[K[0]][K[8] + y];
@@ -2917,13 +3180,13 @@ int solve (int p)
             else if (~g[w[X][7]] & g[w[K[0]][6]] & K[5])
               k[1] = w[K[0]][6];
 #if RJ > 2
-            k[50] = k[1] + 1 ? 6 : 2;
+            k[50] = ~k[1] ? 6 : 2;
             A[0][0] = X;
 #endif
             L = 0;
             Z = w[X][K[7]];
-            if ((ERI (Z) & K[5]) || ((L = 1) && (ERI (Z + L) & K[5])) ||
-              ((L = 2) && (ERI (Z + L) & K[5])))
+            if (ERI (Z) & K[5] || ((L = 1) && ERI (Z + L) & K[5]) ||
+              ((L = 2) && ERI (Z + L) & K[5]))
             {                // ERI 10, Reduced ERI 14, 18, 22
               if (g[w[K[0]][K[7]] + L] & K[5])
                 k[2] = w[K[0]][K[7]] + L;
@@ -2932,13 +3195,13 @@ int solve (int p)
               else if (~g[w[Z + L][13]] & g[w[Y][12]] & K[5])
                 k[3] = w[Y][12];
 #if RJ > 2
-              if (k[3] + 1)
+              if (~k[3])
                 k[50] = 6;
               A[1][0] = Z + L;
 #endif
             }
-            else if (((L = 6) && (ERI (w[Y][L]) & K[5])) ||
-              ((L = 7) && (ERI (w[Y][L]) & K[5])))
+            else if (((L = 6) && ERI (w[Y][L]) & K[5]) ||
+              ((L = 7) && ERI (w[Y][L]) & K[5]))
             {                // ERI 26, Reduced ERI 30
               if ((g[M = w[K[2]][L]] | g[w[M][12]] | g[w[M][13]]) & K[5])
               {
@@ -2950,7 +3213,7 @@ int solve (int p)
               A[1][0] = w[Y][L];
 #endif
             }
-            if ((k[0] & k[1] & k[2] & k[3]) + 1)
+            if (~(k[0] & k[1] & k[2] & k[3]))
               goto XYWT1Tf;
           }
           X = w[K[4]][K[7] + y];
@@ -2966,29 +3229,29 @@ int solve (int p)
                 k[1] = w[K[6]][12];
             }
 #if RJ > 2
-            k[50] = k[1] + 1 ? 6 : 2;
+            k[50] = ~k[1] ? 6 : 2;
             A[0][0] = X;
 #endif
             L = 0;
             Z = w[Y][K[8]];
-            if ((ERI (Z) & K[5]) || ((L = 9) && (ERI (Z + L) & K[5])) ||
-              ((L = 18) && (ERI (Z + L) & K[5])))
+            if (ERI (Z) & K[5] || ((L = 9) && ERI (Z + L) & K[5]) ||
+              ((L = 18) && ERI (Z + L) & K[5]))
             {                // ERI 11, Reduced ERI 15, 19, 23
-              if (B[g[K[0]]] < 3 && (g[w[K[2]][K[8]] + L] & K[5]))
+              if (B[g[K[0]]] < 3 && g[w[K[2]][K[8]] + L] & K[5])
                 k[2] = w[K[2]][K[8]] + L;
               if (~g[w[Z + L][6]] & g[w[Y][7]] & K[5])
                 k[3] = w[Y][7];
               else if (~g[w[Z + L][7]] & g[w[Y][6]] & K[5])
                 k[3] = w[Y][6];
 #if RJ > 2
-              if (k[3] + 1)
+              if (~k[3])
                 k[50] = 6;
               A[1][0] = Z + L;
 #endif
             }
-            else if (B[g[K[0]]] < 3 && (((L = 12) && (ERI (w[Y][L]) & K[5])) ||
-              ((L = 13) && (ERI (w[Y][L]) & K[5]))) &&
-              ((g[M = w[K[2]][L]] | g[w[M][6]] | g[w[M][7]]) & K[5]))
+            else if (B[g[K[0]]] < 3 && (((L = 12) && ERI (w[Y][L]) & K[5]) ||
+              ((L = 13) && ERI (w[Y][L]) & K[5])) &&
+              (g[M = w[K[2]][L]] | g[w[M][6]] | g[w[M][7]]) & K[5])
             {                // ERI 27, Reduced ERI 31
               k[2] = M;
               k[3] = w[M][6];
@@ -2997,7 +3260,7 @@ int solve (int p)
               A[1][0] = w[Y][L];
 #endif
             }
-            if ((k[0] & k[1] & k[2] & k[3]) + 1)
+            if (~(k[0] & k[1] & k[2] & k[3]))
               goto XYWT1Tf;
           }
           X = w[K[2]][K[8] + y];
@@ -3013,29 +3276,29 @@ int solve (int p)
                 k[1] = w[K[6]][6];
             }
 #if RJ > 2
-            k[50] = k[1] + 1 ? 6 : 2;
+            k[50] = ~k[1] ? 6 : 2;
             A[0][0] = X;
 #endif
             L = 0;
             Z = w[Y][K[7]];
-            if ((ERI (Z) & K[5]) || ((L = 1) && (ERI (Z + L) & K[5])) ||
-              ((L = 2) && (ERI (Z + L) & K[5])))
+            if (ERI (Z) & K[5] || ((L = 1) && ERI (Z + L) & K[5]) ||
+              ((L = 2) && ERI (Z + L) & K[5]))
             {                // ERI 12, Reduced ERI 16, 20, 24
-              if (B[g[K[0]]] < 3 && (g[w[K[4]][K[7]] + L] & K[5]))
+              if (B[g[K[0]]] < 3 && g[w[K[4]][K[7]] + L] & K[5])
                 k[2] = w[K[4]][K[7]] + L;
               if (~g[w[Z + L][12]] & g[w[Y][13]] & K[5])
                 k[3] = w[Y][13];
               else if (~g[w[Z + L][13]] & g[w[Y][12]] & K[5])
                 k[3] = w[Y][12];
 #if RJ > 2
-              if (k[3] + 1)
+              if (~k[3])
                 k[50] = 6;
               A[1][0] = Z + L;
 #endif
             }
-            else if (B[g[K[0]]] < 3 && (((L = 6) && (ERI (w[Y][L]) & K[5])) ||
-              ((L = 7) && (ERI (w[Y][L]) & K[5]))) &&
-              ((g[M = w[K[4]][L]] | g[w[M][12]] | g[w[M][13]]) & K[5]))
+            else if (B[g[K[0]]] < 3 && (((L = 6) && ERI (w[Y][L]) & K[5]) ||
+              ((L = 7) && ERI (w[Y][L]) & K[5])) &&
+              (g[M = w[K[4]][L]] | g[w[M][12]] | g[w[M][13]]) & K[5])
             {                // ERI 28, Reduced ERI 32
               k[2] = M;
               k[3] = w[M][12];
@@ -3044,19 +3307,18 @@ int solve (int p)
               A[1][0] = w[Y][L];
 #endif
             }
-            if ((k[0] & k[1] & k[2] & k[3]) + 1)
+            if (~(k[0] & k[1] & k[2] & k[3]))
               goto XYWT1Tf;
           }
           for (Y = 0; Y < 3; ++Y)
-            if ((g[L = w[K[0]][K[8] + Y]] &
-              LN1 (w[K[0]][K[7] + y], w[X][K[8] + Y], w[K[4]][K[7] + y], 1) & K[5]) ||
-              (g[L = w[K[0]][K[7] + Y]] &
-              LN1 (w[K[0]][K[8] + y], w[X][K[7] + Y], w[K[2]][K[8] + y], 0) & K[5]) ||
-              (B[g[K[0]]] < 3 && ((g[L = w[K[2]][K[8] + Y]] &
-              LN1 (w[K[4]][K[7] + y], w[w[K[0]][K[7] + y]][K[8] + Y],
-              w[K[0]][K[7] + y], 1) & K[5]) || (g[L = w[K[4]][K[7] + Y]] &
+            if (LN1 (w[K[0]][K[7] + y], w[X][K[8] + Y], w[K[4]][K[7] + y], 1) &
+              g[L = w[K[0]][K[8] + Y]] & K[5] ||
+              LN1 (w[K[0]][K[8] + y], w[X][K[7] + Y], w[K[2]][K[8] + y], 0) &
+              g[L = w[K[0]][K[7] + Y]] & K[5] || (B[g[K[0]]] < 3 &&
+              (LN1 (w[K[4]][K[7] + y], w[w[K[0]][K[7] + y]][K[8] + Y],
+              w[K[0]][K[7] + y], 1) & g[L = w[K[2]][K[8] + Y]] & K[5] ||
               LN1 (w[K[2]][K[8] + y], w[w[K[0]][K[8] + y]][K[7] + Y],
-              w[K[0]][K[8] + y], 0) & K[5]))))
+              w[K[0]][K[8] + y], 0) & g[L = w[K[4]][K[7] + Y]] & K[5])))
             {                // Line 33, 34, 35, 36
               k[0] = L;
 #if RJ > 2
@@ -3067,9 +3329,9 @@ int solve (int p)
             }
           for (k[50] = Y = 0; Y < 2; ++Y)
           {
-            if (LN1 (w[K[0]][K[7] + y], w[M = w[K[4]][K[7] + y]][12 | Y],
-              w[X][K[8]], 1) & (g[w[M][6]] | g[w[M][7]] |
-              g[L = w[K[4]][12 | Y]] | g[w[L][6]] | g[w[L][7]]) & K[5])
+            if (LN1 (w[K[0]][K[7] + y], w[M = w[K[4]][K[7] + y]][12 | Y], w[X][K[8]], 1) &
+              (g[w[M][6]] | g[w[M][7]] | g[L = w[K[4]][12 | Y]] |
+              g[w[L][6]] | g[w[L][7]]) & K[5])
             {                // Line 37
               k[0] = w[M][6];
               k[1] = w[M][7];
@@ -3082,9 +3344,9 @@ int solve (int p)
 #endif
               goto XYWT1Tf;
             }
-            if (LN1 (w[K[0]][K[8] + y], w[M = w[K[2]][K[8] + y]][6 | Y],
-              w[X][K[7]], 0) & (g[w[M][12]] | g[w[M][13]] |
-              g[L = w[K[2]][6 | Y]] | g[w[L][12]] | g[w[L][13]]) & K[5])
+            if (LN1 (w[K[0]][K[8] + y], w[M = w[K[2]][K[8] + y]][6 | Y], w[X][K[7]], 0) &
+              (g[w[M][12]] | g[w[M][13]] | g[L = w[K[2]][6 | Y]] |
+              g[w[L][12]] | g[w[L][13]]) & K[5])
             {                // Line 38
               k[0] = w[M][12];
               k[1] = w[M][13];
@@ -3097,8 +3359,8 @@ int solve (int p)
 #endif
               goto XYWT1Tf;
             }
-            if (LN1 (w[K[4]][K[7] + y], w[M = w[K[0]][K[7] + y]][12 | Y],
-              w[M][K[8]], 1) & (g[w[M][6]] | g[w[M][7]] | (B[g[K[0]]] > 2 ? 0 :
+            if (LN1 (w[K[4]][K[7] + y], w[M = w[K[0]][K[7] + y]][12 | Y], w[M][K[8]], 1) &
+              (g[w[M][6]] | g[w[M][7]] | (B[g[K[0]]] > 2 ? 0 :
               g[L = w[K[2]][12 | Y]] | g[w[L][6]] | g[w[L][7]])) & K[5])
             {                // Line 39
               k[0] = w[M][6];
@@ -3115,8 +3377,8 @@ int solve (int p)
 #endif
               goto XYWT1Tf;
             }
-            if (LN1 (w[K[2]][K[8] + y], w[M = w[K[0]][K[8] + y]][6 | Y],
-              w[M][K[7]], 0) & (g[w[M][12]] | g[w[M][13]] | (B[g[K[0]]] > 2 ? 0 :
+            if (LN1 (w[K[2]][K[8] + y], w[M = w[K[0]][K[8] + y]][6 | Y], w[M][K[7]], 0) &
+              (g[w[M][12]] | g[w[M][13]] | (B[g[K[0]]] > 2 ? 0 :
               g[L = w[K[4]][6 | Y]] | g[w[L][12]] | g[w[L][13]])) & K[5])
             {                // Line 40
               k[0] = w[M][12];
@@ -3135,15 +3397,15 @@ int solve (int p)
             }
           }
           if (((N = LN1 (w[K[0]][K[8] + y], w[K[2]][K[8] + y], w[X][K[7]], 0) & K[5]) ||
-            (ERI (X) & ERI (Z) & K[5])) &&
-            (((g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] |
-            (N ? g[w[X][12]] | g[w[X][13]] | g[w[Z][12]] | g[w[Z][13]] :
-            g[X] | g[Z] | g[L = w[X][K[7]]] | g[w[L][6]] | g[w[L][7]]) |
-            g[w[K[2]][12]] | g[w[K[2]][13]] | g[K[6]] | g[w[K[6]][12]] | g[w[K[6]][13]]) & K[5]) ||
-            ((g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
-            g[w[K[0]][K[7]]] | g[w[w[K[0]][K[7]]][6]] | g[w[w[K[0]][K[7]]][7]]) & (g[K[2]] ^ K[5])) ||
+            ERI (X) & ERI (Z) & K[5]) &&
             ((g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] |
-            g[X] | g[w[X][12]] | g[w[X][13]]) & (g[K[4]] ^ K[5]))))
+            (N ? g[w[X][12]] | g[w[X][13]] | g[w[Z][12]] | g[w[Z][13]] :
+            g[X] | g[Z] | g[L = w[X][K[7]]] | g[w[L][6]] | g[w[L][7]]) | g[w[K[2]][12]] |
+            g[w[K[2]][13]] | g[K[6]] | g[w[K[6]][12]] | g[w[K[6]][13]]) & K[5] ||
+            (g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
+            g[w[K[0]][K[7]]] | g[w[w[K[0]][K[7]]][6]] | g[w[w[K[0]][K[7]]][7]]) &
+            (g[K[2]] ^ K[5]) || (g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] |
+            g[w[K[4]][13]] | g[X] | g[w[X][12]] | g[w[X][13]]) & (g[K[4]] ^ K[5])))
           {                  // Line Ring 41, ERI Ring 43
             if (B[g[K[0]]] > 2)
               k[0] = K[6];
@@ -3178,15 +3440,16 @@ int solve (int p)
             goto XYWT1Tf;
           }
           if (((N = LN1 (w[K[0]][K[7] + y], w[K[4]][K[7] + y], w[X][K[8]], 1) & K[5]) ||
-            (ERI (X) & ERI (Z) & K[5])) &&
-            (((g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[4]][6]] | g[w[K[4]][7]] |
+            ERI (X) & ERI (Z) & K[5]) &&
+            ((g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[4]][6]] | g[w[K[4]][7]] |
             (N ? g[w[X][6]] | g[w[X][7]] | g[w[Z][6]] | g[w[Z][7]] :
-            g[X] | g[Z] | g[L = w[X][K[8]]] | g[w[L][12]] | g[w[L][13]]) |
-            g[w[K[2]][6]] | g[w[K[2]][7]] | g[K[6]] | g[w[K[6]][6]] | g[w[K[6]][7]]) & K[5]) ||
-            ((g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
-            g[X] | g[w[X][6]] | g[w[X][7]]) & (g[K[2]] ^ K[5])) ||
-            ((g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] |
-            g[w[K[0]][K[8]]] | g[w[w[K[0]][K[8]]][12]] | g[w[w[K[0]][K[8]]][13]]) & (g[K[4]] ^ K[5]))))
+            g[X] | g[Z] | g[L = w[X][K[8]]] | g[w[L][12]] | g[w[L][13]]) | g[w[K[2]][6]] |
+            g[w[K[2]][7]] | g[K[6]] | g[w[K[6]][6]] | g[w[K[6]][7]]) & K[5] ||
+            (g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
+            g[X] | g[w[X][6]] | g[w[X][7]]) & (g[K[2]] ^ K[5]) ||
+            (g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] |
+            g[w[K[0]][K[8]]] | g[w[w[K[0]][K[8]]][12]] |
+            g[w[w[K[0]][K[8]]][13]]) & (g[K[4]] ^ K[5])))
           {                  // Line Ring 42, ERI Ring 44
             if (B[g[K[0]]] > 2)
               k[0] = K[6];
@@ -3221,13 +3484,13 @@ int solve (int p)
             goto XYWT1Tf;
           }
         }
-        if ((ERI (K[0]) & K[5]) &&
-          (((g[y = w[K[0]][K[7]]] | g[w[y][6]] | g[w[y][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
-          g[Y = w[K[0]][K[8]]] | g[w[Y][12]] | g[w[Y][13]] | g[w[K[4]][12]] | g[w[K[4]][13]]) & K[5]) ||
-          ((g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
-          g[y] | g[w[y][6]] | g[w[y][7]]) & (g[K[2]] ^ K[5])) ||
-          ((g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] |
-          g[Y] | g[w[Y][12]] | g[w[Y][13]]) & (g[K[4]] ^ K[5]))))
+        if (ERI (K[0]) & K[5] && ((g[y = w[K[0]][K[7]]] | g[w[y][6]] | g[w[y][7]] |
+          g[w[K[2]][6]] | g[w[K[2]][7]] | g[Y = w[K[0]][K[8]]] | g[w[Y][12]] |
+          g[w[Y][13]] | g[w[K[4]][12]] | g[w[K[4]][13]]) & K[5] ||
+          (g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
+          g[y] | g[w[y][6]] | g[w[y][7]]) & (g[K[2]] ^ K[5]) ||
+          (g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] |
+          g[Y] | g[w[Y][12]] | g[w[Y][13]]) & (g[K[4]] ^ K[5])))
         {                    // ERI Ring 45
           k[0] = y;
           k[1] = w[y][6];
@@ -3245,13 +3508,13 @@ int solve (int p)
 #endif
           goto XYWT1Tf;
         }
-        if (B[g[K[0]]] < 3 && (ERI (K[6]) & K[5]) &&
-          (((g[y = w[K[4]][K[7]]] | g[w[y][6]] | g[w[y][7]] | g[w[K[4]][6]] | g[w[K[4]][7]] |
-          g[Y = w[K[2]][K[8]]] | g[w[Y][12]] | g[w[Y][13]] | g[w[K[2]][12]] | g[w[K[2]][13]]) & K[5]) ||
-          ((g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
-          g[w[K[0]][K[7]]] | g[w[w[K[0]][K[7]]][6]] | g[w[w[K[0]][K[7]]][7]]) & (g[K[2]] ^ K[5])) ||
-          ((g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] |
-          g[w[K[0]][K[8]]] | g[w[w[K[0]][K[8]]][12]] | g[w[w[K[0]][K[8]]][13]]) & (g[K[4]] ^ K[5]))))
+        if (B[g[K[0]]] < 3 && ERI (K[6]) & K[5] && ((g[y = w[K[4]][K[7]]] |
+          g[w[y][6]] | g[w[y][7]] | g[w[K[4]][6]] | g[w[K[4]][7]] | g[Y = w[K[2]][K[8]]] |
+          g[w[Y][12]] | g[w[Y][13]] | g[w[K[2]][12]] | g[w[K[2]][13]]) & K[5] ||
+          (g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] | g[w[K[0]][K[7]]] |
+          g[w[w[K[0]][K[7]]][6]] | g[w[w[K[0]][K[7]]][7]]) & (g[K[2]] ^ K[5]) ||
+          (g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] | g[w[K[0]][K[8]]] |
+          g[w[w[K[0]][K[8]]][12]] | g[w[w[K[0]][K[8]]][13]]) & (g[K[4]] ^ K[5])))
         {                    // ERI Ring 46
           k[0] = w[K[4]][6];
           k[1] = w[K[4]][7];
@@ -3344,17 +3607,17 @@ int solve (int p)
 #endif
             if (N)
             {
-              if ((~(g[w[X][6]] | g[w[X][7]]) & K[5]) &&
-                (((g[L = w[K[0]][K[8]]] | g[w[L][12]] | g[w[L][13]] |
+              if (~(g[w[X][6]] | g[w[X][7]]) & K[5] &&
+                ((g[L = w[K[0]][K[8]]] | g[w[L][12]] | g[w[L][13]] |
                 g[w[K[4]][12]] | g[w[K[4]][13]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
                 g[M = w[K[2]][13 ^ y]] | g[w[M][6]] | g[w[M][7]] |
                 ((g[w[Z][6]] | g[w[Z][7]]) & K[5] ? 0 :
                 g[Y = w[K[2]][K[8]]] | g[w[Y][12]] | g[w[Y][13]] |
-                g[K[6]] | g[w[K[6]][12]] | g[w[K[6]][13]])) & K[5]) ||
-                ((g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
-                g[Y = w[K[0]][K[7]]] | g[w[Y][6]] | g[w[Y][7]]) & (g[K[2]] ^ K[5])) ||
-                ((g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] |
-                g[Y = w[K[0]][K[8]]] | g[w[Y][12]] | g[w[Y][13]]) & (g[K[4]] ^ K[5]))))
+                g[K[6]] | g[w[K[6]][12]] | g[w[K[6]][13]])) & K[5] ||
+                (g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
+                g[Y = w[K[0]][K[7]]] | g[w[Y][6]] | g[w[Y][7]]) & (g[K[2]] ^ K[5]) ||
+                (g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] |
+                g[Y = w[K[0]][K[8]]] | g[w[Y][12]] | g[w[Y][13]]) & (g[K[4]] ^ K[5])))
               {              // Reduced Line Ring 59, 63
                 k[1] = L;
                 k[2] = w[L][12];
@@ -3368,7 +3631,7 @@ int solve (int p)
                 k[6] = w[K[4]][13];
 #if RJ > 2
                 k[50] = 12;
-                A[0][1] = -1;
+                A[0][1] = A[0][2] = -1;
 #endif
                 if (~(g[w[Z][6]] | g[w[Z][7]]) & K[5])
                 {            // Reduced Line Ring 63
@@ -3380,36 +3643,34 @@ int solve (int p)
                   if (B[g[K[0]]] > 2)
                     k[9] = K[6];
 #if RJ > 2
-                  A[1][1] = -1;
+                  A[1][1] = A[1][2] = -1;
 #endif
                 }
               }
-              else if (B[g[K[0]]] < 3 && (~g[X] & K[5]) &&
-                (((g[Y = w[K[4]][L = 6]] | g[w[Y][12]] | g[w[Y][13]]) &
-                ~g[w[X][7]] & K[5]) ||
-                ((g[Y = w[K[4]][L = 7]] | g[w[Y][12]] | g[w[Y][13]]) &
-                ~g[w[X][6]] & K[5])))
+              else if (B[g[K[0]]] < 3 && ~g[X] & K[5] &&
+                ((g[Y = w[K[4]][L = 6]] | g[w[Y][12]] | g[w[Y][13]]) & ~g[w[X][7]] & K[5] ||
+                (g[Y = w[K[4]][L = 7]] | g[w[Y][12]] | g[w[Y][13]]) & ~g[w[X][6]] & K[5]))
               {              // Line 67
                 k[1] = Y;
                 k[2] = w[Y][12];
                 k[3] = w[Y][13];
 #if RJ > 2
                 A[0][0] = w[X][L];
-                A[0][1] = -1;
+                A[0][1] = A[0][2] = -1;
 #endif
               }
             }
           }
           else if (B[g[K[0]]] < 3 &&
-            (LB3 (w[K[2]][12 | y], w[w[K[0]][12 | y]][K[7]], w[K[0]][12 | y], 0) & K[5]) &&
-            ((g[w[K[4]][L = K[7]]] & ~(g[w[Z][6]] | g[w[Z][7]]) & K[5]) ||
-            (g[w[K[4]][++L]] & ~(g[Z] | g[w[Z][7]]) & K[5]) ||
-            (g[w[K[4]][++L]] & ~(g[Z] | g[w[Z][6]]) & K[5])))
+            LB3 (w[K[2]][12 | y], w[w[K[0]][12 | y]][K[7]], w[K[0]][12 | y], 0) & K[5] &&
+            (g[w[K[4]][L = K[7]]] & ~(g[w[Z][6]] | g[w[Z][7]]) & K[5] ||
+            g[w[K[4]][++L]] & ~(g[Z] | g[w[Z][7]]) & K[5] ||
+            g[w[K[4]][++L]] & ~(g[Z] | g[w[Z][6]]) & K[5]))
           {                  // Line 71
             k[0] = w[K[4]][L];
 #if RJ > 2
             A[0][0] = w[w[K[0]][12 | y]][L];
-            A[0][1] = -1;
+            A[0][1] = A[0][2] = -1;
             A[1][0] = X;
             A[1][1] = w[X][6];
             A[1][2] = w[X][7];
@@ -3423,13 +3684,13 @@ int solve (int p)
             k[2] = w[Y][7];
 #if RJ > 2
             A[0][0] = Z;
-            A[0][1] = -1;
+            A[0][1] = A[0][2] = -1;
             A[1][0] = X;
             A[1][1] = w[X][6];
             A[1][2] = w[X][7];
 #endif
           }
-          if ((k[0] & k[1]) + 1)
+          if (~(k[0] & k[1]))
             goto XYWT1Tf;
           if ((N = LB3 (w[K[0]][6 | y], w[K[4]][6 | y], w[X][K[8]], 1) & K[5]) ||
             LB3 (w[K[0]][K[8]], w[X][7 ^ y], w[X][6 | y], 1) & K[5])
@@ -3447,17 +3708,16 @@ int solve (int p)
 #endif
             if (N)
             {
-              if ((~(g[w[X][12]] | g[w[X][13]]) & K[5]) &&
-                (((g[L = w[K[0]][K[7]]] | g[w[L][6]] | g[w[L][7]] |
+              if (~(g[w[X][12]] | g[w[X][13]]) & K[5] &&
+                ((g[L = w[K[0]][K[7]]] | g[w[L][6]] | g[w[L][7]] |
                 g[w[K[2]][6]] | g[w[K[2]][7]] | g[w[K[4]][12]] | g[w[K[4]][13]] |
-                g[M = w[K[4]][7 ^ y]] | g[w[M][12]] | g[w[M][13]] |
-                ((g[w[Z][12]] | g[w[Z][13]]) & K[5] ? 0 :
-                g[Y = w[K[4]][K[7]]] | g[w[Y][6]] | g[w[Y][7]] |
-                g[K[6]] | g[w[K[6]][6]] | g[w[K[6]][7]])) & K[5]) ||
-                ((g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
-                g[Y = w[K[0]][K[7]]] | g[w[Y][6]] | g[w[Y][7]]) & (g[K[2]] ^ K[5])) ||
-                ((g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] |
-                g[Y = w[K[0]][K[8]]] | g[w[Y][12]] | g[w[Y][13]]) & (g[K[4]] ^ K[5]))))
+                g[M = w[K[4]][7 ^ y]] | g[w[M][12]] | g[w[M][13]] | ((g[w[Z][12]] |
+                g[w[Z][13]]) & K[5] ? 0 : g[Y = w[K[4]][K[7]]] | g[w[Y][6]] |
+                g[w[Y][7]] | g[K[6]] | g[w[K[6]][6]] | g[w[K[6]][7]])) & K[5] ||
+                (g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
+                g[Y = w[K[0]][K[7]]] | g[w[Y][6]] | g[w[Y][7]]) & (g[K[2]] ^ K[5]) ||
+                (g[w[K[0]][12]] | g[w[K[0]][13]] | g[w[K[4]][12]] | g[w[K[4]][13]] |
+                g[Y = w[K[0]][K[8]]] | g[w[Y][12]] | g[w[Y][13]]) & (g[K[4]] ^ K[5])))
               {              // Reduced Line Ring 60, 64
                 k[1] = L;
                 k[2] = w[L][6];
@@ -3471,7 +3731,7 @@ int solve (int p)
                 k[6] = w[K[4]][13];
 #if RJ > 2
                 k[50] = 12;
-                A[0][1] = -1;
+                A[0][1] = A[0][2] = -1;
 #endif
                 if (~(g[w[Z][12]] | g[w[Z][13]]) & K[5])
                 {            // Reduced Line Ring 64
@@ -3483,36 +3743,34 @@ int solve (int p)
                   if (B[g[K[0]]] > 2)
                     k[9] = K[6];
 #if RJ > 2
-                  A[1][1] = -1;
+                  A[1][1] = A[1][2] = -1;
 #endif
                 }
               }
-              else if (B[g[K[0]]] < 3 && (~g[X] & K[5]) &&
-                (((g[Y = w[K[2]][L = 12]] | g[w[Y][6]] | g[w[Y][7]]) &
-                ~g[w[X][13]] & K[5]) ||
-                ((g[Y = w[K[2]][L = 13]] | g[w[Y][6]] | g[w[Y][7]]) &
-                ~g[w[X][12]] & K[5])))
+              else if (B[g[K[0]]] < 3 && ~g[X] & K[5] &&
+                ((g[Y = w[K[2]][L = 12]] | g[w[Y][6]] | g[w[Y][7]]) & ~g[w[X][13]] & K[5] ||
+                (g[Y = w[K[2]][L = 13]] | g[w[Y][6]] | g[w[Y][7]]) & ~g[w[X][12]] & K[5]))
               {              // Line 68
                 k[1] = Y;
                 k[2] = w[Y][6];
                 k[3] = w[Y][7];
 #if RJ > 2
                 A[0][0] = w[X][L];
-                A[0][1] = -1;
+                A[0][1] = A[0][2] = -1;
 #endif
               }
             }
           }
           else if (B[g[K[0]]] < 3 &&
-            (LB3 (w[K[4]][6 | y], w[w[K[0]][6 | y]][K[8]], w[K[0]][6 | y], 1) & K[5]) &&
-            ((g[w[K[2]][L = K[8]]] & ~(g[w[Z][12]] | g[w[Z][13]]) & K[5]) ||
-            (g[w[K[2]][++L]] & ~(g[Z] | g[w[Z][13]]) & K[5]) ||
-            (g[w[K[2]][++L]] & ~(g[Z] | g[w[Z][12]]) & K[5])))
+            LB3 (w[K[4]][6 | y], w[w[K[0]][6 | y]][K[8]], w[K[0]][6 | y], 1) & K[5] &&
+            (g[w[K[2]][L = K[8]]] & ~(g[w[Z][12]] | g[w[Z][13]]) & K[5] ||
+            g[w[K[2]][++L]] & ~(g[Z] | g[w[Z][13]]) & K[5] ||
+            g[w[K[2]][++L]] & ~(g[Z] | g[w[Z][12]]) & K[5]))
           {                  // Line 72
             k[0] = w[K[2]][L];
 #if RJ > 2
             A[0][0] = w[w[K[0]][6 | y]][L];
-            A[0][1] = -1;
+            A[0][1] = A[0][2] = -1;
             A[1][0] = X;
             A[1][1] = w[X][12];
             A[1][2] = w[X][13];
@@ -3526,17 +3784,17 @@ int solve (int p)
             k[2] = w[Y][13];
 #if RJ > 2
             A[0][0] = Z;
-            A[0][1] = -1;
+            A[0][1] = A[0][2] = -1;
             A[1][0] = X;
             A[1][1] = w[X][12];
             A[1][2] = w[X][13];
 #endif
           }
-          if ((k[0] & k[1]) + 1)
+          if (~(k[0] & k[1]))
             goto XYWT1Tf;
           if ((N = LB3 (w[K[6]][12 | y], w[K[4]][12 | y], w[Z][K[7]], 0) & K[5]) ||
             (B[g[K[0]]] < 3 && LB3 (w[K[4]][K[7]], w[X][13 ^ y], w[X][12 | y], 0) & K[5]))
-          {                  // Box 53, Line 57, 69, 69a, Reduced Line Ring 61, 65
+          {                  // Box 53, Line 57, 69, Reduced Line 69a, Reduced Line Ring 61, 65
             if (B[g[K[0]]] < 3)
             {
               if (g[w[K[6]][13 ^ y]] & K[5])
@@ -3553,30 +3811,25 @@ int solve (int p)
             A[0][1] = w[X][6];
             A[0][2] = w[X][7];
             A[1][0] = Z;
-            if (B[g[K[0]]] < 3)
-            {
-              A[1][1] = w[Z][6];
-              A[1][2] = w[Z][7];
-            }
-            else
-              A[1][1] = -1;
+            A[1][1] = w[Z][6];
+            A[1][2] = w[Z][7];
 #endif
             if (N)
             {
-              if ((~(g[w[X][6]] | g[w[X][7]]) & K[5]) &&
-                (((g[L = w[K[2]][K[8]]] | g[w[L][12]] | g[w[L][13]] |
+              if (~(g[w[X][6]] | g[w[X][7]]) & K[5] &&
+                ((g[L = w[K[2]][K[8]]] | g[w[L][12]] | g[w[L][13]] |
                 g[w[K[2]][12]] | g[w[K[2]][13]] | g[M = w[K[4]][13 ^ y]] |
                 (B[g[K[0]]] > 2 ? g[K[6]] : g[w[M][6]] | g[w[M][7]] |
                 g[w[K[4]][6]] | g[w[K[4]][7]]) | g[N = w[K[6]][13 ^ y]] |
                 ((g[w[Z][6]] | g[w[Z][7]]) & K[5] ? 0 :
                 g[Y = w[K[0]][K[8]]] | g[w[Y][12]] | g[w[Y][13]] |
-                g[w[K[0]][12]] | g[w[K[0]][13]])) & K[5]) ||
-                ((g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
-                g[Y = w[K[0]][K[7]]] | g[w[Y][6]] | g[w[Y][7]]) & (g[K[2]] ^ K[5])) ||
-                ((g[w[K[4]][12]] | g[w[K[4]][13]] | g[w[K[0]][12]] | g[w[K[0]][13]] |
-                g[Y = w[K[0]][K[8]]] | g[w[Y][12]] | g[w[Y][13]]) & (g[K[4]] ^ K[5]))))
+                g[w[K[0]][12]] | g[w[K[0]][13]])) & K[5] ||
+                (g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
+                g[Y = w[K[0]][K[7]]] | g[w[Y][6]] | g[w[Y][7]]) & (g[K[2]] ^ K[5]) ||
+                (g[w[K[4]][12]] | g[w[K[4]][13]] | g[w[K[0]][12]] | g[w[K[0]][13]] |
+                g[Y = w[K[0]][K[8]]] | g[w[Y][12]] | g[w[Y][13]]) & (g[K[4]] ^ K[5])))
               {              // Reduced Line Ring 61, 65
-                if (B[g[K[0]]] < 3 || (~(g[w[Z][6]] | g[w[Z][7]]) & K[5]))
+                if (B[g[K[0]]] < 3 || ~(g[w[Z][6]] | g[w[Z][7]]) & K[5])
                 {
                   if (B[g[K[0]]] < 3)
                   {
@@ -3594,7 +3847,7 @@ int solve (int p)
                   k[6] = w[K[2]][13];
 #if RJ > 2
                   k[50] = 12;
-                  A[0][1] = -1;
+                  A[0][1] = A[0][2] = -1;
 #endif
                 }
                 if (~(g[w[Z][6]] | g[w[Z][7]]) & K[5])
@@ -3606,47 +3859,52 @@ int solve (int p)
                   k[17] = w[K[0]][13];
 #if RJ > 2
                   k[50] = 12;
-                  A[1][1] = -1;
+                  A[1][1] = A[1][2] = -1;
 #endif
                 }
               }
-              else if ((~g[X] & K[5]) &&
-                ((~g[w[X][7]] & (g[Y = w[K[2]][L = 6]] |
-                (B[g[K[0]]] < 3 || (~(g[w[Z][6]] | g[w[Z][7]]) & K[5]) ?
-                g[w[Y][12]] | g[w[Y][13]] : 0)) & K[5]) ||
-                (~g[w[X][6]] & (g[Y = w[K[2]][L = 7]] |
-                (B[g[K[0]]] < 3 || (~(g[w[Z][6]] | g[w[Z][7]]) & K[5]) ?
-                g[w[Y][12]] | g[w[Y][13]] : 0)) & K[5])))
-              {              // Line 69, 69a
+              else if (~g[X] & K[5] && (~g[w[X][7]] & (g[Y = w[K[2]][L = 6]] |
+                (B[g[K[0]]] < 3 || ~(g[w[Z][6]] | g[w[Z][7]]) & K[5] ?
+                g[w[Y][12]] | g[w[Y][13]] : 0)) & K[5] ||
+                ~g[w[X][6]] & (g[Y = w[K[2]][L = 7]] |
+                (B[g[K[0]]] < 3 || ~(g[w[Z][6]] | g[w[Z][7]]) & K[5] ?
+                g[w[Y][12]] | g[w[Y][13]] : 0)) & K[5]))
+              {              // Line 69, Reduced Line 69a
                 k[1] = Y;
-                if (B[g[K[0]]] < 3 || (~(g[w[Z][6]] | g[w[Z][7]]) & K[5]))
+                if (B[g[K[0]]] < 3 || ~(g[w[Z][6]] | g[w[Z][7]]) & K[5])
                 {
                   k[2] = w[Y][12];
                   k[3] = w[Y][13];
+#if RJ > 2
+                  if (B[g[K[0]]] > 2)
+                  {
+                    k[50] = 4;
+                    A[1][1] = A[1][2] = -1;
+                  }
+#endif
                 }
 #if RJ > 2
                 A[0][0] = w[X][L];
-                A[0][1] = -1;
+                A[0][1] = A[0][2] = -1;
 #endif
               }
             }
           }
-          else if ((LB3 (w[K[4]][12 | y], w[X][K[7]], w[K[6]][12 | y], 0) & K[5]) &&
-            ((g[w[K[0]][L = K[7]]] & ~(g[w[Z][6]] | g[w[Z][7]]) & K[5]) ||
-            (g[w[K[0]][++L]] & ~(g[Z] | g[w[Z][7]]) & K[5]) ||
-            (g[w[K[0]][++L]] & ~(g[Z] | g[w[Z][6]]) & K[5])))
+          else if (LB3 (w[K[4]][12 | y], w[X][K[7]], w[K[6]][12 | y], 0) & K[5] &&
+            (g[w[K[0]][L = K[7]]] & ~(g[w[Z][6]] | g[w[Z][7]]) & K[5] ||
+            g[w[K[0]][++L]] & ~(g[Z] | g[w[Z][7]]) & K[5] ||
+            g[w[K[0]][++L]] & ~(g[Z] | g[w[Z][6]]) & K[5]))
           {                  // Line 73
             k[0] = w[K[0]][L];
 #if RJ > 2
             A[0][0] = w[X][L];
-            A[0][1] = -1;
+            A[0][1] = A[0][2] = -1;
             A[1][0] = X;
             A[1][1] = w[X][6];
             A[1][2] = w[X][7];
 #endif
           }
-          else if (B[g[K[0]]] < 3 &&
-            (g[Y = w[K[4]][K[7]]] | g[w[Y][6]] | g[w[Y][7]]) &
+          else if (B[g[K[0]]] < 3 && (g[Y = w[K[4]][K[7]]] | g[w[Y][6]] | g[w[Y][7]]) &
             LN3 (w[K[6]][12 | y], w[w[K[4]][12 | y]][K[7]], w[K[4]][12 | y], 0) & K[5])
           {                  // Line 77
             k[0] = Y;
@@ -3654,17 +3912,17 @@ int solve (int p)
             k[2] = w[Y][7];
 #if RJ > 2
             A[0][0] = X;
-            A[0][1] = -1;
+            A[0][1] = A[0][2] = -1;
             A[1][0] = Z;
             A[1][1] = w[Z][6];
             A[1][2] = w[Z][7];
 #endif
           }
-          if ((k[0] & k[1]) + 1)
+          if (~(k[0] & k[1]))
             goto XYWT1Tf;
           if ((N = LB3 (w[K[6]][6 | y], w[K[2]][6 | y], w[Z][K[8]], 1) & K[5]) ||
             (B[g[K[0]]] < 3 && LB3 (w[K[2]][K[8]], w[X][7 ^ y], w[X][6 | y], 1) & K[5]))
-          {                  // Box 54, Line 58, 70, 70a, Reduced Line Ring 62, 66
+          {                  // Box 54, Line 58, 70, Reduced Line 70a, Reduced Line Ring 62, 66
             if (B[g[K[0]]] < 3)
             {
               if (g[w[K[6]][7 ^ y]] & K[5])
@@ -3686,25 +3944,23 @@ int solve (int p)
               A[1][1] = w[Z][12];
               A[1][2] = w[Z][13];
             }
-            else
-              A[1][1] = -1;
 #endif
             if (N)
             {
-              if ((~(g[w[X][12]] | g[w[X][13]]) & K[5]) &&
-                (((g[L = w[K[4]][K[7]]] | g[w[L][6]] | g[w[L][7]] |
+              if (~(g[w[X][12]] | g[w[X][13]]) & K[5] &&
+                ((g[L = w[K[4]][K[7]]] | g[w[L][6]] | g[w[L][7]] |
                 g[w[K[4]][6]] | g[w[K[4]][7]] | g[M = w[K[2]][7 ^ y]] |
                 g[N = w[K[6]][7 ^ y]] | (B[g[K[0]]] > 2 ? g[K[6]] :
                 g[w[M][12]] | g[w[M][13]] | g[w[K[2]][12]] | g[w[K[2]][13]]) |
                 ((g[w[Z][12]] | g[w[Z][13]]) & K[5] ? 0 :
                 g[Y = w[K[0]][K[7]]] | g[w[Y][6]] | g[w[Y][7]] |
-                g[w[K[0]][6]] | g[w[K[0]][7]])) & K[5]) ||
-                ((g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
-                g[Y = w[K[0]][K[7]]] | g[w[Y][6]] | g[w[Y][7]]) & (g[K[2]] ^ K[5])) ||
-                ((g[w[K[4]][12]] | g[w[K[4]][13]] | g[w[K[0]][12]] | g[w[K[0]][13]] |
-                g[Y = w[K[0]][K[8]]] | g[w[Y][12]] | g[w[Y][13]]) & (g[K[4]] ^ K[5]))))
+                g[w[K[0]][6]] | g[w[K[0]][7]])) & K[5] ||
+                (g[w[K[0]][6]] | g[w[K[0]][7]] | g[w[K[2]][6]] | g[w[K[2]][7]] |
+                g[Y = w[K[0]][K[7]]] | g[w[Y][6]] | g[w[Y][7]]) & (g[K[2]] ^ K[5]) ||
+                (g[w[K[4]][12]] | g[w[K[4]][13]] | g[w[K[0]][12]] | g[w[K[0]][13]] |
+                g[Y = w[K[0]][K[8]]] | g[w[Y][12]] | g[w[Y][13]]) & (g[K[4]] ^ K[5])))
               {              // Reduced Line Ring 62, 66
-                if (B[g[K[0]]] < 3 || (~(g[w[Z][12]] | g[w[Z][13]]) & K[5]))
+                if (B[g[K[0]]] < 3 || ~(g[w[Z][12]] | g[w[Z][13]]) & K[5])
                 {
                   if (B[g[K[0]]] < 3)
                   {
@@ -3722,7 +3978,7 @@ int solve (int p)
                   k[6] = w[K[4]][7];
 #if RJ > 2
                   k[50] = 12;
-                  A[0][1] = -1;
+                  A[0][1] = A[0][2] = -1;
 #endif
                 }
                 if (~(g[w[Z][12]] | g[w[Z][13]]) & K[5])
@@ -3734,47 +3990,52 @@ int solve (int p)
                   k[17] = w[K[0]][7];
 #if RJ > 2
                   k[50] = 12;
-                  A[1][1] = -1;
+                  A[1][1] = A[1][2] = -1;
 #endif
                 }
               }
-              else if ((~g[X] & K[5]) &&
-                ((~g[w[X][13]] & (g[Y = w[K[4]][L = 12]] |
-                (B[g[K[0]]] < 3 || (~(g[w[Z][12]] | g[w[Z][13]]) & K[5]) ?
-                g[w[Y][6]] | g[w[Y][7]] : 0)) & K[5]) ||
-                (~g[w[X][12]] & (g[Y = w[K[4]][L = 13]] |
-                (B[g[K[0]]] < 3 || (~(g[w[Z][12]] | g[w[Z][13]]) & K[5]) ?
-                g[w[Y][6]] | g[w[Y][7]] : 0)) & K[5])))
-              {              // Line 70, 70a
+              else if (~g[X] & K[5] && (~g[w[X][13]] & (g[Y = w[K[4]][L = 12]] |
+                (B[g[K[0]]] < 3 || ~(g[w[Z][12]] | g[w[Z][13]]) & K[5] ?
+                g[w[Y][6]] | g[w[Y][7]] : 0)) & K[5] ||
+                ~g[w[X][12]] & (g[Y = w[K[4]][L = 13]] |
+                (B[g[K[0]]] < 3 || ~(g[w[Z][12]] | g[w[Z][13]]) & K[5] ?
+                g[w[Y][6]] | g[w[Y][7]] : 0)) & K[5]))
+              {              // Line 70, Reduced Line 70a
                 k[1] = Y;
-                if (B[g[K[0]]] < 3 || (~(g[w[Z][12]] | g[w[Z][13]]) & K[5]))
+                if (B[g[K[0]]] < 3 || ~(g[w[Z][12]] | g[w[Z][13]]) & K[5])
                 {
                   k[2] = w[Y][6];
                   k[3] = w[Y][7];
+#if RJ > 2
+                  if (B[g[K[0]]] > 2)
+                  {
+                    k[50] = 4;
+                    A[1][1] = A[1][2] = -1;
+                  }
+#endif
                 }
 #if RJ > 2
                 A[0][0] = w[X][L];
-                A[0][1] = -1;
+                A[0][1] = A[0][2] = -1;
 #endif
               }
             }
           }
-          else if ((LB3 (w[K[2]][6 | y], w[X][K[8]], w[K[6]][6 | y], 1) & K[5]) &&
-            ((g[w[K[0]][L = K[8]]] & ~(g[w[Z][12]] | g[w[Z][13]]) & K[5]) ||
-            (g[w[K[0]][++L]] & ~(g[Z] | g[w[Z][13]]) & K[5]) ||
-            (g[w[K[0]][++L]] & ~(g[Z] | g[w[Z][12]]) & K[5])))
+          else if (LB3 (w[K[2]][6 | y], w[X][K[8]], w[K[6]][6 | y], 1) & K[5] &&
+            (g[w[K[0]][L = K[8]]] & ~(g[w[Z][12]] | g[w[Z][13]]) & K[5] ||
+            g[w[K[0]][++L]] & ~(g[Z] | g[w[Z][13]]) & K[5] ||
+            g[w[K[0]][++L]] & ~(g[Z] | g[w[Z][12]]) & K[5]))
           {                  // Line 74
             k[0] = w[K[0]][L];
 #if RJ > 2
             A[0][0] = w[X][L];
-            A[0][1] = -1;
+            A[0][1] = A[0][2] = -1;
             A[1][0] = X;
             A[1][1] = w[X][12];
             A[1][2] = w[X][13];
 #endif
           }
-          else if (B[g[K[0]]] < 3 &&
-            (g[Y = w[K[2]][K[8]]] | g[w[Y][12]] | g[w[Y][13]]) &
+          else if (B[g[K[0]]] < 3 && (g[Y = w[K[2]][K[8]]] | g[w[Y][12]] | g[w[Y][13]]) &
             LN3 (w[K[6]][6 | y], w[w[K[2]][6 | y]][K[8]], w[K[2]][6 | y], 1) & K[5])
           {                  // Line 78
             k[0] = Y;
@@ -3782,41 +4043,41 @@ int solve (int p)
             k[2] = w[Y][13];
 #if RJ > 2
             A[0][0] = X;
-            A[0][1] = -1;
+            A[0][1] = A[0][2] = -1;
             A[1][0] = Z;
             A[1][1] = w[Z][12];
             A[1][2] = w[Z][13];
 #endif
           }
-          if ((k[0] & k[1]) + 1)
+          if (~(k[0] & k[1]))
           {
 XYWT1Tf:
-            if (k[0] + 1)
+            if (~k[0])
             {
               k[18] = g[k[0]];
               g[k[0]] &= ~K[5];
             }
-            if (k[1] + 1)
+            if (~k[1])
             {
               k[19] = g[k[1]];
               g[k[1]] &= ~K[5];
             }
-            if (k[2] + 1)
+            if (~k[2])
             {
               k[20] = g[k[2]];
               g[k[2]] &= ~K[5];
             }
-            if (k[3] + 1)
+            if (~k[3])
             {
               k[21] = g[k[3]];
               g[k[3]] &= ~K[5];
             }
-            if (k[4] + 1)
+            if (~k[4])
             {
               k[22] = g[k[4]];
               g[k[4]] &= ~K[5];
             }
-            if (k[5] + 1)
+            if (~k[5])
             {
               k[23] = g[k[5]];
               k[24] = g[k[10]];
@@ -3858,15 +4119,15 @@ XYWT1Tf:
               g[w[K[0]][K[8] + 2]] &= ~Y;
               g[w[K[4]][12]] &= ~Y;
               g[w[K[4]][13]] &= ~Y;
-              if (k[6] + 1)
+              if (~k[6])
               {
                 k[43] = g[k[6]];
                 g[k[6]] &= ~K[5];
-                if (k[7] + 1)
+                if (~k[7])
                 {
                   k[44] = g[k[7]];
                   g[k[7]] &= ~K[5];
-                  if (k[8] + 1)
+                  if (~k[8])
                   {
                     k[45] = g[k[8]];
                     k[46] = g[k[15]];
@@ -3877,7 +4138,7 @@ XYWT1Tf:
                     g[k[16]] &= ~K[5];
                     g[k[17]] &= ~K[5];
                   }
-                  if (k[9] + 1)
+                  if (~k[9])
                   {
                     k[49] = g[k[9]];
                     g[k[9]] &= ~K[5];
@@ -3890,47 +4151,47 @@ XYWT1Tf:
               p, B[g[K[0]]] < 3 ? "-Wing Type 1 " : "Z-", k[50] & 4 ? " Reduced " : " ",
               k[50] & 1 ? "Box" : (k[50] & 2 ? "ERI" : R_C), k[50] & 8 ? " Ring " : " ",
               b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[2]][20]),
-              COL (w[K[0]][20] | w[K[2]][20]), S[K[4]], A[1][0] + 1 ? " between " : " ");
+              COL (w[K[0]][20] | w[K[2]][20]), S[K[4]], ~A[1][0] ? " between " : " ");
             if (k[50] & 2)
               printf ("ERI %d @ b%d", b[K[5]], BOX (A[0][0]));
             else
               printf ("%d @ ", b[K[5]]);
-            printf ("r%dc%d", ROW (w[A[0][0]][20] | (A[0][1] + 1 ? w[A[0][1]][20] : 0) |
-              (A[0][2] + 1 ? w[A[0][2]][20] : 0)), COL (w[A[0][0]][20] |
-              (A[0][1] + 1 ? w[A[0][1]][20] : 0) | (A[0][2] + 1 ? w[A[0][2]][20] : 0)));
-            if (A[1][0] + 1)
+            printf ("r%dc%d", ROW (w[A[0][0]][20] | (~A[0][1] ? w[A[0][1]][20] : 0) |
+              (~A[0][2] ? w[A[0][2]][20] : 0)), COL (w[A[0][0]][20] |
+              (~A[0][1] ? w[A[0][1]][20] : 0) | (~A[0][2] ? w[A[0][2]][20] : 0)));
+            if (~A[1][0])
             {
               if (k[50] & 2)
                 printf (" and ERI %d @ b%d", b[K[5]], BOX (A[1][0]));
               else
                 printf (" and %d @ ", b[K[5]]);
-              printf ("r%dc%d", ROW (w[A[1][0]][20] | (A[1][1] + 1 ? w[A[1][1]][20] : 0) |
-                (A[1][2] + 1 ? w[A[1][2]][20] : 0)), COL (w[A[1][0]][20] |
-                (A[1][1] + 1 ? w[A[1][1]][20] : 0) | (A[1][2] + 1 ? w[A[1][2]][20] : 0)));
+              printf ("r%dc%d", ROW (w[A[1][0]][20] | (~A[1][1] ? w[A[1][1]][20] : 0) |
+                (~A[1][2] ? w[A[1][2]][20] : 0)), COL (w[A[1][0]][20] |
+                (~A[1][1] ? w[A[1][1]][20] : 0) | (~A[1][2] ? w[A[1][2]][20] : 0)));
             }
             printf ("\n=> -%d @", b[K[5]]);
-            if (k[0] + 1)
+            if (~k[0])
               printf (" %s", S[k[0]]);
-            if (k[1] + 1)
+            if (~k[1])
               printf (" %s", S[k[1]]);
-            if (k[2] + 1)
+            if (~k[2])
               printf (" %s", S[k[2]]);
-            if (k[3] + 1)
+            if (~k[3])
               printf (" %s", S[k[3]]);
-            if (k[4] + 1)
+            if (~k[4])
               printf (" %s", S[k[4]]);
-            if (k[5] + 1)
+            if (~k[5])
             {
               printf (" %s %s %s %s %s %s", S[k[5]], S[k[10]], S[k[11]], S[k[12]], S[k[13]], S[k[14]]);
-              if (k[6] + 1)
+              if (~k[6])
               {
                 printf (" %s", S[k[6]]);
-                if (k[7] + 1)
+                if (~k[7])
                 {
                   printf (" %s", S[k[7]]);
-                  if (k[8] + 1)
+                  if (~k[8])
                     printf (" %s %s %s %s", S[k[8]], S[k[15]], S[k[16]], S[k[17]]);
-                  if (k[9] + 1)
+                  if (~k[9])
                     printf (" %s", S[k[9]]);
                 }
               }
@@ -3955,47 +4216,47 @@ XYWT1Tf:
               p, B[g[K[0]]] < 3 ? "-Wing Type 1 " : "Z-", k[50] & 4 ? " Reduced " : " ",
               k[50] & 1 ? "Box" : (k[50] & 2 ? "ERI" : R_C), k[50] & 8 ? " Ring " : " ",
               b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[2]][20]),
-              COL (w[K[0]][20] | w[K[2]][20]), S[K[4]], A[1][0] + 1 ? " between " : " ");
+              COL (w[K[0]][20] | w[K[2]][20]), S[K[4]], ~A[1][0] ? " between " : " ");
             if (k[50] & 2)
               printf ("ERI %d @ b%d", b[K[5]], BOX (A[0][0]));
             else
               printf ("%d @ ", b[K[5]]);
-            printf ("r%dc%d", ROW (w[A[0][0]][20] | (A[0][1] + 1 ? w[A[0][1]][20] : 0) |
-              (A[0][2] + 1 ? w[A[0][2]][20] : 0)), COL (w[A[0][0]][20] |
-              (A[0][1] + 1 ? w[A[0][1]][20] : 0) | (A[0][2] + 1 ? w[A[0][2]][20] : 0)));
-            if (A[1][0] + 1)
+            printf ("r%dc%d", ROW (w[A[0][0]][20] | (~A[0][1] ? w[A[0][1]][20] : 0) |
+              (~A[0][2] ? w[A[0][2]][20] : 0)), COL (w[A[0][0]][20] |
+              (~A[0][1] ? w[A[0][1]][20] : 0) | (~A[0][2] ? w[A[0][2]][20] : 0)));
+            if (~A[1][0])
             {
               if (k[50] & 2)
                 printf (" and ERI %d @ b%d", b[K[5]], BOX (A[1][0]));
               else
                 printf (" and %d @ ", b[K[5]]);
-              printf ("r%dc%d", ROW (w[A[1][0]][20] | (A[1][1] + 1 ? w[A[1][1]][20] : 0) |
-                (A[1][2] + 1 ? w[A[1][2]][20] : 0)), COL (w[A[1][0]][20] |
-                (A[1][1] + 1 ? w[A[1][1]][20] : 0) | (A[1][2] + 1 ? w[A[1][2]][20] : 0)));
+              printf ("r%dc%d", ROW (w[A[1][0]][20] | (~A[1][1] ? w[A[1][1]][20] : 0) |
+                (~A[1][2] ? w[A[1][2]][20] : 0)), COL (w[A[1][0]][20] |
+                (~A[1][1] ? w[A[1][1]][20] : 0) | (~A[1][2] ? w[A[1][2]][20] : 0)));
             }
             printf (" <= +%d @", b[K[5]]);
-            if (k[0] + 1)
+            if (~k[0])
               printf (" %s", S[k[0]]);
-            if (k[1] + 1)
+            if (~k[1])
               printf (" %s", S[k[1]]);
-            if (k[2] + 1)
+            if (~k[2])
               printf (" %s", S[k[2]]);
-            if (k[3] + 1)
+            if (~k[3])
               printf (" %s", S[k[3]]);
-            if (k[4] + 1)
+            if (~k[4])
               printf (" %s", S[k[3]]);
-            if (k[5] + 1)
+            if (~k[5])
             {
               printf (" %s %s %s %s %s %s", S[k[5]], S[k[10]], S[k[11]], S[k[12]], S[k[13]], S[k[14]]);
-              if (k[6] + 1)
+              if (~k[6])
               {
                 printf (" %s", S[k[6]]);
-                if (k[7] + 1)
+                if (~k[7])
                 {
                   printf (" %s", S[k[7]]);
-                  if (k[8] + 1)
+                  if (~k[8])
                     printf (" %s %s %s %s", S[k[8]], S[k[15]], S[k[16]], S[k[17]]);
-                  if (k[9] + 1)
+                  if (~k[9])
                     printf (" %s", S[k[9]]);
                 }
               }
@@ -4013,20 +4274,20 @@ XYWT1Tf:
             }
             printf ("\n");
 #endif
-            if (k[5] + 1)
+            if (~k[5])
             {
-              if (k[6] + 1)
+              if (~k[6])
               {
-                if (k[7] + 1)
+                if (~k[7])
                 {
-                  if (k[8] + 1)
+                  if (~k[8])
                   {
                     g[k[8]] = k[45];
                     g[k[15]] = k[46];
                     g[k[16]] = k[47];
                     g[k[17]] = k[48];
                   }
-                  if (k[9] + 1)
+                  if (~k[9])
                     g[k[9]] = k[49];
                   g[k[7]] = k[44];
                 }
@@ -4053,15 +4314,15 @@ XYWT1Tf:
               g[k[13]] = k[27];
               g[k[14]] = k[28];
             }
-            if (k[4] + 1)
+            if (~k[4])
               g[k[4]] = k[22];
-            if (k[3] + 1)
+            if (~k[3])
               g[k[3]] = k[21];
-            if (k[2] + 1)
+            if (~k[2])
               g[k[2]] = k[20];
-            if (k[1] + 1)
+            if (~k[1])
               g[k[1]] = k[19];
-            if (k[0] + 1)
+            if (~k[0])
               g[k[0]] = k[18];
 #if RJ > 3
             prn ();
@@ -4119,17 +4380,17 @@ XYWT1Tf:
           continue;          // Skip for no XYZ-Hybrid found
 #if RJ > 2
         printf ("%d)%sXYZ-Hybrid: %d @ r%dc%d %s %s Hybrid %d @ %s => -%d @",
-          p, (k[0] | k[1]) + 1 ? " Dual " : " ", b[g[K[2]] | g[K[4]]],
+          p, ~(k[0] | k[1]) ? " Dual " : " ", b[g[K[2]] | g[K[4]]],
           ROW (w[K[0]][20] | w[K[2]][20]), COL (w[K[0]][20] | w[K[2]][20]), S[K[4]],
-          (k[0] | k[1]) + 1 ? "Dual" : (k[0] + 1 ? "Column wise" : "Row wise"),
+          ~(k[0] | k[1]) ? "Dual" : (~k[0] ? "Column wise" : "Row wise"),
           b[K[5]], S[K[6]], b[K[5]]);
-        if (k[0] + 1)
+        if (~k[0])
           printf (" r%dc%d", ROW (w[w[K[0]][6]][20] | w[w[K[0]][7]][20] |
             w[w[K[2]][6]][20] | w[w[K[2]][7]][20] | w[w[K[0]][K[7]]][20] |
             w[w[K[0]][K[7] + 1]][20] | w[w[K[0]][K[7] + 2]][20]), COL (w[w[K[0]][6]][20] |
             w[w[K[0]][7]][20] | w[w[K[2]][6]][20] | w[w[K[2]][7]][20] |
             w[w[K[0]][K[7]]][20] | w[w[K[0]][K[7] + 1]][20] | w[w[K[0]][K[7] + 2]][20]));
-        if (k[1] + 1)
+        if (~k[1])
           printf (" r%dc%d", ROW (w[w[K[0]][12]][20] | w[w[K[0]][13]][20] |
             w[w[K[4]][12]][20] | w[w[K[4]][13]][20] | w[w[K[0]][K[8]]][20] |
             w[w[K[0]][K[8] + 1]][20] | w[w[K[0]][K[8] + 2]][20]), COL (w[w[K[0]][12]][20] |
@@ -4141,17 +4402,17 @@ XYWT1Tf:
           return 1;
 #if RJ > 2
         printf ("%d) Undo%sXYZ-Hybrid: %d @ r%dc%d %s %s Hybrid %d @ %s <= +%d @",
-          p, (k[0] | k[1]) + 1 ? " Dual " : " ", b[g[K[2]] | g[K[4]]],
+          p, ~(k[0] | k[1]) ? " Dual " : " ", b[g[K[2]] | g[K[4]]],
           ROW (w[K[0]][20] | w[K[2]][20]), COL (w[K[0]][20] | w[K[2]][20]), S[K[4]],
-          (k[0] | k[1]) + 1 ? "Dual" : (k[0] + 1 ? "Column wise" : "Row wise"),
+          ~(k[0] | k[1]) ? "Dual" : (~k[0] ? "Column wise" : "Row wise"),
           b[K[5]], S[K[6]], b[K[5]]);
-        if (k[0] + 1)
+        if (~k[0])
           printf (" r%dc%d", ROW (w[w[K[0]][6]][20] | w[w[K[0]][7]][20] |
             w[w[K[2]][6]][20] | w[w[K[2]][7]][20] | w[w[K[0]][K[7]]][20] |
             w[w[K[0]][K[7] + 1]][20] | w[w[K[0]][K[7] + 2]][20]), COL (w[w[K[0]][6]][20] |
             w[w[K[0]][7]][20] | w[w[K[2]][6]][20] | w[w[K[2]][7]][20] |
             w[w[K[0]][K[7]]][20] | w[w[K[0]][K[7] + 1]][20] | w[w[K[0]][K[7] + 2]][20]));
-        if (k[1] + 1)
+        if (~k[1])
           printf (" r%dc%d", ROW (w[w[K[0]][12]][20] | w[w[K[0]][13]][20] |
             w[w[K[4]][12]][20] | w[w[K[4]][13]][20] | w[w[K[0]][K[8]]][20] |
             w[w[K[0]][K[8] + 1]][20] | w[w[K[0]][K[8] + 2]][20]), COL (w[w[K[0]][12]][20] |
@@ -4159,7 +4420,7 @@ XYWT1Tf:
             w[w[K[0]][K[8]]][20] | w[w[K[0]][K[8] + 1]][20] | w[w[K[0]][K[8] + 2]][20]));
         printf ("\n");
 #endif
-        if (k[0] + 1)
+        if (~k[0])
         {                    // Check XYZ-Hybrid Column wise
           g[w[K[0]][6]] = k[0];
           g[w[K[0]][7]] = k[2];
@@ -4169,7 +4430,7 @@ XYWT1Tf:
           g[w[K[0]][K[7] + 1]] = k[6];
           g[w[K[0]][K[7] + 2]] = k[7];
         }
-        if (k[1] + 1)
+        if (~k[1])
         {                    // Check XYZ-Hybrid Row wise
           g[w[K[0]][12]] = k[1];
           g[w[K[0]][13]] = k[8];
@@ -4210,44 +4471,40 @@ XYWT1Tf:
           K[6] = W[K[1] < W[5][y] ? 1 : 5][y];
           K[7] = W[K[1] < W[5][y] ? 5 : 1][y];
           K[8] = W[K[3] == W[6][y] || K[3] == W[7][y] || K[3] == W[8][y] ? 4 : 3][!y];
-          if (K[2] > K[0] && K[4] > K[0] &&
-                             // Check XY-Ring Type 2 1st Wing Cell position > Apex Cell position; and 2nd Wing Cell position > Apex Cell position; and
-            B[g[K[0]]] < 3 && !(g[K[2]] & g[K[4]]))
-                             // Apex Cell values two digits; and 1st and 2nd Wing Cells values four digits
+          if (K[2] > K[0] && K[4] > K[0] && B[g[K[0]]] < 3 && !(g[K[2]] & g[K[4]]))
+                             // Check XY-Ring Type 2 1st Wing Cell position > Apex Cell position; and 2nd Wing Cell position > Apex Cell position; and Apex Cell values two digits; and 1st and 2nd Wing Cells values four digits
             for (Y = K[6]; Y < K[6] + 3; ++Y)
             {                // Search XY-Ring Type 2 3rd Wing Cell position 1st and 2nd Wing Cells common Cell positions wise
               if (B[g[K[5] = w[K[4]][Y]]] != 2 || B[g[K[2]] | g[K[5]]] != 3 ||
                              // Skip for either 3rd Wing Cell values not two digits; or 1st and 3rd Wing Cells values not three digits; or
-                B[g[K[4]] | g[K[5]]] != 3 || (g[K[0]] & g[K[5]]) ||
+                B[g[K[4]] | g[K[5]]] != 3 || g[K[0]] & g[K[5]] ||
                              // 2nd and 3rd Wing Cells values not three digits; or no common digits in Apex and 3rd Wing Cells values; or
-                !(((g[w[K[0]][W[3][y]]] | g[w[K[0]][W[4][y]]] | g[w[K[2]][W[3][y]]] |
+                !((g[w[K[0]][W[3][y]]] | g[w[K[0]][W[4][y]]] | g[w[K[2]][W[3][y]]] |
                 g[w[K[2]][W[4][y]]] | g[w[K[0]][K[7]]] | g[w[K[0]][K[7] + 1]] |
-                g[w[K[0]][K[7] + 2]]) & g[K[0]] & g[K[2]]) ||
-                ((g[w[K[4]][W[3][y]]] | g[w[K[4]][W[4][y]]] | g[w[K[5]][W[3][y]]] |
+                g[w[K[0]][K[7] + 2]]) & g[K[0]] & g[K[2]] ||
+                (g[w[K[4]][W[3][y]]] | g[w[K[4]][W[4][y]]] | g[w[K[5]][W[3][y]]] |
                 g[w[K[5]][W[4][y]]] | g[w[K[4]][K[7]]] | g[w[K[4]][K[7] + 1]] |
-                g[w[K[4]][K[7] + 2]]) & g[K[4]] & g[K[5]]) ||
-                ((g[w[K[0]][W[3][y]]] | g[w[K[0]][W[4][y]]] | g[w[K[4]][W[3][y]]] |
+                g[w[K[4]][K[7] + 2]]) & g[K[4]] & g[K[5]] ||
+                (g[w[K[0]][W[3][y]]] | g[w[K[0]][W[4][y]]] | g[w[K[4]][W[3][y]]] |
                 g[w[K[4]][W[4][y]]] |  g[X = w[K[0]][K[8]]] | g[w[X][W[3][y]]] |
                 g[w[X][W[4][y]]] | (w[K[0]][20] & w[K[4]][20] & W[15][y] ?
                 g[w[K[0]][W[1][!y]]] | g[w[K[0]][W[18][!y]]] | g[w[K[0]][W[19][!y]]] |
                 g[w[K[0]][W[20][!y]]] | g[w[K[0]][W[21][!y]]] |
-                g[w[K[0]][W[22][!y]]] : 0)) & g[K[0]] & g[K[4]]) ||
-                ((g[w[K[2]][W[3][y]]] | g[w[K[2]][W[4][y]]] | g[w[K[5]][W[3][y]]] |
+                g[w[K[0]][W[22][!y]]] : 0)) & g[K[0]] & g[K[4]] ||
+                (g[w[K[2]][W[3][y]]] | g[w[K[2]][W[4][y]]] | g[w[K[5]][W[3][y]]] |
                 g[w[K[5]][W[4][y]]] | g[Z = w[K[2]][K[8]]] | g[w[Z][W[3][y]]] |
                 g[w[Z][W[4][y]]] | (w[K[2]][20] & w[K[5]][20] & W[15][y] ?
                 g[w[K[2]][W[1][!y]]] | g[w[K[2]][W[18][!y]]] | g[w[K[2]][W[19][!y]]] |
                 g[w[K[2]][W[20][!y]]] | g[w[K[2]][W[21][!y]]] |
-                g[w[K[2]][W[22][!y]]] : 0)) & g[K[2]] & g[K[5]])))
+                g[w[K[2]][W[22][!y]]] : 0)) & g[K[2]] & g[K[5]]))
                 continue;    // No XY-Ring Type 2 removal Cell values found
-              int k[32] = {g[w[K[0]][W[3][y]]], g[w[K[0]][W[4][y]]],
-                           g[w[K[2]][W[3][y]]], g[w[K[2]][W[4][y]]],
-                           g[w[K[0]][K[7]]], g[w[K[0]][K[7] + 1]],
-                           g[w[K[0]][K[7] + 2]], g[w[K[4]][W[3][y]]],
-                           g[w[K[4]][W[4][y]]], g[w[K[5]][W[3][y]]],
-                           g[w[K[5]][W[4][y]]], g[w[K[4]][K[7]]],
-                           g[w[K[4]][K[7] + 1]], g[w[K[4]][K[7] + 2]],
-                           g[X = w[K[0]][K[8]]], g[w[X][W[3][y]]], g[w[X][W[4][y]]],
-                           g[Z = w[K[2]][K[8]]], g[w[Z][W[3][y]]], g[w[Z][W[4][y]]],-1,-1};
+              int k[32] = {g[w[K[0]][W[3][y]]], g[w[K[0]][W[4][y]]], g[w[K[2]][W[3][y]]],
+                          g[w[K[2]][W[4][y]]], g[w[K[0]][K[7]]], g[w[K[0]][K[7] + 1]],
+                          g[w[K[0]][K[7] + 2]], g[w[K[4]][W[3][y]]], g[w[K[4]][W[4][y]]],
+                          g[w[K[5]][W[3][y]]], g[w[K[5]][W[4][y]]], g[w[K[4]][K[7]]],
+                          g[w[K[4]][K[7] + 1]], g[w[K[4]][K[7] + 2]], g[X = w[K[0]][K[8]]],
+                          g[w[X][W[3][y]]], g[w[X][W[4][y]]], g[Z = w[K[2]][K[8]]],
+                          g[w[Z][W[3][y]]], g[w[Z][W[4][y]]],-1,-1};
                              // Backup XY-Ring Type 2 removal Cell values and drop Wing Cells common values from removal Cell values
               g[w[K[0]][W[3][y]]] &= ~g[K[0]];
               g[w[K[0]][W[4][y]]] &= ~g[K[0]];
@@ -4322,7 +4579,7 @@ XYWT1Tf:
                 COL (w[w[K[4]][W[3][y]]][20] | w[w[K[4]][W[4][y]]][20]),
                 ROW (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]),
                 COL (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]));
-              if (k[20] + 1)
+              if (~k[20])
                 printf (" r%dc%d",
                   ROW (w[w[K[0]][W[1][!y]]][20] | w[w[K[0]][W[18][!y]]][20] |
                   w[w[K[0]][W[19][!y]]][20] | w[w[K[0]][W[20][!y]]][20] |
@@ -4337,7 +4594,7 @@ XYWT1Tf:
                   COL (w[w[K[5]][W[3][y]]][20] | w[w[K[5]][W[4][y]]][20]),
                   ROW (w[Z][20] | w[w[Z][W[3][y]]][20] | w[w[Z][W[4][y]]][20]),
                   COL (w[Z][20] | w[w[Z][W[3][y]]][20] | w[w[Z][W[4][y]]][20]));
-              if (k[21] + 1)
+              if (~k[21])
                 printf (" r%dc%d",
                   ROW (w[w[K[2]][W[1][!y]]][20] | w[w[K[2]][W[18][!y]]][20] |
                   w[w[K[2]][W[19][!y]]][20] | w[w[K[2]][W[20][!y]]][20] |
@@ -4372,7 +4629,7 @@ XYWT1Tf:
                 COL (w[w[K[4]][W[3][y]]][20] | w[w[K[4]][W[4][y]]][20]),
                 ROW (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]),
                 COL (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]));
-              if (k[20] + 1)
+              if (~k[20])
                 printf (" r%dc%d",
                   ROW (w[w[K[0]][W[1][!y]]][20] | w[w[K[0]][W[18][!y]]][20] |
                   w[w[K[0]][W[19][!y]]][20] | w[w[K[0]][W[20][!y]]][20] |
@@ -4387,7 +4644,7 @@ XYWT1Tf:
                   COL (w[w[K[5]][W[3][y]]][20] | w[w[K[5]][W[4][y]]][20]),
                   ROW (w[Z][20] | w[w[Z][W[3][y]]][20] | w[w[Z][W[4][y]]][20]),
                   COL (w[Z][20] | w[w[Z][W[3][y]]][20] | w[w[Z][W[4][y]]][20]));
-              if (k[21] + 1)
+              if (~k[21])
                 printf (" r%dc%d",
                   ROW (w[w[K[2]][W[1][!y]]][20] | w[w[K[2]][W[18][!y]]][20] |
                   w[w[K[2]][W[19][!y]]][20] | w[w[K[2]][W[20][!y]]][20] |
@@ -4417,7 +4674,7 @@ XYWT1Tf:
               g[Z] = k[17];
               g[w[Z][W[3][y]]] = k[18];
               g[w[Z][W[4][y]]] = k[19];
-              if (k[20] + 1)
+              if (~k[20])
               {
                 g[w[K[0]][W[1][!y]]] = k[20];
                 g[w[K[0]][W[18][!y]]] = k[22];
@@ -4426,7 +4683,7 @@ XYWT1Tf:
                 g[w[K[0]][W[21][!y]]] = k[25];
                 g[w[K[0]][W[22][!y]]] = k[26];
               }
-              if (k[21] + 1)
+              if (~k[21])
               {
                 g[w[K[2]][W[1][!y]]] = k[21];
                 g[w[K[2]][W[18][!y]]] = k[27];
@@ -4442,10 +4699,8 @@ XYWT1Tf:
             }
           if (B[g[K[0]] | g[K[2]] | g[K[4]]] > 3 ||
                              // Skip for either Apex Cell and Wing Cells values > three digits; or
-            B[K[5] = g[K[2]] & g[K[4]]] != 1 ||
-                             // Wing Cells common value not one digit; or
-            ((g[K[0]] & K[5]) && B[g[K[0]]] != 3))
-            continue;        // Wing Cells common value in Apex Cell values; and Apex Cell values not three digits
+            B[K[5] = g[K[2]] & g[K[4]]] != 1 || (g[K[0]] & K[5] && B[g[K[0]]] != 3))
+            continue;        // Wing Cells common value not one digit; or Wing Cells common value in Apex Cell values; and Apex Cell values not three digits
           int k[6] = {g[w[K[0]][W[3][y]]], g[w[K[0]][W[4][y]]]};
                              // Backup XY-Wing Type 2 and XYZ-Wing removal Cells values
           if (B[g[K[0]]] < 3)
@@ -4513,25 +4768,25 @@ XYWT1Tf:
                 k[30] = {-1,-1,-1,-1,-1,-1,-1};
 
             if (((k[29] = LB3 (M = w[K[4]][N], w[X][K[1]], w[X][K[7]], y) & K[5]) ||
-              (LB3 (w[K[0]][K[7]], w[K[4]][K[7]], w[X][K[8]], y) & K[5])) &&
-              (((g[w[K[2]][W[3][y]]] | g[w[K[2]][W[4][y]]] |
+              LB3 (w[K[0]][K[7]], w[K[4]][K[7]], w[X][K[8]], y) & K[5]) &&
+              ((g[w[K[2]][W[3][y]]] | g[w[K[2]][W[4][y]]] |
               g[w[K[4]][W[3][y]]] | g[w[K[4]][W[4][y]]] | (B[g[K[0]]] < 3 ? 0 :
               g[A = w[K[4]][K[1]]] | g[w[A][W[3][y]]] | g[w[A][W[4][y]]]) |
               (k[29] && (B[g[K[0]]] < 3 || w[K[0]][K[8]] == M) &&
-              (~(g[w[X][W[3][y]]] | g[w[X][W[4][y]]]) & K[5]) ?
+              ~(g[w[X][W[3][y]]] | g[w[X][W[4][y]]]) & K[5] ?
               g[w[X][W[1][!y]]] | g[w[X][W[18][!y]]] | g[w[X][W[19][!y]]] |
               g[w[X][W[20][!y]]] | g[w[X][W[21][!y]]] | g[w[X][W[22][!y]]] : 0) |
-              (k[29] && (~(g[w[Z][W[3][y]]] | g[w[Z][W[4][y]]]) & K[5]) ?
+              (k[29] && ~(g[w[Z][W[3][y]]] | g[w[Z][W[4][y]]]) & K[5] ?
               g[w[Z][W[1][!y]]] | g[w[Z][W[18][!y]]] | g[w[Z][W[19][!y]]] |
-              g[w[Z][W[20][!y]]] | g[w[Z][W[21][!y]]] | g[w[Z][W[22][!y]]] : 0)) & K[5]) ||
-              ((g[w[K[0]][W[3][y]]] | g[w[K[0]][W[4][y]]] |
+              g[w[Z][W[20][!y]]] | g[w[Z][W[21][!y]]] | g[w[Z][W[22][!y]]] : 0)) & K[5] ||
+              (g[w[K[0]][W[3][y]]] | g[w[K[0]][W[4][y]]] |
               g[L = w[K[0]][K[7]]] | g[w[L][W[3][y]]] | g[w[L][W[4][y]]] |
-              g[w[K[2]][W[3][y]]] | g[w[K[2]][W[4][y]]]) & (g[K[2]] ^ K[5])) ||
-              ((g[w[K[0]][W[3][y]]] | g[w[K[0]][W[4][y]]] | g[M] | g[w[M][W[3][y]]] |
+              g[w[K[2]][W[3][y]]] | g[w[K[2]][W[4][y]]]) & (g[K[2]] ^ K[5]) ||
+              (g[w[K[0]][W[3][y]]] | g[w[K[0]][W[4][y]]] | g[M] | g[w[M][W[3][y]]] |
               g[w[M][W[4][y]]] | g[w[K[4]][W[3][y]]] | g[w[K[4]][W[4][y]]] |
               (w[K[0]][K[8]] == M ? g[w[K[4]][W[1][!y]]] | g[w[K[4]][W[18][!y]]] |
               g[w[K[4]][W[19][!y]]] | g[w[K[4]][W[20][!y]]] | g[w[K[4]][W[21][!y]]] |
-              g[w[K[4]][W[22][!y]]] : 0)) & (g[K[4]] ^ K[5]))))
+              g[w[K[4]][W[22][!y]]] : 0)) & (g[K[4]] ^ K[5])))
             {                // Line Ring 05, 07, Box Ring 06, 08, Reduced Line Ring 09, 10, 11, 12
               if (B[g[K[0]]] > 2)
               {
@@ -4775,23 +5030,23 @@ XYWT1Tf:
             {
               A = W[Y < W[5][!y] ? 5 : 1][!y];
               if (((k[29] = LN1 (w[K[2]][Y], w[K[4]][Y], w[Z][K[7]], y) & K[5]) ||
-                (ERI (X) & ERI (Z) & K[5])) &&
-                (((g[M = w[K[4]][N]] | (B[g[K[0]]] < 3 || w[K[0]][K[8]] == M ?
+                ERI (X) & ERI (Z) & K[5]) &&
+                ((g[M = w[K[4]][N]] | (B[g[K[0]]] < 3 || w[K[0]][K[8]] == M ?
                 (k[29] ? g[w[X][W[3][!y]]] | g[w[X][W[4][!y]]] |
                 g[w[Z][W[3][!y]]] | g[w[Z][W[4][!y]]] : g[X] | g[Z] |
                 g[w[Z][K[7]]] | g[w[Z][K[7] + 1]] | g[w[Z][K[7] + 2]]) |
                 g[w[K[4]][K[1]]] | g[w[K[2]][K[8]]] | g[L = w[K[2]][A]] |
                 g[w[L][W[3][!y]]] | g[w[L][W[4][!y]]] | g[L = w[K[4]][A]] |
-                g[w[L][W[3][!y]]] | g[w[L][W[4][!y]]] : 0)) & K[5]) ||
-                ((g[w[K[0]][W[3][y]]] | g[w[K[0]][W[4][y]]] |
+                g[w[L][W[3][!y]]] | g[w[L][W[4][!y]]] : 0)) & K[5] ||
+                (g[w[K[0]][W[3][y]]] | g[w[K[0]][W[4][y]]] |
                 g[w[K[0]][K[7]]] | g[w[K[0]][K[7] + 1]] | g[w[K[0]][K[7] + 2]] |
-                g[w[K[2]][W[3][y]]] | g[w[K[2]][W[4][y]]]) & (g[K[2]] ^ K[5])) ||
-                ((g[w[K[0]][W[3][y]]] | g[w[K[0]][W[4][y]]] |
+                g[w[K[2]][W[3][y]]] | g[w[K[2]][W[4][y]]]) & (g[K[2]] ^ K[5]) ||
+                (g[w[K[0]][W[3][y]]] | g[w[K[0]][W[4][y]]] |
                 g[M] | g[w[M][W[3][y]]] | g[w[M][W[4][y]]] |
                 g[w[K[4]][W[3][y]]] | g[w[K[4]][W[4][y]]] |
                 (w[K[0]][K[8]] == M ? (k[29] ? g[w[Z][W[3][!y]]] |
                 g[w[Z][W[4][!y]]] : g[Z]) | g[w[K[4]][A]] | g[w[K[4]][A + 1]] |
-                g[w[K[4]][A + 2]] : 0)) & (g[K[4]] ^ K[5]))))
+                g[w[K[4]][A + 2]] : 0)) & (g[K[4]] ^ K[5])))
               {              // Line Ring 13, 14, ERI Ring 15, 16
                 k[0] = g[w[K[0]][W[3][y]]];
                 k[1] = g[w[K[0]][W[4][y]]];
@@ -5014,7 +5269,7 @@ XYWT1Tf:
                 for (A = 3; A < 5; ++A)
                   if (((k[29] = LN1 (w[L = w[w[K[4]][K[1]]][W[A][y]]][Y],
                     w[K[0]][Y], w[Z][K[7]], y) & K[5]) ||
-                    (ERI (X) & ERI (Z) & K[5])) && g[L] & K[5])
+                    ERI (X) & ERI (Z) & K[5]) && g[L] & K[5])
                   {          // Line 17, ERI 18
                     g[L] -= K[5];
 #if RJ > 2
@@ -5045,9 +5300,9 @@ XYWT1Tf:
                   for (A = K[7]; A < K[7] + 3; ++A)
                     if (((k[29] = LN1 (w[L = w[K[W[16][M]]][A]][Y],
                       w[K[4 >> M]][Y], w[K[2 << M]][Y], y) & K[5]) ||
-                      (ERI (X) & ERI (Z) & K[5])) && ((g[L] | (!k[29] &&
-                      (B[g[K[0]]] < 3 || w[K[0]][K[8]] == w[K[4]][N]) ?
-                      g[w[K[2 << M]][Y]] : 0)) & K[5]))
+                      ERI (X) & ERI (Z) & K[5]) && (g[L] |
+                      (!k[29] && (B[g[K[0]]] < 3 || w[K[0]][K[8]] == w[K[4]][N]) ?
+                      g[w[K[2 << M]][Y]] : 0)) & K[5])
                     {        // Line 19, ERI 20, 21
                       k[0] = g[L];
                       g[L] &= ~K[5];
@@ -5062,7 +5317,7 @@ XYWT1Tf:
                         b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[2]][20]),
                         COL (w[K[0]][20] | w[K[2]][20]), S[K[4]], b[K[5]],
                         k[29] ? R_C : "ERI Box", k[29] ? RCN (X) : BOX (X), b[K[5]], S[L]);
-                      if (k[1] + 1)
+                      if (~k[1])
                         printf (" %s", S[w[K[2 << M]][Y]]);
                       printf ("\n");
 #endif
@@ -5074,12 +5329,12 @@ XYWT1Tf:
                         b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[2]][20]),
                         COL (w[K[0]][20] | w[K[2]][20]), S[K[4]], b[K[5]],
                         k[29] ? R_C : "ERI Box", k[29] ? RCN (X) : BOX (X), b[K[5]], S[L]);
-                      if (k[1] + 1)
+                      if (~k[1])
                         printf (" %s", S[w[K[2 << M]][Y]]);
                       printf ("\n");
 #endif
                       g[L] = k[0];
-                      if (k[1] + 1)
+                      if (~k[1])
                         g[w[K[2 << M]][Y]] = k[1];
 #if RJ > 3
                       prn ();
@@ -5089,11 +5344,11 @@ XYWT1Tf:
                 for (A = 3; A < 5; ++A)
                   if (((k[29] = LN1 (w[L = w[K[2 << M]][W[A][y]]][Y],
                     w[K[4 >> M]][Y], w[M ? X : Z][K[7]], y) & K[5]) ||
-                    (ERI (X) & ERI (Z) & K[5])) &&
-                    ((g[L] | (B[g[K[0]]] < 3 || w[K[0]][K[8]] == w[K[4]][N] ?
+                    ERI (X) & ERI (Z) & K[5]) &&
+                    (g[L] | (B[g[K[0]]] < 3 || w[K[0]][K[8]] == w[K[4]][N] ?
                     (M ? g[w[L][N]] : g[w[L][W[3][!y]]] | g[w[L][W[4][!y]]]) |
                     (k[29] ? g[w[w[K[2 << M]][Y]][W[3][!y]]] |
-                    g[w[w[K[2 << M]][Y]][W[4][!y]]] : g[w[K[2 << M]][Y]]) : 0)) & K[5]))
+                    g[w[w[K[2 << M]][Y]][W[4][!y]]] : g[w[K[2 << M]][Y]]) : 0)) & K[5])
                   {          // Line 22, 24, 26, 28, 30 ERI 23, 25, 27, 29, 31
                     k[0] = g[L];
                     g[L] &= ~K[5];
@@ -5138,16 +5393,16 @@ XYWT1Tf:
                       b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[2]][20]),
                       COL (w[K[0]][20] | w[K[2]][20]), S[K[4]], k[29] ? R_C : "ERI",
                       k[29] ? RCN (X) : BOX (X), b[K[5]], S[X], b[K[5]], S[Z], b[K[5]], S[L]);
-                    if (k[1] + 1)
+                    if (~k[1])
                     {
                       printf (" %s", S[w[L][M ? N : (B[g[K[0]]] < 3 ? K[8] : W[3][!y])]]);
-                      if (k[2] + 1)
+                      if (~k[2])
                         printf (" %s", S[w[L][W[4][!y]]]);
                     }
-                    if (k[3] + 1)
+                    if (~k[3])
                     {
                       printf (" %s", S[k[29] ? w[w[K[2 << M]][Y]][W[3][!y]] : w[K[2 << M]][Y]]);
-                      if (k[4] + 1)
+                      if (~k[4])
                         printf (" %s", S[w[w[K[2 << M]][Y]][W[4][!y]]]);
                     }
                     printf ("\n");
@@ -5160,16 +5415,16 @@ XYWT1Tf:
                       b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[2]][20]),
                       COL (w[K[0]][20] | w[K[2]][20]), S[K[4]], k[29] ? R_C : "ERI",
                       k[29] ? RCN (X) : BOX (X), b[K[5]], S[X], b[K[5]], S[Z], b[K[5]], S[L]);
-                    if (k[1] + 1)
+                    if (~k[1])
                     {
                       printf (" %s", S[w[L][M ? N : (B[g[K[0]]] < 3 ? K[8] : W[3][!y])]]);
-                      if (k[2] + 1)
+                      if (~k[2])
                         printf (" %s", S[w[L][W[4][!y]]]);
                     }
-                    if (k[3] + 1)
+                    if (~k[3])
                     {
                       printf (" %s", S[k[29] ? w[w[K[2 << M]][Y]][W[3][!y]] : w[K[2 << M]][Y]]);
-                      if (k[4] + 1)
+                      if (~k[4])
                         printf (" %s", S[w[w[K[2 << M]][Y]][W[4][!y]]]);
                     }
                     printf ("\n");
@@ -5203,7 +5458,7 @@ XYWT1Tf:
                     return 0;// Undo XY-Wing Type 2 Transport and XYZ-Wing Transport removal Cell values
                   }
                 if ((B[g[K[0]]] < 3 || w[K[0]][K[8]] == w[K[4]][N]) &&
-                  (g[w[K[4 >> M]][Y]] & ERI (w[K[2 << M]][Y]) & K[5]))
+                  g[w[K[4 >> M]][Y]] & ERI (w[K[2 << M]][Y]) & K[5])
                 {            // ERI 32, 33
                   g[w[K[4 >> M]][Y]] -= K[5];
 #if RJ > 2
@@ -5238,8 +5493,8 @@ XYWT1Tf:
 
             if (~(g[w[K[4]][K[7]]] | g[w[K[4]][K[7] + 1]] | g[w[K[4]][K[7] + 2]]) &
               (g[X = w[K[0]][K[8]]] | g[w[X][W[3][y]]] | g[w[X][W[4][y]]] |
-              (Y = (w[K[0]][20] & w[K[4]][20] & W[15][y]) &&
-              (~(g[w[K[4]][W[3][y]]] | g[w[K[4]][W[4][y]]]) & K[5]) ?
+              (Y = w[K[0]][20] & w[K[4]][20] & W[15][y] &&
+              ~(g[w[K[4]][W[3][y]]] | g[w[K[4]][W[4][y]]]) & K[5] ?
               g[w[K[0]][W[1][!y]]] | g[w[K[0]][W[18][!y]]] |
               g[w[K[0]][W[19][!y]]] | g[w[K[0]][W[20][!y]]] |
               g[w[K[0]][W[21][!y]]] | g[w[K[0]][W[22][!y]]] : 0)) & K[5])
@@ -5266,11 +5521,11 @@ XYWT1Tf:
                 g[w[K[0]][W[22][!y]]] &= ~K[5];
               }
             }
-            if (((g[w[K[0]][K[7]]] | g[w[K[0]][K[7] + 1]] | g[w[K[0]][K[7] + 2]]) & K[5]) &&
-              ((~(g[Z = w[K[2]][K[8]]] | g[w[Z][W[3][y]]] | g[w[Z][W[4][y]]]) & K[5]) ||
-              (~(g[Z] | g[w[K[2]][W[1][!y]]] | g[w[K[2]][W[18][!y]]] |
+            if ((g[w[K[0]][K[7]]] | g[w[K[0]][K[7] + 1]] | g[w[K[0]][K[7] + 2]]) & K[5] &&
+              (~(g[Z = w[K[2]][K[8]]] | g[w[Z][W[3][y]]] | g[w[Z][W[4][y]]]) & K[5] ||
+              ~(g[Z] | g[w[K[2]][W[1][!y]]] | g[w[K[2]][W[18][!y]]] |
               g[w[K[2]][W[19][!y]]] | g[w[K[2]][W[20][!y]]] | g[w[K[2]][W[21][!y]]] |
-              g[w[K[2]][W[22][!y]]]) & g[w[K[4]][K[1]]] & K[5])))
+              g[w[K[2]][W[22][!y]]]) & g[w[K[4]][K[1]]] & K[5]))
             {                // Check XYZ-Wing Hybrid for 1st Wing either Line or Box wise and remove Wing Cells common value from removal Cells values
                              // Backup XYZ-Wing Hybrid 1st Wing either Line or Box wise and remove Wing Cells common value from removal Cells values
               k[1] = g[w[K[0]][K[7]]];
@@ -5284,21 +5539,21 @@ XYWT1Tf:
               continue;      // Skip for no XYZ-Wing Hybrid found
 #if RJ > 2
             printf ("%d)%sXYZ-Wing Hybrid: %d @ r%dc%d %s%s%s Hybrid %d @ r%dc%d => -%d @",
-              p, (k[0] | k[1]) + 1 ? " Dual " : " ", b[g[K[2]] | g[K[4]]],
+              p, ~(k[0] | k[1]) ? " Dual " : " ", b[g[K[2]] | g[K[4]]],
               ROW (w[K[0]][20] | w[K[2]][20]), COL (w[K[0]][20] | w[K[2]][20]), S[K[4]],
-              k[2] + 1 ? " Reduced " : " ", (k[0] | k[1]) + 1 ? "Dual" :
-              (k[0] + 1 ? (y ? "Column wise" : "Row wise") : "Box wise"), b[K[5]],
+              ~k[2] ? " Reduced " : " ", ~(k[0] | k[1]) ? "Dual" :
+              (~k[0] ? (y ? "Column wise" : "Row wise") : "Box wise"), b[K[5]],
               ROW (w[w[K[4]][K[6]]][20] | w[w[K[4]][K[6] + 1]][20] |
               w[w[K[4]][K[6] + 2]][20]), COL (w[w[K[4]][K[6]]][20] |
               w[w[K[4]][K[6] + 1]][20] | w[w[K[4]][K[6] + 2]][20]), b[K[5]]);
-            if (k[0] + 1)
+            if (~k[0])
               printf (" r%dc%d", ROW (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]),
                 COL (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]));
-            if (k[1] + 1)
+            if (~k[1])
               printf (" r%dc%d", ROW (w[w[K[0]][K[7]]][20] | w[w[K[0]][K[7] + 1]][20] |
                 w[w[K[0]][K[7] + 2]][20]), COL (w[w[K[0]][K[7]]][20] |
                 w[w[K[0]][K[7] + 1]][20] | w[w[K[0]][K[7] + 2]][20]));
-            if (k[2] + 1)
+            if (~k[2])
               printf (" r%dc%d", ROW (w[w[K[0]][W[1][!y]]][20] | w[w[K[0]][W[18][!y]]][20] |
                 w[w[K[0]][W[19][!y]]][20] | w[w[K[0]][W[20][!y]]][20] |
                 w[w[K[0]][W[21][!y]]][20] | w[w[K[0]][W[22][!y]]][20]),
@@ -5311,21 +5566,21 @@ XYWT1Tf:
               return 1;
 #if RJ > 2
             printf ("%d) Undo%sXYZ-Wing Hybrid: %d @ r%dc%d %s%s%s Hybrid %d @ r%dc%d <= +%d @",
-              p, (k[0] | k[1]) + 1 ? " Dual " : " ", b[g[K[2]] | g[K[4]]],
+              p, ~(k[0] | k[1]) ? " Dual " : " ", b[g[K[2]] | g[K[4]]],
               ROW (w[K[0]][20] | w[K[2]][20]), COL (w[K[0]][20] | w[K[2]][20]), S[K[4]],
-              k[2] + 1 ? " Reduced " : " ", (k[0] | k[1]) + 1 ? "Dual" :
-              (k[0] + 1 ? (y ? "Column wise" : "Row wise") : "Box wise"), b[K[5]],
+              ~k[2] ? " Reduced " : " ", ~(k[0] | k[1]) ? "Dual" :
+              (~k[0] ? (y ? "Column wise" : "Row wise") : "Box wise"), b[K[5]],
               ROW (w[w[K[4]][K[6]]][20] | w[w[K[4]][K[6] + 1]][20] |
               w[w[K[4]][K[6] + 2]][20]), COL (w[w[K[4]][K[6]]][20] |
               w[w[K[4]][K[6] + 1]][20] | w[w[K[4]][K[6] + 2]][20]), b[K[5]]);
-            if (k[0] + 1)
+            if (~k[0])
               printf (" r%dc%d", ROW (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]),
                 COL (w[X][20] | w[w[X][W[3][y]]][20] | w[w[X][W[4][y]]][20]));
-            if (k[1] + 1)
+            if (~k[1])
               printf (" r%dc%d", ROW (w[w[K[0]][K[7]]][20] | w[w[K[0]][K[7] + 1]][20] |
                 w[w[K[0]][K[7] + 2]][20]), COL (w[w[K[0]][K[7]]][20] |
                 w[w[K[0]][K[7] + 1]][20] | w[w[K[0]][K[7] + 2]][20]));
-            if (k[2] + 1)
+            if (~k[2])
               printf (" r%dc%d", ROW (w[w[K[0]][W[1][!y]]][20] | w[w[K[0]][W[18][!y]]][20] |
                 w[w[K[0]][W[19][!y]]][20] | w[w[K[0]][W[20][!y]]][20] |
                 w[w[K[0]][W[21][!y]]][20] | w[w[K[0]][W[22][!y]]][20]),
@@ -5334,19 +5589,19 @@ XYWT1Tf:
                 w[w[K[0]][W[21][!y]]][20] | w[w[K[0]][W[22][!y]]][20]));
             printf ("\n");
 #endif
-            if (k[0] + 1)
+            if (~k[0])
             {                // Check XYZ-Wing Hybrid Line wise
               g[X] = k[0];
               g[w[X][W[3][y]]] = k[3];
               g[w[X][W[4][y]]] = k[4];
             }
-            if (k[1] + 1)
+            if (~k[1])
             {                // Check XYZ-Wing Hybrid either Line or Box wise
               g[w[K[0]][K[7]]] = k[1];
               g[w[K[0]][K[7] + 1]] = k[10];
               g[w[K[0]][K[7] + 2]] = k[11];
             }
-            if (k[2] + 1)
+            if (~k[2])
             {
               g[w[K[0]][W[1][!y]]] = k[2];
               g[w[K[0]][W[18][!y]]] = k[5];
@@ -5384,7 +5639,7 @@ XYWT1Tf:
           continue;          // Skip for either 2nd Wing Cell position not unsolved; or Apex and Wings Cells values > four digits
         for (Y = 0; Y < 2; ++Y)
         {                    // Search 3rd Wing Cell position Line wise
-          if ((!Y && K[3] < 14) || (Y && K[1] > 5) || B[g[K[4 >> Y]]] > 2)
+          if ((Y ? K[1] > 5 : K[3] < 14) || B[g[K[4 >> Y]]] > 2)
             continue;        // Skip for either 2nd (or 1st) Wing Cell position within Chute; or 2nd (or 1st) Wing Cell values > two digits
           for (K[5] = !Y && K[1] > 5 ? 0 : K[W[14][Y]] + (Y && K[3] == 12) + 1; K[5] < W[2][Y]; ++K[5])
           {                  // Search 3rd Wing Cell position
@@ -5392,18 +5647,18 @@ XYWT1Tf:
                              // Skip for either 3rd Wing Cell position not unsolved; or Apex and Wings Cells values > four digits; or
               B[K[7] = g[K[4 >> Y]] & (g[K[2 << Y]] | g[K[6]])] != 1 ||
                              // Wing Cells common value not one digit; or
-              ((g[K[0]] & K[7]) &&
+              (g[K[0]] & K[7] &&
                              // Wing Cells common value in Apex Cell values; and
-              !((g[K[2]] & K[7]) && K[1] > 5) && !((g[K[4]] & K[7]) && K[3] < 14)) ||
+              !(g[K[2]] & K[7] && K[1] > 5) && !(g[K[4]] & K[7] && K[3] < 14)) ||
                              // either 2nd or 3rd Wing Cell position within Apex Box; or
-              (g[K[2 << Y]] & g[K[6]] & K[7]))
+              g[K[2 << Y]] & g[K[6]] & K[7])
               continue;      // Wing Cells common value in Both 1st (or 2nd) and 3rd Wing Cells values
             int k[6] = {-1, g[K[8] = K[g[K[2]] & K[7] ? 2 : 6] - K[0] +
                        K[g[K[4]] & K[7] ? 4 : 6]]};
 
-            if (((g[K[2]] & K[7]) && K[1] > 5) || ((g[K[4]] & K[7]) && K[3] < 14))
+            if ((g[K[2]] & K[7] && K[1] > 5) || (g[K[4]] & K[7] && K[3] < 14))
             {                // Check Wings Cells common value in Wing Cell position within Apex Box
-              k[0] = (g[K[2]] & K[7]) && K[1] > 5;
+              k[0] = g[K[2]] & K[7] && K[1] > 5;
               if (g[K[0]] & K[7])
                 k[1] = 0;
               else
@@ -5416,7 +5671,7 @@ XYWT1Tf:
             }
             if ((k[1] | k[2] | k[3] | k[4] | k[5]) & K[7])
             {                // Check no Wing Cells common value in WXYZ-Wing Type 1 removal Cell values
-              if (k[0] + 1)
+              if (~k[0])
               {              // Drop Wing Cells common value from WXYZ-Wing Type 1 removal Cell positions
                 if (~g[K[0]] & K[7])
                 {
@@ -5434,7 +5689,7 @@ XYWT1Tf:
                 p, b[g[K[2]] | g[K[4]] | g[K[6]]],
                 ROW (w[K[0]][20] | w[K[2 << Y]][20] | w[K[6]][20]),
                 COL (w[K[0]][20] | w[K[2 << Y]][20] | w[K[6]][20]), S[K[4 >> Y]], b[K[7]]);
-              if (k[0] + 1)
+              if (~k[0])
               {
                 printf ("r%dc%d",
                   ROW (w[w[K[0]][W[3][k[0]]]][20] | w[w[K[0]][W[4][k[0]]]][20]),
@@ -5455,7 +5710,7 @@ XYWT1Tf:
                 p, b[g[K[2]] | g[K[4]] | g[K[6]]],
                 ROW (w[K[0]][20] | w[K[2 << Y]][20] | w[K[6]][20]),
                 COL (w[K[0]][20] | w[K[2 << Y]][20] | w[K[6]][20]), S[K[4 >> Y]], b[K[7]]);
-              if (k[0] + 1)
+              if (~k[0])
               {
                 printf ("r%dc%d",
                   ROW (w[w[K[0]][W[3][k[0]]]][20] | w[w[K[0]][W[4][k[0]]]][20]),
@@ -5469,7 +5724,7 @@ XYWT1Tf:
               else
                 printf ("%s\n", S[K[8]]);
 #endif
-              if (k[0] + 1)  // Undo Wing Cells common value to WXYZ-Wing Type 1 removal Cell positions
+              if (~k[0])     // Undo Wing Cells common value to WXYZ-Wing Type 1 removal Cell positions
               {
                 if (~g[K[0]] & K[7])
                 {
@@ -5492,7 +5747,7 @@ XYWT1Tf:
         }
         if (K[1] > 5 || K[3] < 14 || B[g[K[0]]] > 3 ||
                              // Skip Almost Locked Set move Type 1a and Type 1b for either 1st Wing Cell position not Apex Box; or 2nd Wing Cell position not Apex Box; or Apex Cell values > three digits; or
-          B[g[K[2]]] > 2 || B[g[K[4]]] > 2 || (g[K[2]] & g[K[4]]))
+          B[g[K[2]]] > 2 || B[g[K[4]]] > 2 || g[K[2]] & g[K[4]])
           continue;          // 1st Wing Cell values > two digits; or 2nd Wing Cell values > two digits; or common digits in 1st and 2nd Wing Cells values
         if (B[g[K[0]]] > 2 && B[g[K[5] = K[2] - K[0] + K[4]]] == 2 &&
                              // Check for Apex Cell values three digits; and 3rd Wing Cell values two digits; and
@@ -5500,14 +5755,13 @@ XYWT1Tf:
                              // Apex and 3rd Wing Cells values four digits; and
           B[g[K[2]] | g[K[5]]] == 3 && B[g[K[4]] | g[K[5]]] == 3 &&
                              // 1st and 3rd Wing Cells values three digits; and 2nd and 3rd Wing Cells values three digits; and
-          ((g[w[K[0]][W[3][Y = B[g[K[0]] | g[K[2]]] > 3]]] | g[w[K[0]][W[4][Y]]] |
+          (g[w[K[0]][W[3][Y = B[g[K[0]] | g[K[2]]] > 3]]] | g[w[K[0]][W[4][Y]]] |
           g[w[y = K[2 << Y]][W[3][Y]]] | g[w[y][W[4][Y]]] |
           g[w[K[0]][Z = W[K[W[14][Y]] < W[5][Y] ? 5 : 1][Y]]] |
-          g[w[K[0]][Z + 1]] | g[w[K[0]][Z + 2]]) & (K[6] = ~g[K[5]] & g[y])))
+          g[w[K[0]][Z + 1]] | g[w[K[0]][Z + 2]]) & (K[6] = ~g[K[5]] & g[y]))
         {                    // Almost Locked Set move Type 1a removal Cell values
-          int k[7] = {g[w[K[0]][W[3][Y]]], g[w[K[0]][W[4][Y]]],
-                      g[w[y][W[3][Y]]], g[w[y][W[4][Y]]],
-                      g[w[K[0]][Z]], g[w[K[0]][Z + 1]], g[w[K[0]][Z + 2]]};
+          int k[7] = {g[w[K[0]][W[3][Y]]], g[w[K[0]][W[4][Y]]], g[w[y][W[3][Y]]],
+                     g[w[y][W[4][Y]]], g[w[K[0]][Z]], g[w[K[0]][Z + 1]], g[w[K[0]][Z + 2]]};
                              // Backup Almost Locked Set move Type 1a removal Cell values and drop Wing Cells common values from removal Cell values
           g[w[K[0]][W[3][Y]]] &= ~K[6];
           g[w[K[0]][W[4][Y]]] &= ~K[6];
@@ -5570,7 +5824,7 @@ XYWT1Tf:
             {
               k[7] = g[k[!Y]];
               if ((w[K[2 << Y]][20] & W[25][Y]) == (w[K[6]][20] & W[25][Y]))
-              {
+              {              // Check Almost Locked Set move Type 1b within Chute
                 k[8] = g[k[2] = w[k[Y]][W[3][!Y]]];
                 k[9] = g[k[3] = w[k[Y]][W[4][!Y]]];
                 k[10] = g[k[4] = w[k[!Y]][W[3][!Y]]];
@@ -5584,7 +5838,7 @@ XYWT1Tf:
               if (B[g[K[0]]] < 3)
               {
                 g[k[!Y]] &= ~K[7];
-                if (k[2] + 1)
+                if (~k[2])
                 {
                   g[k[2]] &= ~K[7];
                   g[k[3]] &= ~K[7];
@@ -5596,11 +5850,11 @@ XYWT1Tf:
               printf ("%d) Almost Locked Set move Type 1b: %d @ r%dc%d %s %s => -%d @ r%dc%d",
                 p, b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[2 << Y]][20]),
                 COL (w[K[0]][20] | w[K[2 << Y]][20]), S[K[4 >> Y]], S[K[6]], b[K[7]],
-                ROW (w[k[Y]][20] | (k[2] + 1 ? w[k[2]][20] | w[k[3]][20] : 0)),
-                COL (w[k[Y]][20] | (k[2] + 1 ? w[k[2]][20] | w[k[3]][20] : 0)));
+                ROW (w[k[Y]][20] | (~k[2] ? w[k[2]][20] | w[k[3]][20] : 0)),
+                COL (w[k[Y]][20] | (~k[2] ? w[k[2]][20] | w[k[3]][20] : 0)));
               if (B[g[K[0]]] < 3)
-                printf (" r%dc%d", ROW (w[k[!Y]][20] | (k[2] + 1 ? w[k[4]][20] | w[k[5]][20] : 0)),
-                COL (w[k[!Y]][20] | (k[2] + 1 ? w[k[4]][20] | w[k[5]][20] : 0)));
+                printf (" r%dc%d", ROW (w[k[!Y]][20] | (~k[2] ? w[k[4]][20] | w[k[5]][20] : 0)),
+                COL (w[k[!Y]][20] | (~k[2] ? w[k[4]][20] | w[k[5]][20] : 0)));
               printf ("\n");
 #endif
               if (solve (p))
@@ -5609,18 +5863,18 @@ XYWT1Tf:
               printf ("%d) Undo Almost Locked Set move Type 1b: %d @ r%dc%d %s %s <= +%d @ r%dc%d",
                 p, b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[2 << Y]][20]),
                 COL (w[K[0]][20] | w[K[2 << Y]][20]), S[K[4 >> Y]], S[K[6]], b[K[7]],
-                ROW (w[k[Y]][20] | (k[2] + 1 ? w[k[2]][20] | w[k[3]][20] : 0)),
-                COL (w[k[Y]][20] | (k[2] + 1 ? w[k[2]][20] | w[k[3]][20] : 0)));
+                ROW (w[k[Y]][20] | (~k[2] ? w[k[2]][20] | w[k[3]][20] : 0)),
+                COL (w[k[Y]][20] | (~k[2] ? w[k[2]][20] | w[k[3]][20] : 0)));
               if (B[g[K[0]]] < 3)
-                printf (" r%dc%d", ROW (w[k[!Y]][20] | (k[2] + 1 ? w[k[4]][20] | w[k[5]][20] : 0)),
-                COL (w[k[!Y]][20] | (k[2] + 1 ? w[k[4]][20] | w[k[5]][20] : 0)));
+                printf (" r%dc%d", ROW (w[k[!Y]][20] | (~k[2] ? w[k[4]][20] | w[k[5]][20] : 0)),
+                COL (w[k[!Y]][20] | (~k[2] ? w[k[4]][20] | w[k[5]][20] : 0)));
               printf ("\n");
 #endif
               g[k[Y]] = k[6];
               if (B[g[K[0]]] < 3)
               {
                 g[k[!Y]] = k[7];
-                if (k[2] + 1)
+                if (~k[2])
                 {
                   g[k[2]] = k[8];
                   g[k[3]] = k[9];
@@ -5638,7 +5892,7 @@ XYWT1Tf:
       }
     }
   }
-  for (a = p; a < q; ++a)    // Search WXYZ-Wing Type 2a, Type 2b, Type 3, Type 4a, Type 4b, Type 5, Almost Locked Set move Type 2a, Type 2b and Type 2c Apex unsolved Cell positions wise
+  for (a = p; a < q; ++a)    // Search WXYZ-Wing Type 2a, Type 2b, Type 3, Type 4a, Type 4b, (SDC), Almost Locked Set move Type 2a, Type 2b and Type 2c Apex unsolved Cell positions wise
   {
     if (B[g[r[a]]] > 4)
       continue;              // Skip for unsolved Cell values > four digits
@@ -5668,22 +5922,23 @@ XYWT1Tf:
                 B[g[K[0]] | g[K[2]] | g[K[4]] | g[K[6]]] != 4 ||
                              // Apex and Wings Cells values not four digits; or
                 !(g[K[0]] & g[K[4 >> Y]]) ||
-                             // No common value in Apex and 1st (or 2nd) Wing Cells values; or
+                             // No common digit in Apex and 1st (or 2nd) Wing Cells values; or
                 !(g[K[0]] & (g[K[2 << Y]] | g[K[6]])) ||
-                             // No common value in Apex and 2nd (or 1st) or 3rd Wings Cells values; or
+                             // No common digit in Apex, 2nd (or 1st) and 3rd Wings Cells values; or
                 B[K[7] = g[K[4 >> Y]] & (g[K[2 << Y]] | g[K[6]])] != 1)
-                continue;    // Wing Cells common value not one digit
+                continue;    // Wing Cells common digit not one
               int A[2] = {-1},
                   k[5] = {g[w[K[0]][W[3][y]]], g[w[K[0]][W[4][y]]]};
                              // Backup WXYZ-Wing Type 2b and Type 3 removal Cell positions
-              if ((~g[K[0]] & K[7]) &&
+              if (~g[K[0]] & K[7] &&
                              // Check no Wing Cells common value in Apex Cell values; and
                 (K[6] == w[K[2 << Y]][W[3][y]] || K[6] == w[K[2 << Y]][W[4][y]] ||
                              // 3rd Wing Cell position within 1st (or 2nd) Wing Cell position mini-Line; or
                 (g[K[2 << Y]] & K[7]) != (g[K[6]] & K[7])))
               {              // No Wing Cells common value in both 1st (or 2nd) Wing Cell values and 3rd Wing Cell values
                 A[0] = K[g[K[2]] & g[K[4 >> Y]] & (g[K[2 << Y]] | g[K[6]]) ? 2 : 6];
-                A[1] = W[K[g[K[4]] & g[K[4 >> Y]] & (g[K[2 << Y]] | g[K[6]]) ? 3 : 5] < W[5][y] ? 1 : 5][y];
+                A[1] = W[K[g[K[4]] & g[K[4 >> Y]] &
+                       (g[K[2 << Y]] | g[K[6]]) ? 3 : 5] < W[5][y] ? 1 : 5][y];
                 k[2] = g[w[A[0]][A[1]]];
                 k[3] = g[w[A[0]][A[1] + 1]];
                 k[4] = g[w[A[0]][A[1] + 2]];
@@ -5693,7 +5948,7 @@ XYWT1Tf:
                              // Drop Wing Cells common value from WXYZ-Wing Type 2a, Type 2b and Type 3 removal Cell positions
                 g[w[K[0]][W[3][y]]] &= ~K[7];
                 g[w[K[0]][W[4][y]]] &= ~K[7];
-                if (A[0] + 1)
+                if (~A[0])
                 {            // Drop Wing Cells common value from WXYZ-Wing Type 2a more removal Cell positions
                   g[w[A[0]][A[1]]] &= ~K[7];
                   g[w[A[0]][A[1] + 1]] &= ~K[7];
@@ -5701,11 +5956,11 @@ XYWT1Tf:
                 }
 #if RJ > 2
                 printf ("%d) WXYZ-Wing Type %s: %d @ %s %s %s %s => -%d @ r%dc%d",
-                  p, A[0] + 1 ? "2a" : g[K[0]] & K[7] ? "3" : "2b",
+                  p, ~A[0] ? "2a" : g[K[0]] & K[7] ? "3" : "2b",
                   b[g[K[0]] | g[K[2]] | g[K[4]] | g[K[6]]], S[K[0]], S[K[2]], S[K[4]], S[K[6]], b[K[7]],
                   ROW (w[w[K[0]][W[3][y]]][20] | w[w[K[0]][W[4][y]]][20]),
                   COL (w[w[K[0]][W[3][y]]][20] | w[w[K[0]][W[4][y]]][20]));
-                if (A[0] + 1)
+                if (~A[0])
                   printf (" r%dc%d", ROW (w[w[A[0]][A[1]]][20] | w[w[A[0]][A[1] + 1]][20] |
                     w[w[A[0]][A[1] + 2]][20]), COL (w[w[A[0]][A[1]]][20] |
                     w[w[A[0]][A[1] + 1]][20] | w[w[A[0]][A[1] + 2]][20]));
@@ -5715,11 +5970,11 @@ XYWT1Tf:
                   return 1;
 #if RJ > 2
                 printf ("%d) Undo WXYZ-Wing Type %s: %d @ %s %s %s %s <= +%d @ r%dc%d",
-                  p, A[0] + 1 ? "2a" : g[K[0]] & K[7] ? "3" : "2b",
+                  p, ~A[0] ? "2a" : g[K[0]] & K[7] ? "3" : "2b",
                   b[g[K[0]] | g[K[2]] | g[K[4]] | g[K[6]]], S[K[0]], S[K[2]], S[K[4]], S[K[6]], b[K[7]],
                   ROW (w[w[K[0]][W[3][y]]][20] | w[w[K[0]][W[4][y]]][20]),
                   COL (w[w[K[0]][W[3][y]]][20] | w[w[K[0]][W[4][y]]][20]));
-                if (A[0] + 1)
+                if (~A[0])
                   printf (" r%dc%d", ROW (w[w[A[0]][A[1]]][20] | w[w[A[0]][A[1] + 1]][20] |
                     w[w[A[0]][A[1] + 2]][20]), COL (w[w[A[0]][A[1]]][20] |
                     w[w[A[0]][A[1] + 1]][20] | w[w[A[0]][A[1] + 2]][20]));
@@ -5727,7 +5982,7 @@ XYWT1Tf:
 #endif
                 g[w[K[0]][W[3][y]]] = k[0];
                 g[w[K[0]][W[4][y]]] = k[1];
-                if (A[0] + 1)
+                if (~A[0])
                 {
                   g[w[A[0]][A[1]]] = k[2];
                   g[w[A[0]][A[1] + 1]] = k[3];
@@ -5742,7 +5997,7 @@ XYWT1Tf:
 // WXYZ-Wing Type 2a, Type 2b and Type 3 Transport
             }
           for (K[5] = 3; K[5] < 5; ++K[5])
-          {                  // Search WXYZ-Wing Type 4a, Type 4b and Type 5 for 2nd Apex Cell position mini-Line wise
+          {                  // Search WXYZ-Wing Type 4a, Type 4b and (SDC) for 2nd Apex Cell position mini-Line wise
             if (K[0] > (K[6] = w[K[0]][W[K[5]][y]]) ||
                              // Skip for either 1st Apex Cell position > 2nd Apex Cell position; or
               !g[K[6]] || B[g[K[0]] | g[K[2]] | g[K[4]] | g[K[6]]] != 4 ||
@@ -5750,22 +6005,22 @@ XYWT1Tf:
               !((g[K[0]] | g[K[6]]) & g[K[2]]) || !((g[K[0]] | g[K[6]]) & g[K[4]]))
               continue;      //  No common digit in Apex Cells and 1st Wing Cell values; or no common digit in Apex Cells and 2nd Wing Cell values; or
             if (B[K[7] = g[K[2]] & g[K[4]]] == 1)
-            {                // Check WXYZ-Wing Type 4a and Type 4b for Wing Cells common value one digit
+            {                // Check WXYZ-Wing Type 4a and Type 4b for Wing Cells common digit is one
               int k[4] = {g[w[K[0]][W[7 - K[5]][y]]]};
                              // Backup WXYZ-Wing Type 4b removal Cell value
               Z = -1;
               if (~(g[K[0]] | g[K[6]]) & K[7])
-              {              // Check no Wing Cells common value in Apex Cells values
+              {              // Check no Wing Cells common digit in Apex Cells values
                 k[1] = g[w[K[2]][Z = W[K[3] < W[5][y] ? 1 : 5][y]]];
                 k[2] = g[w[K[2]][Z + 1]];
                 k[3] = g[w[K[2]][Z + 2]];
               }              // Backup WXYZ-Wing Type 4a more removal Cell values
               if ((k[0] | k[1] | k[2] | k[3]) & K[7])
               {              // Check WXYZ-Wing Type 4a and Type 4b removal Cells values
-                             // Drop Wing Cells common value from WXYZ-Wing Type 4b removal Cell position
+                             // Drop Wing Cells common digit from WXYZ-Wing Type 4b removal Cell position
                 g[w[K[0]][W[7 - K[5]][y]]] &= ~K[7];
                 if (Z + 1)
-                {            // Drop Wing Cells common value from WXYZ-Wing Type 4a more removal Cell positions
+                {            // Drop Wing Cells common digit from WXYZ-Wing Type 4a more removal Cell positions
                   g[w[K[2]][Z]] &= ~K[7];
                   g[w[K[2]][Z + 1]] &= ~K[7];
                   g[w[K[2]][Z + 2]] &= ~K[7];
@@ -5812,19 +6067,19 @@ XYWT1Tf:
             else
             {
               X = W[K[3] < W[5][y] ? 5 : 1][y];
-              if (!(g[K[2]] & g[K[4]]) &&
-                             // Check WXYZ-Wing Type 5 for no common digit in Wing Cells values; and
-                ((g[K[7] = w[K[0]][W[7 - K[5]][y]]] | g[w[K[2]][W[3][y]]] | g[w[K[2]][W[4][y]]] |
-                g[w[K[0]][W[Z = K[1] == W[6][y] || K[1] == W[7][y] || K[1] == W[8][y] ? 9 : 6][y]]] |
+              if (!K[7] &&   // Check WXYZ-Wing (SDC) for no common digit in Wing Cells values; and
+                ((g[K[7] = w[K[0]][W[7 - K[5]][y]]] | g[w[K[2]][W[3][y]]] |
+                g[w[K[2]][W[4][y]]] | g[w[K[0]][W[Z = K[1] == W[6][y] ||
+                K[1] == W[7][y] || K[1] == W[8][y] ? 9 : 6][y]]] |
                 g[w[K[0]][W[Z + 1][y]]] | g[w[K[0]][W[Z + 2][y]]]) & g[K[2]] ||
                 (g[K[7]] | g[w[K[4]][W[3][y]]] | g[w[K[4]][W[4][y]]] |
                 g[w[K[0]][X]] | g[w[K[0]][X + 1]] | g[w[K[0]][X + 2]]) & g[K[4]]))
-              {              // WXYZ-Wing Type 5 removal Cells values
+              {              // WXYZ-Wing (SDC) removal Cells values
                 int k[11] = {g[K[7]], g[w[K[2]][W[3][y]]], g[w[K[2]][W[4][y]]],
                             g[w[K[0]][W[Z][y]]], g[w[K[0]][W[Z + 1][y]]],
                             g[w[K[0]][W[Z + 2][y]]], g[w[K[4]][W[3][y]]], g[w[K[4]][W[4][y]]],
                             g[w[K[0]][X]], g[w[K[0]][X + 1]], g[w[K[0]][X + 2]]};
-                             // Backup WXYZ-Wing Type 5 removal Cells values and drop from removal Cells values
+                             // Backup WXYZ-Wing (SDC) removal Cells values and drop from removal Cells values
                 g[K[7]] &= ~(g[K[2]] | g[K[4]]);
                 g[w[K[2]][W[3][y]]] &= ~g[K[2]];
                 g[w[K[2]][W[4][y]]] &= ~g[K[2]];
@@ -5837,7 +6092,7 @@ XYWT1Tf:
                 g[w[K[0]][X + 1]] &= ~g[K[4]];
                 g[w[K[0]][X + 2]] &= ~g[K[4]];
 #if RJ > 2
-                printf ("%d) WXYZ-Wing Type 5 (SDC): %d @ r%dc%d %s => -%d @ %s => -%d @ r%dc%d r%dc%d => -%d @ r%dc%d\n",
+                printf ("%d) WXYZ-Wing (SDC): %d @ r%dc%d %s => -%d @ %s => -%d @ r%dc%d r%dc%d => -%d @ r%dc%d\n",
                   p, b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[6]][20] | w[K[4]][20]),
                   COL (w[K[0]][20] | w[K[6]][20] | w[K[4]][20]), S[K[2]],
                   b[g[K[2]] | g[K[4]]], S[K[7]], b[g[K[2]]],
@@ -5854,7 +6109,7 @@ XYWT1Tf:
                 if (solve (p))
                   return 1;
 #if RJ > 2
-                printf ("%d) Undo WXYZ-Wing Type 5 (SDC): %d @ r%dc%d %s <= +%d @ %s <= +%d @ r%dc%d r%dc%d <= +%d @ r%dc%d\n",
+                printf ("%d) Undo WXYZ-Wing (SDC): %d @ r%dc%d %s <= +%d @ %s <= +%d @ r%dc%d r%dc%d <= +%d @ r%dc%d\n",
                   p, b[g[K[2]] | g[K[4]]], ROW (w[K[0]][20] | w[K[6]][20] | w[K[4]][20]),
                   COL (w[K[0]][20] | w[K[6]][20] | w[K[4]][20]), S[K[2]],
                   b[g[K[2]] | g[K[4]]], S[K[7]], b[g[K[2]]],
@@ -5882,7 +6137,7 @@ XYWT1Tf:
 #if RJ > 3
                 prn ();
 #endif
-                return 0;      // Undo WXYZ-Wing Type 5 removal Cells values
+                return 0;      // Undo WXYZ-Wing (SDC) removal Cells values
               }
             }
           }
@@ -5893,8 +6148,9 @@ XYWT1Tf:
             for (Y = W[K[3] < W[5][y] ? 1 : 5][y]; Y < W[K[3] < W[5][y] ? 5 : 2][y]; ++Y)
             {                // Search Almost Locked Set move Type 2c 3rd Wing Cell position 1st Wing Box and 2nd Wing Line wise
               if (B[g[K[5] = w[K[2]][Y]]] != 2 || B[g[K[0]] | g[K[5]]] != 4 ||
+                             // Skip for 3rd Wing Cell values not two digits; or Apex and 3rd Wing Cell values not four digits; or
                 B[g[K[2]] | g[K[5]]] != 3 || B[g[K[4]] | g[K[5]]] != 3)
-                continue;    // 1st and 3rd Wing Cells values not three digits; or 2nd and 3rd Wing Cells values not three digits; or
+                continue;    // 1st and 3rd Wing Cells values not three digits; or 2nd and 3rd Wing Cells values not three digits
               int k[4] = {0};
 
               if (B[g[K[2]]] < 3)
@@ -5963,7 +6219,7 @@ XYWT1Tf:
                 return 0;    // Undo Almost Locked Set move Type 2c removal Cells values
               }
             }
-          if (B[g[K[0]]] > 3 || B[g[K[2]]] > 2 || B[g[K[4]]] > 2 || (g[K[2]] & g[K[4]]))
+          if (B[g[K[0]]] > 3 || B[g[K[2]]] > 2 || B[g[K[4]]] > 2 || g[K[2]] & g[K[4]])
             continue;        // Skip Almost Locked Set move Type 2a and Type 2b for either Apex Cell values > three digits; or 1st Wing Cell values > two digits; or 2nd Wing Cell values > two digits; or 1st and 2nd Wing Cell values common digit
           if (B[g[K[0]]] > 2)// Check Almost Locked Set move Type 2a for Apex Cell values three digits
           {
@@ -5983,7 +6239,7 @@ XYWT1Tf:
                 g[w[Z][W[3][y]]] | g[w[Z][W[4][y]]] | g[w[K[0]][W[3][y]]] |
                 g[w[K[0]][W[4][y]]]) & (X = ~g[K[5]] & g[K[4 >> L]]))) &&
                 !((g[w[K[4 >> L]][W[3][y]]] | g[w[K[4 >> L]][W[4][y]]]) & g[K[4 >> L]])))
-                continue;
+                continue;    // No removal Cell values
               int k[13] = {g[w[K[4 >> L]][W[3][y]]], g[w[K[4 >> L]][W[4][y]]],
                           g[Z], g[w[Z][W[3][y]]], g[w[Z][W[4][y]]],
                           g[w[K[0]][W[3][y]]], g[w[K[0]][W[4][y]]],-1};
@@ -5997,7 +6253,7 @@ XYWT1Tf:
                 g[w[Z][W[4][y]]] &= ~X;
                 g[w[K[0]][W[3][y]]] &= ~X;
                 g[w[K[0]][W[4][y]]] &= ~X;
-                if (L && (w[K[0]][20] & w[K[2]][20] & W[15][y]))
+                if (L && w[K[0]][20] & w[K[2]][20] & W[15][y])
                 {            // Apex and 1st Wing Cell positions within Line
                   k[7] = g[w[K[0]][W[1][!y]]];
                   k[8] = g[w[K[0]][W[18][!y]]];
@@ -6030,7 +6286,7 @@ XYWT1Tf:
                     COL (w[w[K[0]][W[3][y]]][20] | w[w[K[0]][W[4][y]]][20]),
                     ROW (w[Z][20] | w[w[Z][W[3][y]]][20] | w[w[Z][W[4][y]]][20]),
                     COL (w[Z][20] | w[w[Z][W[3][y]]][20] | w[w[Z][W[4][y]]][20]));
-                  if (k[7] + 1)
+                  if (~k[7])
                     printf (" r%dc%d",
                       ROW (w[w[K[0]][W[1][!y]]][20] | w[w[K[0]][W[18][!y]]][20] |
                       w[w[K[0]][W[19][!y]]][20] | w[w[K[0]][W[20][!y]]][20] |
@@ -6067,7 +6323,7 @@ XYWT1Tf:
                     COL (w[w[K[0]][W[3][y]]][20] | w[w[K[0]][W[4][y]]][20]),
                     ROW (w[Z][20] | w[w[Z][W[3][y]]][20] | w[w[Z][W[4][y]]][20]),
                     COL (w[Z][20] | w[w[Z][W[3][y]]][20] | w[w[Z][W[4][y]]][20]));
-                  if (k[7] + 1)
+                  if (~k[7])
                     printf (" r%dc%d",
                       ROW (w[w[K[0]][W[1][!y]]][20] | w[w[K[0]][W[18][!y]]][20] |
                       w[w[K[0]][W[19][!y]]][20] | w[w[K[0]][W[20][!y]]][20] |
@@ -6094,7 +6350,7 @@ XYWT1Tf:
                 g[w[Z][W[4][y]]] = k[4];
                 g[w[K[0]][W[3][y]]] = k[5];
                 g[w[K[0]][W[4][y]]] = k[6];
-                if (k[7] + 1)
+                if (~k[7])
                 {
                   g[w[K[0]][W[1][!y]]] = k[7];
                   g[w[K[0]][W[18][!y]]] = k[8];
@@ -6198,19 +6454,19 @@ XYWT1Tf:
     {
       for (z = 0, Y = g[X]; y = Y & -Y; Y -= y)
                              // For each digit in Guardian Cell position
-        if ((g[w[X][0]] & y ? 1 : 0) + (g[w[X][1]] & y ? 1 : 0) +
-          (g[w[X][2]] & y ? 1 : 0) + (g[w[X][3]] & y ? 1 : 0) +
-          (g[w[X][4]] & y ? 1 : 0) + (g[w[X][5]] & y ? 1 : 0) +
-          (g[w[X][6]] & y ? 1 : 0) + (g[w[X][7]] & y ? 1 : 0) > 1 &&
-          (g[w[X][6]] & y ? 1 : 0) + (g[w[X][7]] & y ? 1 : 0) +
-          (g[w[X][8]] & y ? 1 : 0) + (g[w[X][9]] & y ? 1 : 0) +
-          (g[w[X][10]] & y ? 1 : 0) + (g[w[X][11]] & y ? 1 : 0) +
-          (g[w[X][12]] & y ? 1 : 0) + (g[w[X][13]] & y ? 1 : 0) > 1 &&
-          (g[w[X][12]] & y ? 1 : 0) + (g[w[X][13]] & y ? 1 : 0) +
-          (g[w[X][14]] & y ? 1 : 0) + (g[w[X][15]] & y ? 1 : 0) +
-          (g[w[X][16]] & y ? 1 : 0) + (g[w[X][17]] & y ? 1 : 0) +
-          (g[w[X][18]] & y ? 1 : 0) + (g[w[X][19]] & y ? 1 : 0) > 1)
-          z |= y;            // Digit found Row, Box and Column wise in > one Cell positions
+        if (!(g[w[X][0]] & y) + !(g[w[X][1]] & y) +
+          !(g[w[X][2]] & y) + !(g[w[X][3]] & y) +
+          !(g[w[X][4]] & y) + !(g[w[X][5]] & y) +
+          !(g[w[X][6]] & y) + !(g[w[X][7]] & y) < 7 &&
+          !(g[w[X][6]] & y) + !(g[w[X][7]] & y) +
+          !(g[w[X][8]] & y) + !(g[w[X][9]] & y) +
+          !(g[w[X][10]] & y) + !(g[w[X][11]] & y) +
+          !(g[w[X][12]] & y) + !(g[w[X][13]] & y) < 7 &&
+          !(g[w[X][12]] & y) + !(g[w[X][13]] & y) +
+          !(g[w[X][14]] & y) + !(g[w[X][15]] & y) +
+          !(g[w[X][16]] & y) + !(g[w[X][17]] & y) +
+          !(g[w[X][18]] & y) + !(g[w[X][19]] & y) < 7)
+          z |= y;            // Digit not found in Row, Box and Column wise < seven Cell positions
         Z = g[X];            // Backup BUG+n removal Cell values
         g[X] = z;            // Remove non-Guardian values from removal Cell values
 #if RJ > 2
@@ -6219,13 +6475,14 @@ XYWT1Tf:
         if (solve (p))
           return 1;
 #if RJ > 2
-        printf ("%d) Undo BUG+%d: %d @ %s <= +%d @ %s\n", p, B[z], b[z], S[X], b[Z - z], S[X]);
+        printf ("%d) Undo BUG+%d: %d @ %s <= +%d @ %s\n",
+          p, B[z], b[z], S[X], b[Z - z], S[X]);
 #endif
         g[X] = Z;
 #if RJ > 3
         prn ();
 #endif
-        return 0;           // Undo BUG+n removal Cell values
+        return 0;            // Undo BUG+n removal Cell values
     }
 #if RJ > 2
     else
@@ -6243,18 +6500,19 @@ NHSCF:
     r[x] = a;
   }
   for (Y = g[r[p]], g[r[p]] = 0; s[r[p]] = z & -z; z -= y > 1 ? s[r[p]] : z)
-  {                          // Backup and clear current Cell values and assign current Cell position to each current Cell value
+  {                          // Backup, clear current Cell values and assign solved Cell position to each digit in packup Cell values
     for (++n[y], Z = a = 0; a < 20; ++a)
                              // Search 20 peer Cell positions
       if (g[w[r[p]][a]] & s[r[p]])
       {
-        Z |= 1 << a;         // Backup and drop current Cell value from 20 peer Cell positions
+        Z |= 1 << a;         // Backup and drop current Cell digit from 20 peer Cell positions
         g[w[r[p]][a]] -= s[r[p]];
       }
 #if RJ > 2
     printf ("%d%s) %s: %d @ %s", p + 1, p != 10 && !(p % 10) ? "st" :
       (p != 11 && p % 10 == 1 ? "nd" : (p != 12 && p % 10 == 2 ? "rd" : "th")),
-      y ? (y > 1 ? "Trial & Error" : "Hidden single") : "Naked single", b[s[r[p]]], S[r[p]]);
+      y ? (y > 1 ? "Trial & Error" : "Hidden single") : "Naked single",
+      b[s[r[p]]], S[r[p]]);
     if (y)
     {
       printf (" from values %d", b[Y]);
@@ -6269,7 +6527,8 @@ NHSCF:
 #if RJ > 2
     printf ("%d%s) Undo %s: %d @ %s", p + 1, p != 10 && !(p % 10) ? "st" :
       (p != 11 && p % 10 == 1 ? "nd" : (p != 12 && p % 10 == 2 ? "rd" : "th")),
-      y ? (y > 1 ? "Trial & Error" : "Hidden single") : "Naked single", b[s[r[p]]], S[r[p]]);
+      y ? (y > 1 ? "Trial & Error" : "Hidden single") : "Naked single",
+      b[s[r[p]]], S[r[p]]);
     if (y)
     {
       printf (" from values %d", b[Y]);
@@ -6431,7 +6690,8 @@ int main (void)
 #endif
         }
 #if RJ
-        printf (" # C%d # P%d # N%ld # H%ld # G%ld # D%ld # %f\n", 81 - q, n[8], n[0], n[1], n[2], n[4], c);
+        printf (" # C%d # P%d # N%ld # H%ld # G%ld # D%ld # %f\n",
+          81 - q, n[8], n[0], n[1], n[2], n[4], c);
 #endif
         a = -1;
       }
