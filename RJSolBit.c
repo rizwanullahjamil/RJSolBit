@@ -1484,10 +1484,10 @@ int solve (int p)
         {                    // Search 1st Wing Cell values 2nd digit SL Line wise
           int K[6] = {-1,-1,-1,-1},
               k[15] = {0};
-          if ((g[w[X][W[3][N]]] & M) + (g[w[X][W[4][N]]] & M) +
-            (g[A[0][N]] & M) + (g[w[A[0][N]][W[3][N]]] & M) +
-            (g[w[A[0][N]][W[4][N]]] & M) + (g[A[1][N]] & M) +
-            (g[w[A[1][N]][W[3][N]]] & M) + (g[w[A[1][N]][W[4][N]]] & M) == 1)
+          if (!(g[w[X][W[3][N]]] & M) + !(g[w[X][W[4][N]]] & M) +
+            !(g[A[0][N]] & M) + !(g[w[A[0][N]][W[3][N]]] & M) +
+            !(g[w[A[0][N]][W[4][N]]] & M) + !(g[A[1][N]] & M) +
+            !(g[w[A[1][N]][W[3][N]]] & M) + !(g[w[A[1][N]][W[4][N]]] & M) == 7)
           {                  // M-Wing Type 1A, 1B, 4A, 4B, and M-Ring Type A
             if (g[w[X][W[3][N]]] & M)
               Z = w[X][W[3][N]];
