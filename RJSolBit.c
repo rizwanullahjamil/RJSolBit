@@ -1484,10 +1484,10 @@ int solve (int p)
         {                    // Search 1st Wing Cell values 2nd digit SL Line wise
           int K[6] = {-1,-1,-1,-1},
               k[15] = {0};
-          if (!(g[w[X][W[3][N]]] & M) + !(g[w[X][W[4][N]]] & M) +
-            !(g[A[0][N]] & M) + !(g[w[A[0][N]][W[3][N]]] & M) +
-            !(g[w[A[0][N]][W[4][N]]] & M) + !(g[A[1][N]] & M) +
-            !(g[w[A[1][N]][W[3][N]]] & M) + !(g[w[A[1][N]][W[4][N]]] & M) == 7)
+          if ((g[w[X][W[3][N]]] & M) + (g[w[X][W[4][N]]] & M) +
+            (g[A[0][N]] & M) + (g[w[A[0][N]][W[3][N]]] & M) +
+            (g[w[A[0][N]][W[4][N]]] & M) + (g[A[1][N]] & M) +
+            (g[w[A[1][N]][W[3][N]]] & M) + (g[w[A[1][N]][W[4][N]]] & M) == M)
           {                  // M-Wing Type 1A, 1B, 4A, 4B, and M-Ring Type A
             if (g[w[X][W[3][N]]] & M)
               Z = w[X][W[3][N]];
@@ -2231,10 +2231,10 @@ int solve (int p)
             printf ("%d) Empty Rectangle: ERI %d @ b%d%s SL %s %d between %d @ %s and %d @ %s => -%d @ %s\n",
               p, b[K[1]], BOX (a), S[a], R_C, RCN (K[2]), b[K[1]], S[K[2]],
               b[K[1]], S[w[K[2]][W[1][y] + b[~K[3] & 63] - 1]], b[K[1]], S[K[7]]);
-            if (!(g[w[K[7]][W[3][!y]]] & K[1]) + !(g[w[K[7]][W[4][!y]]] & K[1]) +
-              !(g[w[K[7]][W[1][!y]]] & K[1]) + !(g[w[K[7]][W[18][!y]]] & K[1]) +
-              !(g[w[K[7]][W[19][!y]]] & K[1]) + !(g[w[K[7]][W[20][!y]]] & K[1]) +
-              !(g[w[K[7]][W[21][!y]]] & K[1]) + !(g[w[K[7]][W[22][!y]]] & K[1]) == 7)
+            if ((g[w[K[7]][W[3][!y]]] & K[1]) + (g[w[K[7]][W[4][!y]]] & K[1]) +
+              (g[w[K[7]][W[1][!y]]] & K[1]) + (g[w[K[7]][W[18][!y]]] & K[1]) +
+              (g[w[K[7]][W[19][!y]]] & K[1]) + (g[w[K[7]][W[20][!y]]] & K[1]) +
+              (g[w[K[7]][W[21][!y]]] & K[1]) + (g[w[K[7]][W[22][!y]]] & K[1]) == K[1])
             {                // Check one ERI digit found in 2nd Line Cell positions
               g[K[2]] -= K[1];
               printf ("%d) Empty Rectangle: ERI %d @ b%d%s SL %s %d between %d @ %s and %d @ %s => -%d @ %s\n",
@@ -2249,10 +2249,10 @@ int solve (int p)
             printf ("%d) Undo Empty Rectangle: ERI %d @ b%d%s SL %s %d between %d @ %s and %d @ %s <= +%d @ %s\n",
               p, b[K[1]], BOX (a), S[a], R_C, RCN (K[2]), b[K[1]], S[K[2]],
               b[K[1]], S[w[K[2]][W[1][y] + b[~K[3] & 63] - 1]], b[K[1]], S[K[7]]);
-            if (!(g[w[K[7]][W[3][!y]]] & K[1]) + !(g[w[K[7]][W[4][!y]]] & K[1]) +
-              !(g[w[K[7]][W[1][!y]]] & K[1]) + !(g[w[K[7]][W[18][!y]]] & K[1]) +
-              !(g[w[K[7]][W[19][!y]]] & K[1]) + !(g[w[K[7]][W[20][!y]]] & K[1]) +
-              !(g[w[K[7]][W[21][!y]]] & K[1]) + !(g[w[K[7]][W[22][!y]]] & K[1]) == 7)
+            if ((g[w[K[7]][W[3][!y]]] & K[1]) + (g[w[K[7]][W[4][!y]]] & K[1]) +
+              (g[w[K[7]][W[1][!y]]] & K[1]) + (g[w[K[7]][W[18][!y]]] & K[1]) +
+              (g[w[K[7]][W[19][!y]]] & K[1]) + (g[w[K[7]][W[20][!y]]] & K[1]) +
+              (g[w[K[7]][W[21][!y]]] & K[1]) + (g[w[K[7]][W[22][!y]]] & K[1]) == K[1])
             {                // Check one ERI digit in 2nd Line Cell positions
               printf ("%d) Undo Empty Rectangle: ERI %d @ b%d%s SL %s %d between %d @ %s and %d @ %s <= +%d @ %s\n",
                 p, b[K[1]], BOX (a), S[a], y ? "Row" : "Column",
